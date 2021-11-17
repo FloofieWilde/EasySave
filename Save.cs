@@ -8,6 +8,7 @@ namespace Projet
 {
     public class Save
     {
+        //Allow the transfer of files. Has the role of model.
         public Save(string source, string target, bool type)
         {
             DirectoryCopy(source, target, type);
@@ -25,10 +26,10 @@ namespace Projet
 
             DirectoryInfo[] dirs = dir.GetDirectories();
 
-            // Créer le dossier si il n'existe pas      
+            //Create a folder if it doesn't exist yet
             Directory.CreateDirectory(destDir);
 
-            // Copier coller les fichiers
+            //Copy-paste the folders
             FileInfo[] files = dir.GetFiles();
             foreach (FileInfo file in files)
             {
@@ -36,8 +37,7 @@ namespace Projet
                 file.CopyTo(tempPath, false);
             }
 
-            // Copier coller les sous dossiers
-
+            //Copy past the sub folders
             foreach (DirectoryInfo subdir in dirs)
             {
                 string tempPath = Path.Combine(destDir, subdir.Name);
