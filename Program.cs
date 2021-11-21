@@ -10,7 +10,7 @@ namespace Projet
     public class Program
     {
 
-
+        //Main class which has the role of ViewModel
         public static void Main(string[] args)
         {
             Console.WriteLine("Please type your command \nreminder: [Command name] [Source directory] [Target directory] [Type]\n All fields are required");
