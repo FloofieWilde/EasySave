@@ -1,0 +1,8 @@
+{
+    "menutitle": "Select a choice.",
+    "menuc1": "1. Clone files",
+    "menuc2": "2. Configurate the software",
+    "menuc3": "3. Watch logs",
+    "menuc4": "4. Exit application",
+    "menubc": "Isn't a valid choice.",
+}

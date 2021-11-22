@@ -6,4 +6,9 @@
     <RootNamespace>Menu</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="data\lang\logs\Daily\" />
+    <Folder Include="data\lang\logs\State\" />
+  </ItemGroup>
+
 </Project>
