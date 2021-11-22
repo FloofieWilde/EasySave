@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\1.0",
+    "\\1.0\\1.0"
   ],
+  "SelectedNode": "\\1.0\\1.0\\Menu.cs",
   "PreviewInSolutionExplorer": false
 }
