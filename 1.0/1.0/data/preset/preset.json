@@ -1,27 +1,27 @@
 ﻿{
-  "1":{
-    "id": 1,
-    "pathSource": "/source1",
-    "pathDestination": "/dest1"
+  "Preset1": {
+    "name": "",
+    "pathSource": "",
+    "pathDestination": ""
   },
-  "2":{
-    "id": 2,
-    "pathSource": "/source2",
-    "pathDestination": "/dest2"
+  "Preset2": {
+    "name": "",
+    "pathSource": "",
+    "pathDestination": ""
   },
-  "3":{
-    "id": 3,
-    "pathSource": "/source3",
-    "pathDestination": "/dest3"
+  "Preset3": {
+    "name": "",
+    "pathSource": "",
+    "pathDestination": ""
   },
-  "4":{
-    "id": 4,
-    "pathSource": "/source4",
-    "pathDestination": "/dest4"
+  "Preset4": {
+    "name": "",
+    "pathSource": "",
+    "pathDestination": ""
   },
-  "5":{
-    "id": 5,
-    "pathSource": "/source5",
-    "pathDestination": "/dest5"
+  "Preset5": {
+    "name": "",
+    "pathSource": "",
+    "pathDestination": ""
   }
 }
