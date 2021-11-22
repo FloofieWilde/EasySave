@@ -7,9 +7,19 @@ using Menu;
 
 namespace Options
 {
-    class Menu
+    class Opt_Menu
     {
-        
+        static public void opt_menu(langue.language dict_lang)
+        {
+            Console.WriteLine(dict_lang.opttitle);
+            Console.WriteLine("");
+            Console.WriteLine(dict_lang.optc1);
+            Console.WriteLine(dict_lang.optc2);
+            Console.WriteLine(dict_lang.optexit);
+
+            Console.WriteLine("");
+            string optchoice = Console.ReadLine();
+        }
     }
 
     class langue
@@ -29,6 +39,46 @@ namespace Options
             return dict_lang;
         }
 
+        static public void get_files()
+        {
+            string[] files = Directory.GetFiles("C:/Users/jennm/source/repos/C-hashtag-point-web/1.0/1.0/data/lang");
+            Console.WriteLine("Langues disponibles :");
+            foreach (string file in files)
+            {
+                string file_new = file.Substring(66);
+                int length = file_new.Length;
+                file_new = file_new.Remove(length-5);
+                Console.WriteLine("• " + file_new);
+            }
+            bool verif_lan = false;
+
+            Console.WriteLine("Faites votre choix");
+            Console.WriteLine("");
+
+            string lchoice = Console.ReadLine();
+            Console.WriteLine("");
+            Console.WriteLine("");
+
+            verif_lan = false;
+
+            foreach (string file in files)
+            {
+                string file_new = file.Substring(66);
+                int length = file_new.Length;
+                file_new = file_new.Remove(length - 5);
+                if (lchoice == file_new)
+                {
+                    verif_lan = true;
+
+                    //TODO: Ajouter édit de 
+
+                    language dict_lang = get_lang();
+                }
+            }
+
+        }
+
+
         public class language
         {
             public string menutitle { get; set; }
@@ -37,6 +87,11 @@ namespace Options
             public string menuc3 { get; set; }
             public string menuc4 { get; set; }
             public string menubc { get; set; }
+            public string opttitle { get; set; }
+            public string optc1 { get; set; }
+            public string optc2 { get; set; }
+            public string optexit { get; set; }
+
         }
     }
 }

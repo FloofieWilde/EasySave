@@ -23,7 +23,7 @@ namespace Menu
 
             string choice = MakeChoice(dict_lang);
 
-            while(!(choice == "1" | choice == "2" | choice == "3" | choice == "4"))
+            while(!(choice == "1" | choice == "2" | choice == "3" | choice == "4" | choice == "621"))
             {
                 Console.WriteLine(dict_lang.menubc);
                 Console.WriteLine("");
@@ -37,13 +37,19 @@ namespace Menu
                     break;
                 case "2":
                     Console.WriteLine("Option");
+                    Opt_Menu.opt_menu(dict_lang);
                     break;
                 case "3":
                     Console.WriteLine("Logs");
                     break;
                 case "4":
                     Console.WriteLine("Quitter");
-                    System.Environment.Exit(1);
+                    System.Environment.Exit(621);
+                    break;
+                case "621":
+                    Console.WriteLine("Test");
+                    langue.get_files();
+                    Console.ReadLine();
                     break;
             }
 
@@ -68,6 +74,7 @@ namespace Menu
     class config
     {
         public string lang { get; set; }
+        public string ver { get; set; }
     }
 
     class language
