@@ -5,4 +5,9 @@
     "menuc3": "3. Watch logs",
     "menuc4": "4. Exit application",
     "menubc": "Isn't a valid choice.",
+        
+    "opttitle": "What do you want to configure ?",
+    "optc1": "1. Language",
+    "optc2": "2. Presets",
+    "optexit": "3. Go back",
 }

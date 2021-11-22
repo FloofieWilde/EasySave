@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="data\lang\logs\Daily\" />
-    <Folder Include="data\lang\logs\State\" />
+    <Compile Remove="data\lang\logs\**" />
+    <EmbeddedResource Remove="data\lang\logs\**" />
+    <None Remove="data\lang\logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
 </Project>
