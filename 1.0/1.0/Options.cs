@@ -19,6 +19,21 @@ namespace Options
 
             Console.WriteLine("");
             string optchoice = Console.ReadLine();
+
+            string choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    Console.WriteLine("Langue");
+                    break;
+                case "2":
+                    Console.WriteLine("Preset");
+                    Preset.EditPreset();
+                    break;
+                case "3":
+                    Console.WriteLine("Quitter");
+                    break;
+            }
         }
     }
 
@@ -26,13 +41,13 @@ namespace Options
     {
         public static language get_lang()
         {
-            StreamReader sr = new StreamReader("C:/Users/jennm/source/repos/C-hashtag-point-web/1.0/1.0/data/config.json");
+            StreamReader sr = new StreamReader("C:/Users/loicm/source/repos/C-hashtag-point-web/1.0/1.0/data/config.json");
             string jsonString = sr.ReadToEnd();
             config configuration = JsonConvert.DeserializeObject<config>(jsonString);
 
             //Console.WriteLine(configuration.lang);
 
-            sr = new StreamReader("C:/Users/jennm/source/repos/C-hashtag-point-web/1.0/1.0/data/lang/" + configuration.lang + ".json");
+            sr = new StreamReader("C:/Users/loicm/source/repos/C-hashtag-point-web/1.0/1.0/data/lang/" + configuration.lang + ".json");
             jsonString = sr.ReadToEnd();
             language dict_lang = JsonConvert.DeserializeObject<language>(jsonString);
 
@@ -41,7 +56,7 @@ namespace Options
 
         static public void get_files()
         {
-            string[] files = Directory.GetFiles("C:/Users/jennm/source/repos/C-hashtag-point-web/1.0/1.0/data/lang");
+            string[] files = Directory.GetFiles("C:/Users/loicm/source/repos/C-hashtag-point-web/1.0/1.0/data/lang");
             Console.WriteLine("Langues disponibles :");
             foreach (string file in files)
             {
