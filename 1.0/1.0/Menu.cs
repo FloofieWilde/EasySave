@@ -1,10 +1,12 @@
 ﻿using System;
 using Options;
+using Projet.Logs;
 
-namespace Menu
+namespace Projet
 {
     class Menu
     {
+
         static void Main(string[] args)
         {
             Console.WriteLine("  ______                 _____                                      _               __   ___  ");
@@ -16,14 +18,15 @@ namespace Menu
             Console.WriteLine("                   __/ |                                                                      ");
             Console.WriteLine("                  |___/                                                                       ");
             Console.WriteLine("");
-
             string choice = MakeChoice();
 
+            
             while(!(choice == "1" | choice == "2" | choice == "3" | choice == "4"))
             {
                 Console.WriteLine("N'est pas un choix valide.");
                 Console.WriteLine("");
                 choice = MakeChoice();
+                
             }
 
             switch (choice)
@@ -59,5 +62,7 @@ namespace Menu
 
             return choice;
         }
+
+
     }
 }
