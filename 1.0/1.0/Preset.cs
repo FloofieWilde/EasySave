@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Text.Json;
+//using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Options
@@ -11,18 +12,27 @@ namespace Options
     {
         public static void EditPreset()
         {
-            var path = new Path
-            {
-                Name = "",
-                Source = "",
-                Destination = ""
-            };
-
-            var options = new JsonSerializerOptions { WriteIndented = true };
-            string jsonString = JsonSerializer.Serialize(path, options);
-
-            Console.WriteLine(jsonString);
+            // read file into a string and deserialize JSON to a type
+            string content = File.ReadAllText(@"\data\preset\preset.json");
+            Path preset = JsonConvert.DeserializeObject<Path>(content);
         }
+    }
+}
+
+        //public static void EditPreset()
+        //{
+        //    var path = new Path
+        //    {
+        //        Name = "",
+        //        Source = "",
+        //        Destination = ""
+        //    };
+
+        //    var options = new JsonSerializerOptions { WriteIndented = true };
+        //    string jsonString = JsonSerializer.Serialize(path, options);
+
+        //    Console.WriteLine(jsonString);
+        //}
 
         //public static async Task EditPreset()
         //{
@@ -40,6 +50,3 @@ namespace Options
 
             //Console.WriteLine(File.ReadAllText(fileName));
         //}
-        
-    }
-}
