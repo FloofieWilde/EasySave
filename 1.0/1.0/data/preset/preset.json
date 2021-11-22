@@ -1,0 +1,27 @@
+﻿{
+  "1":{
+    "id": 1,
+    "pathSource": "/source1",
+    "pathDestination": "/dest1"
+  },
+  "2":{
+    "id": 2,
+    "pathSource": "/source2",
+    "pathDestination": "/dest2"
+  },
+  "3":{
+    "id": 3,
+    "pathSource": "/source3",
+    "pathDestination": "/dest3"
+  },
+  "4":{
+    "id": 4,
+    "pathSource": "/source4",
+    "pathDestination": "/dest4"
+  },
+  "5":{
+    "id": 5,
+    "pathSource": "/source5",
+    "pathDestination": "/dest5"
+  }
+}
