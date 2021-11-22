@@ -1,0 +1,8 @@
+{
+    "menutitle": "Veuillez sélectrionner un choix.",
+    "menuc1": "1. Copier vos fichiers",
+    "menuc2": "2. Configurer l'application",
+    "menuc3": "3. Voir les logs",
+    "menuc4": "4. Quitter l'application",
+    "menubc": "N'est pas un choix valide.",
+}

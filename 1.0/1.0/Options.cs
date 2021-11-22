@@ -6,6 +6,9 @@ namespace Options
 {
     class Menu
     {
+        /*int choice()
+        {
 
+        }*/
     }
 }
