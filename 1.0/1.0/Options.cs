@@ -18,7 +18,22 @@ namespace Options
             Console.WriteLine(dict_lang.optexit);
 
             Console.WriteLine("");
-            string optchoice = Console.ReadLine();
+            //string optchoice = Console.ReadLine();
+
+            string choice = Console.ReadLine();
+            switch (choice)
+            {
+                case "1":
+                    Console.WriteLine("Langue");
+                    break;
+                case "2":
+                    Console.WriteLine("Preset");
+                    Preset.MenuPreset();
+                    break;
+                case "3":
+                    Console.WriteLine("Quitter");
+                    break;
+            }
         }
     }
 
