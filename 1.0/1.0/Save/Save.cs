@@ -34,10 +34,11 @@ namespace Projet.SaveSystem
                 Directory.CreateDirectory(TargetDir);
             }
             FullCopy(sourceDirInfo, targetDirInfo);
+            CurrentLog.End();
         }
         private void FullCopy(DirectoryInfo source, DirectoryInfo target)
         {
-
+            CurrentLog.Display(true);
             long filesSize;
             Directory.CreateDirectory(target.FullName);
 
@@ -57,6 +58,7 @@ namespace Projet.SaveSystem
                 CurrentLog.Display();
 
             }
+            
         }
 
         private void DiffCopy(DirectoryInfo source, DirectoryInfo target)

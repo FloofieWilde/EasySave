@@ -11,7 +11,7 @@ namespace Projet.Logs
         public string Name { get; set; }
         public string SourceDir { get; set; }
         public string TargetDir { get; set; }
-        public string Timestamp { get; set; }
+        public DateTimeOffset Timestamp { get; set; }
         public long TotalFiles { get; set; }
         public long TotalSize { get; set; }
 

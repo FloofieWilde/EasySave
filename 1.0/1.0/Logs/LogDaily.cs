@@ -12,7 +12,7 @@ namespace Projet.Logs
         long FilesSize { get; set; }
         long TransferTime { get; set; }
 
-        public LogDaily(string name, string sourceDir, string targetDir, string timestamp, long filesSize, long transferTime)
+        public LogDaily(string name, string sourceDir, string targetDir, DateTimeOffset timestamp, long filesSize, long transferTime)
         {
             Name = name;
             SourceDir = sourceDir;
@@ -22,7 +22,7 @@ namespace Projet.Logs
             TransferTime = transferTime;
         }
 
-        public void Save(LogDaily logToWrite)
+        public void Save()
         {
             DateTime localTime = DateTime.Now;
 
@@ -39,7 +39,7 @@ namespace Projet.Logs
             {
                 
                 CreatePath(localTime);
-                string jsonString = JsonSerializer.Serialize(logToWrite);
+                string jsonString = JsonSerializer.Serialize(this);
                 File.WriteAllText(fileName, jsonString);
             }
         }

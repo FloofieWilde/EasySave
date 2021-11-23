@@ -7,11 +7,12 @@ namespace Projet.Logs
 {
     public class LogState : LogBase
     {
-        public bool Active { get; set; } = false;
+        public bool Active { get; set; } = true;
         public int Progress { get; set; }
         public long RemainingFiles { get; set; }
         public long RemainingFilesSize { get; set; }
-        
+        bool FirstTime = true;
+
         public LogState(string name, string sourceDir, string targetDir, long totalFiles, long totalFilesSize)
         {
             Progress = 0;
@@ -19,7 +20,7 @@ namespace Projet.Logs
             SourceDir = sourceDir;
             TargetDir = targetDir;
             DateTimeOffset now = (DateTimeOffset)DateTime.UtcNow;
-            Timestamp = now.ToString("yyyy/MM/dd - HH:mm:ss - fff");
+            Timestamp = now;
             RemainingFiles = totalFiles;
             RemainingFilesSize = totalFilesSize;
             TotalFiles = totalFiles;
@@ -33,19 +34,23 @@ namespace Projet.Logs
             string jsonString = JsonSerializer.Serialize(this);
             File.WriteAllText(fileName, jsonString);
         }
-        public void Display()
+        public void Display(bool firstTime = false)
         {
-            if (Active) Console.WriteLine("WORK IN PROGRESS");
-            else Console.WriteLine("SAVE ENDED");
-            Console.WriteLine("Name : " + Name);
-            Console.WriteLine("Source directory : " + SourceDir);
-            Console.WriteLine("Target directory : " + TargetDir);
-            Console.WriteLine("Start timestamp : " + Timestamp);
-            Console.WriteLine("Progress : " + Progress + "%");
-            Console.WriteLine("Remaining files : " + RemainingFiles);
-            Console.WriteLine("Remaining files size : " + RemainingFilesSize);
-            Console.WriteLine("Total files : " + TotalFiles);
-            Console.WriteLine("Total files size : " + TotalSize);
+            if (FirstTime)
+            {
+                string tempTimestamp = Timestamp.ToString("yyyy/MM/dd - HH:mm:ss - fff");
+                Console.WriteLine("WORK IN PROGRESS");
+                Console.WriteLine("Type : " + Name);
+                Console.WriteLine("Source directory : " + SourceDir);
+                Console.WriteLine("Target directory : " + TargetDir);
+                Console.WriteLine("Start timestamp : " + tempTimestamp);
+                Console.WriteLine("Total files : " + TotalFiles);
+                Console.WriteLine("Total files size : " + TotalSize);
+                FirstTime = false;
+            }
+            string LogString = "Progress : " + Progress + "% | Remaining files : " + RemainingFiles + " | Remaining files size : " + RemainingFilesSize + "     ";
+            Console.Write("\r{0}", LogString);
+
         }
         public void Update(long remainingFilesSize)
         {
@@ -62,7 +67,19 @@ namespace Projet.Logs
         {
             Active = false;
             Save();
-            Console.WriteLine("J'ai FINI (En vrai faudrait que je finisse ça");
+            Console.WriteLine("\n");
+            Console.WriteLine("SAVE SUCCESSFULLY COMPLETED");
+
+            DateTimeOffset now = (DateTimeOffset)DateTime.UtcNow;
+            TimeSpan totalTime = now - Timestamp;
+            long totalMilliseconds = totalTime.Days * 24 * 60 * 60 * 1000 +
+                     totalTime.Hours * 60 * 60 * 1000 +
+                     totalTime.Minutes * 60 * 1000 +
+                     totalTime.Seconds * 1000 +
+                     totalTime.Milliseconds;
+
+            LogDaily dailyLog = new LogDaily(Name, SourceDir, TargetDir, Timestamp, TotalSize, totalMilliseconds);
+            dailyLog.Save();
         }
 
     }
