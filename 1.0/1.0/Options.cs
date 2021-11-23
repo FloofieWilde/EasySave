@@ -18,7 +18,7 @@ namespace Options
             Console.WriteLine(dict_lang.optexit);
 
             Console.WriteLine("");
-            //string optchoice = Console.ReadLine();
+            string optchoice = Console.ReadLine();
 
             string choice = Console.ReadLine();
             switch (choice)
