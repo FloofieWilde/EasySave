@@ -1,8 +1,8 @@
 {
   "Preset1": {
-    "Name": "Salut",
-    "PathSource": "Test",
-    "PathDestination": "MDRRR"
+    "Name": "PremierPreset",
+    "PathSource": "C:/FIRST",
+    "PathDestination": "C:/SECOND"
   },
   "Preset2": {
     "Name": "Oops",
@@ -10,9 +10,9 @@
     "PathDestination": "C:/LolDestination"
   },
   "Preset3": {
-    "Name": "wut",
-    "PathSource": "",
-    "PathDestination": ""
+    "Name": "Haha",
+    "PathSource": "C:/P",
+    "PathDestination": "C:/M"
   },
   "Preset4": {
     "Name": "Voila",

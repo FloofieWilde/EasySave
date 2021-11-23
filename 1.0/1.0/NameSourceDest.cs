@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Options
 {
+    /// <summary>
+    /// Class to declare the columns of each preset
+    /// </summary>
     public class NameSourceDest
     {
         public string Name { get; set; }
