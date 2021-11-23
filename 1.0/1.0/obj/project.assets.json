@@ -10,6 +10,9 @@
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
+      },
+      "VisualStudio.gitignore/1.0.1": {
+        "type": "package"
       }
     }
   },
@@ -40,11 +43,26 @@
         "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
+    },
+    "VisualStudio.gitignore/1.0.1": {
+      "sha512": "uF3VC/z+BWxr6q16MisLgpKm8YtzcfAE72nmo8nY4W3s0AFzGWecPKOUsc41qeQeUI/dU4cBduTMf6ccXMx3Zw==",
+      "type": "package",
+      "path": "visualstudio.gitignore/1.0.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "tools/init.ps1",
+        "visualstudio.gitignore.1.0.1.nupkg.sha512",
+        "visualstudio.gitignore.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Newtonsoft.Json >= 13.0.1"
+      "Newtonsoft.Json >= 13.0.1",
+      "VisualStudio.gitignore >= 1.0.1"
     ]
   },
   "packageFolders": {
@@ -97,6 +115,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.1, )"
+          },
+          "VisualStudio.gitignore": {
+            "target": "Package",
+            "version": "[1.0.1, )"
           }
         },
         "imports": [
