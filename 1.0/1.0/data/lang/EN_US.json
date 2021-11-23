@@ -10,4 +10,9 @@
     "optc1": "1. Language",
     "optc2": "2. Presets",
     "optexit": "3. Go back",
+    
+    "langselect" : "Available languages :",
+    "langchange": "Language modified",
+    "langno" : "Selected language does not exist",
+    "langchoice" : "Select your language",
 }

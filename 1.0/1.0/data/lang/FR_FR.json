@@ -10,4 +10,9 @@
     "optc1": "1. Langue",
     "optc2": "2. Présets",
     "optexit": "3. Retour",
+    
+    "langselect" : "Langues disponibles :",
+    "langchange": "Langue modifiée",
+    "langno" : "Langue inexistante",
+    "langchoice" : "Faites votre choix",
 }

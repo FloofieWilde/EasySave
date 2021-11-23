@@ -48,7 +48,7 @@ namespace Menu
                     break;
                 case "621":
                     Console.WriteLine("Test");
-                    langue.get_files();
+                    /*dict_lang = */langue.get_files(dict_lang);
                     Console.ReadLine();
                     break;
             }
@@ -77,13 +77,4 @@ namespace Menu
         public string ver { get; set; }
     }
 
-    class language
-    {
-        public string menutitle { get; set; }
-        public string menuc1 { get; set; }
-        public string menuc2 { get; set; }
-        public string menuc3 { get; set; }
-        public string menuc4 { get; set; }
-        public string menubc { get; set; }
-    }
 }
