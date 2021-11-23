@@ -1,0 +1,27 @@
+{
+  "Preset1": {
+    "Name": "PremierPreset",
+    "PathSource": "C:/FIRST",
+    "PathDestination": "C:/SECOND"
+  },
+  "Preset2": {
+    "Name": "Oops",
+    "PathSource": "C:/LolSource",
+    "PathDestination": "C:/LolDestination"
+  },
+  "Preset3": {
+    "Name": "Haha",
+    "PathSource": "C:/P",
+    "PathDestination": "C:/M"
+  },
+  "Preset4": {
+    "Name": "Voila",
+    "PathSource": "",
+    "PathDestination": ""
+  },
+  "Preset5": {
+    "Name": "Test",
+    "PathSource": "C:/source",
+    "PathDestination": "C:/destination"
+  }
+}
