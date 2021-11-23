@@ -1,13 +1,13 @@
-﻿{
+{
   "Preset1": {
     "Name": "Salut",
     "PathSource": "Test",
     "PathDestination": "MDRRR"
   },
   "Preset2": {
-    "Name": "Wow",
-    "PathSource": "",
-    "PathDestination": ""
+    "Name": "Oops",
+    "PathSource": "C:/LolSource",
+    "PathDestination": "C:/LolDestination"
   },
   "Preset3": {
     "Name": "wut",
@@ -15,13 +15,13 @@
     "PathDestination": ""
   },
   "Preset4": {
-    "Name": "wtf",
+    "Name": "Voila",
     "PathSource": "",
     "PathDestination": ""
   },
   "Preset5": {
-    "Name": "u_u",
-    "PathSource": "",
-    "PathDestination": ""
+    "Name": "Test",
+    "PathSource": "C:/source",
+    "PathDestination": "C:/destination"
   }
 }

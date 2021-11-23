@@ -30,20 +30,34 @@ namespace Options
         public static void MakeChoicePreset(Dictionary<string, NameSourceDest> preset)
         {
             Console.WriteLine("\nVoici la liste des presets:\n");
-            Console.WriteLine($"1. {preset["Preset1"].Name}");
-            Console.WriteLine($"2. {preset["Preset2"].Name}");
-            Console.WriteLine($"3. {preset["Preset3"].Name}");
-            Console.WriteLine($"4. {preset["Preset4"].Name}");
-            Console.WriteLine($"5. {preset["Preset5"].Name}");
+            for (int i=1; i<=5; i++)
+            {
+                Console.WriteLine(i.ToString()+$". {preset["Preset"+i.ToString()].Name}");
+            }
             Console.WriteLine("\nQuel preset voulez vous modifier?\n");
-
             string choice = Console.ReadLine();
-            EditPreset(choice);
+            EditPreset(choice, preset);
         }
 
-        public static void EditPreset(string choice)
+        public static void EditPreset(string choice, Dictionary<string, NameSourceDest> preset)
         {
-            Console.WriteLine("\nVous avez choisit de modifier le Preset" + choice + "\n");
+            Console.WriteLine("\nVous avez choisit de modifier le Preset" + choice);
+            Console.WriteLine("\nChoisissez un nouveau nom: ");
+            preset["Preset" + choice].Name = Console.ReadLine();
+            Console.WriteLine("\nChoisissez un nouveau path source: ");
+            preset["Preset" + choice].PathSource = Console.ReadLine();
+            Console.WriteLine("\nChoisissez un nouveau path destination: ");
+            preset["Preset" + choice].PathDestination = Console.ReadLine();
+
+            string json = JsonConvert.SerializeObject(preset, Formatting.Indented);
+            //Console.WriteLine(json);
+            File.WriteAllText(@"C:/Users/loicm/source/repos/C-hashtag-point-web/1.0/1.0/data/preset/preset.json", json);
+            Console.WriteLine("$\nEnregistrement du nouveau preset n°"+choice+" avec succès! " +
+                "\nVoici les nouvelles valeur: " +
+                "\nName: "+ $". {preset["Preset" + choice].Name}"+
+                "\nName: "+ $". {preset["Preset" + choice].PathSource}"+
+                "\nName: "+ $". {preset["Preset" + choice].PathDestination}"
+            );
         }
     }
 }
