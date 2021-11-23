@@ -28,7 +28,7 @@ namespace Options
                     break;
                 case "2":
                     Console.WriteLine("Preset");
-                    Preset.EditPreset();
+                    Preset.MenuPreset();
                     break;
                 case "3":
                     Console.WriteLine("Quitter");

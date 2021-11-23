@@ -12,11 +12,4 @@ namespace Options
         public Dictionary<string, NameSourceDest> Preset4 { get; set; }
         public Dictionary<string, NameSourceDest> Preset5 { get; set; }
     }
-
-    public class NameSourceDest
-    {
-        public string Name { get; set; }
-        public string PathSource { get; set; }
-        public string PathDestination { get; set; }
-    }
 }
