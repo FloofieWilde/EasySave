@@ -9,8 +9,8 @@ namespace Projet.Logs
 {
     public class LogDaily : LogBase
     {
-        private long _filesSize { get; set; }
-        private long _transferTime { get; set; }
+        long FilesSize { get; set; }
+        long TransferTime { get; set; }
 
         public LogDaily(string name, string sourceDir, string targetDir, string timestamp, long filesSize, long transferTime)
         {
@@ -18,8 +18,8 @@ namespace Projet.Logs
             SourceDir = sourceDir;
             TargetDir = targetDir;
             Timestamp = timestamp;
-            _filesSize = filesSize;
-            _transferTime = transferTime;
+            FilesSize = filesSize;
+            TransferTime = transferTime;
         }
 
         public void Save(LogDaily logToWrite)
@@ -37,6 +37,7 @@ namespace Projet.Logs
             }
             else
             {
+                
                 CreatePath(localTime);
                 string jsonString = JsonSerializer.Serialize(logToWrite);
                 File.WriteAllText(fileName, jsonString);

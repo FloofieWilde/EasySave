@@ -1,67 +1,83 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using Projet.Logs;
 
-namespace Projet.Save
+
+namespace Projet.SaveSystem
 {
     public class Save
     {
-        private bool _complete = false;
-        private string _sourceDir;
-        private string _targetDir;
-        public Save(string source, string target, bool type)
+        readonly string SourceDir;
+        readonly string TargetDir;
+        readonly bool Full;
+        LogState CurrentLog;
+        public Save(string source, string target, bool full)
         {
-            this._sourceDir = source;
-            this._targetDir = target;
+            SourceDir = source;
+            TargetDir = target;
+            Full = full;
+        }
+        public void Copy()
+        {
+            string copyType = "Partial";
+            if (Full) copyType = "Complete";
+
+            DirectoryInfo sourceDirInfo = new DirectoryInfo(SourceDir);
+            long filesNumber = Directory.GetFiles(SourceDir, "*", SearchOption.AllDirectories).Length;
+            long filesSize = DirSize(sourceDirInfo);
+
+            CurrentLog = new LogState(copyType, SourceDir, TargetDir, filesNumber, filesSize);
+            DirectoryInfo targetDirInfo = new DirectoryInfo(TargetDir);
+
+            if (!targetDirInfo.Exists)
+            {
+                Directory.CreateDirectory(TargetDir);
+            }
+            FullCopy(sourceDirInfo, targetDirInfo);
+        }
+        private void FullCopy(DirectoryInfo source, DirectoryInfo target)
+        {
+
+            long filesSize;
+            Directory.CreateDirectory(target.FullName);
+
+            foreach (FileInfo fi in source.GetFiles())
+            {
+                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                filesSize = fi.Length;
+                CurrentLog.Update(filesSize);
+            }
+
+            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+            {
+                DirectoryInfo nextTargetSubDir =
+                    target.CreateSubdirectory(diSourceSubDir.Name);
+                FullCopy(diSourceSubDir, nextTargetSubDir);
+                CurrentLog.Save();
+                CurrentLog.Display();
+
+            }
         }
 
-        /*private bool CheckFiles()
+        private void DiffCopy(DirectoryInfo source, DirectoryInfo target)
         {
-            DirectoryInfo sourceDir = new DirectoryInfo(_sourceDir);
-            DirectoryInfo targetDir = new DirectoryInfo(_targetDir);
 
-            if (sourceDir.Exists && targetDir.Exists)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
-        public void CopyFiles(string sourceDir, string targetDir)
+        private static long DirSize(DirectoryInfo directory)
         {
-            DirectoryInfo dir = new DirectoryInfo(sourceDir);
-
-            if (!dir.Exists)
+            long size = 0;
+            FileInfo[] fis = directory.GetFiles();
+            foreach (FileInfo fi in fis)
             {
-                throw new DirectoryNotFoundException(
-                    "Source directory does not exist or could not be found: "
-                    + sourceDir);
+                size += fi.Length;
             }
-
-            DirectoryInfo[] dirs = dir.GetDirectories();
-
-            //Create a folder if it doesn't exist yet
-            Directory.CreateDirectory(destDir);
-
-            //Copy-paste the folders
-            FileInfo[] files = dir.GetFiles();
-            foreach (FileInfo file in files)
+            DirectoryInfo[] dis = directory.GetDirectories();
+            foreach (DirectoryInfo di in dis)
             {
-                string tempPath = Path.Combine(destDir, file.Name);
-                file.CopyTo(tempPath, false);
+                size += DirSize(di);
             }
-
-            //Copy past the sub folders
-            foreach (DirectoryInfo subdir in dirs)
-            {
-                string tempPath = Path.Combine(destDir, subdir.Name);
-                DirectoryCopy(subdir.FullName, tempPath, true);
-            }
-        }*/
+            return size;
+        }
 
     }
 }

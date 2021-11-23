@@ -1,12 +1,12 @@
 ﻿using System;
 using Options;
 using Projet.Logs;
+using Projet.SaveSystem;
 
 namespace Projet
 {
     class Menu
     {
-
         static void Main(string[] args)
         {
             Console.WriteLine("  ______                 _____                                      _               __   ___  ");
@@ -33,6 +33,10 @@ namespace Projet
             {
                 case "1":
                     Console.WriteLine("Copie");
+                    string a = @"C:\Users\franc\source\repos\C-hashtag-point-web\1.0\1.0\DossA";
+                    string b = @"C:\Users\franc\source\repos\C-hashtag-point-web\1.0\1.0\DossB";
+                    Save save = new Save(a, b, true);
+                    save.Copy();
                     break;
                 case "2":
                     Console.WriteLine("Option");

@@ -6,12 +6,14 @@ using System.Text.Json;
 
 namespace Projet.Logs
 {
-    public class LogBase
+    public abstract class LogBase
     {
-        protected string Name { get; set; }
-        protected string SourceDir { get; set; }
-        protected string TargetDir { get; set; }
-        protected string Timestamp { get; set; }
+        public string Name { get; set; }
+        public string SourceDir { get; set; }
+        public string TargetDir { get; set; }
+        public string Timestamp { get; set; }
+        public long TotalFiles { get; set; }
+        public long TotalSize { get; set; }
 
     }
 
