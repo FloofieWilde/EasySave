@@ -1,13 +1,13 @@
 {
   "Preset1": {
-    "Name": "Test1",
-    "PathSource": "C:/salut",
-    "PathDestination": "C:/Mdr"
+    "Name": "PremierPreset",
+    "PathSource": "C:/FIRST",
+    "PathDestination": "C:/SECOND"
   },
   "Preset2": {
-    "Name": "Test2",
-    "PathSource": "C:/Test25",
-    "PathDestination": "C:/Test99"
+    "Name": "Oops",
+    "PathSource": "C:/LolSource",
+    "PathDestination": "C:/LolDestination"
   },
   "Preset3": {
     "Name": "Haha",

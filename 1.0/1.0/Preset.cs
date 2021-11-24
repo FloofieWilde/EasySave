@@ -71,8 +71,8 @@ namespace Options
             Console.WriteLine("\nEnregistrement du nouveau preset n°"+choice+" avec succès! " +
                 "\nVoici les nouvelles valeur: " +
                 "\nName: "+ $". {preset["Preset" + choice].Name}"+
-                "\nPathSource: "+ $". {preset["Preset" + choice].PathSource}"+
-                "\nPathDestination: "+ $". {preset["Preset" + choice].PathDestination}"
+                "\nName: "+ $". {preset["Preset" + choice].PathSource}"+
+                "\nName: "+ $". {preset["Preset" + choice].PathDestination}"
             );
         }
 
