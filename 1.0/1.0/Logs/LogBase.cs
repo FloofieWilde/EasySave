@@ -18,7 +18,7 @@ namespace Projet.Logs
         public string Timestamp;
         public LogBase()
         {
-            LogFile = "./Logs/";
+            LogFile = "./data/Logs/";
         }
         /// <summary>
         /// Create the day's path if it doesn't exists
