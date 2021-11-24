@@ -11,6 +11,7 @@ namespace Projet.Logs
         public int Progress { get; set; }
         public long RemainingFiles { get; set; }
         public long RemainingFilesSize { get; set; }
+
         bool FirstTime = true;
 
         public LogState(string name, string sourceDir, string targetDir, long totalFiles, long totalFilesSize)
@@ -26,14 +27,7 @@ namespace Projet.Logs
             TotalFiles = totalFiles;
             TotalSize = totalFilesSize;
         }
-        public void Save()
-        {
-            string fileName = @"C:\Users\franc\source\repos\C-hashtag-point-web\1.0\1.0\Logs\LogsData/Current.json";
-
-            if (File.Exists(fileName)) File.Delete(fileName);
-            string jsonString = JsonSerializer.Serialize(this);
-            File.WriteAllText(fileName, jsonString);
-        }
+        
         public void Display(bool firstTime = false)
         {
             if (FirstTime)
@@ -66,20 +60,18 @@ namespace Projet.Logs
         public void End()
         {
             Active = false;
-            Save();
+            Save("State");
             Console.WriteLine("\n");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("SAVE SUCCESSFULLY COMPLETED");
+            Console.ResetColor();
 
             DateTimeOffset now = (DateTimeOffset)DateTime.UtcNow;
             TimeSpan totalTime = now - Timestamp;
-            long totalMilliseconds = totalTime.Days * 24 * 60 * 60 * 1000 +
-                     totalTime.Hours * 60 * 60 * 1000 +
-                     totalTime.Minutes * 60 * 1000 +
-                     totalTime.Seconds * 1000 +
-                     totalTime.Milliseconds;
+            double totalMs = totalTime.TotalMilliseconds;
 
-            LogDaily dailyLog = new LogDaily(Name, SourceDir, TargetDir, Timestamp, TotalSize, totalMilliseconds);
-            dailyLog.Save();
+            LogDaily dailyLog = new LogDaily(Name);
+            dailyLog.Save("Daily");
         }
 
     }

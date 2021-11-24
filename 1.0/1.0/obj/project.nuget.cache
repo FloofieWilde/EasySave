@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "+BnxGyIMx6D16F6+y0PUlxq/XogSDqY7EwEUi0rbNM+lGjBz4kGQYpxtRU9CYJBO3xjrmDwLGTmwk/yHb8+hjw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\franc\\source\\repos\\C-hashtag-point-web\\1.0\\1.0\\1.0.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\franc\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.21\\microsoft.netcore.app.host.win-x64.3.1.21.nupkg.sha512",
+    "C:\\Users\\franc\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.10\\microsoft.aspnetcore.app.ref.3.1.10.nupkg.sha512",
+    "C:\\Users\\franc\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\3.1.0\\microsoft.windowsdesktop.app.ref.3.1.0.nupkg.sha512",
+    "C:\\Users\\franc\\.nuget\\packages\\microsoft.netcore.app.ref\\3.1.0\\microsoft.netcore.app.ref.3.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,16 +1,19 @@
 using System;
 using System.IO;
 using Projet.Logs;
+using System.Diagnostics;
 
 
 namespace Projet.SaveSystem
 {
     public class Save
     {
-        readonly string SourceDir;
-        readonly string TargetDir;
-        readonly bool Full;
-        LogState CurrentLog;
+        private readonly string SourceDir;
+        private readonly string TargetDir;
+        private readonly bool Full;
+        private LogState CurrentStateLog;
+        private LogDaily CurrentDailyLog;
+        private Stopwatch ProcessTime;
         public Save(string source, string target, bool full)
         {
             SourceDir = source;
@@ -26,7 +29,8 @@ namespace Projet.SaveSystem
             long filesNumber = Directory.GetFiles(SourceDir, "*", SearchOption.AllDirectories).Length;
             long filesSize = DirSize(sourceDirInfo);
 
-            CurrentLog = new LogState(copyType, SourceDir, TargetDir, filesNumber, filesSize);
+            CurrentStateLog = new LogState(copyType, SourceDir, TargetDir, filesNumber, filesSize);
+            CurrentDailyLog = new LogDaily(copyType);
             DirectoryInfo targetDirInfo = new DirectoryInfo(TargetDir);
 
             if (!targetDirInfo.Exists)
@@ -34,11 +38,11 @@ namespace Projet.SaveSystem
                 Directory.CreateDirectory(TargetDir);
             }
             FullCopy(sourceDirInfo, targetDirInfo);
-            CurrentLog.End();
+            CurrentStateLog.End();
         }
         private void FullCopy(DirectoryInfo source, DirectoryInfo target)
         {
-            CurrentLog.Display(true);
+            CurrentStateLog.Display(true);
             long filesSize;
             Directory.CreateDirectory(target.FullName);
 
@@ -46,7 +50,8 @@ namespace Projet.SaveSystem
             {
                 fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
                 filesSize = fi.Length;
-                CurrentLog.Update(filesSize);
+                CurrentDailyLog.Save("Daily");
+                CurrentStateLog.Update(filesSize);
             }
 
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
@@ -54,11 +59,9 @@ namespace Projet.SaveSystem
                 DirectoryInfo nextTargetSubDir =
                     target.CreateSubdirectory(diSourceSubDir.Name);
                 FullCopy(diSourceSubDir, nextTargetSubDir);
-                CurrentLog.Save();
-                CurrentLog.Display();
-
+                CurrentStateLog.Save("State");
+                CurrentStateLog.Display();
             }
-            
         }
 
         private void DiffCopy(DirectoryInfo source, DirectoryInfo target)
