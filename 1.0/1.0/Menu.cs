@@ -1,6 +1,8 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
+using Projet.Logs;
+using Projet.SaveSystem;
 using Options;
 
 namespace Menu
@@ -14,7 +16,6 @@ namespace Menu
             Title();
             string choice = GetMainChoice(dict_lang);
             RedirFromMain(choice, dict_lang);
-
         }
 
         static string MakeChoice(langue.language dict_lang)
@@ -64,7 +65,16 @@ namespace Menu
             switch (choice)
             {
                 case "1":
-                    Console.WriteLine("Copie");
+                    string presetId = GetPresetChoice();
+                    var presets = Preset.GetJsonPreset();
+
+                    string choosenSourcePath = presets["Preset" + presetId].PathSource;
+                    string choosenTargetPath = presets["Preset" + presetId].PathDestination;
+                    string copyChoice = GetFullCopy();
+                    bool full = false;
+                    if (copyChoice == "1") full = true;
+                    Save save = new Save(choosenSourcePath, choosenTargetPath, full);
+                    save.Copy();
                     break;
                 case "2":
                     //Console.WriteLine("Option");
@@ -83,6 +93,54 @@ namespace Menu
                     break;
             }
         }
+
+
+        private static string PresetChoice()
+        {
+            var presets = Preset.GetJsonPreset();
+            if (presets == null) Console.WriteLine("You don't have presets saved");
+            
+            var choosenPreset = Preset.MakeChoicePreset(presets);
+            Console.WriteLine(choosenPreset);
+            
+            return choosenPreset;
+        }
+        private static string GetPresetChoice()
+        {
+            string choice = PresetChoice();
+
+            while (!(choice == "1" || choice == "2" || choice == "3" || choice == "4" || choice == "5"))
+            {
+                Console.WriteLine("Please select an existing preset");
+                choice = PresetChoice();
+            }
+
+            return choice;
+        }
+
+        private static string FullCopy()
+        {
+            Console.WriteLine("Please choose between theses save modes : ");
+            Console.WriteLine("1. Full");
+            Console.WriteLine("2. Differential");
+            string choosenCopy = Console.ReadLine();
+
+            return choosenCopy;
+        }
+
+        private static string GetFullCopy()
+        {
+            string choice = FullCopy();
+
+            while (!(choice == "1" || choice == "2"))
+            {
+                Console.WriteLine("Please choose between theses save modes only");
+                choice = FullCopy();
+            }
+
+            return choice;
+        }
+
     }
 
 
