@@ -18,7 +18,7 @@ namespace Projet.Logs
         public string Timestamp;
         public LogBase()
         {
-            LogFile = @"C:/Users/franc/source/repos/C-hashtag-point-web/1.0/1.0/Logs/LogsData/";
+            LogFile = "./Logs/";
         }
         /// <summary>
         /// Create the day's path if it doesn't exists

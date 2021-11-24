@@ -8,14 +8,14 @@ namespace Projet.Languages
     {
         public static Language GetLang()
         {
-            StreamReader sr = new StreamReader("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/config.json");
+            StreamReader sr = new StreamReader("./data/config.json");
             string jsonString = sr.ReadToEnd();
             sr.Dispose();
             Config configuration = JsonConvert.DeserializeObject<Config>(jsonString);
 
 
 
-            sr = new StreamReader("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/lang/" + configuration.Lang + ".json");
+            sr = new StreamReader("./data/lang/" + configuration.Lang + ".json");
             jsonString = sr.ReadToEnd();
             Language dictLang = JsonConvert.DeserializeObject<Language>(jsonString);
 
@@ -24,7 +24,7 @@ namespace Projet.Languages
 
         static public Language GetFiles(Language dictLang)
         {
-            string Path = "C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/lang/";
+            string Path = "./data/lang/";
             string[] files = Directory.GetFiles(Path);
             Console.WriteLine(dictLang.LangSelect);
 
@@ -55,15 +55,15 @@ namespace Projet.Languages
                 {
                     verifLan = true;
 
-                    StreamReader sr = new StreamReader("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/config.json");
+                    StreamReader sr = new StreamReader("./data/config.json");
                     string jsonString = sr.ReadToEnd();
                     Config conf = JsonConvert.DeserializeObject<Config>(jsonString);
                     sr.Dispose();
 
-                    string text = File.ReadAllText("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/config.json");
+                    string text = File.ReadAllText("./data/config.json");
                     text = text.Replace(conf.Lang, lChoice);
 
-                    File.WriteAllText("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/config.json", text);
+                    File.WriteAllText("./data/config.json", text);
                 }
             }
             if (verifLan == false)

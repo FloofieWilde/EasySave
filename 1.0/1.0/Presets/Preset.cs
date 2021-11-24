@@ -28,7 +28,7 @@ namespace Projet.Presets
         /// <returns>preset</returns>
         public static Dictionary<string, NameSourceDest> GetJsonPreset()
         {
-            string json = File.ReadAllText(@"C:/Users/"+ Environment.UserName +"/source/repos/C-hashtag-point-web/1.0/1.0/data/preset/preset.json");
+            string json = File.ReadAllText(@"./data/preset/preset.json");
             Dictionary<string, NameSourceDest> preset = JsonConvert.DeserializeObject<Dictionary<string, NameSourceDest>>(json);
             return preset;
         }
@@ -75,7 +75,7 @@ namespace Projet.Presets
             preset["Preset" + choice].PathDestination = Console.ReadLine();
 
             string json = JsonConvert.SerializeObject(preset, Formatting.Indented);
-            File.WriteAllText(@"C:/Users/"+ Environment.UserName +"/source/repos/C-hashtag-point-web/1.0/1.0/data/preset/preset.json", json);
+            File.WriteAllText(@"./data/preset/preset.json", json);
             Console.WriteLine("\n"+dictLang.PreSave1+choice+dictLang.PreSave2 +
                 "\n"+ dictLang.PreSave3 +
                 "\nName: "+ $"{preset["Preset" + choice].Name}"+
