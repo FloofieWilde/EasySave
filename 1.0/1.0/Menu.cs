@@ -35,7 +35,7 @@ namespace Projet
                     Console.WriteLine("Copie");
                     string a = @"C:\Users\franc\source\repos\C-hashtag-point-web\1.0\1.0\DossA";
                     string b = @"C:\Users\franc\source\repos\C-hashtag-point-web\1.0\1.0\DossB";
-                    Save save = new Save(a, b, true);
+                    Save save = new Save(a, b, false);
                     save.Copy();
                     break;
                 case "2":
