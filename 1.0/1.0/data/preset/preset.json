@@ -1,8 +1,8 @@
 {
   "Preset1": {
-    "Name": "Test1",
-    "PathSource": "C:/salut",
-    "PathDestination": "C:/Mdr"
+    "Name": "Tewest",
+    "PathSource": "C://copy",
+    "PathDestination": "C://paste"
   },
   "Preset2": {
     "Name": "Test2",

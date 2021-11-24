@@ -15,4 +15,15 @@
     "langchange": "Langue modifiée",
     "langno" : "Langue inexistante",
     "langchoice" : "Faites votre choix",
+    
+    "prelist" : "Voici la liste des presets:",
+    "premod" : "Quel preset voulez vous modifier?",
+    "prechoice" : "Vous avez choisit de modifier le Preset",
+    "prename" : "Choisissez un nouveau nom: ",
+    "prepathsource" : "Choisissez un nouveau path source: ",
+    "prepathdest" : "Choisissez un nouveau path destination: ",
+    "presave1" : "Enregistrement du nouveau preset n°",
+    "presave2" : " avec succès!",
+    "presave3" : "Voici les nouvelles valeurs: ",
+    "prefgb" : "Retour au menu Options...",
 }

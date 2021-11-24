@@ -105,6 +105,16 @@ namespace Options
             public string langchange { get; set; }
             public string langno { get; set; }
             public string langchoice { get; set; }
+            public string prelist { get; set; }
+            public string premod { get; set; }
+            public string prechoice { get; set; }
+            public string prename { get; set; }
+            public string prepathsource { get; set; }
+            public string prepathdest { get; set; }
+            public string presave1 { get; set; }
+            public string presave2 { get; set; }
+            public string presave3 { get; set; }
+            public string prefgb { get; set; }
         }
     }
 }

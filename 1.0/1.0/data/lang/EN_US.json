@@ -15,4 +15,15 @@
     "langchange": "Language modified",
     "langno" : "Selected language does not exist",
     "langchoice" : "Select your language",
+    
+    "prelist" : "Here's the available presets :",
+    "premod" : "Which preset would you modify ?",
+    "prechoice" : "You choosed to modify preset",
+    "prename" : "Enter a new name: ",
+    "prepathsource" : "Choose the source path: ",
+    "prepathdest" : "Choose the destination path: ",
+    "presave1" : "Preset number ",
+    "presave2" : " successly saved!",
+    "presave3" : "Here are the new parameters : ",
+    "prefgb" : "Returning to option menu...",
 }

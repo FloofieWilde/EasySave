@@ -41,13 +41,16 @@ namespace Options
         /// <returns>choice</returns>
         public static string MakeChoicePreset(Dictionary<string, NameSourceDest> preset)
         {
-            Console.WriteLine("\nVoici la liste des presets:\n");
+            langue.language dict_lang = langue.get_lang();
+
+            Console.WriteLine("\n"+dict_lang.prelist+"\n");
             for (int i=1; i<=5; i++)
             {
                 Console.WriteLine(i.ToString()+$". {preset["Preset"+i.ToString()].Name}");
             }
-            Console.WriteLine("\nQuel preset voulez vous modifier?\n");
+            Console.WriteLine("\n"+dict_lang.premod+"\n");
             string choice = Console.ReadLine();
+
             return choice;
         }
 
@@ -58,18 +61,20 @@ namespace Options
         /// <param name="preset"></param>
         public static void EditPreset(string choice, Dictionary<string, NameSourceDest> preset)
         {
-            Console.WriteLine("\nVous avez choisit de modifier le Preset" + choice);
-            Console.WriteLine("\nChoisissez un nouveau nom: ");
+            langue.language dict_lang = langue.get_lang();
+
+            Console.WriteLine("\n"+ dict_lang.prechoice + choice);
+            Console.WriteLine("\n"+dict_lang.prename);
             preset["Preset" + choice].Name = Console.ReadLine();
-            Console.WriteLine("\nChoisissez un nouveau path source: ");
+            Console.WriteLine("\n"+dict_lang.prepathsource);
             preset["Preset" + choice].PathSource = Console.ReadLine();
-            Console.WriteLine("\nChoisissez un nouveau path destination: ");
+            Console.WriteLine("\n"+dict_lang.prepathdest);
             preset["Preset" + choice].PathDestination = Console.ReadLine();
 
             string json = JsonConvert.SerializeObject(preset, Formatting.Indented);
             File.WriteAllText(@"C:/Users/"+ Environment.UserName +"/source/repos/C-hashtag-point-web/1.0/1.0/data/preset/preset.json", json);
-            Console.WriteLine("\nEnregistrement du nouveau preset n°"+choice+" avec succès! " +
-                "\nVoici les nouvelles valeur: " +
+            Console.WriteLine("\n"+dict_lang.presave1+choice+dict_lang.presave2 +
+                "\n"+ dict_lang.presave3 +
                 "\nName: "+ $". {preset["Preset" + choice].Name}"+
                 "\nPathSource: "+ $". {preset["Preset" + choice].PathSource}"+
                 "\nPathDestination: "+ $". {preset["Preset" + choice].PathDestination}"
@@ -81,8 +86,8 @@ namespace Options
         /// </summary>
         public static void BackToMenuOption()
         {
-            Console.WriteLine("\nRetour au menu Options...\n");
             langue.language dict_lang = langue.get_lang();
+            Console.WriteLine("\n" + dict_lang.prefgb + "\n");
             Opt_Menu.opt_menu(dict_lang);
         }
     }
