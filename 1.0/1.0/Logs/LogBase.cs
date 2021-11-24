@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.IO;
 using System.Text.Json;
+using Projet.Languages;
 
 namespace Projet.Logs
 {
@@ -15,7 +16,6 @@ namespace Projet.Logs
         public string TargetDir { get; set; }
         protected DateTimeOffset DateTimeStamp;
         public string Timestamp;
-
         public LogBase()
         {
             LogFile = @"C:/Users/franc/source/repos/C-hashtag-point-web/1.0/1.0/Logs/LogsData/";

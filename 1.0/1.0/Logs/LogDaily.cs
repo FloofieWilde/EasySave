@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using System.IO;
 using System.Text.Json;
+using Projet.Languages;
 
 namespace Projet.Logs
 {
@@ -14,6 +15,7 @@ namespace Projet.Logs
     {
         public long FileSize { get; set; }
         public double TransferTime { get; set; }
+        private Langue.Language CurrentLanguage;
 
         public LogDaily(string name)
         {
@@ -21,6 +23,7 @@ namespace Projet.Logs
 
             DateTimeStamp = (DateTimeOffset)DateTime.UtcNow;
             Timestamp = DateTimeStamp.ToString("yyyy/MM/dd - HH:mm:ss - fff");
+            CurrentLanguage = Langue.GetLang();
 
         }
         /// <summary>
@@ -64,7 +67,7 @@ namespace Projet.Logs
             if (!Directory.Exists(path))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("There is no log generated today");
+                Console.WriteLine(CurrentLanguage.LogNoDaily);
                 Console.ResetColor();
             }
             else
@@ -75,7 +78,7 @@ namespace Projet.Logs
                 {
                     it++;
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("File Number : " + it + " / " + files.Length);
+                    Console.WriteLine(CurrentLanguage.LogDailyFilen + " : " + it + " / " + files.Length);
                     Console.ResetColor();
                     string[] json = File.ReadAllLines(file);
                     int i = 0;
@@ -85,7 +88,7 @@ namespace Projet.Logs
                         if (line.StartsWith("}"))
                         {
                             Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.WriteLine("Log number : " + i);
+                            Console.WriteLine(CurrentLanguage.LogNumber + " : " + i);
                             Console.ResetColor();
                         }
                         else
@@ -102,6 +105,7 @@ namespace Projet.Logs
                     }
                 }
             }
+            Menu.Main();
         }
     }
 }

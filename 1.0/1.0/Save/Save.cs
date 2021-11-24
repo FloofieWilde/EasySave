@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using Projet.Logs;
 using System.Diagnostics;
+using Projet.Languages;
 
 
 namespace Projet.SaveSystem
@@ -31,12 +32,13 @@ namespace Projet.SaveSystem
         {
             string copyType = "Partial";
             if (Full) copyType = "Complete";
+            Langue.Language currentLanguage = Langue.GetLang();
 
             DirectoryInfo sourceDirInfo = new DirectoryInfo(SourceDir);
             if (!sourceDirInfo.Exists)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Your source directory doesn't exists !");
+                Console.WriteLine(currentLanguage.SaveSauceNotExists);
                 Console.ResetColor();
                 return;
             }
@@ -62,7 +64,7 @@ namespace Projet.SaveSystem
         /// <param name="target">Target Directory</param>
         private void ProcessCopy(DirectoryInfo source, DirectoryInfo target)
         {
-            CurrentStateLog.Display(true);
+            CurrentStateLog.Display();
             long filesSize;
             Directory.CreateDirectory(target.FullName);
 

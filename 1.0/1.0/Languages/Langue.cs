@@ -106,6 +106,22 @@ namespace Projet.Languages
             public string PreSave2 { get; set; }
             public string PreSave3 { get; set; }
             public string PreFbg { get; set; }
+            public string SaveSauceNotExists { get; set; }
+            public string SaveWip { get; set; }
+            public string SaveType { get; set; }
+            public string SaveSauce { get; set; }
+            public string SaveTarget { get; set; }
+            public string SaveStarttime { get; set; }
+            public string SaveTotalFile { get; set; }
+            public string SaveTotalSize { get; set; }
+            public string SaveProgress1 { get; set; }
+            public string SaveProgress2 { get; set; }
+            public string SaveProgress3 { get; set; }
+            public string SaveSuccess { get; set; }
+            public string LogNoDaily { get; set; }
+            public string LogDailyFilen { get; set; }
+            public string LogNumber { get; set; }
+
         }
     }
 }

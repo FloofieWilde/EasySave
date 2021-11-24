@@ -2,6 +2,8 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.IO;
+using Projet.Languages;
+using Projet;
 
 namespace Projet.Logs
 {
@@ -18,6 +20,7 @@ namespace Projet.Logs
         bool FirstTime = true;
         public long TotalFiles { get; set; }
         public long TotalSize { get; set; }
+        private Langue.Language CurrentLanguage;
 
         public LogState(string name, string sourceDir, string targetDir, long totalFiles, long totalFilesSize)
         {
@@ -31,25 +34,27 @@ namespace Projet.Logs
             RemainingFilesSize = totalFilesSize;
             TotalFiles = totalFiles;
             TotalSize = totalFilesSize;
+            CurrentLanguage = Langue.GetLang();
         }
         /// <summary>
         /// Displays current status on the console
         /// </summary>
         /// <param name="firstTime"></param>
-        public void Display(bool firstTime = false)
+        public void Display()
         {
+
             if (FirstTime)
             {
-                Console.WriteLine("WORK IN PROGRESS");
-                Console.WriteLine("Type : " + Name);
-                Console.WriteLine("Source directory : " + SourceDir);
-                Console.WriteLine("Target directory : " + TargetDir);
-                Console.WriteLine("Start timestamp : " + Timestamp);
-                Console.WriteLine("Total files : " + TotalFiles);
-                Console.WriteLine("Total files size : " + TotalSize);
+                Console.WriteLine(CurrentLanguage.SaveWip);
+                Console.WriteLine(CurrentLanguage.SaveType + " : " + Name);
+                Console.WriteLine(CurrentLanguage.SaveSauce + " : " + SourceDir);
+                Console.WriteLine(CurrentLanguage.SaveTarget + " : " + TargetDir);
+                Console.WriteLine(CurrentLanguage.SaveStarttime + " : " + Timestamp);
+                Console.WriteLine(CurrentLanguage.SaveTotalFile + " : " + TotalFiles);
+                Console.WriteLine(CurrentLanguage.SaveTotalSize + " : " + TotalSize);
                 FirstTime = false;
             }
-            string LogString = "Progress : " + Progress + "% | Remaining files : " + RemainingFiles + " | Remaining files size : " + RemainingFilesSize + "     ";
+            string LogString = CurrentLanguage.SaveProgress1+ " : " + Progress + "% | " + CurrentLanguage.SaveProgress2 + " : " + RemainingFiles + " | " + CurrentLanguage.SaveProgress3 + " : " + RemainingFilesSize + "     ";
             Console.Write("\r{0}", LogString);
 
         }
@@ -89,8 +94,9 @@ namespace Projet.Logs
             Save();
             Console.WriteLine("\n");
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("SAVE SUCCESSFULLY COMPLETED");
+            Console.WriteLine(CurrentLanguage.SaveSuccess);
             Console.ResetColor();
+            Menu.Main();
         }
     }
 }
