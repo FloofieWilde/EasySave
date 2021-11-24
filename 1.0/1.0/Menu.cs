@@ -3,9 +3,10 @@ using System.IO;
 using Newtonsoft.Json;
 using Projet.Logs;
 using Projet.SaveSystem;
-using Options;
+using Projet.Languages;
+using Projet.Presets;
 
-namespace Menu
+namespace Projet
 {
     class Menu
     {
@@ -81,7 +82,8 @@ namespace Menu
                     Opt_Menu.opt_menu(dict_lang);
                     break;
                 case "3":
-                    Console.WriteLine("Logs");
+                    LogDaily oui = new LogDaily("Full");
+                    oui.Load();
                     break;
                 case "4":
                     //Console.WriteLine("Quitter");

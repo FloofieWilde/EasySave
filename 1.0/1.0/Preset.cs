@@ -2,10 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
+using Projet.Languages;
 
-namespace Options
+namespace Projet.Presets
 {
     /// <summary>
     /// Class to choose a preset, and edit it

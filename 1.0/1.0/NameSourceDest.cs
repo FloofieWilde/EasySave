@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Options
+namespace Projet.Presets
 {
     /// <summary>
     /// Class to declare the columns of each preset

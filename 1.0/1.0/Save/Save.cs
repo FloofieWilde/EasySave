@@ -5,7 +5,9 @@ using System.Diagnostics;
 
 
 namespace Projet.SaveSystem
-{
+{/// <summary>
+/// The class that manages the save system
+/// </summary>
     public class Save
     {
         private readonly string SourceDir;
@@ -13,19 +15,31 @@ namespace Projet.SaveSystem
         private readonly bool Full;
         private LogState CurrentStateLog;
         private LogDaily CurrentDailyLog;
-        private Stopwatch ProcessTime;
+        private readonly Stopwatch ProcessTime;
+
         public Save(string source, string target, bool full)
         {
             SourceDir = source;
             TargetDir = target;
             Full = full;
+            ProcessTime = new Stopwatch();
         }
+        /// <summary>
+        /// Fetches basic data like copy type or directory size then call ProcessCopy
+        /// </summary>
         public void Copy()
         {
             string copyType = "Partial";
             if (Full) copyType = "Complete";
 
             DirectoryInfo sourceDirInfo = new DirectoryInfo(SourceDir);
+            if (!sourceDirInfo.Exists)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Your source directory doesn't exists !");
+                Console.ResetColor();
+                return;
+            }
             long filesNumber = Directory.GetFiles(SourceDir, "*", SearchOption.AllDirectories).Length;
             long filesSize = DirSize(sourceDirInfo);
 
@@ -37,10 +51,16 @@ namespace Projet.SaveSystem
             {
                 Directory.CreateDirectory(TargetDir);
             }
-            FullCopy(sourceDirInfo, targetDirInfo);
+            ProcessCopy(sourceDirInfo, targetDirInfo);
+
             CurrentStateLog.End();
         }
-        private void FullCopy(DirectoryInfo source, DirectoryInfo target)
+        /// <summary>
+        /// Process the copy, writing logs at the same time
+        /// </summary>
+        /// <param name="source">Source Directory</param>
+        /// <param name="target">Target Directory</param>
+        private void ProcessCopy(DirectoryInfo source, DirectoryInfo target)
         {
             CurrentStateLog.Display(true);
             long filesSize;
@@ -48,26 +68,40 @@ namespace Projet.SaveSystem
 
             foreach (FileInfo fi in source.GetFiles())
             {
-                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                ProcessTime.Start();
+                if (Full == false)
+                {
+                    if (File.GetLastWriteTime(target.FullName) != File.GetLastWriteTime(fi.FullName))
+                    {
+                        fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                    }
+                }
+                else
+                {
+                    fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                }
+
                 filesSize = fi.Length;
-                CurrentDailyLog.Save("Daily");
+                ProcessTime.Stop();
+                CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name);
                 CurrentStateLog.Update(filesSize);
+                ProcessTime.Reset();
             }
 
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
             {
                 DirectoryInfo nextTargetSubDir =
-                    target.CreateSubdirectory(diSourceSubDir.Name);
-                FullCopy(diSourceSubDir, nextTargetSubDir);
-                CurrentStateLog.Save("State");
+                target.CreateSubdirectory(diSourceSubDir.Name);
+                ProcessCopy(diSourceSubDir, nextTargetSubDir);
+                CurrentStateLog.Save();
                 CurrentStateLog.Display();
             }
         }
-
-        private void DiffCopy(DirectoryInfo source, DirectoryInfo target)
-        {
-
-        }
+        /// <summary>
+        /// Returns directory's size, in bytes
+        /// </summary>
+        /// <param name="directory">The directory to measure</param>
+        /// <returns></returns>
         private static long DirSize(DirectoryInfo directory)
         {
             long size = 0;

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO;
 using Newtonsoft.Json;
-using Menu;
 
-namespace Options
+namespace Projet.Languages
 {
     class langue
     {

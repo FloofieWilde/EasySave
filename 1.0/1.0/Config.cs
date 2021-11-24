@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Options
+namespace Projet.Languages
 {
     class config
     {

@@ -17,4 +17,9 @@
     <PackageReference Include="VisualStudio.gitignore" Version="1.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logs\LogsData\Daily\" />
+    <Folder Include="Logs\LogsData\State\" />
+  </ItemGroup>
+
 </Project>

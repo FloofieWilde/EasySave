@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using Newtonsoft.Json;
-using Menu;
+using Projet.Languages;
+using Projet.Logs;
+using Projet.Presets;
 
-namespace Options
+namespace Projet
 {
     class Opt_Menu
     {
@@ -36,7 +38,7 @@ namespace Options
                 case "3":
                     //Console.WriteLine("Retour");
                     Console.WriteLine("\n\n\n");
-                    Menu.Menu.Main();
+                    Menu.Main();
                     break;
             }
         }
