@@ -29,7 +29,7 @@ namespace Options
         /// <returns>preset</returns>
         public static Dictionary<string, NameSourceDest> GetJsonPreset()
         {
-            string json = File.ReadAllText(@"C:/Users/loicm/source/repos/C-hashtag-point-web/1.0/1.0/data/preset/preset.json");
+            string json = File.ReadAllText(@"C:/Users/"+ Environment.UserName +"/source/repos/C-hashtag-point-web/1.0/1.0/data/preset/preset.json");
             Dictionary<string, NameSourceDest> preset = JsonConvert.DeserializeObject<Dictionary<string, NameSourceDest>>(json);
             return preset;
         }
@@ -67,7 +67,7 @@ namespace Options
             preset["Preset" + choice].PathDestination = Console.ReadLine();
 
             string json = JsonConvert.SerializeObject(preset, Formatting.Indented);
-            File.WriteAllText(@"C:/Users/loicm/source/repos/C-hashtag-point-web/1.0/1.0/data/preset/preset.json", json);
+            File.WriteAllText(@"C:/Users/"+ Environment.UserName +"/source/repos/C-hashtag-point-web/1.0/1.0/data/preset/preset.json", json);
             Console.WriteLine("\nEnregistrement du nouveau preset n°"+choice+" avec succès! " +
                 "\nVoici les nouvelles valeur: " +
                 "\nName: "+ $". {preset["Preset" + choice].Name}"+
