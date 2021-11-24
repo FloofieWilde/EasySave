@@ -9,34 +9,36 @@ using Projet.Presets;
 
 namespace Projet
 {
-    class Opt_Menu
+    class Option
     {
-        static public void opt_menu(langue.language dict_lang)
+        static public void OptMenu(Langue.Language dictLang)
         {
-            Console.WriteLine(dict_lang.opttitle);
-            Console.WriteLine("");
-            Console.WriteLine(dict_lang.optc1);
-            Console.WriteLine(dict_lang.optc2);
-            Console.WriteLine(dict_lang.optexit);
 
-            Console.WriteLine("");
-            //string optchoice = Console.ReadLine();
+            string choice = "0";
+            while (!(choice == "1" | choice == "2" | choice == "3"))
+            {
+                Console.WriteLine(dictLang.opttitle);
+                Console.WriteLine("");
+                Console.WriteLine(dictLang.optc1);
+                Console.WriteLine(dictLang.optc2);
+                Console.WriteLine(dictLang.optexit);
 
-            string choice = Console.ReadLine();
+                Console.WriteLine("");
+
+                choice = Console.ReadLine();
+            }
+
             switch (choice)
             {
                 case "1":
-                    //Console.WriteLine("Langue");
-                    dict_lang = langue.get_files(dict_lang);
-                    opt_menu(dict_lang);
+                    dictLang = Langue.GetFiles(dictLang);
+                    OptMenu(dictLang);
                     break;
                 case "2":
-                    //Console.WriteLine("Preset");
                     Preset.MenuPreset();
-                    opt_menu(dict_lang);
+                    OptMenu(dictLang);
                     break;
                 case "3":
-                    //Console.WriteLine("Retour");
                     Console.WriteLine("\n\n\n");
                     Menu.Main();
                     break;

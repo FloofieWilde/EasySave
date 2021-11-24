@@ -80,14 +80,12 @@ namespace Projet.SaveSystem
                 {
                     fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
                 }
-
                 filesSize = fi.Length;
                 ProcessTime.Stop();
                 CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name);
                 CurrentStateLog.Update(filesSize);
                 ProcessTime.Reset();
             }
-
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
             {
                 DirectoryInfo nextTargetSubDir =

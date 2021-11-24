@@ -12,21 +12,21 @@ namespace Projet
     {
         static public void Main()
         {
-            langue.language dict_lang = langue.get_lang();
+            Langue.Language dictLang = Langue.GetLang();
 
             Title();
-            string choice = GetMainChoice(dict_lang);
-            RedirFromMain(choice, dict_lang);
+            string choice = GetMainChoice(dictLang);
+            RedirFromMain(choice, dictLang);
         }
 
-        static string MakeChoice(langue.language dict_lang)
+        static string MakeChoice(Langue.Language dictLang)
         {
-            Console.WriteLine(dict_lang.menutitle);
+            Console.WriteLine(dictLang.MenuTitle);
             Console.WriteLine("");
-            Console.WriteLine(dict_lang.menuc1);
-            Console.WriteLine(dict_lang.menuc2);
-            Console.WriteLine(dict_lang.menuc3);
-            Console.WriteLine(dict_lang.menuc4);
+            Console.WriteLine(dictLang.menuc1);
+            Console.WriteLine(dictLang.menuc2);
+            Console.WriteLine(dictLang.menuc3);
+            Console.WriteLine(dictLang.menuc4);
 
             Console.WriteLine("");
             string choice = Console.ReadLine();
@@ -47,21 +47,21 @@ namespace Projet
             Console.WriteLine("");
         }
 
-        static string GetMainChoice(langue.language dict_lang)
+        static string GetMainChoice(Langue.Language dictLang)
         {
-            string choice = MakeChoice(dict_lang);
+            string choice = MakeChoice(dictLang);
 
             while (!(choice == "1" | choice == "2" | choice == "3" | choice == "4" | choice == "621"))
             {
-                Console.WriteLine(dict_lang.menubc);
+                Console.WriteLine(dictLang.menubc);
                 Console.WriteLine("");
-                choice = MakeChoice(dict_lang);
+                choice = MakeChoice(dictLang);
             }
 
             return choice;
         }
 
-        static void RedirFromMain(string choice, langue.language dict_lang)
+        static void RedirFromMain(string choice, Langue.Language dictLang)
         {
             switch (choice)
             {
@@ -79,7 +79,7 @@ namespace Projet
                     break;
                 case "2":
                     //Console.WriteLine("Option");
-                    Opt_Menu.opt_menu(dict_lang);
+                    Option.OptMenu(dictLang);
                     break;
                 case "3":
                     LogDaily oui = new LogDaily("Full");

@@ -4,9 +4,9 @@ using Newtonsoft.Json;
 
 namespace Projet.Languages
 {
-    class langue
+    class Langue
     {
-        public static language get_lang()
+        public static Language GetLang()
         {
             StreamReader sr = new StreamReader("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/config.json");
             string jsonString = sr.ReadToEnd();
@@ -17,16 +17,16 @@ namespace Projet.Languages
 
             sr = new StreamReader("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/lang/" + configuration.lang + ".json");
             jsonString = sr.ReadToEnd();
-            language dict_lang = JsonConvert.DeserializeObject<language>(jsonString);
+            Language dictLang = JsonConvert.DeserializeObject<Language>(jsonString);
 
-            return dict_lang;
+            return dictLang;
         }
 
-        static public language get_files(language dict_lang)
+        static public Language GetFiles(Language dictLang)
         {
             string Path = "C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/lang/";
             string[] files = Directory.GetFiles(Path);
-            Console.WriteLine(dict_lang.langselect);
+            Console.WriteLine(dictLang.langselect);
 
             foreach (string file in files)
             {
@@ -37,7 +37,7 @@ namespace Projet.Languages
             }
             bool verif_lan = false;
 
-            Console.WriteLine(dict_lang.langchoice);
+            Console.WriteLine(dictLang.langchoice);
             Console.WriteLine("");
 
             string lchoice = Console.ReadLine();
@@ -74,21 +74,21 @@ namespace Projet.Languages
             }
             if (verif_lan == false)
             {
-                Console.WriteLine(dict_lang.langno);
-                return dict_lang;
+                Console.WriteLine(dictLang.langno);
+                return dictLang;
             } else
             {
-                language new_dict_lang = get_lang();
-                Console.WriteLine(new_dict_lang.langchange);
-                return new_dict_lang;
+                Language newDictLang = GetLang();
+                Console.WriteLine(newDictLang.langchange);
+                return newDictLang;
             }
 
         }
 
 
-        public class language
+        public class Language
         {
-            public string menutitle { get; set; }
+            public string MenuTitle { get; set; }
             public string menuc1 { get; set; }
             public string menuc2 { get; set; }
             public string menuc3 { get; set; }

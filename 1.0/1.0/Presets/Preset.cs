@@ -40,15 +40,19 @@ namespace Projet.Presets
         /// <returns>choice</returns>
         public static string MakeChoicePreset(Dictionary<string, NameSourceDest> preset)
         {
-            langue.language dict_lang = langue.get_lang();
+            Langue.Language dictLang = Langue.GetLang();
 
-            Console.WriteLine("\n"+dict_lang.prelist+"\n");
-            for (int i=1; i<=5; i++)
+            string choice = "0";
+            while (!(choice == "1" | choice == "2" | choice == "3" | choice == "4" | choice == "5"))
             {
-                Console.WriteLine(i.ToString()+$". {preset["Preset"+i.ToString()].Name}");
+                Console.WriteLine("\n" + dictLang.prelist);
+                Console.WriteLine(dictLang.premod);
+                for (int i = 1; i <= 5; i++)
+                {
+                    Console.WriteLine(i.ToString() + $". {preset["Preset" + i.ToString()].Name}");
+                }
+                choice = Console.ReadLine();
             }
-            Console.WriteLine("\n"+dict_lang.premod+"\n");
-            string choice = Console.ReadLine();
 
             return choice;
         }
@@ -60,23 +64,23 @@ namespace Projet.Presets
         /// <param name="preset"></param>
         public static void EditPreset(string choice, Dictionary<string, NameSourceDest> preset)
         {
-            langue.language dict_lang = langue.get_lang();
+            Langue.Language dictLang = Langue.GetLang();
 
-            Console.WriteLine("\n"+ dict_lang.prechoice + choice);
-            Console.WriteLine("\n"+dict_lang.prename);
+            Console.WriteLine("\n"+ dictLang.prechoice + choice);
+            Console.WriteLine("\n"+dictLang.prename);
             preset["Preset" + choice].Name = Console.ReadLine();
-            Console.WriteLine("\n"+dict_lang.prepathsource);
+            Console.WriteLine("\n"+dictLang.prepathsource);
             preset["Preset" + choice].PathSource = Console.ReadLine();
-            Console.WriteLine("\n"+dict_lang.prepathdest);
+            Console.WriteLine("\n"+dictLang.prepathdest);
             preset["Preset" + choice].PathDestination = Console.ReadLine();
 
             string json = JsonConvert.SerializeObject(preset, Formatting.Indented);
             File.WriteAllText(@"C:/Users/"+ Environment.UserName +"/source/repos/C-hashtag-point-web/1.0/1.0/data/preset/preset.json", json);
-            Console.WriteLine("\n"+dict_lang.presave1+choice+dict_lang.presave2 +
-                "\n"+ dict_lang.presave3 +
-                "\nName: "+ $". {preset["Preset" + choice].Name}"+
-                "\nPathSource: "+ $". {preset["Preset" + choice].PathSource}"+
-                "\nPathDestination: "+ $". {preset["Preset" + choice].PathDestination}"
+            Console.WriteLine("\n"+dictLang.presave1+choice+dictLang.presave2 +
+                "\n"+ dictLang.presave3 +
+                "\nName: "+ $"{preset["Preset" + choice].Name}"+
+                "\nPathSource: "+ $"{preset["Preset" + choice].PathSource}"+
+                "\nPathDestination: "+ $"{preset["Preset" + choice].PathDestination}"
             );
         }
 
@@ -85,9 +89,9 @@ namespace Projet.Presets
         /// </summary>
         public static void BackToMenuOption()
         {
-            langue.language dict_lang = langue.get_lang();
-            Console.WriteLine("\n" + dict_lang.prefgb + "\n");
-            Opt_Menu.opt_menu(dict_lang);
+            Langue.Language dictLang = Langue.GetLang();
+            Console.WriteLine("\n" + dictLang.prefgb + "\n");
+            Option.OptMenu(dictLang);
         }
     }
 }
