@@ -70,9 +70,9 @@ namespace Options
             File.WriteAllText(@"C:/Users/"+ Environment.UserName +"/source/repos/C-hashtag-point-web/1.0/1.0/data/preset/preset.json", json);
             Console.WriteLine("\nEnregistrement du nouveau preset n°"+choice+" avec succès! " +
                 "\nVoici les nouvelles valeur: " +
-                "\nName: "+ $". {preset["Preset" + choice].Name}"+
-                "\nName: "+ $". {preset["Preset" + choice].PathSource}"+
-                "\nName: "+ $". {preset["Preset" + choice].PathDestination}"
+                "\nName: " + $". {preset["Preset" + choice].Name}" +
+                "\nPathSource: " + $". {preset["Preset" + choice].PathSource}" +
+                "\nPathDestination: " + $". {preset["Preset" + choice].PathDestination}"
             );
         }
 
