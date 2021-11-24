@@ -11,11 +11,11 @@ namespace Projet.Languages
             StreamReader sr = new StreamReader("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/config.json");
             string jsonString = sr.ReadToEnd();
             sr.Dispose();
-            config configuration = JsonConvert.DeserializeObject<config>(jsonString);
+            Config configuration = JsonConvert.DeserializeObject<Config>(jsonString);
 
 
 
-            sr = new StreamReader("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/lang/" + configuration.lang + ".json");
+            sr = new StreamReader("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/lang/" + configuration.Lang + ".json");
             jsonString = sr.ReadToEnd();
             Language dictLang = JsonConvert.DeserializeObject<Language>(jsonString);
 
@@ -26,60 +26,54 @@ namespace Projet.Languages
         {
             string Path = "C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/lang/";
             string[] files = Directory.GetFiles(Path);
-            Console.WriteLine(dictLang.langselect);
+            Console.WriteLine(dictLang.LangSelect);
 
             foreach (string file in files)
             {
-                string file_new = file.Substring(Path.Length);
-                int length = file_new.Length;
-                file_new = file_new.Remove(length - 5);
-                Console.WriteLine("•   " + file_new);
+                string fileNew = file.Substring(Path.Length);
+                int length = fileNew.Length;
+                fileNew = fileNew.Remove(length - 5);
+                Console.WriteLine("•   " + fileNew);
             }
-            bool verif_lan = false;
+            bool verifLan = false;
 
-            Console.WriteLine(dictLang.langchoice);
+            Console.WriteLine(dictLang.LangChoice);
             Console.WriteLine("");
 
-            string lchoice = Console.ReadLine();
+            string lChoice = Console.ReadLine();
             Console.WriteLine("");
             Console.WriteLine("");
 
-            verif_lan = false;
 
             foreach (string file in files)
             {
-                string file_new = file.Substring(66);
-                int length = file_new.Length;
-                file_new = file_new.Remove(length - 5);
+                string fileNew = file.Substring(66);
+                int length = fileNew.Length;
+                fileNew = fileNew.Remove(length - 5);
 
-                if (lchoice == file_new)
+                if (lChoice == fileNew)
                 {
-                    verif_lan = true;
+                    verifLan = true;
 
                     StreamReader sr = new StreamReader("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/config.json");
                     string jsonString = sr.ReadToEnd();
-                    config conf = JsonConvert.DeserializeObject<config>(jsonString);
+                    Config conf = JsonConvert.DeserializeObject<Config>(jsonString);
                     sr.Dispose();
 
-
                     string text = File.ReadAllText("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/config.json");
-                    text = text.Replace(conf.lang, lchoice);
+                    text = text.Replace(conf.Lang, lChoice);
 
                     File.WriteAllText("C:/Users/" + Environment.UserName + "/source/repos/C-hashtag-point-web/1.0/1.0/data/config.json", text);
-
-
-                    
-
                 }
             }
-            if (verif_lan == false)
+            if (verifLan == false)
             {
-                Console.WriteLine(dictLang.langno);
+                Console.WriteLine(dictLang.LangNo);
                 return dictLang;
             } else
             {
                 Language newDictLang = GetLang();
-                Console.WriteLine(newDictLang.langchange);
+                Console.WriteLine(newDictLang.LangChange);
                 return newDictLang;
             }
 
@@ -89,29 +83,29 @@ namespace Projet.Languages
         public class Language
         {
             public string MenuTitle { get; set; }
-            public string menuc1 { get; set; }
-            public string menuc2 { get; set; }
-            public string menuc3 { get; set; }
-            public string menuc4 { get; set; }
-            public string menubc { get; set; }
-            public string opttitle { get; set; }
-            public string optc1 { get; set; }
-            public string optc2 { get; set; }
-            public string optexit { get; set; }
-            public string langselect { get; set; }
-            public string langchange { get; set; }
-            public string langno { get; set; }
-            public string langchoice { get; set; }
-            public string prelist { get; set; }
-            public string premod { get; set; }
-            public string prechoice { get; set; }
-            public string prename { get; set; }
-            public string prepathsource { get; set; }
-            public string prepathdest { get; set; }
-            public string presave1 { get; set; }
-            public string presave2 { get; set; }
-            public string presave3 { get; set; }
-            public string prefgb { get; set; }
+            public string MenuC1 { get; set; }
+            public string MenuC2 { get; set; }
+            public string MenuC3 { get; set; }
+            public string MenuC4 { get; set; }
+            public string MenuBc { get; set; }
+            public string OptTitle { get; set; }
+            public string OptC1 { get; set; }
+            public string OptC2 { get; set; }
+            public string OptExit { get; set; }
+            public string LangSelect { get; set; }
+            public string LangChange { get; set; }
+            public string LangNo { get; set; }
+            public string LangChoice { get; set; }
+            public string PreList { get; set; }
+            public string PreMod { get; set; }
+            public string PreChoice { get; set; }
+            public string PreName { get; set; }
+            public string PrepathSource { get; set; }
+            public string PrepathDest { get; set; }
+            public string PreSave1 { get; set; }
+            public string PreSave2 { get; set; }
+            public string PreSave3 { get; set; }
+            public string PreFbg { get; set; }
         }
     }
 }

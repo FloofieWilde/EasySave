@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Projet.Languages
 {
-    class config
+    class Config
     {
-        public string lang { get; set; }
-        public string ver { get; set; }
+        public string Lang { get; set; }
+        public string Ver { get; set; }
     }
 }

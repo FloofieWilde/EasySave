@@ -17,11 +17,11 @@ namespace Projet
             string choice = "0";
             while (!(choice == "1" | choice == "2" | choice == "3"))
             {
-                Console.WriteLine(dictLang.opttitle);
+                Console.WriteLine(dictLang.OptTitle);
                 Console.WriteLine("");
-                Console.WriteLine(dictLang.optc1);
-                Console.WriteLine(dictLang.optc2);
-                Console.WriteLine(dictLang.optexit);
+                Console.WriteLine(dictLang.OptC1);
+                Console.WriteLine(dictLang.OptC2);
+                Console.WriteLine(dictLang.OptExit);
 
                 Console.WriteLine("");
 

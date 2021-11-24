@@ -23,10 +23,10 @@ namespace Projet
         {
             Console.WriteLine(dictLang.MenuTitle);
             Console.WriteLine("");
-            Console.WriteLine(dictLang.menuc1);
-            Console.WriteLine(dictLang.menuc2);
-            Console.WriteLine(dictLang.menuc3);
-            Console.WriteLine(dictLang.menuc4);
+            Console.WriteLine(dictLang.MenuC1);
+            Console.WriteLine(dictLang.MenuC2);
+            Console.WriteLine(dictLang.MenuC3);
+            Console.WriteLine(dictLang.MenuC4);
 
             Console.WriteLine("");
             string choice = Console.ReadLine();
@@ -53,7 +53,7 @@ namespace Projet
 
             while (!(choice == "1" | choice == "2" | choice == "3" | choice == "4" | choice == "621"))
             {
-                Console.WriteLine(dictLang.menubc);
+                Console.WriteLine(dictLang.MenuBc);
                 Console.WriteLine("");
                 choice = MakeChoice(dictLang);
             }

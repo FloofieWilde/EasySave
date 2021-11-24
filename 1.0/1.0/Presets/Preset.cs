@@ -45,8 +45,8 @@ namespace Projet.Presets
             string choice = "0";
             while (!(choice == "1" | choice == "2" | choice == "3" | choice == "4" | choice == "5"))
             {
-                Console.WriteLine("\n" + dictLang.prelist);
-                Console.WriteLine(dictLang.premod);
+                Console.WriteLine("\n" + dictLang.PreList);
+                Console.WriteLine(dictLang.PreMod);
                 for (int i = 1; i <= 5; i++)
                 {
                     Console.WriteLine(i.ToString() + $". {preset["Preset" + i.ToString()].Name}");
@@ -66,18 +66,18 @@ namespace Projet.Presets
         {
             Langue.Language dictLang = Langue.GetLang();
 
-            Console.WriteLine("\n"+ dictLang.prechoice + choice);
-            Console.WriteLine("\n"+dictLang.prename);
+            Console.WriteLine("\n"+ dictLang.PreChoice + choice);
+            Console.WriteLine("\n"+dictLang.PreName);
             preset["Preset" + choice].Name = Console.ReadLine();
-            Console.WriteLine("\n"+dictLang.prepathsource);
+            Console.WriteLine("\n"+dictLang.PrepathSource);
             preset["Preset" + choice].PathSource = Console.ReadLine();
-            Console.WriteLine("\n"+dictLang.prepathdest);
+            Console.WriteLine("\n"+dictLang.PrepathDest);
             preset["Preset" + choice].PathDestination = Console.ReadLine();
 
             string json = JsonConvert.SerializeObject(preset, Formatting.Indented);
             File.WriteAllText(@"C:/Users/"+ Environment.UserName +"/source/repos/C-hashtag-point-web/1.0/1.0/data/preset/preset.json", json);
-            Console.WriteLine("\n"+dictLang.presave1+choice+dictLang.presave2 +
-                "\n"+ dictLang.presave3 +
+            Console.WriteLine("\n"+dictLang.PreSave1+choice+dictLang.PreSave2 +
+                "\n"+ dictLang.PreSave3 +
                 "\nName: "+ $"{preset["Preset" + choice].Name}"+
                 "\nPathSource: "+ $"{preset["Preset" + choice].PathSource}"+
                 "\nPathDestination: "+ $"{preset["Preset" + choice].PathDestination}"
@@ -90,7 +90,7 @@ namespace Projet.Presets
         public static void BackToMenuOption()
         {
             Langue.Language dictLang = Langue.GetLang();
-            Console.WriteLine("\n" + dictLang.prefgb + "\n");
+            Console.WriteLine("\n" + dictLang.PreFbg + "\n");
             Option.OptMenu(dictLang);
         }
     }
