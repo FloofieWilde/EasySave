@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>1.0</name>
+    </assembly>
+    <members>
+        <member name="T:Options.NameSourceDest">
+            <summary>
+            Class to declare the columns of each preset
+            </summary>
+        </member>
+        <member name="T:Options.Path">
+            <summary>
+            Class to declare the preset. Each preset have 3 column (name, source, destination)
+            </summary>
+        </member>
+        <member name="T:Options.Preset">
+            <summary>
+            Class to choose a preset, and edit it
+            </summary>
+        </member>
+        <member name="M:Options.Preset.MenuPreset">
+            <summary>
+            Function to navigate between the different function
+            </summary>
+        </member>
+        <member name="M:Options.Preset.GetJsonPreset">
+            <summary>
+            Function to get the Json file and convert it to a .NET object
+            </summary>
+            <returns>preset</returns>
+        </member>
+        <member name="M:Options.Preset.MakeChoicePreset(System.Collections.Generic.Dictionary{System.String,Options.NameSourceDest})">
+            <summary>
+            Function to choose which preset we want to edit
+            </summary>
+            <param name="preset"></param>
+            <returns>choice</returns>
+        </member>
+        <member name="M:Options.Preset.EditPreset(System.String,System.Collections.Generic.Dictionary{System.String,Options.NameSourceDest})">
+            <summary>
+            Function to edit the choosen preset
+            </summary>
+            <param name="choice"></param>
+            <param name="preset"></param>
+        </member>
+        <member name="M:Options.Preset.BackToMenuOption">
+            <summary>
+            Function to get back to the options menu
+            </summary>
+        </member>
+    </members>
+</doc>

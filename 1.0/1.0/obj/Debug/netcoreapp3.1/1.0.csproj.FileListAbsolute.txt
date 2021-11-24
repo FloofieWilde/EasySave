@@ -28,3 +28,4 @@ C:\Users\loicm\Source\Repos\C-hashtag-point-web\1.0\1.0\obj\Debug\netcoreapp3.1\
 C:\Users\loicm\Source\Repos\C-hashtag-point-web\1.0\1.0\obj\Debug\netcoreapp3.1\1.0.dll
 C:\Users\loicm\Source\Repos\C-hashtag-point-web\1.0\1.0\obj\Debug\netcoreapp3.1\1.0.pdb
 C:\Users\loicm\Source\Repos\C-hashtag-point-web\1.0\1.0\obj\Debug\netcoreapp3.1\1.0.genruntimeconfig.cache
+C:\Users\jennm\Source\Repos\C-hashtag-point-web\1.0\1.0\bin\Debug\netcoreapp3.1\1.0.xml

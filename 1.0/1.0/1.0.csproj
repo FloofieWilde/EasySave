@@ -6,6 +6,10 @@
     <RootNamespace>Menu</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\jennm\Source\Repos\C-hashtag-point-web\1.0\1.0\1.0.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="data\lang\logs\**" />
     <EmbeddedResource Remove="data\lang\logs\**" />
