@@ -47,7 +47,7 @@ namespace Projet.Languages
 
             foreach (string file in files)
             {
-                string fileNew = file.Substring(66);
+                string fileNew = file.Substring(Path.Length);
                 int length = fileNew.Length;
                 fileNew = fileNew.Remove(length - 5);
 
