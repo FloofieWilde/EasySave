@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>1.0</id>
+    <version>1.0.0</version>
+    <authors>1.0</authors>
+    <description>Package Description</description>
+    <dependencies>
+      <group targetFramework=".NETCoreApp3.1">
+        <dependency id="Newtonsoft.Json" version="13.0.1" exclude="Build,Analyzers" />
+        <dependency id="VisualStudio.gitignore" version="1.0.1" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="C:\Users\jennm\Source\Repos\C-hashtag-point-web\1.0\1.0\bin\Debug\netcoreapp3.1\1.0.runtimeconfig.json" target="lib\netcoreapp3.1\1.0.runtimeconfig.json" />
+    <file src="C:\Users\jennm\Source\Repos\C-hashtag-point-web\1.0\1.0\bin\Debug\netcoreapp3.1\1.0.dll" target="lib\netcoreapp3.1\1.0.dll" />
+  </files>
+</package>
