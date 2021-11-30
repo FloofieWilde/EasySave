@@ -23,8 +23,8 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
-bin/
-obj/
+#bin/
+#obj/
 TestResults/
 ###################
 # Web publish log #
@@ -83,6 +83,7 @@ bld/
 
 # Visual Studo 2015 cache/options directory
 .vs/
+*.sqlite
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
