@@ -12,18 +12,31 @@ namespace Projet.Presets
     public class Preset
     {
         /// <summary>
-        /// Function to navigate between the different function
+        /// Method to navigate between the different Methods
         /// </summary>
         public static void MenuPreset()
         {
-            Dictionary<string, NameSourceDest> preset = GetJsonPreset();
-            string choice = MakeChoicePreset(preset);
-            EditPreset(choice, preset);
+            string action = MakeChoiceAction();
+            switch (action)
+            {
+                case "1":
+                    AddPreset();
+                    break;
+                case "2":
+                    EditPreset();
+                    break;
+                case "3":
+                    DeletePreset();
+                    break;
+                case "4":
+                    BackToMenuOption();
+                    break;
+            }
             BackToMenuOption();
         }
 
         /// <summary>
-        /// Function to get the Json file and convert it to a .NET object
+        /// Method to get the Json file and convert it to a .NET object
         /// </summary>
         /// <returns>preset</returns>
         public static Dictionary<string, NameSourceDest> GetJsonPreset()
@@ -34,54 +47,126 @@ namespace Projet.Presets
         }
 
         /// <summary>
-        /// Function to choose which preset we want to edit
+        /// Method to choose if we want to edit, add or delete a preset.
+        /// </summary>
+        /// <returns>action</returns>
+        public static string MakeChoiceAction()
+        {
+            string action = "0";
+            while (!(action == "1" | action == "2" | action == "3" | action == "4"))
+            {
+                Console.WriteLine("Quel action voulez vous faire?");
+                Console.WriteLine("1. Ajouter un preset");
+                Console.WriteLine("2. Modifier un preset");
+                Console.WriteLine("3. Supprimer un preset");
+                Console.WriteLine("4. Retour");
+                action = Console.ReadLine();
+            }
+            return action;
+        }
+
+        /// <summary>
+        /// Method to choose which preset we want to edit
         /// </summary>
         /// <param name="preset"></param>
         /// <returns>choice</returns>
         public static string MakeChoicePreset(Dictionary<string, NameSourceDest> preset)
         {
             Langue.Language dictLang = Langue.GetLang();
-
+            int nbPreset = preset.Count;
+            Console.WriteLine("Nombre de travail de sauvegarde: " + nbPreset);
             string choice = "0";
-            while (!(choice == "1" | choice == "2" | choice == "3" | choice == "4" | choice == "5"))
+            List<string> listOfChoice = new List<string>();
+            for (int i = 1; i <= nbPreset; i++)
+            {
+                listOfChoice.Add(i.ToString());
+            }
+            while (!listOfChoice.Contains(choice))
             {
                 Console.WriteLine("\n" + dictLang.PreList);
                 Console.WriteLine(dictLang.PreMod);
-                for (int i = 1; i <= 5; i++)
+                for (int i = 1; i <= nbPreset; i++)
                 {
                     Console.WriteLine(i.ToString() + $". {preset["Preset" + i.ToString()].Name}");
                 }
                 choice = Console.ReadLine();
             }
-
             return choice;
         }
 
         /// <summary>
-        /// Function to edit the choosen preset
+        /// Method to edit the choosen preset
         /// </summary>
-        /// <param name="choice"></param>
-        /// <param name="preset"></param>
-        public static void EditPreset(string choice, Dictionary<string, NameSourceDest> preset)
+        public static void EditPreset()
         {
+            Dictionary<string, NameSourceDest> preset = GetJsonPreset();
+            string choice = MakeChoicePreset(preset);
             Langue.Language dictLang = Langue.GetLang();
 
-            Console.WriteLine("\n"+ dictLang.PreChoice + choice);
-            Console.WriteLine("\n"+dictLang.PreName);
+            Console.WriteLine("\n" + dictLang.PreChoice + choice);
+            Console.WriteLine("\n" + dictLang.PreName);
             preset["Preset" + choice].Name = Console.ReadLine();
-            Console.WriteLine("\n"+dictLang.PrepathSource);
+            Console.WriteLine("\n" + dictLang.PrepathSource);
             preset["Preset" + choice].PathSource = Console.ReadLine();
-            Console.WriteLine("\n"+dictLang.PrepathDest);
+            Console.WriteLine("\n" + dictLang.PrepathDest);
             preset["Preset" + choice].PathDestination = Console.ReadLine();
 
             string json = JsonConvert.SerializeObject(preset, Formatting.Indented);
             File.WriteAllText(@"./data/preset/preset.json", json);
-            Console.WriteLine("\n"+dictLang.PreSave1+choice+dictLang.PreSave2 +
-                "\n"+ dictLang.PreSave3 +
-                "\nName: "+ $"{preset["Preset" + choice].Name}"+
-                "\nPathSource: "+ $"{preset["Preset" + choice].PathSource}"+
-                "\nPathDestination: "+ $"{preset["Preset" + choice].PathDestination}"
+            Console.WriteLine("\n" + dictLang.PreSave1 + choice + dictLang.PreSave2 +
+                "\n" + dictLang.PreSave3 +
+                "\nName: " + $"{preset["Preset" + choice].Name}" +
+                "\nPathSource: " + $"{preset["Preset" + choice].PathSource}" +
+                "\nPathDestination: " + $"{preset["Preset" + choice].PathDestination}"
             );
+        }
+
+        /// <summary>
+        /// Method to add a new preset
+        /// </summary>
+        public static void AddPreset()
+        {
+            Dictionary<string, NameSourceDest> preset = GetJsonPreset();
+            int idPreset = preset.Count + 1;
+            Langue.Language dictLang = Langue.GetLang();
+
+            Console.WriteLine("\n" + dictLang.PreName);
+            string name = Console.ReadLine();
+            Console.WriteLine("\n" + dictLang.PrepathSource);
+            string source = Console.ReadLine();
+            Console.WriteLine("\n" + dictLang.PrepathDest);
+            string destination = Console.ReadLine();
+
+            NameSourceDest newPreset = new NameSourceDest
+            {
+                Name = name,
+                PathSource = source,
+                PathDestination = destination
+            };
+            preset.Add("Preset" + idPreset, newPreset);
+
+            string json = JsonConvert.SerializeObject(preset, Formatting.Indented);
+            File.WriteAllText(@"./data/preset/preset.json", json);
+
+            Console.WriteLine("Preset créé avec succès!");
+        }
+
+        /// <summary>
+        /// Method to delete a preset from the json file. 
+        /// </summary>
+        public static void DeletePreset()
+        {
+            Dictionary<string, NameSourceDest> preset = GetJsonPreset();
+            string choice = MakeChoicePreset(preset);
+            Langue.Language dictLang = Langue.GetLang();
+            for (int i = Convert.ToInt32(choice); i < preset.Count; i++)
+            {
+                preset["Preset" + i] = preset["Preset" + (i + 1).ToString()];
+            }
+            preset.Remove("Preset" + preset.Count);
+            //preset.Remove("Preset" + (preset.Count+1).ToString());
+            string json = JsonConvert.SerializeObject(preset, Formatting.Indented);
+            File.WriteAllText(@"./data/preset/preset.json", json);
         }
 
         /// <summary>
@@ -90,7 +175,7 @@ namespace Projet.Presets
         public static void BackToMenuOption()
         {
             Langue.Language dictLang = Langue.GetLang();
-            Console.WriteLine("\n" + dictLang.PreFbg + "\n");
+            Console.WriteLine("\n" + dictLang.PreFbg + "\n\n\n");
             Option.OptMenu(dictLang);
         }
     }

@@ -15,6 +15,7 @@ namespace Projet.Logs
     {
         public long FileSize { get; set; }
         public double TransferTime { get; set; }
+        public long CryptTime { get; set;}
         private Langue.Language CurrentLanguage;
 
         public LogDaily(string name)
@@ -33,12 +34,13 @@ namespace Projet.Logs
         /// <param name="transferTime">Total time taken to process the file</param>
         /// <param name="sourceDir">Source directory</param>
         /// <param name="targetDir">Target directory</param>
-        public void Update(long filesize, double transferTime, string sourceDir, string targetDir)
+        public void Update(long filesize, double transferTime, string sourceDir, string targetDir, long cryptTime)
         {
             FileSize = filesize;
             TransferTime = transferTime;
             SourceDir = sourceDir;
             TargetDir = targetDir;
+            CryptTime = cryptTime;
             Save();
 
         }

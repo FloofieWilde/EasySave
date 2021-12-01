@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\1.0"
+    "\\1.0",
+    "\\1.0\\1.0",
+    "\\1.0\\1.0\\Logs"
   ],
+  "SelectedNode": "\\1.0\\1.0\\Logs\\LogDaily.cs",
   "PreviewInSolutionExplorer": false
 }

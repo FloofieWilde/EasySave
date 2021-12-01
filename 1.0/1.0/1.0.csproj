@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="DossB\" />
     <Folder Include="Logs\LogsData\Daily\" />
     <Folder Include="Logs\LogsData\State\" />
   </ItemGroup>

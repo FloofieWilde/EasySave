@@ -16,8 +16,8 @@ namespace Projet.SaveSystem
         private readonly bool Full;
         private LogState CurrentStateLog;
         private LogDaily CurrentDailyLog;
+        private long CryptTime = 0;
         private readonly Stopwatch ProcessTime;
-
         public Save(string source, string target, bool full)
         {
             SourceDir = source;
@@ -30,6 +30,15 @@ namespace Projet.SaveSystem
         /// </summary>
         public void Copy()
         {
+            Process[] process = Process.GetProcessesByName("Calculator");
+            Console.WriteLine(process.Length);
+            if (process.Length > 0)
+            {
+                Console.WriteLine("Merci d'arrêter votre logiciel métier avant de faire une sauvegarde");
+                Menu.Main();
+                return;
+            }
+
             string copyType = "Partial";
             if (Full) copyType = "Complete";
             Langue.Language currentLanguage = Langue.GetLang();
@@ -75,16 +84,16 @@ namespace Projet.SaveSystem
                 {
                     if (File.GetLastWriteTime(target.FullName) != File.GetLastWriteTime(fi.FullName))
                     {
-                        fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                        CheckException(fi, target);
                     }
                 }
                 else
                 {
-                    fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                    CheckException(fi, target);
                 }
                 filesSize = fi.Length;
                 ProcessTime.Stop();
-                CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name);
+                CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name, CryptTime);
                 CurrentStateLog.Update(filesSize);
                 ProcessTime.Reset();
             }
@@ -115,7 +124,19 @@ namespace Projet.SaveSystem
             {
                 size += DirSize(di);
             }
+
             return size;
+        }
+        private void CheckException(FileInfo source, DirectoryInfo target)
+        {
+            try
+            {
+                CryptTime = Crypt.CryptOrSave(source, target);
+            }
+            catch (IOException)
+            {
+                CryptTime = -1;
+            }
         }
 
     }
