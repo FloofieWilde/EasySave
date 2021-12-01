@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave_2._0"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="800" Width="800">
     <Grid>
         <Label Content="Easy save" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="448" FontSize="30" HorizontalContentAlignment="Center"/>
         <Button Name="CopyButton" Content="Copie" HorizontalAlignment="Left" Margin="142,94,0,0" VerticalAlignment="Top" Click="CopyButton_Click"/>
@@ -15,28 +15,85 @@
         <StackPanel Name="CopyPannel" Margin="10,137,10,10" Visibility="Collapsed">
             <Label Name="LabelCopie" Content="Vous avez choisis copier." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
         </StackPanel>
+
         <StackPanel Name="OptionsPannel" Margin="10,137,10,10" Visibility="Collapsed">
             <Label Name="LabelOptions" Content="Que voulez-vous faire?" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
             <Button Name="LangButton" Content="Langue" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="LangButton_Click"/>
             <Button Name="PresetButton" Content="Presets" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="PresetButton_Click"/>
+            <Button Name="ExtensionButton" Content="Extension" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="ExtensionButton_Click"/>
+
             <StackPanel Name="LangPannel" Margin="10,0,10,10" Visibility="Collapsed">
                 <Label Name="LabelLang" Content="Vous avez choisis langue." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
             </StackPanel>
+
             <StackPanel Name="PresetPannel" Margin="10,0,10,10" Visibility="Collapsed">
+                <ListBox Name="ListPreset" Margin="10,10,500,0">
+                </ListBox>
                 <Label Name="LabelActionPreset" Content="Quel action voulez-vous faire?" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
                 <Button Name="AddPresetButton" Content="Ajouter un preset" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="AddPresetButton_Click"/>
-                <Button Name="EditPresetButton" Content="Modifier un preset" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="EditPresetButton_Click"/>
-                <Button Name="DeletePresetButton" Content="Supprimer un preset" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="DeletePresetButton_Click"/>
+                <Button Name="EditPresetButton" Content="Modifier le preset sélectionné" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="EditPresetButton_Click"/>
+                <Button Name="DeletePresetButton" Content="Supprimer le preset sélectionné" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="DeletePresetButton_Click"/>
                 <StackPanel Name="AddPannel" Margin="10,0,10,10" Visibility="Collapsed">
-                    <Label Name="LabelAdd" Content="Vous avez choisis d'ajouter un preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                    <Label Name="LabelAddPreset" Content="Vous avez choisis d'ajouter un preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                    <Label Name="LabelNameAddPreset" Content="Nom:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="AddNameTextbox" HorizontalAlignment="Left" Margin="30,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Name="LabelSourceAddPreset" Content="Source:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="AddPathSourceTextbox" HorizontalAlignment="Left" Margin="30,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Name="LabelDestinationAddPreset" Content="Destination:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="AddPathDestinationTextbox" HorizontalAlignment="Left" Margin="30,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Button Name="ConfirmAddPreset" Content="Confirmer" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="ConfirmAddPreset_Click"/>
+                    <Button Name="CancelAddPreset" Content="Annuler" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="CancelAddPreset_Click"/>
                 </StackPanel>
                 <StackPanel Name="EditPannel" Margin="10,0,10,10" Visibility="Collapsed">
-                    <Label Name="LabelEdit" Content="Vous avez choisis de modifier un preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                    <Label Name="LabelEditPreset" Content="Vous avez choisis de modifier un preset dont l'ID est:" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                    <Label Name="PresetEditId" Content="" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <Label Name="LabelNameEditPreset" Content="Nom:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="EditNameTextbox" HorizontalAlignment="Left" Margin="30,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Name="LabelSourceEditPreset" Content="Source:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="EditPathSourceTextbox" HorizontalAlignment="Left" Margin="30,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Name="LabelDestinationEditPreset" Content="Destination:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="EditPathDestinationTextbox" HorizontalAlignment="Left" Margin="30,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Button Name="ConfirmEditPreset" Content="Confirmer" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="ConfirmEditPreset_Click"/>
+                    <Button Name="CancelEditPreset" Content="Annuler" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="CancelEditPreset_Click"/>
                 </StackPanel>
                 <StackPanel Name="DeletePannel" Margin="10,0,10,10" Visibility="Collapsed">
-                    <Label Name="LabelDelete" Content="Vous avez choisis de supprimer un preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                    <Label Name="LabelDeletePreset" Content="Êtes vous sûr de supprimer le preset numéro:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <Label Name="PresetDeleteId" Content="" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <Button Name="ConfirmDeletePreset" Content="Confirmer" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="ConfirmDeletePreset_Click"/>
+                    <Button Name="CancelDeletePreset" Content="Annuler" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="CancelDeletePreset_Click"/>
                 </StackPanel>
             </StackPanel>
+
+            <StackPanel Name="ExtensionPannel" Margin="10,0,10,10" Visibility="Collapsed">
+                <ListBox Name="ListExtension" Margin="10,10,500,0">
+                </ListBox>
+                <Label Name="LabelActionExtension" Content="Quel action voulez-vous faire?" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                <Button Name="AddExtensionButton" Content="Ajouter une extension" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="AddExtensionButton_Click"/>
+                <Button Name="EditExtensionButton" Content="Modifier l'extension sélectionné" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="EditExtensionButton_Click"/>
+                <Button Name="DeleteExtensionButton" Content="Supprimer l'extension sélectionné" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="DeleteExtensionButton_Click"/>
+                <StackPanel Name="AddExtensionPannel" Margin="10,0,10,10" Visibility="Collapsed">
+                    <Label Name="LabelAddExtension" Content="Vous avez choisis d'ajouter une extension." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                    <Label Name="LabelAddNewExtension" Content="Extension (mettez un point devant):" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="AddExtensionTextbox" HorizontalAlignment="Left" Margin="30,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Button Name="ConfirmAddExtension" Content="Confirmer" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="ConfirmAddExtension_Click"/>
+                    <Button Name="CancelAddExtension" Content="Annuler" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="CancelAddExtension_Click"/>
+                </StackPanel>
+                <StackPanel Name="EditExtensionPannel" Margin="10,0,10,10" Visibility="Collapsed">
+                    <Label Name="LabelEditExtension" Content="Vous avez choisis de modifier une extension dans l'ID est:." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                    <Label Name="ExtensionEditId" Content="" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <Label Name="LabelEditTheExtension" Content="Extension (mettez un point devant):" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <TextBox Name="EditExtensionTextbox" HorizontalAlignment="Left" Margin="30,0,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Button Name="ConfirmEditExtension" Content="Confirmer" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="ConfirmEditExtension_Click"/>
+                    <Button Name="CancelEditExtension" Content="Annuler" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="CancelEditExtension_Click"/>
+                </StackPanel>
+                <StackPanel Name="DeleteExtensionPannel" Margin="10,0,10,10" Visibility="Collapsed">
+                    <Label Name="LabelDeleteExtension" Content="Êtes vous sûr de supprimer l'extension numéro:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <Label Name="ExtensionDeleteId" Content="" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+                    <Button Name="ConfirmDeleteExtension" Content="Confirmer" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="ConfirmDeleteExtension_Click"/>
+                    <Button Name="CancelDeleteExtension" Content="Annuler" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="CancelDeleteExtension_Click"/>
+                </StackPanel>
+            </StackPanel>
+
         </StackPanel>
         <StackPanel Name="LogsPannel" Margin="10,137,10,10" Visibility="Collapsed">
             <Label Name="LabelLogs" Content="Vous avez choisis afficher logs." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>

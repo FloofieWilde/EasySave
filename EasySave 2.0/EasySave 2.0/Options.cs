@@ -35,7 +35,7 @@ namespace Projet
                     OptMenu(dictLang);
                     break;
                 case "2":
-                    Preset.MenuPreset();
+                    //Preset.MenuPreset();
                     OptMenu(dictLang);
                     break;
                 case "3":
