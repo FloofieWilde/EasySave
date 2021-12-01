@@ -7,6 +7,27 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="225,116,0,0" VerticalAlignment="Top"/>
+        <Label Content="Easy save" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="448" FontSize="30" HorizontalContentAlignment="Center"/>
+        <Button Name="CopyButton" Content="Copie" HorizontalAlignment="Left" Margin="142,94,0,0" VerticalAlignment="Top" Click="CopyButton_Click"/>
+        <Button Name="OptionsBouton" Content="Options" HorizontalAlignment="Left" Margin="292,94,0,0" VerticalAlignment="Top" Click="OptionsBouton_Click"/>
+        <Button Name="LogsButton" Content="Afficher logs" HorizontalAlignment="Left" Margin="447,94,0,0" VerticalAlignment="Top" Click="LogsButton_Click"/>
+        <Button Name="ExitButton" Content="Quitter" HorizontalAlignment="Left" Margin="606,94,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <StackPanel Name="CopyPannel" Margin="10,137,10,10" Visibility="Collapsed">
+            <Label Name="LabelCopie" Content="Vous avez choisis copier." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+        </StackPanel>
+        <StackPanel Name="OptionsPannel" Margin="10,137,10,10" Visibility="Collapsed">
+            <Label Name="LabelOptions" Content="Que voulez-vous faire?" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+            <Button Name="LangButton" Content="Langue" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="LangButton_Click"/>
+            <Button Name="PresetButton" Content="Presets" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="PresetButton_Click"/>
+            <StackPanel Name="LangPannel" Margin="10,0,10,10" Visibility="Collapsed">
+                <Label Name="LabelLang" Content="Vous avez choisis langue." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+            </StackPanel>
+            <StackPanel Name="PresetPannel" Margin="10,0,10,10" Visibility="Collapsed">
+                <Label Name="LabelPreset" Content="Vous avez choisis preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Name="LogsPannel" Margin="10,137,10,10" Visibility="Collapsed">
+            <Label Name="LabelLogs" Content="Vous avez choisis afficher logs." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+        </StackPanel>
     </Grid>
 </Window>

@@ -24,5 +24,48 @@ namespace EasySave_2._0
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Environment.Exit(0);
+        }
+
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void CopyButton_Click(object sender, RoutedEventArgs e)
+        {
+            CopyPannel.Visibility = Visibility.Visible;
+            OptionsPannel.Visibility = Visibility.Collapsed;
+            LogsPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void OptionsBouton_Click(object sender, RoutedEventArgs e)
+        {
+            CopyPannel.Visibility = Visibility.Collapsed;
+            OptionsPannel.Visibility = Visibility.Visible;
+            LogsPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void LogsButton_Click(object sender, RoutedEventArgs e)
+        {
+            CopyPannel.Visibility = Visibility.Collapsed;
+            OptionsPannel.Visibility = Visibility.Collapsed;
+            LogsPannel.Visibility = Visibility.Visible;
+        }
+
+        private void LangButton_Click(object sender, RoutedEventArgs e)
+        {
+            LangPannel.Visibility = Visibility.Visible;
+            PresetPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void PresetButton_Click(object sender, RoutedEventArgs e)
+        {
+            LangPannel.Visibility = Visibility.Collapsed;
+            PresetPannel.Visibility = Visibility.Visible;
+        }
     }
 }
