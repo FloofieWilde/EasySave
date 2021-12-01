@@ -40,7 +40,7 @@ namespace Projet
                     break;
                 case "3":
                     Console.WriteLine("\n\n\n");
-                    Menu.Main();
+                    Menu.MenuPrincipal();
                     break;
             }
         }
