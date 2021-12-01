@@ -67,5 +67,27 @@ namespace EasySave_2._0
             LangPannel.Visibility = Visibility.Collapsed;
             PresetPannel.Visibility = Visibility.Visible;
         }
+
+        private void AddPresetButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddPannel.Visibility = Visibility.Visible;
+            EditPannel.Visibility = Visibility.Collapsed;
+            DeletePannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void EditPresetButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddPannel.Visibility = Visibility.Collapsed;
+            EditPannel.Visibility = Visibility.Visible;
+            DeletePannel.Visibility = Visibility.Collapsed;
+        }
+
+        
+        private void DeletePresetButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddPannel.Visibility = Visibility.Collapsed;
+            EditPannel.Visibility = Visibility.Collapsed;
+            DeletePannel.Visibility = Visibility.Visible;
+        }
     }
 }

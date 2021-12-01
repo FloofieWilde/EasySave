@@ -23,7 +23,19 @@
                 <Label Name="LabelLang" Content="Vous avez choisis langue." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
             </StackPanel>
             <StackPanel Name="PresetPannel" Margin="10,0,10,10" Visibility="Collapsed">
-                <Label Name="LabelPreset" Content="Vous avez choisis preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                <Label Name="LabelActionPreset" Content="Quel action voulez-vous faire?" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                <Button Name="AddPresetButton" Content="Ajouter un preset" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="AddPresetButton_Click"/>
+                <Button Name="EditPresetButton" Content="Modifier un preset" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="EditPresetButton_Click"/>
+                <Button Name="DeletePresetButton" Content="Supprimer un preset" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="DeletePresetButton_Click"/>
+                <StackPanel Name="AddPannel" Margin="10,0,10,10" Visibility="Collapsed">
+                    <Label Name="LabelAdd" Content="Vous avez choisis d'ajouter un preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                </StackPanel>
+                <StackPanel Name="EditPannel" Margin="10,0,10,10" Visibility="Collapsed">
+                    <Label Name="LabelEdit" Content="Vous avez choisis de modifier un preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                </StackPanel>
+                <StackPanel Name="DeletePannel" Margin="10,0,10,10" Visibility="Collapsed">
+                    <Label Name="LabelDelete" Content="Vous avez choisis de supprimer un preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
         <StackPanel Name="LogsPannel" Margin="10,137,10,10" Visibility="Collapsed">
