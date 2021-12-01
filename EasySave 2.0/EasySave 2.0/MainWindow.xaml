@@ -5,41 +5,36 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave_2._0"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" Background="#FF10100F">
     <Grid>
-        <Label Content="Easy save" HorizontalAlignment="Center" Margin="0,0,0,0" VerticalAlignment="Top" Width="448" FontSize="30" HorizontalContentAlignment="Center"/>
-        <Button Name="CopyButton" Content="Copie" HorizontalAlignment="Left" Margin="142,94,0,0" VerticalAlignment="Top" Click="CopyButton_Click"/>
-        <Button Name="OptionsBouton" Content="Options" HorizontalAlignment="Left" Margin="292,94,0,0" VerticalAlignment="Top" Click="OptionsBouton_Click"/>
-        <Button Name="LogsButton" Content="Afficher logs" HorizontalAlignment="Left" Margin="447,94,0,0" VerticalAlignment="Top" Click="LogsButton_Click"/>
-        <Button Name="ExitButton" Content="Quitter" HorizontalAlignment="Left" Margin="606,94,0,0" VerticalAlignment="Top" Click="Button_Click"/>
-        <StackPanel Name="CopyPannel" Margin="10,137,10,10" Visibility="Collapsed">
-            <Label Name="LabelCopie" Content="Vous avez choisis copier." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
-        </StackPanel>
-        <StackPanel Name="OptionsPannel" Margin="10,137,10,10" Visibility="Collapsed">
-            <Label Name="LabelOptions" Content="Que voulez-vous faire?" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
-            <Button Name="LangButton" Content="Langue" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="LangButton_Click"/>
-            <Button Name="PresetButton" Content="Presets" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="PresetButton_Click"/>
-            <StackPanel Name="LangPannel" Margin="10,0,10,10" Visibility="Collapsed">
-                <Label Name="LabelLang" Content="Vous avez choisis langue." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
-            </StackPanel>
-            <StackPanel Name="PresetPannel" Margin="10,0,10,10" Visibility="Collapsed">
-                <Label Name="LabelActionPreset" Content="Quel action voulez-vous faire?" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
-                <Button Name="AddPresetButton" Content="Ajouter un preset" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="AddPresetButton_Click"/>
-                <Button Name="EditPresetButton" Content="Modifier un preset" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="EditPresetButton_Click"/>
-                <Button Name="DeletePresetButton" Content="Supprimer un preset" HorizontalAlignment="Left" Margin="30,0,0,0" VerticalAlignment="Top" Click="DeletePresetButton_Click"/>
-                <StackPanel Name="AddPannel" Margin="10,0,10,10" Visibility="Collapsed">
-                    <Label Name="LabelAdd" Content="Vous avez choisis d'ajouter un preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
-                </StackPanel>
-                <StackPanel Name="EditPannel" Margin="10,0,10,10" Visibility="Collapsed">
-                    <Label Name="LabelEdit" Content="Vous avez choisis de modifier un preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
-                </StackPanel>
-                <StackPanel Name="DeletePannel" Margin="10,0,10,10" Visibility="Collapsed">
-                    <Label Name="LabelDelete" Content="Vous avez choisis de supprimer un preset." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
-                </StackPanel>
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Name="LogsPannel" Margin="10,137,10,10" Visibility="Collapsed">
-            <Label Name="LabelLogs" Content="Vous avez choisis afficher logs." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
-        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="4*" MinHeight="100" MaxHeight="150"/>
+            <RowDefinition Height="4*" MinHeight="80" MaxHeight="130"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Image HorizontalAlignment="Center" Height="auto" Width="auto" VerticalAlignment="Center" Source="/logo.png" OpacityMask="#FF040418"/>
+
+        <Grid Margin="0,5,0,10" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Height="auto" Width="auto" Background="#FF450046" Margin="4">
+                <Image Source="/copy-icon.png" Height="auto" Width="auto" Margin="10,10"/>
+            </Button>
+
+            <Button Grid.Column="1" Height="auto" Width="auto" Background="#FF450046" Margin="4">
+                <Image Source="/settings-logo.png" Height="auto" Width="auto" Margin="10,10"/>
+            </Button>
+
+            <Button Grid.Column="2" Height="auto" Width="auto" Background="#FF450046" Margin="4">
+                <Image Source="/copy-icon.png" Height="auto" Width="auto" Margin="10,10"/>
+            </Button>
+        </Grid>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Margin="5">
+            <Image Source="/exit-logo.png" Height="60" Width="60"/>
+        </Button>
+
     </Grid>
 </Window>

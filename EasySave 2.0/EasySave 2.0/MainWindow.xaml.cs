@@ -25,69 +25,55 @@ namespace EasySave_2._0
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        class MyCustomPanel : Panel
         {
-            Environment.Exit(0);
-        }
+            bool _wrap = false;
 
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+            public MyCustomPanel()
+            {
+            }
 
-        }
+            protected override Size MeasureOverride(Size constraint)
+            {
+                if (this.Children.Count < 2)
+                {
+                    return base.MeasureOverride(constraint);
+                }
+                Size finalSize = new Size();
 
-        private void CopyButton_Click(object sender, RoutedEventArgs e)
-        {
-            CopyPannel.Visibility = Visibility.Visible;
-            OptionsPannel.Visibility = Visibility.Collapsed;
-            LogsPannel.Visibility = Visibility.Collapsed;
-        }
+                Children[0].Measure(constraint);
+                Children[1].Measure(constraint);
 
-        private void OptionsBouton_Click(object sender, RoutedEventArgs e)
-        {
-            CopyPannel.Visibility = Visibility.Collapsed;
-            OptionsPannel.Visibility = Visibility.Visible;
-            LogsPannel.Visibility = Visibility.Collapsed;
-        }
+                if (Children[0].DesiredSize.Width + Children[1].DesiredSize.Width <= constraint.Width)
+                {
+                    _wrap = false;
+                    finalSize.Width = Children[0].DesiredSize.Width + Children[1].DesiredSize.Width;
+                    finalSize.Height = Math.Max(Children[0].DesiredSize.Height, Children[1].DesiredSize.Height);
+                }
+                else
+                {
+                    _wrap = true;
+                    finalSize.Height = Children[0].DesiredSize.Height + Children[1].DesiredSize.Height;
+                    finalSize.Width = Math.Max(Children[0].DesiredSize.Width, Children[1].DesiredSize.Width);
+                }
+                return finalSize;
+            }
 
-        private void LogsButton_Click(object sender, RoutedEventArgs e)
-        {
-            CopyPannel.Visibility = Visibility.Collapsed;
-            OptionsPannel.Visibility = Visibility.Collapsed;
-            LogsPannel.Visibility = Visibility.Visible;
-        }
+            protected override Size ArrangeOverride(Size finalSize)
+            {
+                if (_wrap)
+                {
+                    Children[0].Arrange(new Rect(0, 0, finalSize.Width, finalSize.Height));
+                    Children[1].Arrange(new Rect(0, Children[0].RenderSize.Height, finalSize.Width, finalSize.Height - Children[0].RenderSize.Height));
+                }
+                else
+                {
+                    Children[0].Arrange(new Rect(0, 0, finalSize.Width, finalSize.Height));
+                    Children[1].Arrange(new Rect(finalSize.Width - Children[1].DesiredSize.Width, 0, Children[1].DesiredSize.Width, finalSize.Height));
 
-        private void LangButton_Click(object sender, RoutedEventArgs e)
-        {
-            LangPannel.Visibility = Visibility.Visible;
-            PresetPannel.Visibility = Visibility.Collapsed;
-        }
-
-        private void PresetButton_Click(object sender, RoutedEventArgs e)
-        {
-            LangPannel.Visibility = Visibility.Collapsed;
-            PresetPannel.Visibility = Visibility.Visible;
-        }
-
-        private void AddPresetButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddPannel.Visibility = Visibility.Visible;
-            EditPannel.Visibility = Visibility.Collapsed;
-            DeletePannel.Visibility = Visibility.Collapsed;
-        }
-
-        private void EditPresetButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddPannel.Visibility = Visibility.Collapsed;
-            EditPannel.Visibility = Visibility.Visible;
-            DeletePannel.Visibility = Visibility.Collapsed;
-        }
-
-        
-        private void DeletePresetButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddPannel.Visibility = Visibility.Collapsed;
-            EditPannel.Visibility = Visibility.Collapsed;
-            DeletePannel.Visibility = Visibility.Visible;
+                }
+                return base.ArrangeOverride(finalSize);
+            }
         }
     }
 }
