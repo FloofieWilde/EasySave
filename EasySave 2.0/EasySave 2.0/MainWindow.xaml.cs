@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Projet.Extensions;
 using Projet.Presets;
+using Projet.Applications;
 
 namespace EasySave_2._0
 {
@@ -61,6 +62,7 @@ namespace EasySave_2._0
             LangPannel.Visibility = Visibility.Collapsed;
             PresetPannel.Visibility = Visibility.Collapsed;
             ExtensionPannel.Visibility = Visibility.Collapsed;
+            ApplicationPannel.Visibility = Visibility.Collapsed;
         }
 
         private void LogsButton_Click(object sender, RoutedEventArgs e)
@@ -75,6 +77,7 @@ namespace EasySave_2._0
             LangPannel.Visibility = Visibility.Visible;
             PresetPannel.Visibility = Visibility.Collapsed;
             ExtensionPannel.Visibility = Visibility.Collapsed;
+            ApplicationPannel.Visibility = Visibility.Collapsed;
         }
         private void ExtensionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -82,6 +85,7 @@ namespace EasySave_2._0
             LangPannel.Visibility = Visibility.Collapsed;
             PresetPannel.Visibility = Visibility.Collapsed;
             ExtensionPannel.Visibility = Visibility.Visible;
+            ApplicationPannel.Visibility = Visibility.Collapsed;
             AddExtensionPannel.Visibility = Visibility.Collapsed;
             EditExtensionPannel.Visibility = Visibility.Collapsed;
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
@@ -93,12 +97,25 @@ namespace EasySave_2._0
             }
         }
 
+        private void ApplicationButton_Click(object sender, RoutedEventArgs e)
+        {
+            ListApplication.Items.Clear();
+            LangPannel.Visibility = Visibility.Collapsed;
+            PresetPannel.Visibility = Visibility.Collapsed;
+            ExtensionPannel.Visibility = Visibility.Collapsed;
+            ApplicationPannel.Visibility = Visibility.Visible;
+            EditApplicationPannel.Visibility = Visibility.Collapsed;
+            Appli application = Applications.GetJsonApplication();
+            ListApplication.Items.Add(application.Application);
+        }
+
         private void PresetButton_Click(object sender, RoutedEventArgs e)
         {
             ListPreset.Items.Clear();
             LangPannel.Visibility = Visibility.Collapsed;
             PresetPannel.Visibility = Visibility.Visible;
             ExtensionPannel.Visibility = Visibility.Collapsed;
+            ApplicationPannel.Visibility = Visibility.Collapsed;
             AddPannel.Visibility = Visibility.Collapsed;
             EditPannel.Visibility = Visibility.Collapsed;
             DeletePannel.Visibility = Visibility.Collapsed;
@@ -368,6 +385,28 @@ namespace EasySave_2._0
             {
                 ErrorCopy.Visibility = Visibility.Visible;
             }
+        }
+
+        private void EditApplicationButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditApplicationPannel.Visibility = Visibility.Visible;
+            Appli application = Applications.GetJsonApplication();
+            EditApplicationTextbox.Text = application.Application;
+        }
+
+        private void ConfirmEditApplication_Click(object sender, RoutedEventArgs e)
+        {
+            string newApplication = EditApplicationTextbox.Text;
+            Applications.EditApplication(newApplication);
+            ListApplication.Items.Clear();
+            Appli application = Applications.GetJsonApplication();
+            ListApplication.Items.Add(application.Application);
+            EditApplicationPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void CancelEditApplication_Click(object sender, RoutedEventArgs e)
+        {
+            EditApplicationPannel.Visibility = Visibility.Collapsed;
         }
     }
 }
