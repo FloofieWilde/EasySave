@@ -359,6 +359,7 @@ namespace EasySave_2._0
                 CopyNbFile.Text = "Nombre total des fichiers: 1";
                 CopySizeFile.Text = "Taille total des fichiers: ";
 
+                ProgressBarCopy.Value = 70;
                 CopyFileRemaining.Content = "Fichier restants: ";
                 CopySizeRemaining.Content = "Taille des fichiers restant: ";
                 //CopyEnd.Text = "Copie terminée!";
