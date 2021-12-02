@@ -1,8 +1,8 @@
 {
   "runtimeOptions": {
     "additionalProbingPaths": [
-      "C:\\Users\\loicm\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\loicm\\.nuget\\packages"
+      "C:\\Users\\franc\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\franc\\.nuget\\packages"
     ]
   }
 }

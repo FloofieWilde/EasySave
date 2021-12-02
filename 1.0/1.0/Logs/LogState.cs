@@ -17,6 +17,7 @@ namespace Projet.Logs
         public long RemainingFiles { get; set; }
         public long RemainingFilesSize { get; set; }
 
+        bool FirstTime = true;
         public long TotalFiles { get; set; }
         public long TotalSize { get; set; }
         private Langue.Language CurrentLanguage;
@@ -39,13 +40,24 @@ namespace Projet.Logs
         /// Displays current status on the console
         /// </summary>
         /// <param name="firstTime"></param>
-        public (int Progress, long RemainingFiles, long RemainingFilesSize) Display()
+        public void Display()
         {
 
-            return (Progress, RemainingFiles, RemainingFilesSize);
+            if (FirstTime)
+            {
+                Console.WriteLine(CurrentLanguage.SaveWip);
+                Console.WriteLine(CurrentLanguage.SaveType + " : " + Name);
+                Console.WriteLine(CurrentLanguage.SaveSauce + " : " + SourceDir);
+                Console.WriteLine(CurrentLanguage.SaveTarget + " : " + TargetDir);
+                Console.WriteLine(CurrentLanguage.SaveStarttime + " : " + Timestamp);
+                Console.WriteLine(CurrentLanguage.SaveTotalFile + " : " + TotalFiles);
+                Console.WriteLine(CurrentLanguage.SaveTotalSize + " : " + TotalSize);
+                FirstTime = false;
+            }
+            string LogString = CurrentLanguage.SaveProgress1+ " : " + Progress + "% | " + CurrentLanguage.SaveProgress2 + " : " + RemainingFiles + " | " + CurrentLanguage.SaveProgress3 + " : " + RemainingFilesSize + "     ";
+            Console.Write("\r{0}", LogString);
 
         }
-
         /// <summary>
         /// Update object's infos, without saving in json
         /// </summary>
@@ -84,7 +96,7 @@ namespace Projet.Logs
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine(CurrentLanguage.SaveSuccess);
             Console.ResetColor();
-            Menu.MenuPrincipal();
+            Menu.Main();
         }
     }
 }

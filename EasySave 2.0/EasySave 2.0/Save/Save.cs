@@ -3,6 +3,7 @@ using System.IO;
 using Projet.Logs;
 using System.Diagnostics;
 using Projet.Languages;
+using EasySave_2._0;
 
 
 namespace Projet.SaveSystem
@@ -14,7 +15,7 @@ namespace Projet.SaveSystem
         private readonly string SourceDir;
         private readonly string TargetDir;
         private readonly bool Full;
-        private LogState CurrentStateLog;
+        public LogState CurrentStateLog;
         private LogDaily CurrentDailyLog;
         private readonly Stopwatch ProcessTime;
 
@@ -28,7 +29,7 @@ namespace Projet.SaveSystem
         /// <summary>
         /// Fetches basic data like copy type or directory size then call ProcessCopy
         /// </summary>
-        public void Copy()
+        public bool Copy()
         {
             string copyType = "Partial";
             if (Full) copyType = "Complete";
@@ -40,7 +41,7 @@ namespace Projet.SaveSystem
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(currentLanguage.SaveSauceNotExists);
                 Console.ResetColor();
-                return;
+                return false;
             }
             long filesNumber = Directory.GetFiles(SourceDir, "*", SearchOption.AllDirectories).Length;
             long filesSize = DirSize(sourceDirInfo);
@@ -56,6 +57,7 @@ namespace Projet.SaveSystem
             ProcessCopy(sourceDirInfo, targetDirInfo);
 
             CurrentStateLog.End();
+            return true;
         }
         /// <summary>
         /// Process the copy, writing logs at the same time
@@ -102,6 +104,7 @@ namespace Projet.SaveSystem
         /// </summary>
         /// <param name="directory">The directory to measure</param>
         /// <returns></returns>
+
         private static long DirSize(DirectoryInfo directory)
         {
             long size = 0;
