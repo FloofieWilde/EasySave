@@ -32,9 +32,13 @@
                 <Image Source="/copy-icon.png" Height="auto" Width="auto" Margin="10,10"/>
             </Button>
         </Grid>
-        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Margin="5">
+        <Button Name="ExitButton" Click="ExitApp" ClickMode="Release" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Margin="5">
             <Image Source="/exit-logo.png" Height="60" Width="60"/>
         </Button>
+
+        <Grid Grid.Row="2">
+
+        </Grid>
 
     </Grid>
 </Window>
