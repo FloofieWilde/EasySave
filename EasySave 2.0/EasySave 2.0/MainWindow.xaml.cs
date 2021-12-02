@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Projet.Extensions;
 using Projet.Presets;
+using Projet.SaveSystem;
 using Projet.Applications;
 
 namespace EasySave_2._0
@@ -357,8 +358,10 @@ namespace EasySave_2._0
                 string source = preset["Preset" + presetId].PathSource;
                 string destination = preset["Preset" + presetId].PathDestination;
                 string copyType = "";
+                bool full = false;
                 if (RadioCopyComplet.IsChecked == true)
                 {
+                    full = true;
                     copyType = "complet";
                 }
                 else if (RadioCopyPartial.IsChecked == true)
@@ -368,17 +371,36 @@ namespace EasySave_2._0
                 InfoCopy.Visibility = Visibility.Visible;
                 ProgressCopy.Visibility = Visibility.Visible;
                 ErrorCopy.Visibility = Visibility.Hidden;
+
+
+                Save save = new Save(source, destination, full);
+                bool validated = save.Copy();
+                while(validated == false)
+                {
+                    // Va falloir définir les cas si le preset n'est pas valide
+                }
+                var staticLog = save.CurrentStateLog;
+
                 CopyType.Text = $"Type de sauvegarde: {copyType}";
                 CopyNamePreset.Text = $"Nom sauvegarde: {name}";
                 CopySource.Text = $"Path Source: {source}";
                 CopyDestination.Text = $"Path Destination: {destination}";
-                CopyDate.Text = "Date de début: ";
-                CopyNbFile.Text = "Nombre total des fichiers: 1";
-                CopySizeFile.Text = "Taille total des fichiers: ";
+                CopyDate.Text = $"Date de début: {staticLog.Timestamp}";
+                CopyNbFile.Text = $"Nombre total des fichiers: {staticLog.TotalFiles}";
+                CopySizeFile.Text = $"Taille total des fichiers: {staticLog.TotalSize}";
 
-                ProgressBarCopy.Value = 70;
-                CopyFileRemaining.Content = "Fichier restants: ";
-                CopySizeRemaining.Content = "Taille des fichiers restant: ";
+                bool processing = false;
+                var temp = staticLog.Display();
+
+                while (processing == false)
+                {
+                    temp = staticLog.Display();
+                    ProgressBarCopy.Value = temp.Progress;
+                    CopyFileRemaining.Content = $"Fichier restants: {staticLog.RemainingFiles}";
+                    CopySizeRemaining.Content = $"Taille des fichiers restant: {staticLog.RemainingFilesSize}";
+                    
+                }
+                
                 //CopyEnd.Text = "Copie terminée!";
             }
             else
