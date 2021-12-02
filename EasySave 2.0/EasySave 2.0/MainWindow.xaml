@@ -105,14 +105,16 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Button Name="LangButton" Grid.Column="0" Content="Langue" Height="auto" Width="auto" Click="LangButton_Click"/>
                 <Button Name="PresetButton" Grid.Column="1" Content="Presets" Height="auto" Width="auto" Click="PresetButton_Click"/>
                 <Button Name="ExtensionButton" Grid.Column="2" Content="Extension" Height="auto" Width="auto" Click="ExtensionButton_Click"/>
+                <Button Name="ApplicationButton" Grid.Column="3" Content="Application métier" Height="auto" Width="auto" Click="ApplicationButton_Click"/>
             </Grid>
 
             <Grid Name="LangPannel" Grid.Row="1" Visibility="Collapsed">
-                <Label Name="LabelLang" Content="Vous avez choisis langue." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                <Label Name="LabelLang" Content="Vous avez choisis langue." Foreground="white" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
             </Grid>
 
             <Grid Name="PresetPannel" Grid.Row="1" Visibility="Collapsed">
@@ -215,6 +217,28 @@
                         <Label Name="ExtensionDeleteId" Content="" HorizontalAlignment="Left" Foreground="white"/>
                         <Button Name="ConfirmDeleteExtension" Content="Confirmer" HorizontalAlignment="Left" Click="ConfirmDeleteExtension_Click"/>
                         <Button Name="CancelDeleteExtension" Content="Annuler" HorizontalAlignment="Left" Click="CancelDeleteExtension_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Name="ApplicationPannel" Grid.Row="1" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <ListBox Name="ListApplication" Grid.Column="0" Height="50" VerticalAlignment="Top" Width="auto">
+                </ListBox>
+                <Grid Name="ApplicationInterface" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <Button Name="EditApplicationButton" Grid.Row="0" Content="Modifier l'application métier" HorizontalAlignment="Center" Width="200" Click="EditApplicationButton_Click"/>
+                    <StackPanel Name="EditApplicationPannel" Grid.Row="1" Visibility="Collapsed">
+                        <Label Name="LabelEditApplication" Content="Modification de l'application métier." HorizontalAlignment="Left" Foreground="white"/>
+                        <Label Name="LabelEditTheApplication" Content="Nom de l'application:" HorizontalAlignment="Left" Foreground="white"/>
+                        <TextBox Name="EditApplicationTextbox" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" Width="120"/>
+                        <Button Name="ConfirmEditApplication" Content="Confirmer" HorizontalAlignment="Left" Click="ConfirmEditApplication_Click"/>
+                        <Button Name="CancelEditApplication" Content="Annuler" HorizontalAlignment="Left" Click="CancelEditApplication_Click"/>
                     </StackPanel>
                 </Grid>
             </Grid>
