@@ -37,6 +37,14 @@ namespace EasySave_2._0
             CopyPannel.Visibility = Visibility.Visible;
             OptionsPannel.Visibility = Visibility.Collapsed;
             LogsPannel.Visibility = Visibility.Collapsed;
+            InfoCopy.Visibility = Visibility.Collapsed;
+            ProgressCopy.Visibility = Visibility.Collapsed;
+            Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
+            int nbPreset = preset.Count;
+            for (int i = 1; i <= nbPreset; i++)
+            {
+                ListPresetCopy.Items.Add(i.ToString() + $" - {preset["Preset" + i.ToString()].Name}");
+            }
         }
 
         private void OptionsBouton_Click(object sender, RoutedEventArgs e)
@@ -320,6 +328,45 @@ namespace EasySave_2._0
             AddExtensionPannel.Visibility = Visibility.Collapsed;
             EditExtensionPannel.Visibility = Visibility.Collapsed;
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void CopyStartButton_Click(object sender, RoutedEventArgs e)
+        {
+            if ((RadioCopyComplet.IsChecked == true || RadioCopyPartial.IsChecked == true) && ListPresetCopy.SelectedIndex != -1)
+            {
+                Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
+                string presetId = ListPresetCopy.SelectedItem.ToString().Substring(0,1);
+                string name = preset["Preset" + presetId].Name;
+                string source = preset["Preset" + presetId].PathSource;
+                string destination = preset["Preset" + presetId].PathDestination;
+                string copyType = "";
+                if (RadioCopyComplet.IsChecked == true)
+                {
+                    copyType = "complet";
+                }
+                else if (RadioCopyPartial.IsChecked == true)
+                {
+                    copyType = "partielle";
+                }
+                InfoCopy.Visibility = Visibility.Visible;
+                ProgressCopy.Visibility = Visibility.Visible;
+                ErrorCopy.Visibility = Visibility.Hidden;
+                CopyType.Text = $"Type de sauvegarde: {copyType}";
+                CopyNamePreset.Text = $"Nom sauvegarde: {name}";
+                CopySource.Text = $"Path Source: {source}";
+                CopyDestination.Text = $"Path Destination: {destination}";
+                CopyDate.Text = "Date de début: ";
+                CopyNbFile.Text = "Nombre total des fichiers: 1";
+                CopySizeFile.Text = "Taille total des fichiers: ";
+
+                CopyFileRemaining.Content = "Fichier restants: ";
+                CopySizeRemaining.Content = "Taille des fichiers restant: ";
+                //CopyEnd.Text = "Copie terminée!";
+            }
+            else
+            {
+                ErrorCopy.Visibility = Visibility.Visible;
+            }
         }
     }
 }

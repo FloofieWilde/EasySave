@@ -37,7 +37,62 @@
         </Button>
 
         <Grid Name="CopyPannel" Row="2" Visibility="Collapsed">
-            <Label Name="LabelCopie" Content="Vous avez choisis copier." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Foreground="white"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <ListBox Name="ListPresetCopy" Grid.Column="0">
+                </ListBox>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="2*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" VerticalAlignment="Center">
+                        <Label Content="Choisissez le type de sauvegarde:" HorizontalAlignment="Left" Foreground="white"></Label>
+                        <RadioButton Name="RadioCopyPartial" Content="Partielle" Margin="30 0 0 0"  HorizontalAlignment="Left" Foreground="white"/>
+                        <RadioButton Name="RadioCopyComplet" Content="Complet" Margin="30 0 0 0" HorizontalAlignment="Left" Foreground="white"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1">
+                        <Button Name="CopyStartButton" Content="START" Height="auto" MaxWidth="150" Click="CopyStartButton_Click"/>
+                        <Label Name="ErrorCopy" Content="Selectionnez les informations!" HorizontalAlignment="Center" Foreground="red" Visibility="Hidden"></Label>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <TextBlock Name="InfoCopy" Grid.Row="1" Foreground="white" TextWrapping="Wrap" Visibility="Collapsed">
+                <Run Name="CopyType" Text=""/>
+                <LineBreak/>
+                <Run Name="CopyNamePreset" Text=""/>
+                <LineBreak/>
+                <Run Name="CopySource" Text="" Foreground="Orange"/>
+                <LineBreak/>
+                <Run Name="CopyDestination" Text="" Foreground="Orange"/>
+                <LineBreak/>
+                <Run Name="CopyDate" Text=""/>
+                <LineBreak/>
+                <Run Name="CopyNbFile" Text=""/>
+                <LineBreak/>
+                <Run Name="CopySizeFile" Text=""/>
+                <LineBreak/>
+                <LineBreak/>
+                <Run Name="CopyEnd" Text="" Foreground="Green"/>
+            </TextBlock>
+            <Grid Name="ProgressCopy" Grid.Row="2" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <ProgressBar Name="ProgressBarCopy"  Grid.Column="0" HorizontalAlignment="Center" Height="10" VerticalAlignment="Center" Width="300" Minimum="0" Maximum="100" Value="30"/>
+                <Label Name="CopyFileRemaining" Grid.Column="1" Content="" Foreground="green"/>
+                <Label Name="CopySizeRemaining" Grid.Column="2" Content="" Foreground="green"/>
+            </Grid>
         </Grid>
 
         <Grid Name="OptionsPannel" Row="2" Visibility="Collapsed">
