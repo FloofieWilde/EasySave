@@ -41,6 +41,7 @@ namespace EasySave_2._0
             LogsPannel.Visibility = Visibility.Collapsed;
             InfoCopy.Visibility = Visibility.Collapsed;
             ProgressCopy.Visibility = Visibility.Collapsed;
+            ListPresetCopy.Items.Clear();
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
             int nbPreset = preset.Count;
             for (int i = 1; i <= nbPreset; i++)
