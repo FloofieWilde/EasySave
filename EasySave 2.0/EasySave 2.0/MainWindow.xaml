@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EasySave_2._0"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Background="#FF10100F">
+        Title="MainWindow" Height="600" Width="800" Background="#FF10100F">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="4*" MinHeight="100" MaxHeight="150"/>
-            <RowDefinition Height="4*" MinHeight="80" MaxHeight="130"/>
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="2*" MinHeight="100" MaxHeight="150"/>
+            <RowDefinition Height="2*" MinHeight="80" MaxHeight="130"/>
+            <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
         <Image HorizontalAlignment="Center" Height="auto" Width="auto" VerticalAlignment="Center" Source="/logo.png" OpacityMask="#FF040418"/>
 
@@ -20,15 +20,15 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Height="auto" Width="auto" Background="#FF450046" Margin="4">
+            <Button Name="CopyButton" Grid.Column="0" Height="auto" Width="auto" Background="#FF450046" Margin="4" Click="CopyButton_Click">
                 <Image Source="/copy-icon.png" Height="auto" Width="auto" Margin="10,10"/>
             </Button>
 
-            <Button Grid.Column="1" Height="auto" Width="auto" Background="#FF450046" Margin="4">
+            <Button Name="OptionsBouton" Grid.Column="1" Height="auto" Width="auto" Background="#FF450046" Margin="4" Click="OptionsBouton_Click">
                 <Image Source="/settings-logo.png" Height="auto" Width="auto" Margin="10,10"/>
             </Button>
 
-            <Button Grid.Column="2" Height="auto" Width="auto" Background="#FF450046" Margin="4">
+            <Button Name="LogsButton" Grid.Column="2" Height="auto" Width="auto" Background="#FF450046" Margin="4" Click="LogsButton_Click">
                 <Image Source="/copy-icon.png" Height="auto" Width="auto" Margin="10,10"/>
             </Button>
         </Grid>
@@ -36,27 +36,138 @@
             <Image Source="/exit-logo.png" Height="60" Width="60"/>
         </Button>
 
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="1*"/>
-            </Grid.ColumnDefinitions>
+        <Grid Name="CopyPannel" Row="2" Visibility="Collapsed">
+            <Label Name="LabelCopie" Content="Vous avez choisis copier." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Foreground="white"/>
+        </Grid>
 
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="5*"/>
-                </Grid.RowDefinitions>
+        <Grid Name="OptionsPannel" Row="2" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="6*"/>
+            </Grid.RowDefinitions>
+            <Grid Name="OptionsBoutonPannel" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Name="LangButton" Grid.Column="0" Content="Langue" Height="auto" Width="auto" Click="LangButton_Click"/>
+                <Button Name="PresetButton" Grid.Column="1" Content="Presets" Height="auto" Width="auto" Click="PresetButton_Click"/>
+                <Button Name="ExtensionButton" Grid.Column="2" Content="Extension" Height="auto" Width="auto" Click="ExtensionButton_Click"/>
+            </Grid>
 
-                <Grid Grid.Row="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="1*"/>
-                    </Grid.ColumnDefinitions>
+            <Grid Name="LangPannel" Grid.Row="1" Visibility="Collapsed">
+                <Label Name="LabelLang" Content="Vous avez choisis langue." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+            </Grid>
+
+            <Grid Name="PresetPannel" Grid.Row="1" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox Name="ListPreset" Grid.Column="0" Height="auto" Width="auto">
+                </ListBox>
+
+                <Grid Name="PresetInterface" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="AddPresetButton" Grid.Column="0" Content="Ajouter un preset" Click="AddPresetButton_Click"/>
+                        <Button Name="EditPresetButton" Grid.Column="1" Content="Modifier le preset" Click="EditPresetButton_Click"/>
+                        <Button Name="DeletePresetButton" Grid.Column="2" Content="Supprimer le preset" Click="DeletePresetButton_Click"/>
+                    </Grid>
+                    <StackPanel Name="AddPannel" Grid.Row="1" Visibility="Collapsed">
+                        <Label Name="LabelAddPreset" Content="Vous avez choisis d'ajouter un preset." Foreground="white"/>
+                        <Label Name="LabelNameAddPreset" Content="Nom:" Foreground="white"/>
+                        <TextBox Name="AddNameTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
+                        <Label Name="LabelSourceAddPreset" Content="Source:" HorizontalAlignment="left" Foreground="white"/>
+                        <TextBox Name="AddPathSourceTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
+                        <Label Name="LabelDestinationAddPreset" Content="Destination:" Foreground="white"/>
+                        <TextBox Name="AddPathDestinationTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
+                        <Button Name="ConfirmAddPreset" Content="Confirmer" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ConfirmAddPreset_Click"/>
+                        <Button Name="CancelAddPreset" Content="Annuler" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="CancelAddPreset_Click"/>
+                    </StackPanel>
+                    <StackPanel Name="EditPannel" Grid.Row="1" Visibility="Collapsed">
+                        <Label Name="LabelEditPreset" Content="Vous avez choisis de modifier un preset dont l'ID est:" Foreground="white"/>
+                        <Label Name="PresetEditId" Content="" HorizontalAlignment="Left" Foreground="white"/>
+                        <Label Name="LabelNameEditPreset" Content="Nom:" Foreground="white"/>
+                        <TextBox Name="EditNameTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
+                        <Label Name="LabelSourceEditPreset" Content="Source:" HorizontalAlignment="left" Foreground="white"/>
+                        <TextBox Name="EditPathSourceTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
+                        <Label Name="LabelDestinationEditPreset" Content="Destination:" Foreground="white"/>
+                        <TextBox Name="EditPathDestinationTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
+                        <Button Name="ConfirmEditPreset" Content="Confirmer" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ConfirmEditPreset_Click"/>
+                        <Button Name="CancelEditPreset" Content="Annuler" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="CancelEditPreset_Click"/>
+                    </StackPanel>
+                    <StackPanel Name="DeletePannel" Grid.Row="1" Visibility="Collapsed">
+                        <Label Name="LabelDeletePreset" Content="Êtes vous sûr de supprimer le preset numéro:" HorizontalAlignment="Left" Foreground="white"/>
+                        <Label Name="PresetDeleteId" Content="" HorizontalAlignment="Left" Foreground="white"/>
+                        <Button Name="ConfirmDeletePreset" Content="Confirmer" HorizontalAlignment="Left" Click="ConfirmDeletePreset_Click"/>
+                        <Button Name="CancelDeletePreset" Content="Annuler" HorizontalAlignment="Left" Click="CancelDeletePreset_Click"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+            <Grid Name="ExtensionPannel" Grid.Row="1" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox Name="ListExtension" Grid.Column="0" Height="auto" Width="auto">
+                </ListBox>
+
+                <Grid Name="ExtensionInterface" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="AddExtensionButton" Grid.Column="0" Content="Ajouter une extension" Click="AddExtensionButton_Click"/>
+                        <Button Name="EditExtensiontButton" Grid.Column="1" Content="Modifier l'extension" Click="EditExtensionButton_Click"/>
+                        <Button Name="DeleteExtensionButton" Grid.Column="2" Content="Supprimer l'extension" Click="DeleteExtensionButton_Click"/>
+                    </Grid>
+                    <StackPanel Name="AddExtensionPannel" Grid.Row="1" Visibility="Collapsed">
+                        <Label Name="LabelAddExtension" Content="Vous avez choisis d'ajouter une extension." HorizontalAlignment="Left" Foreground="white"/>
+                        <Label Name="LabelAddNewExtension" Content="Extension (mettez un point devant):" HorizontalAlignment="Left" Foreground="white"/>
+                        <TextBox Name="AddExtensionTextbox" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" Width="120"/>
+                        <Button Name="ConfirmAddExtension" Content="Confirmer" HorizontalAlignment="Left" Click="ConfirmAddExtension_Click"/>
+                        <Button Name="CancelAddExtension" Content="Annuler" HorizontalAlignment="Left" Click="CancelAddExtension_Click"/>
+                    </StackPanel>
+                    <StackPanel Name="EditExtensionPannel" Grid.Row="1" Visibility="Collapsed">
+                        <Label Name="LabelEditExtension" Content="Vous avez choisis de modifier une extension dans l'ID est:." HorizontalAlignment="Left" Foreground="white"/>
+                        <Label Name="ExtensionEditId" Content="" HorizontalAlignment="Left" Foreground="white"/>
+                        <Label Name="LabelEditTheExtension" Content="Extension (mettez un point devant):" HorizontalAlignment="Left" Foreground="white"/>
+                        <TextBox Name="EditExtensionTextbox" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" Width="120"/>
+                        <Button Name="ConfirmEditExtension" Content="Confirmer" HorizontalAlignment="Left" Click="ConfirmEditExtension_Click"/>
+                        <Button Name="CancelEditExtension" Content="Annuler" HorizontalAlignment="Left" Click="CancelEditExtension_Click"/>
+                    </StackPanel>
+                    <StackPanel Name="DeleteExtensionPannel" Grid.Row="1" Visibility="Collapsed">
+                        <Label Name="LabelDeleteExtension" Content="Êtes vous sûr de supprimer l'extension numéro:" HorizontalAlignment="Left" Foreground="white"/>
+                        <Label Name="ExtensionDeleteId" Content="" HorizontalAlignment="Left" Foreground="white"/>
+                        <Button Name="ConfirmDeleteExtension" Content="Confirmer" HorizontalAlignment="Left" Click="ConfirmDeleteExtension_Click"/>
+                        <Button Name="CancelDeleteExtension" Content="Annuler" HorizontalAlignment="Left" Click="CancelDeleteExtension_Click"/>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Grid>
 
+        <Grid Name="LogsPannel" Row="2" Visibility="Collapsed">
+            <Label Name="LabelLogs" Content="Vous avez choisis afficher logs." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Foreground="white"/>
+        </Grid>
+        
     </Grid>
 </Window>

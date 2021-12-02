@@ -16,12 +16,17 @@
   },
   "Preset4": {
     "Name": "Voila",
-    "PathSource": "",
-    "PathDestination": ""
+    "PathSource": "C:/sharp",
+    "PathDestination": "C:/plusplus"
   },
   "Preset5": {
     "Name": "Test",
     "PathSource": "C:/source",
     "PathDestination": "C:/destination"
+  },
+  "Preset6": {
+    "Name": "Oof",
+    "PathSource": "D:/Lefichier",
+    "PathDestination": "D:/Ledossier"
   }
 }

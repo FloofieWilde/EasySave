@@ -31,16 +31,16 @@ namespace Projet
             switch (choice)
             {
                 case "1":
-                    dictLang = Langue.GetFiles(dictLang);
-                    OptMenu(dictLang);
+                    //dictLang = Langue.GetFiles(dictLang);
+                    //OptMenu(dictLang);
                     break;
                 case "2":
-                    Preset.MenuPreset();
-                    OptMenu(dictLang);
+                    //Preset.MenuPreset();
+                    //OptMenu(dictLang);
                     break;
                 case "3":
                     Console.WriteLine("\n\n\n");
-                    Menu.MenuPrincipal();
+                    //Menu.MenuPrincipal();
                     break;
             }
         }
