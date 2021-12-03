@@ -44,7 +44,7 @@ namespace Projet.SaveSystem
             if (!sourceDirInfo.Exists) return (null, null, 2 );
             long filesNumber = Directory.GetFiles(SourceDir, "*", SearchOption.AllDirectories).Length;
             long filesSize = DirSize(sourceDirInfo);
-
+            if (filesSize == 0) return (null, null, 3);
             CurrentStateLog = new LogState(copyType, SourceDir, TargetDir, filesNumber, filesSize);
             CurrentDailyLog = new LogDaily(copyType);
             DirectoryInfo targetDirInfo = new DirectoryInfo(TargetDir);

@@ -3,8 +3,12 @@
     "",
     "\\1.0",
     "\\1.0\\1.0",
-    "\\1.0\\1.0\\Logs"
+    "\\1.0\\1.0\\Logs",
+    "\\1.0\\1.0\\Save",
+    "\\EasySave 2.0",
+    "\\EasySave 2.0\\EasySave 2.0",
+    "\\EasySave 2.0\\EasySave 2.0\\Applications"
   ],
-  "SelectedNode": "\\1.0\\1.0\\Logs\\LogDaily.cs",
+  "SelectedNode": "\\EasySave 2.0\\EasySave 2.0\\Applications\\Applications.cs",
   "PreviewInSolutionExplorer": false
 }
