@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using Projet.Extensions;
 using Projet.Presets;
 using Projet.SaveSystem;
-using Projet.Applications;
+using Projet.WorkSoftwares;
 
 namespace EasySave_2._0
 {
@@ -107,7 +107,7 @@ namespace EasySave_2._0
             ExtensionPannel.Visibility = Visibility.Collapsed;
             ApplicationPannel.Visibility = Visibility.Visible;
             EditApplicationPannel.Visibility = Visibility.Collapsed;
-            Appli application = Applications.GetJsonApplication();
+            WorkSoft application = WorkSoftware.GetJsonApplication();
             ListApplication.Items.Add(application.Application);
         }
 
@@ -354,7 +354,7 @@ namespace EasySave_2._0
             if ((RadioCopyComplet.IsChecked == true || RadioCopyPartial.IsChecked == true) && ListPresetCopy.SelectedIndex != -1)
             {
                 Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
-                string presetId = ListPresetCopy.SelectedItem.ToString().Substring(0,1);
+                string presetId = ListPresetCopy.SelectedItem.ToString().Substring(0, 1);
                 string name = preset["Preset" + presetId].Name;
                 string source = preset["Preset" + presetId].PathSource;
                 string destination = preset["Preset" + presetId].PathDestination;
@@ -371,44 +371,49 @@ namespace EasySave_2._0
                 }
                 ErrorCopy.Visibility = Visibility.Hidden;
 
-
                 Save save = new Save(source, destination, full);
-                bool validated = save.Copy();
 
-                //while(validated == false)
-                //{
-                    // Va falloir définir les cas si le preset n'est pas valide
-                //}
+                var DirInfo = save.Copy();
+                
 
-                if (validated == true)
+                if (DirInfo.error != 0)
                 {
+                    // 1 = app running
+                    // 2 = preset non valide
+                    // 0 = valide
+                    ErrorCopy.Visibility = Visibility.Visible;
+                }
+                else
+                {
+
                     InfoCopy.Visibility = Visibility.Visible;
                     ProgressCopy.Visibility = Visibility.Visible;
-                    var staticLog = save.CurrentStateLog;
-
                     CopyType.Text = $"Type de sauvegarde: {copyType}";
                     CopyNamePreset.Text = $"Nom sauvegarde: {name}";
                     CopySource.Text = $"Path Source: {source}";
                     CopyDestination.Text = $"Path Destination: {destination}";
+                    save.ProcessCopy(DirInfo.source, DirInfo.target);
+
+                    var staticLog = save.CurrentStateLog;
+                    
+
                     CopyDate.Text = $"Date de début: {staticLog.Timestamp}";
                     CopyNbFile.Text = $"Nombre total des fichiers: {staticLog.TotalFiles}";
                     CopySizeFile.Text = $"Taille total des fichiers: {staticLog.TotalSize}";
 
-                    bool processing = false;
-                    var temp = staticLog.Display();
 
-                    while (processing == false)
+                    while (staticLog.Progress < 100)
                     {
-                        temp = staticLog.Display();
-                        ProgressBarCopy.Value = temp.Progress;
+                        ProgressBarCopy.Value = staticLog.Progress;
                         CopyFileRemaining.Content = $"Fichier restants: {staticLog.RemainingFiles}";
                         CopySizeRemaining.Content = $"Taille des fichiers restant: {staticLog.RemainingFilesSize}";
 
                     }
+                    CopyEnd.Text = "Copie terminée!";
+
                 }
-                
-                
-                //CopyEnd.Text = "Copie terminée!";
+
+
             }
             else
             {
@@ -419,16 +424,16 @@ namespace EasySave_2._0
         private void EditApplicationButton_Click(object sender, RoutedEventArgs e)
         {
             EditApplicationPannel.Visibility = Visibility.Visible;
-            Appli application = Applications.GetJsonApplication();
+            WorkSoft application = WorkSoftware.GetJsonApplication();
             EditApplicationTextbox.Text = application.Application;
         }
 
         private void ConfirmEditApplication_Click(object sender, RoutedEventArgs e)
         {
             string newApplication = EditApplicationTextbox.Text;
-            Applications.EditApplication(newApplication);
+            WorkSoftware.EditApplication(newApplication);
             ListApplication.Items.Clear();
-            Appli application = Applications.GetJsonApplication();
+            WorkSoft application = WorkSoftware.GetJsonApplication();
             ListApplication.Items.Add(application.Application);
             EditApplicationPannel.Visibility = Visibility.Collapsed;
         }
