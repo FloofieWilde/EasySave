@@ -1,8 +1,8 @@
 {
   "Preset1": {
-    "Name": "MaxTestù",
-    "PathSource": "C:/Users/jennm/source/repos/C-hashtag-point-web/1.0/1.0/DossA",
-    "PathDestination": "C:/Users/jennm/source/repos/C-hashtag-point-web/1.0/1.0/DossB"
+    "Name": "Fonctionnel",
+    "PathSource": "C:\\Users\\franc\\source\\repos\\C-hashtag-point-web\\1.0\\1.0\\DossA",
+    "PathDestination": "C:\\Users\\franc\\source\\repos\\C-hashtag-point-web\\1.0\\1.0\\DossB"
   },
   "Preset2": {
     "Name": "Test2",

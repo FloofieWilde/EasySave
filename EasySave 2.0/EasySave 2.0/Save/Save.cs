@@ -4,6 +4,7 @@ using Projet.Logs;
 using System.Diagnostics;
 using Projet.Languages;
 using EasySave_2._0;
+using Projet.WorkSoftwares;
 
 
 namespace Projet.SaveSystem
@@ -18,6 +19,7 @@ namespace Projet.SaveSystem
         public LogState CurrentStateLog;
         private LogDaily CurrentDailyLog;
         private readonly Stopwatch ProcessTime;
+        private long CryptTime;
 
         public Save(string source, string target, bool full)
         {
@@ -29,20 +31,17 @@ namespace Projet.SaveSystem
         /// <summary>
         /// Fetches basic data like copy type or directory size then call ProcessCopy
         /// </summary>
-        public bool Copy()
+        public (DirectoryInfo source, DirectoryInfo target, int error) Copy()
         {
+            var app = WorkSoftware.GetJsonApplication();
+            Process[] pname = Process.GetProcessesByName(app.Application);
+
+            if (pname.Length > 0) return (null, null, 1);
             string copyType = "Partial";
             if (Full) copyType = "Complete";
-            Langue.Language currentLanguage = Langue.GetLang();
 
             DirectoryInfo sourceDirInfo = new DirectoryInfo(SourceDir);
-            if (!sourceDirInfo.Exists)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(currentLanguage.SaveSauceNotExists);
-                Console.ResetColor();
-                return false;
-            }
+            if (!sourceDirInfo.Exists) return (null, null, 2 );
             long filesNumber = Directory.GetFiles(SourceDir, "*", SearchOption.AllDirectories).Length;
             long filesSize = DirSize(sourceDirInfo);
 
@@ -54,17 +53,15 @@ namespace Projet.SaveSystem
             {
                 Directory.CreateDirectory(TargetDir);
             }
-            ProcessCopy(sourceDirInfo, targetDirInfo);
 
-            CurrentStateLog.End();
-            return true;
+            return (sourceDirInfo, targetDirInfo, 0);
         }
         /// <summary>
         /// Process the copy, writing logs at the same time
         /// </summary>
         /// <param name="source">Source Directory</param>
         /// <param name="target">Target Directory</param>
-        private void ProcessCopy(DirectoryInfo source, DirectoryInfo target)
+        public void ProcessCopy(DirectoryInfo source, DirectoryInfo target)
         {
             CurrentStateLog.Display();
             long filesSize;
@@ -77,16 +74,16 @@ namespace Projet.SaveSystem
                 {
                     if (File.GetLastWriteTime(target.FullName) != File.GetLastWriteTime(fi.FullName))
                     {
-                        fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                        CheckException(fi, target);
                     }
                 }
                 else
                 {
-                    fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                    CheckException(fi, target);
                 }
                 filesSize = fi.Length;
                 ProcessTime.Stop();
-                CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name);
+                CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name, CryptTime);
                 CurrentStateLog.Update(filesSize);
                 ProcessTime.Reset();
             }
@@ -120,6 +117,16 @@ namespace Projet.SaveSystem
             }
             return size;
         }
-
+        private void CheckException(FileInfo source, DirectoryInfo target)
+        {
+            try
+            {
+                CryptTime = Crypt.CryptOrSave(source, target);
+            }
+            catch (IOException)
+            {
+                CryptTime = -1;
+            }
+        }
     }
 }

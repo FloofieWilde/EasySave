@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Projet.Applications
+namespace Projet.WorkSoftwares
 {
-    class Appli
+    class WorkSoft
     {
         public string Application { get; set; }
     }

@@ -4,7 +4,6 @@ using Projet.Logs;
 using System.Diagnostics;
 using Projet.Languages;
 
-
 namespace Projet.SaveSystem
 {/// <summary>
 /// The class that manages the save system
@@ -17,6 +16,8 @@ namespace Projet.SaveSystem
         private LogState CurrentStateLog;
         private LogDaily CurrentDailyLog;
         private readonly Stopwatch ProcessTime;
+        private long EncryptTime;
+        private readonly string ExtensionWhitelist = ".txt";
 
         public Save(string source, string target, bool full)
         {
@@ -30,6 +31,12 @@ namespace Projet.SaveSystem
         /// </summary>
         public void Copy()
         {
+            Process[] pname = Process.GetProcessesByName("Calculator");
+            if (pname.Length > 0)
+            {
+                Console.WriteLine("Merci de stopper votre logiciel métier avant de lancer une sauvegarde ");
+                return;
+            }
             string copyType = "Partial";
             if (Full) copyType = "Complete";
             Langue.Language currentLanguage = Langue.GetLang();
@@ -75,16 +82,16 @@ namespace Projet.SaveSystem
                 {
                     if (File.GetLastWriteTime(target.FullName) != File.GetLastWriteTime(fi.FullName))
                     {
-                        fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                        EncryptTime = Crypt.CopyOrCrypt(fi, target, ExtensionWhitelist);
                     }
                 }
                 else
                 {
-                    fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                    EncryptTime = Crypt.CopyOrCrypt(fi, target, ExtensionWhitelist);
                 }
                 filesSize = fi.Length;
                 ProcessTime.Stop();
-                CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name);
+                CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name, EncryptTime);
                 CurrentStateLog.Update(filesSize);
                 ProcessTime.Reset();
             }
@@ -117,6 +124,5 @@ namespace Projet.SaveSystem
             }
             return size;
         }
-
     }
 }
