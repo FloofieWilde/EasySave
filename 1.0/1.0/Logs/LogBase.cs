@@ -17,7 +17,7 @@ namespace Projet.Logs
         public string TargetDir { get; set; }
         protected DateTimeOffset DateTimeStamp;
         public string Timestamp;
-        public bool IsJson = false;
+        public bool IsJson;
         public XmlWriter Writer;
         public LogBase()
         {

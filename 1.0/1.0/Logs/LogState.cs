@@ -5,6 +5,8 @@ using System.IO;
 using Projet.Languages;
 using Projet;
 using System.Xml;
+using Projet.Stockages;
+
 namespace Projet.Logs
 {
     /// <summary>
@@ -37,6 +39,9 @@ namespace Projet.Logs
             TotalFiles = totalFiles;
             TotalSize = totalFilesSize;
             CurrentLanguage = Langue.GetLang();
+            var extensionType = Stockage.GetJsonStockage();
+            if (extensionType.TypeStockage == ".json") IsJson = true;
+            else IsJson = false;
         }
         /// <summary>
         /// Displays current status on the console

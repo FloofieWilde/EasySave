@@ -7,6 +7,7 @@ using System.Xml.Linq;
 using System.IO;
 using System.Text.Json;
 using Projet.Languages;
+using Projet.Stockages;
 
 namespace Projet.Logs
 {
@@ -29,6 +30,9 @@ namespace Projet.Logs
             DateTimeStamp = (DateTimeOffset)DateTime.UtcNow;
             Timestamp = DateTimeStamp.ToString("yyyy/MM/dd - HH:mm:ss - fff");
             CurrentLanguage = Langue.GetLang();
+            var extensionType = Stockage.GetJsonStockage();
+            if (extensionType.TypeStockage == ".json") IsJson = true;
+            else IsJson = false;
 
         }
         /// <summary>
