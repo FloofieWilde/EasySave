@@ -369,38 +369,44 @@ namespace EasySave_2._0
                 {
                     copyType = "partielle";
                 }
-                InfoCopy.Visibility = Visibility.Visible;
-                ProgressCopy.Visibility = Visibility.Visible;
                 ErrorCopy.Visibility = Visibility.Hidden;
 
 
                 Save save = new Save(source, destination, full);
                 bool validated = save.Copy();
-                while(validated == false)
-                {
+
+                //while(validated == false)
+                //{
                     // Va falloir définir les cas si le preset n'est pas valide
-                }
-                var staticLog = save.CurrentStateLog;
+                //}
 
-                CopyType.Text = $"Type de sauvegarde: {copyType}";
-                CopyNamePreset.Text = $"Nom sauvegarde: {name}";
-                CopySource.Text = $"Path Source: {source}";
-                CopyDestination.Text = $"Path Destination: {destination}";
-                CopyDate.Text = $"Date de début: {staticLog.Timestamp}";
-                CopyNbFile.Text = $"Nombre total des fichiers: {staticLog.TotalFiles}";
-                CopySizeFile.Text = $"Taille total des fichiers: {staticLog.TotalSize}";
-
-                bool processing = false;
-                var temp = staticLog.Display();
-
-                while (processing == false)
+                if (validated == true)
                 {
-                    temp = staticLog.Display();
-                    ProgressBarCopy.Value = temp.Progress;
-                    CopyFileRemaining.Content = $"Fichier restants: {staticLog.RemainingFiles}";
-                    CopySizeRemaining.Content = $"Taille des fichiers restant: {staticLog.RemainingFilesSize}";
-                    
+                    InfoCopy.Visibility = Visibility.Visible;
+                    ProgressCopy.Visibility = Visibility.Visible;
+                    var staticLog = save.CurrentStateLog;
+
+                    CopyType.Text = $"Type de sauvegarde: {copyType}";
+                    CopyNamePreset.Text = $"Nom sauvegarde: {name}";
+                    CopySource.Text = $"Path Source: {source}";
+                    CopyDestination.Text = $"Path Destination: {destination}";
+                    CopyDate.Text = $"Date de début: {staticLog.Timestamp}";
+                    CopyNbFile.Text = $"Nombre total des fichiers: {staticLog.TotalFiles}";
+                    CopySizeFile.Text = $"Taille total des fichiers: {staticLog.TotalSize}";
+
+                    bool processing = false;
+                    var temp = staticLog.Display();
+
+                    while (processing == false)
+                    {
+                        temp = staticLog.Display();
+                        ProgressBarCopy.Value = temp.Progress;
+                        CopyFileRemaining.Content = $"Fichier restants: {staticLog.RemainingFiles}";
+                        CopySizeRemaining.Content = $"Taille des fichiers restant: {staticLog.RemainingFilesSize}";
+
+                    }
                 }
+                
                 
                 //CopyEnd.Text = "Copie terminée!";
             }
