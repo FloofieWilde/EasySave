@@ -369,23 +369,25 @@ namespace EasySave_2._0
                 {
                     copyType = "partielle";
                 }
-                ErrorCopy.Visibility = Visibility.Hidden;
 
                 Save save = new Save(source, destination, full);
 
                 var DirInfo = save.Copy();
-                
+                ErrorCopy.Content = "test";
 
                 if (DirInfo.error != 0)
                 {
-                    // 1 = app running
-                    // 2 = preset non valide
-                    // 0 = valide
-                    ErrorCopy.Visibility = Visibility.Visible;
+                    ErrorCopy.Content = DirInfo.error switch
+                    {
+                        1 => "Fermez votre application métier",
+                        2 => "Votre preset n'est pas valide",
+                        _ => "Erreur",
+                    };
+
+                    //ErrorCopy.Visibility = Visibility.Visible;
                 }
                 else
                 {
-
                     InfoCopy.Visibility = Visibility.Visible;
                     ProgressCopy.Visibility = Visibility.Visible;
                     CopyType.Text = $"Type de sauvegarde: {copyType}";
@@ -395,12 +397,10 @@ namespace EasySave_2._0
                     save.ProcessCopy(DirInfo.source, DirInfo.target);
 
                     var staticLog = save.CurrentStateLog;
-                    
 
                     CopyDate.Text = $"Date de début: {staticLog.Timestamp}";
                     CopyNbFile.Text = $"Nombre total des fichiers: {staticLog.TotalFiles}";
                     CopySizeFile.Text = $"Taille total des fichiers: {staticLog.TotalSize}";
-
 
                     while (staticLog.Progress < 100)
                     {
@@ -410,14 +410,12 @@ namespace EasySave_2._0
 
                     }
                     CopyEnd.Text = "Copie terminée!";
-
                 }
-
-
             }
             else
             {
-                ErrorCopy.Visibility = Visibility.Visible;
+                //ErrorCopy.Visibility = Visibility.Visible;
+                ErrorCopy.Content = "Merci de choisir un preset et un type";
             }
         }
 

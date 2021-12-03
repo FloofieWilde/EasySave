@@ -61,7 +61,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="1">
                         <Button Name="CopyStartButton" Content="START" Height="auto" MaxWidth="150" Click="CopyStartButton_Click"/>
-                        <Label Name="ErrorCopy" Content="Selectionnez les informations!" HorizontalAlignment="Center" Foreground="red" Visibility="Hidden"></Label>
+                        <Label Name="ErrorCopy" Content="" HorizontalAlignment="Center" Foreground="red"> </Label>
                     </StackPanel>
                 </Grid>
             </Grid>
