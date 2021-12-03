@@ -37,11 +37,12 @@ namespace Projet.Stockages
         public static string MakeChoiceStockage()
         {
             JsonXml stockage = GetJsonStockage();
-            Console.WriteLine($"Vous utilisez actuellement{stockage.TypeStockage}");
+            Langue.Language dictLang = Langue.GetLang();
+            Console.WriteLine($"{dictLang.StockageCurrentJson}{stockage.TypeStockage}");
             string choice = "0";
             while (!(choice == "1" | choice == "2" || choice == "3"))
             {
-                Console.WriteLine("Choisissez un type de stockage:");
+                Console.WriteLine(dictLang.StockageChooseType);
                 Console.WriteLine("1 - .json");
                 Console.WriteLine("2 - .xml");
                 choice = Console.ReadLine();
@@ -56,7 +57,7 @@ namespace Projet.Stockages
         public static void EditStockage(string choice)
         {
             JsonXml stockage = GetJsonStockage();
-
+            Langue.Language dictLang = Langue.GetLang();
             if (choice == "1")
             {
                 stockage.TypeStockage = ".json";
@@ -67,7 +68,7 @@ namespace Projet.Stockages
             }
             string json = JsonConvert.SerializeObject(stockage, Formatting.Indented);
             File.WriteAllText(@"./data/stockage/stockage.json", json);
-            Console.WriteLine($"Modification en {stockage.TypeStockage} avec succès!");
+            Console.WriteLine($"{dictLang.StockageModifEn}{stockage.TypeStockage}{dictLang.StockageSuccess}");
         }
 
         /// <summary>

@@ -121,7 +121,10 @@ namespace Projet.Languages
             public string LogNoDaily { get; set; }
             public string LogDailyFilen { get; set; }
             public string LogNumber { get; set; }
-
+            public string StockageCurrentJson { get; set; }
+            public string StockageChooseType { get; set; }
+            public string StockageModifEn { get; set; }
+            public string StockageSuccess { get; set; }
         }
     }
 }

@@ -42,5 +42,10 @@
 
   "LogNoDaily": "Il n'y a pas de log journalier.",
   "LogDailyFilen": "File number : ",
-  "LogNumber": "Numéro du log : "
+  "LogNumber": "Numéro du log : ",
+
+  "StockageCurrentJson": "Vous utilisez actuellement ",
+  "StockageChooseType": "Choisissez un type de stockage: ",
+  "StockageModifEn": "Modifié en ",
+  "StockageSuccess": " avec succès!"
 }
