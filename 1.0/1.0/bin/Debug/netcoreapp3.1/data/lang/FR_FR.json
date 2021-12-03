@@ -7,9 +7,9 @@
   "MenuBc": "N'est pas un choix valide.",
 
   "OptTitle": "Que voulez vous configurer ?",
-  "OptC1": "1. Langue",
-  "OptC2": "2. Présets",
-  "OptExit": "3. Retour",
+  "OptC1": "Langue",
+  "OptC2": "Présets",
+  "OptExit": "Retour",
 
   "LangSelect": "Langues disponibles :",
   "LangChange": "Langue modifiée",

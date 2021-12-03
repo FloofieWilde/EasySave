@@ -158,7 +158,6 @@ namespace Projet.Presets
         {
             Dictionary<string, NameSourceDest> preset = GetJsonPreset();
             string choice = MakeChoicePreset(preset);
-            Langue.Language dictLang = Langue.GetLang();
             for (int i = Convert.ToInt32(choice); i < preset.Count; i++)
             {
                 preset["Preset" + i] = preset["Preset" + (i + 1).ToString()];

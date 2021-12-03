@@ -7,9 +7,9 @@
   "MenuBc": "Isn't a valid choice.",
 
   "OptTitle": "What do you want to configure ?",
-  "OptC1": "1. Language",
-  "OptC2": "2. Presets",
-  "OptExit": "3. Go back",
+  "OptC1": "Language",
+  "OptC2": "Presets",
+  "OptExit": "Go back",
 
   "LangSelect": "Available languages :",
   "LangChange": "Language modified",

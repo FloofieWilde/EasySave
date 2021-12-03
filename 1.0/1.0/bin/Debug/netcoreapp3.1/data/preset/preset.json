@@ -23,5 +23,10 @@
     "Name": "Bonjour",
     "PathSource": "C:/mdr",
     "PathDestination": "C:/ptdr"
+  },
+  "Preset6": {
+    "Name": "Bonjour",
+    "PathSource": "C:/buro",
+    "PathDestination": "C:/dossié"
   }
 }

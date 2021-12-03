@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Projet.Languages;
 using Projet.Logs;
 using Projet.Presets;
+using Projet.Stockages;
 
 namespace Projet
 {
@@ -15,13 +16,14 @@ namespace Projet
         {
 
             string choice = "0";
-            while (!(choice == "1" | choice == "2" | choice == "3"))
+            while (!(choice == "1" | choice == "2" | choice == "3" | choice == "4"))
             {
                 Console.WriteLine(dictLang.OptTitle);
                 Console.WriteLine("");
-                Console.WriteLine(dictLang.OptC1);
-                Console.WriteLine(dictLang.OptC2);
-                Console.WriteLine(dictLang.OptExit);
+                Console.WriteLine("1. "+dictLang.OptC1);
+                Console.WriteLine("2. "+dictLang.OptC2);
+                Console.WriteLine("3. Stockage");
+                Console.WriteLine("4. "+dictLang.OptExit);
 
                 Console.WriteLine("");
 
@@ -39,6 +41,9 @@ namespace Projet
                     OptMenu(dictLang);
                     break;
                 case "3":
+                    Stockage.MenuStockage();
+                    break;
+                case "4":
                     Console.WriteLine("\n\n\n");
                     Menu.Main();
                     break;
