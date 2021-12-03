@@ -47,8 +47,10 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <ListBox Name="ListPresetCopy" Grid.Column="0">
+
+                <ListBox Name="ListPresetCopy" Grid.Column="0" Margin="4" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal">
                 </ListBox>
+                
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="5*"/>
@@ -57,7 +59,7 @@
                     <StackPanel Grid.Row="0" VerticalAlignment="Center">
                         <Label Content="Choisissez le type de sauvegarde:" HorizontalAlignment="Left" Foreground="white"></Label>
                         <RadioButton Name="RadioCopyPartial" Content="Partielle" Margin="30 0 0 0"  HorizontalAlignment="Left" Foreground="white"/>
-                        <RadioButton Name="RadioCopyComplet" Content="Complet" Margin="30 0 0 0" HorizontalAlignment="Left" Foreground="white"/>
+                        <RadioButton Name="RadioCopyComplet" Content="Complète" Margin="30 0 0 0" HorizontalAlignment="Left" Foreground="white"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1">
                         <Button Name="CopyStartButton" Content="START" Height="auto" MaxWidth="150" Click="CopyStartButton_Click"/>
@@ -95,7 +97,7 @@
             </Grid>
         </Grid>
 
-        <Grid Name="OptionsPannel" Row="2" Visibility="Collapsed">
+        <Grid Name="OptionsPannel" Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="6*"/>
@@ -107,23 +109,23 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="LangButton" Grid.Column="0" Content="Langue" Height="auto" Width="auto" Click="LangButton_Click"/>
-                <Button Name="PresetButton" Grid.Column="1" Content="Presets" Height="auto" Width="auto" Click="PresetButton_Click"/>
-                <Button Name="ExtensionButton" Grid.Column="2" Content="Extension" Height="auto" Width="auto" Click="ExtensionButton_Click"/>
-                <Button Name="ApplicationButton" Grid.Column="3" Content="Application métier" Height="auto" Width="auto" Click="ApplicationButton_Click"/>
+                <Button Name="LangButton" Grid.Column="0" Content="Langue" Height="auto" Width="auto" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Click="LangButton_Click"/>
+                <Button Name="PresetButton" Grid.Column="1" Content="Presets" Height="auto" Width="auto" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Click="PresetButton_Click"/>
+                <Button Name="ExtensionButton" Grid.Column="2" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Content="Extension" Height="auto" Width="auto" Click="ExtensionButton_Click"/>
+                <Button Name="ApplicationButton" Grid.Column="3" Content="Application" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Height="auto" Width="auto" Click="ApplicationButton_Click"/>
             </Grid>
 
             <Grid Name="LangPannel" Grid.Row="1" Visibility="Collapsed">
-                <Label Name="LabelLang" Content="Vous avez choisis langue." Foreground="white" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                <Label Name="LabelLang" Content="Vous avez choisi langue." Foreground="white" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
             </Grid>
 
-            <Grid Name="PresetPannel" Grid.Row="1" Visibility="Collapsed">
+            <Grid Name="PresetPannel" Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <ListBox Name="ListPreset" Grid.Column="0" Height="auto" Width="auto">
+                <ListBox Name="ListPreset" Grid.Column="0" Height="auto" Width="auto" Margin="4" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal">
                 </ListBox>
 
                 <Grid Name="PresetInterface" Grid.Column="1">
@@ -138,24 +140,64 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Name="AddPresetButton" Grid.Column="0" Content="Ajouter un preset" Click="AddPresetButton_Click"/>
-                        <Button Name="EditPresetButton" Grid.Column="1" Content="Modifier le preset" Click="EditPresetButton_Click"/>
-                        <Button Name="DeletePresetButton" Grid.Column="2" Content="Supprimer le preset" Click="DeletePresetButton_Click"/>
+                        
+                        <Button Name="AddPresetButton" Grid.Column="0" Click="AddPresetButton_Click" Background="#FF450046" Margin="4">
+                            <Image Source="/plus.png" Height="auto" Width="auto" Margin="5"/>
+                        </Button>
+
+                        <Button Name="EditPresetButton" Grid.Column="1" Click="EditPresetButton_Click" Background="#FF450046" Margin="4">
+                            <Image Source="/crayon.png" Height="auto" Width="auto" Margin="5"/>
+                        </Button>
+
+                        <Button Name="DeletePresetButton" Grid.Column="2" Click="DeletePresetButton_Click" Background="#FF450046" Margin="4">
+                            <Image Source="/delete.png" Height="auto" Width="auto" Margin="5"/>
+                        </Button>
                     </Grid>
-                    <StackPanel Name="AddPannel" Grid.Row="1" Visibility="Collapsed">
-                        <Label Name="LabelAddPreset" Content="Vous avez choisis d'ajouter un preset." Foreground="white"/>
+                    <StackPanel Name="AddPannel" Grid.Row="1" Margin="4" Visibility="Collapsed">
+                        <Label Name="LabelAddPreset" Content="Ajouter un preset" Foreground="white" FontSize="16"/>
                         <Label Name="LabelNameAddPreset" Content="Nom:" Foreground="white"/>
-                        <TextBox Name="AddNameTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="AddNameTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
+                        </Grid>
                         <Label Name="LabelSourceAddPreset" Content="Source:" HorizontalAlignment="left" Foreground="white"/>
-                        <TextBox Name="AddPathSourceTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="AddPathSourceTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
+                        </Grid>
+                            
                         <Label Name="LabelDestinationAddPreset" Content="Destination:" Foreground="white"/>
-                        <TextBox Name="AddPathDestinationTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
-                        <Button Name="ConfirmAddPreset" Content="Confirmer" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ConfirmAddPreset_Click"/>
-                        <Button Name="CancelAddPreset" Content="Annuler" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="CancelAddPreset_Click"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="AddPathDestinationTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
+                        </Grid>
+
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmAddPreset" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="Confirmer" Click="ConfirmAddPreset_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelAddPreset" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="Annuler" Click="CancelAddPreset_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
+
+                        
                     </StackPanel>
+                    
+                    
+                    
                     <StackPanel Name="EditPannel" Grid.Row="1" Visibility="Collapsed">
-                        <Label Name="LabelEditPreset" Content="Vous avez choisis de modifier un preset dont l'ID est:" Foreground="white"/>
-                        <Label Name="PresetEditId" Content="" HorizontalAlignment="Left" Foreground="white"/>
+                        <Label Name="LabelEditPreset" Content="Vous avez choisi de modifier un preset dont l'ID est:" Foreground="white"/>
+                        <Label Name="PresetEditId" Content="" Foreground="white"/>
                         <Label Name="LabelNameEditPreset" Content="Nom:" Foreground="white"/>
                         <TextBox Name="EditNameTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
                         <Label Name="LabelSourceEditPreset" Content="Source:" HorizontalAlignment="left" Foreground="white"/>
@@ -179,7 +221,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <ListBox Name="ListExtension" Grid.Column="0" Height="auto" Width="auto">
+                <ListBox Name="ListExtension" Grid.Column="0" Height="auto" Width="auto" Margin="4" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal">
                 </ListBox>
 
                 <Grid Name="ExtensionInterface" Grid.Column="1">
@@ -193,9 +235,18 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Button Name="AddExtensionButton" Grid.Column="0" Content="Ajouter une extension" Click="AddExtensionButton_Click"/>
-                        <Button Name="EditExtensiontButton" Grid.Column="1" Content="Modifier l'extension" Click="EditExtensionButton_Click"/>
-                        <Button Name="DeleteExtensionButton" Grid.Column="2" Content="Supprimer l'extension" Click="DeleteExtensionButton_Click"/>
+                        <Button Name="AddExtensionButton" Grid.Column="0" Click="AddExtensionButton_Click" Background="#FF450046" Margin="4">
+                            <Image Source="/plus.png" Height="auto" Width="auto" Margin="5"/>
+                        </Button>
+
+                        <Button Name="EditExtensiontButton" Grid.Column="1" Click="EditExtensionButton_Click" Background="#FF450046" Margin="4">
+                            <Image Source="/crayon.png" Height="auto" Width="auto" Margin="5"/>
+                        </Button>
+
+                        <Button Name="DeleteExtensionButton" Grid.Column="2" Click="DeleteExtensionButton_Click" Background="#FF450046" Margin="4">
+                            <Image Source="/delete.png" Height="auto" Width="auto" Margin="5"/>
+                        </Button>
+                        
                     </Grid>
                     <StackPanel Name="AddExtensionPannel" Grid.Row="1" Visibility="Collapsed">
                         <Label Name="LabelAddExtension" Content="Vous avez choisis d'ajouter une extension." HorizontalAlignment="Left" Foreground="white"/>
@@ -225,14 +276,16 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <ListBox Name="ListApplication" Grid.Column="0" Height="50" VerticalAlignment="Top" Width="auto">
+
+                <ListBox Name="ListApplication" Grid.Column="0" Height="50" VerticalAlignment="Top" Width="auto" Margin="4" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal">
                 </ListBox>
+                
                 <Grid Name="ApplicationInterface" Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="5*"/>
                     </Grid.RowDefinitions>
-                    <Button Name="EditApplicationButton" Grid.Row="0" Content="Modifier l'application métier" HorizontalAlignment="Center" Width="200" Click="EditApplicationButton_Click"/>
+                    <Button Name="EditApplicationButton" Grid.Row="0" Content="Modifier l'application" HorizontalAlignment="Center" Width="200" Click="EditApplicationButton_Click" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal"/>
                     <StackPanel Name="EditApplicationPannel" Grid.Row="1" Visibility="Collapsed">
                         <Label Name="LabelEditApplication" Content="Modification de l'application métier." HorizontalAlignment="Left" Foreground="white"/>
                         <Label Name="LabelEditTheApplication" Content="Nom de l'application:" HorizontalAlignment="Left" Foreground="white"/>
