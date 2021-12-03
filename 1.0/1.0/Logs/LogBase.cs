@@ -18,7 +18,6 @@ namespace Projet.Logs
         protected DateTimeOffset DateTimeStamp;
         public string Timestamp;
         public bool IsJson;
-        public XmlWriter Writer;
         public LogBase()
         {
             LogFile = "./data/Logs/";
