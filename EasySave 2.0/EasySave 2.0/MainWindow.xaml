@@ -97,7 +97,7 @@
             </Grid>
         </Grid>
 
-        <Grid Name="OptionsPannel" Row="2">
+        <Grid Name="OptionsPannel" Row="2" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="6*"/>
@@ -119,7 +119,7 @@
                 <Label Name="LabelLang" Content="Vous avez choisi langue." Foreground="white" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
             </Grid>
 
-            <Grid Name="PresetPannel" Grid.Row="1">
+            <Grid Name="PresetPannel" Grid.Row="1" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
