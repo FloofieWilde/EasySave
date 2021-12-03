@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using Projet.Extensions;
 using Projet.Presets;
 using Projet.SaveSystem;
+using Projet.Stockages;
 using Projet.WorkSoftwares;
 
 namespace EasySave_2._0
@@ -65,6 +66,7 @@ namespace EasySave_2._0
             PresetPannel.Visibility = Visibility.Collapsed;
             ExtensionPannel.Visibility = Visibility.Collapsed;
             ApplicationPannel.Visibility = Visibility.Collapsed;
+            StockagePannel.Visibility = Visibility.Collapsed;
         }
 
         private void LogsButton_Click(object sender, RoutedEventArgs e)
@@ -80,6 +82,7 @@ namespace EasySave_2._0
             PresetPannel.Visibility = Visibility.Collapsed;
             ExtensionPannel.Visibility = Visibility.Collapsed;
             ApplicationPannel.Visibility = Visibility.Collapsed;
+            StockagePannel.Visibility = Visibility.Collapsed;
         }
         private void ExtensionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -87,6 +90,7 @@ namespace EasySave_2._0
             LangPannel.Visibility = Visibility.Collapsed;
             PresetPannel.Visibility = Visibility.Collapsed;
             ExtensionPannel.Visibility = Visibility.Visible;
+            StockagePannel.Visibility = Visibility.Collapsed;
             ApplicationPannel.Visibility = Visibility.Collapsed;
             AddExtensionPannel.Visibility = Visibility.Collapsed;
             EditExtensionPannel.Visibility = Visibility.Collapsed;
@@ -106,9 +110,21 @@ namespace EasySave_2._0
             PresetPannel.Visibility = Visibility.Collapsed;
             ExtensionPannel.Visibility = Visibility.Collapsed;
             ApplicationPannel.Visibility = Visibility.Visible;
+            StockagePannel.Visibility = Visibility.Collapsed;
             EditApplicationPannel.Visibility = Visibility.Collapsed;
             WorkSoft application = WorkSoftware.GetJsonApplication();
             ListApplication.Items.Add(application.Application);
+        }
+
+        private void StockageButton_Click(object sender, RoutedEventArgs e)
+        {
+            LangPannel.Visibility = Visibility.Collapsed;
+            PresetPannel.Visibility = Visibility.Collapsed;
+            ExtensionPannel.Visibility = Visibility.Collapsed;
+            ApplicationPannel.Visibility = Visibility.Collapsed;
+            StockagePannel.Visibility = Visibility.Visible;
+            JsonXml stockage = Stockage.GetJsonStockage();
+            LabelCurrentStockage.Content = $"Stockage actuelle: {stockage.TypeStockage}";
         }
 
         private void PresetButton_Click(object sender, RoutedEventArgs e)
@@ -118,6 +134,7 @@ namespace EasySave_2._0
             PresetPannel.Visibility = Visibility.Visible;
             ExtensionPannel.Visibility = Visibility.Collapsed;
             ApplicationPannel.Visibility = Visibility.Collapsed;
+            StockagePannel.Visibility = Visibility.Collapsed;
             AddPannel.Visibility = Visibility.Collapsed;
             EditPannel.Visibility = Visibility.Collapsed;
             DeletePannel.Visibility = Visibility.Collapsed;
@@ -148,8 +165,18 @@ namespace EasySave_2._0
             {
                 EditPannel.Visibility = Visibility.Visible;
                 string selectedItem = ListPreset.SelectedItem.ToString();
-                int id = Convert.ToInt32(selectedItem.Substring(0, 1));
-                PresetEditId.Content = id.ToString();
+                string id = "";
+                for (int i = 0; i <= 9; i++)
+                {
+                    for (int j = 0; j <= 3; j++)
+                    {
+                        if (i.ToString() == selectedItem.Substring(j, 1))
+                        {
+                            id += i.ToString();
+                        }
+                    }
+                }
+                PresetEditId.Content = id;
                 EditNameTextbox.Text = preset["Preset" + id].Name;
                 EditPathSourceTextbox.Text = preset["Preset" + id].PathSource;
                 EditPathDestinationTextbox.Text = preset["Preset" + id].PathDestination;
@@ -164,8 +191,18 @@ namespace EasySave_2._0
             {
                 DeletePannel.Visibility = Visibility.Visible;
                 string selectedItem = ListPreset.SelectedItem.ToString();
-                int id = Convert.ToInt32(selectedItem.Substring(0, 1));
-                PresetDeleteId.Content = id.ToString();
+                string id = "";
+                for (int i = 0; i <= 9; i++)
+                {
+                    for (int j = 0; j <= 3; j++)
+                    {
+                        if (i.ToString() == selectedItem.Substring(j, 1))
+                        {
+                            id += i.ToString();
+                        }
+                    }
+                }
+                PresetDeleteId.Content = id;
             }
         }
 
@@ -260,7 +297,17 @@ namespace EasySave_2._0
             {
                 EditExtensionPannel.Visibility = Visibility.Visible;
                 string selectedItem = ListExtension.SelectedItem.ToString();
-                int id = Convert.ToInt32(selectedItem.Substring(0, 1));
+                string id = "";
+                for (int i = 0; i <= 9; i++)
+                {
+                    for (int j = 0; j <= 3; j++)
+                    {
+                        if (i.ToString() == selectedItem.Substring(j, 1))
+                        {
+                            id += i.ToString();
+                        }
+                    }
+                }
                 ExtensionEditId.Content = id;
                 EditExtensionTextbox.Text = extensions["Extension" + id];
             }
@@ -274,7 +321,18 @@ namespace EasySave_2._0
             {
                 DeleteExtensionPannel.Visibility = Visibility.Visible;
                 string selectedItem = ListExtension.SelectedItem.ToString();
-                int id = Convert.ToInt32(selectedItem.Substring(0, 1));
+
+                string id = "";
+                for (int i=0; i<=9; i++)
+                {
+                    for (int j=0; j <= 3; j++)
+                    {
+                        if(i.ToString() == selectedItem.Substring(j, 1))
+                        {
+                            id += i.ToString();
+                        }
+                    }
+                }
                 ExtensionDeleteId.Content = id;
             }
         }
@@ -440,6 +498,35 @@ namespace EasySave_2._0
         private void CancelEditApplication_Click(object sender, RoutedEventArgs e)
         {
             EditApplicationPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void EditStockageButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditStockagePannel.Visibility = Visibility.Visible;
+            RadioJson.IsChecked = false;
+            RadioXml.IsChecked = false;
+        }
+
+        private void ConfirmEditStockage_Click(object sender, RoutedEventArgs e)
+        {
+            JsonXml stockage = Stockage.GetJsonStockage();
+            string stock = stockage.TypeStockage;
+            if (RadioJson.IsChecked == true)
+            {
+                stock = ".json";
+            }
+            else if (RadioXml.IsChecked == true)
+            {
+                stock = ".xml";
+            }
+            Stockage.EditStockage(stock);
+            LabelCurrentStockage.Content = $"Stockage actuelle: {stock}";
+            EditStockagePannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void CancelEditStockage_Click(object sender, RoutedEventArgs e)
+        {
+            EditStockagePannel.Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -108,11 +108,13 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Button Name="LangButton" Grid.Column="0" Content="Langue" Height="auto" Width="auto" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Click="LangButton_Click"/>
                 <Button Name="PresetButton" Grid.Column="1" Content="Presets" Height="auto" Width="auto" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Click="PresetButton_Click"/>
                 <Button Name="ExtensionButton" Grid.Column="2" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Content="Extension" Height="auto" Width="auto" Click="ExtensionButton_Click"/>
                 <Button Name="ApplicationButton" Grid.Column="3" Content="Application" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Height="auto" Width="auto" Click="ApplicationButton_Click"/>
+                <Button Name="StockageButton" Grid.Column="4" Content="Stockage" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Height="auto" Width="auto" Click="StockageButton_Click"/>
             </Grid>
 
             <Grid Name="LangPannel" Grid.Row="1" Visibility="Collapsed">
@@ -295,6 +297,17 @@
                     </StackPanel>
                 </Grid>
             </Grid>
+            <StackPanel Name="StockagePannel" Grid.Row="1" Visibility="Collapsed">
+                <Label Name="LabelCurrentStockage" Content="" HorizontalAlignment="Left" Foreground="green"/>
+                <Button Name="EditStockageButton" Content="Modifier le stockage" HorizontalAlignment="Left" Width="200" Click="EditStockageButton_Click" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal"/>
+                <StackPanel Name="EditStockagePannel" Visibility="Collapsed">
+                    <Label Name="LabelEditStockage" Content="Sélectionnez le nouveau stockage, puis confirmez." HorizontalAlignment="Left" Foreground="white"/>
+                    <RadioButton Name="RadioJson" Content=".json" Margin="30 0 0 0"  HorizontalAlignment="Left" Foreground="white"/>
+                    <RadioButton Name="RadioXml" Content=".xml" Margin="30 0 0 0" HorizontalAlignment="Left" Foreground="white"/>
+                    <Button Name="ConfirmEditStockage" Content="Confirmer" HorizontalAlignment="Left" Click="ConfirmEditStockage_Click"/>
+                    <Button Name="CancelEditStockage" Content="Annuler" HorizontalAlignment="Left" Click="CancelEditStockage_Click"/>
+                </StackPanel>
+            </StackPanel>
         </Grid>
 
         <Grid Name="LogsPannel" Row="2" Visibility="Collapsed">
