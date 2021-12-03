@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using System.IO;
 using System.Text.Json;
 using Projet.Languages;
@@ -14,6 +11,7 @@ namespace Projet.Logs
     public class LogDaily : LogBase
     {
         public long FileSize { get; set; }
+        public long EncryptTime { get; set; }  
         public double TransferTime { get; set; }
         public long CryptTime { get; set;}
         private Langue.Language CurrentLanguage;
@@ -40,7 +38,6 @@ namespace Projet.Logs
             TransferTime = transferTime;
             SourceDir = sourceDir;
             TargetDir = targetDir;
-            CryptTime = cryptTime;
             Save();
 
         }
@@ -59,7 +56,7 @@ namespace Projet.Logs
 
             oui.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
             oui.WriteIndented = true;
-            string jsonString = System.Text.Json.JsonSerializer.Serialize<LogDaily>(this, oui);
+            string jsonString = JsonSerializer.Serialize<LogDaily>(this, oui);
             File.AppendAllText(usedPath, jsonString);
 
         }
@@ -113,3 +110,5 @@ namespace Projet.Logs
 }
 
 
+
+/* */
