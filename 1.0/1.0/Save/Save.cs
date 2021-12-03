@@ -63,7 +63,6 @@ namespace Projet.SaveSystem
                 Directory.CreateDirectory(TargetDir);
             }
             ProcessCopy(sourceDirInfo, targetDirInfo);
-
             CurrentStateLog.End();
         }
         /// <summary>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using System.Text.Json;
 using Projet.Languages;
+using System.Xml;
 
 namespace Projet.Logs
 {
@@ -16,6 +17,8 @@ namespace Projet.Logs
         public string TargetDir { get; set; }
         protected DateTimeOffset DateTimeStamp;
         public string Timestamp;
+        public bool IsJson = false;
+        public XmlWriter Writer;
         public LogBase()
         {
             LogFile = "./data/Logs/";
@@ -69,7 +72,14 @@ namespace Projet.Logs
         {
             string currentMin = "/" + DateTimeStamp.Hour.ToString();
             currentMin += "h" + DateTimeStamp.Minute.ToString();
-            currentMin += ".json";
+            if (IsJson)
+            {
+                currentMin += ".json";
+            }
+            else
+            {
+                currentMin += ".xml";
+            }
             return currentMin;
         }
 

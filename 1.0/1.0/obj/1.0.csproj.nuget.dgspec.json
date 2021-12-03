@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\loicm\\Desktop\\temp\\1.0\\1.0\\1.0.csproj": {}
+    "C:\\Users\\franc\\Source\\Repos\\C-hashtag-point-web\\1.0\\1.0\\1.0.csproj": {}
   },
   "projects": {
-    "C:\\Users\\loicm\\Desktop\\temp\\1.0\\1.0\\1.0.csproj": {
+    "C:\\Users\\franc\\Source\\Repos\\C-hashtag-point-web\\1.0\\1.0\\1.0.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\loicm\\Desktop\\temp\\1.0\\1.0\\1.0.csproj",
+        "projectUniqueName": "C:\\Users\\franc\\Source\\Repos\\C-hashtag-point-web\\1.0\\1.0\\1.0.csproj",
         "projectName": "1.0",
-        "projectPath": "C:\\Users\\loicm\\Desktop\\temp\\1.0\\1.0\\1.0.csproj",
-        "packagesPath": "C:\\Users\\loicm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\loicm\\Desktop\\temp\\1.0\\1.0\\obj\\",
+        "projectPath": "C:\\Users\\franc\\Source\\Repos\\C-hashtag-point-web\\1.0\\1.0\\1.0.csproj",
+        "packagesPath": "C:\\Users\\franc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\franc\\Source\\Repos\\C-hashtag-point-web\\1.0\\1.0\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\loicm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\franc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,6 +30,7 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
+            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -37,6 +42,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Newtonsoft.Json": {
               "target": "Package",
@@ -57,12 +63,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[3.1.10, 3.1.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[3.1.21, 3.1.21]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[3.1.0, 3.1.0]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
