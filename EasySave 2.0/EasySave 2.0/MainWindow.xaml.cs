@@ -17,6 +17,7 @@ using Projet.Presets;
 using Projet.SaveSystem;
 using Projet.Stockages;
 using Projet.WorkSoftwares;
+using Projet.Languages;
 
 namespace EasySave_2._0
 {
@@ -25,6 +26,8 @@ namespace EasySave_2._0
     /// </summary>
     public partial class MainWindow : Window
     {
+        Langue.Language dictLang = Langue.GetLang();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -53,6 +56,11 @@ namespace EasySave_2._0
 
         private void OptionsBouton_Click(object sender, RoutedEventArgs e)
         {
+            LangButton.Content = dictLang.OptMLang;
+            PresetButton.Content = dictLang.OptMPreset;
+            ExtensionButton.Content = dictLang.OptMExt;
+            ApplicationButton.Content = dictLang.OptMApp;
+            StockageButton.Content = dictLang.OptMStoc;
             CopyPannel.Visibility = Visibility.Collapsed;
             OptionsPannel.Visibility = Visibility.Visible;
             LogsPannel.Visibility = Visibility.Collapsed;
@@ -78,6 +86,7 @@ namespace EasySave_2._0
 
         private void LangButton_Click(object sender, RoutedEventArgs e)
         {
+            //Texttext.Content = dictLang.MenuTitle;
             LangPannel.Visibility = Visibility.Visible;
             PresetPannel.Visibility = Visibility.Collapsed;
             ExtensionPannel.Visibility = Visibility.Collapsed;
@@ -105,6 +114,12 @@ namespace EasySave_2._0
 
         private void ApplicationButton_Click(object sender, RoutedEventArgs e)
         {
+            EditApplicationButton.Content = dictLang.OptAppAlter;
+            LabelEditApplication.Content = dictLang.OptAppMod;
+            LabelEditTheApplication.Content = dictLang.Name;
+            ConfirmEditApplication.Content = dictLang.Confirm;
+            CancelEditApplication.Content = dictLang.Cancel;
+
             ListApplication.Items.Clear();
             LangPannel.Visibility = Visibility.Collapsed;
             PresetPannel.Visibility = Visibility.Collapsed;
@@ -124,7 +139,11 @@ namespace EasySave_2._0
             ApplicationPannel.Visibility = Visibility.Collapsed;
             StockagePannel.Visibility = Visibility.Visible;
             JsonXml stockage = Stockage.GetJsonStockage();
-            LabelCurrentStockage.Content = $"Stockage actuelle: {stockage.TypeStockage}";
+            LabelCurrentStockage.Content = dictLang.OptStocNow + stockage.TypeStockage;
+            EditStockageButton.Content = dictLang.OptStocAlter;
+            LabelEditStockage.Content = dictLang.OptStocNew;
+            ConfirmEditStockage.Content = dictLang.Confirm;
+            CancelEditStockage.Content = dictLang.Cancel;
         }
 
         private void PresetButton_Click(object sender, RoutedEventArgs e)
@@ -148,6 +167,12 @@ namespace EasySave_2._0
 
         private void AddPresetButton_Click(object sender, RoutedEventArgs e)
         {
+            LabelAddPreset.Content = dictLang.OptPreAdd;
+            LabelNameAddPreset.Content = dictLang.Name;
+            LabelSourceAddPreset.Content = dictLang.Sauce;
+            LabelDestinationAddPreset.Content = dictLang.Dest;
+            ConfirmAddPreset.Content = dictLang.Confirm;
+            CancelAddPreset.Content = dictLang.Cancel;
             AddNameTextbox.Text = "";
             AddPathSourceTextbox.Text = "";
             AddPathDestinationTextbox.Text = "";
@@ -158,6 +183,12 @@ namespace EasySave_2._0
 
         private void EditPresetButton_Click(object sender, RoutedEventArgs e)
         {
+            LabelEditPreset.Content = dictLang.OptPreEdit;
+            LabelNameEditPreset.Content = dictLang.Name;
+            LabelSourceEditPreset.Content = dictLang.Sauce;
+            LabelDestinationEditPreset.Content = dictLang.Dest;
+            ConfirmEditPreset.Content = dictLang.Confirm;
+            CancelEditPreset.Content = dictLang.Cancel;
             AddPannel.Visibility = Visibility.Collapsed;
             DeletePannel.Visibility = Visibility.Collapsed;
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
@@ -185,6 +216,9 @@ namespace EasySave_2._0
 
         private void DeletePresetButton_Click(object sender, RoutedEventArgs e)
         {
+            LabelDeletePreset.Content = dictLang.OptPreDel;
+            ConfirmDeletePreset.Content = dictLang.Confirm;
+            CancelDeletePreset.Content = dictLang.Cancel;
             AddPannel.Visibility = Visibility.Collapsed;
             EditPannel.Visibility = Visibility.Collapsed;
             if (ListPreset.SelectedIndex != -1)
@@ -282,6 +316,11 @@ namespace EasySave_2._0
 
         private void AddExtensionButton_Click(object sender, RoutedEventArgs e)
         {
+            LabelAddExtension.Content = dictLang.OptExtAdd;
+            LabelAddNewExtension.Content = dictLang.Extension;
+            ConfirmAddExtension.Content = dictLang.Confirm;
+            CancelAddExtension.Content = dictLang.Cancel;
+
             AddExtensionTextbox.Text = "";
             AddExtensionPannel.Visibility = Visibility.Visible;
             EditExtensionPannel.Visibility = Visibility.Collapsed;
@@ -290,6 +329,11 @@ namespace EasySave_2._0
 
         private void EditExtensionButton_Click(object sender, RoutedEventArgs e)
         {
+            LabelEditExtension.Content = dictLang.OptExtEdit;
+            LabelEditTheExtension.Content = dictLang.Extension;
+            ConfirmEditExtension.Content = dictLang.Confirm;
+            CancelEditExtension.Content = dictLang.Cancel;
+
             AddExtensionPannel.Visibility = Visibility.Collapsed;
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
             Dictionary<string, string> extensions = Extension.GetJsonExtension();
@@ -315,6 +359,10 @@ namespace EasySave_2._0
 
         private void DeleteExtensionButton_Click(object sender, RoutedEventArgs e)
         {
+            LabelDeleteExtension.Content = dictLang.OptExtDel;
+            ConfirmDeleteExtension.Content = dictLang.Confirm;
+            CancelDeleteExtension.Content = dictLang.Cancel;
+
             AddExtensionPannel.Visibility = Visibility.Collapsed;
             EditExtensionPannel.Visibility = Visibility.Collapsed;
             if (ListExtension.SelectedIndex != -1)

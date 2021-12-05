@@ -6,9 +6,15 @@ namespace Projet.Languages
 {
     class Langue
     {
-        public static Language GetLang()
+
+        public static StreamReader GetConfig()
         {
             StreamReader sr = new StreamReader("./data/config.json");
+            return sr;
+        }
+        public static Language GetLang()
+        {
+            StreamReader sr = GetConfig();
             string jsonString = sr.ReadToEnd();
             sr.Dispose();
             Config configuration = JsonConvert.DeserializeObject<Config>(jsonString);
@@ -55,7 +61,7 @@ namespace Projet.Languages
                 {
                     verifLan = true;
 
-                    StreamReader sr = new StreamReader("./data/config.json");
+                    StreamReader sr = GetConfig();
                     string jsonString = sr.ReadToEnd();
                     Config conf = JsonConvert.DeserializeObject<Config>(jsonString);
                     sr.Dispose();
@@ -82,6 +88,10 @@ namespace Projet.Languages
 
         public class Language
         {
+            public string flag { get; set; }
+            public string v1 { get; set; }
+
+
             public string MenuTitle { get; set; }
             public string MenuC1 { get; set; }
             public string MenuC2 { get; set; }
@@ -121,6 +131,30 @@ namespace Projet.Languages
             public string LogNoDaily { get; set; }
             public string LogDailyFilen { get; set; }
             public string LogNumber { get; set; }
+
+            public string v2 { get; set; }
+            public string OptMLang { get; set; }
+            public string OptMPreset { get; set; }
+            public string OptPreAdd { get; set; }
+            public string OptPreEdit { get; set; }
+            public string OptPreDel { get; set; }
+            public string OptMExt { get; set; }
+            public string OptExtAdd { get; set; }
+            public string OptExtEdit { get; set; }
+            public string OptExtDel { get; set; }
+            public string Extension { get; set; }
+            public string OptMApp { get; set; }
+            public string OptAppAlter { get; set; }
+            public string OptAppMod { get; set; }
+            public string OptMStoc { get; set; }
+            public string OptStocNow { get; set; }
+            public string OptStocAlter { get; set; }
+            public string OptStocNew { get; set; }
+            public string Name { get; set; }
+            public string Sauce { get; set; }
+            public string Dest { get; set; }
+            public string Confirm { get; set; }
+            public string Cancel { get; set; }
 
         }
     }

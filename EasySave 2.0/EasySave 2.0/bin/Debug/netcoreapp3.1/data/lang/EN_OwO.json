@@ -1,4 +1,8 @@
 {
+    "flag" : "EN_OwO.png",
+    
+    "v1": "",
+    
     "menutitle": "Sewlewct awa chOwOice.",
     "menuc1": "1. ClOwOne filews",
     "menuc2": "2. COwOnfigurawate thew sOwOftwaware",
@@ -26,4 +30,36 @@
     "presave2" : " succewssly sawavewd!",
     "presave3" : "Hewre aware the new pawarawamewtewrs : ",
     "prefgb" : "Rewturning tOwO OwOptiOwOn mewnu...",
+    
+    
+    
+    "v2" : "",
+    
+    "OptMLang" : "Language",
+    
+    "OptMPreset" : "Presets",
+    "OptPreAdd" : "Add a preset",
+    "OptPreEdit" : "Modify preset number ",
+    "OptPreDel" : "Are you sure to delete preset number ",
+    
+    "OptMExt" : "Extension",
+    "OptExtAdd" : "Add a convertible extension",
+    "OptExtEdit" : "Modify extension number",
+    "OptExtDel" : "Are you sure to delete extension number ",
+    "Extension" : "Extension (don't forget the dot before)",
+    
+    "OptMApp" : "Application",
+    "OptAppAlter" : "Modify application",
+    "OptAppMod" : "Modify blocked application",
+    
+    "OptMStoc" : "Storage",
+    "OptStocNow" : "Actual storage :",
+    "OptStocAlter" : "Modify storage type",
+    "OptStocNew" : "Select new logs' storage format.",
+    
+    "Name" : "Name",
+    "Sauce" : "Source path",
+    "Dest" : "Destination path",
+    "Confirm" : "Confirm",
+    "Cancel" : "Cancel",
 }
