@@ -118,7 +118,11 @@
             </Grid>
 
             <Grid Name="LangPannel" Grid.Row="1" Visibility="Collapsed">
-                <Label Name="LabelLang" Content="Vous avez choisi langue." Foreground="white" Margin="20,10,0,0"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Button Name="Kckc" Content="" Grid.Column="0"></Button>
             </Grid>
 
             <Grid Name="PresetPannel" Grid.Row="1" Visibility="Collapsed">
@@ -231,6 +235,7 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="5*"/>
                     </Grid.RowDefinitions>
+                    
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>

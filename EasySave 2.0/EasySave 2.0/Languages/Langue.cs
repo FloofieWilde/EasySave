@@ -28,6 +28,13 @@ namespace Projet.Languages
             return dictLang;
         }
 
+        static public string[] GetFileName()
+        {
+            string Path = "./data/lang/";
+            string[] files = Directory.GetFiles(Path);
+            return files;
+        }
+
         static public Language GetFiles(Language dictLang)
         {
             string Path = "./data/lang/";

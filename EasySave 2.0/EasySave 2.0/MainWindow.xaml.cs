@@ -87,6 +87,8 @@ namespace EasySave_2._0
         private void LangButton_Click(object sender, RoutedEventArgs e)
         {
             //Texttext.Content = dictLang.MenuTitle;
+            Kckc.Content = GetLangLines();
+
             LangPannel.Visibility = Visibility.Visible;
             PresetPannel.Visibility = Visibility.Collapsed;
             ExtensionPannel.Visibility = Visibility.Collapsed;
@@ -576,5 +578,23 @@ namespace EasySave_2._0
         {
             EditStockagePannel.Visibility = Visibility.Collapsed;
         }
+
+        public void GenerateGridLang()
+        {
+            int Lines = GetLangLines();
+        }
+
+        public int GetLangLines()
+        {
+            string[] LangList = Langue.GetFileName();
+            int CountLang = LangList.Count();
+            int Lines = (CountLang / 3) + 1;
+            int ColumnLast = (CountLang % 3);
+            if (ColumnLast == 0) Lines -= 1;
+            return Lines;
+        }
+
+        //TODO: Finir le changement de Langue
+
     }
 }
