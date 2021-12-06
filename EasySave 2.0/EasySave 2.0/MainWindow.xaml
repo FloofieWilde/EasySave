@@ -118,11 +118,19 @@
             </Grid>
 
             <Grid Name="LangPannel" Grid.Row="1" Visibility="Collapsed">
+                <!--<Button Name="Kckc" Content="" Grid.Column="0"></Button>-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
-                <Button Name="Kckc" Content="" Grid.Column="0"></Button>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
             </Grid>
 
             <Grid Name="PresetPannel" Grid.Row="1" Visibility="Collapsed">
@@ -316,7 +324,12 @@
         </Grid>
 
         <Grid Name="LogsPannel" Row="2" Visibility="Collapsed">
-            <Label Name="LabelLogs" Content="Vous avez choisis afficher logs." HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Foreground="white"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox Grid.Column="0" Margin="4"></ListBox>
+            <DataGrid Grid.Column="1" Margin="4"></DataGrid>
         </Grid>
         
     </Grid>

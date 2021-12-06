@@ -28,5 +28,10 @@
     "Name": "Oof",
     "PathSource": "D:/Lefichier",
     "PathDestination": "D:/Ledossier"
+  },
+  "Preset7": {
+    "Name": "Maxime",
+    "PathSource": "C:\\Users\\jennm\\source\\repos\\C-hashtag-point-web\\EasySave 2.0\\EasySave 2.0\\DossA",
+    "PathDestination": "C:\\Users\\jennm\\source\\repos\\C-hashtag-point-web\\EasySave 2.0\\EasySave 2.0\\DossB"
   }
 }

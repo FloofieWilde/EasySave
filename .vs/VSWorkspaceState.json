@@ -1,14 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\1.0",
-    "\\1.0\\1.0",
-    "\\1.0\\1.0\\Logs",
-    "\\1.0\\1.0\\Save",
     "\\EasySave 2.0",
-    "\\EasySave 2.0\\EasySave 2.0",
-    "\\EasySave 2.0\\EasySave 2.0\\Applications"
+    "\\EasySave 2.0\\EasySave 2.0"
   ],
-  "SelectedNode": "\\EasySave 2.0\\EasySave 2.0\\Applications\\Applications.cs",
+  "SelectedNode": "\\EasySave 2.0\\EasySave 2.0\\MainWindow.xaml",
   "PreviewInSolutionExplorer": false
 }

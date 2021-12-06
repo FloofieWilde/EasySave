@@ -87,7 +87,9 @@ namespace EasySave_2._0
         private void LangButton_Click(object sender, RoutedEventArgs e)
         {
             //Texttext.Content = dictLang.MenuTitle;
-            Kckc.Content = GetLangLines();
+            //Kckc.Content = GetLangLines().Item1;
+
+            GenerateGridLang();
 
             LangPannel.Visibility = Visibility.Visible;
             PresetPannel.Visibility = Visibility.Collapsed;
@@ -581,17 +583,59 @@ namespace EasySave_2._0
 
         public void GenerateGridLang()
         {
-            int Lines = GetLangLines();
+            int Lines = GetLangLines().Item1;
+            string[] LangList = GetLangLines().Item2;
+            int countC = 0;
+            int countR = 0;
+            string PathLang = "./data/lang/";
+            string PathDataImg = "./data/imgs/";
+
+
+            foreach (string Lang in LangList)
+            {
+                var bc = new BrushConverter();
+
+                Button butt = new Button();
+                //butt.Background = new SolidColorBrush(FF450046);
+                butt.Margin = new Thickness(4);
+
+                string name = Lang.Substring(PathLang.Length);
+                int length = name.Length;
+                name = name.Remove(length - 5);
+
+                string PathImg = PathDataImg + name + ".png";
+                
+
+                Image img = new Image();
+                BitmapImage ImgBmp = new BitmapImage(new Uri(PathImg, UriKind.Relative));
+                img.Source = ImgBmp;
+                img.Margin = new Thickness(10);
+
+                //img.Source = new Uri(PathImg);
+
+                butt.Content = img;
+
+                LangPannel.Children.Add(butt);
+
+                Grid.SetColumn(butt, countC);
+                Grid.SetRow(butt, countR);
+                countC += 1;
+                if (countC == 3)
+                {
+                    countC = 0;
+                    countR += 1;
+                }
+            }
         }
 
-        public int GetLangLines()
+        public (int, string[]) GetLangLines()
         {
             string[] LangList = Langue.GetFileName();
             int CountLang = LangList.Count();
             int Lines = (CountLang / 3) + 1;
             int ColumnLast = (CountLang % 3);
             if (ColumnLast == 0) Lines -= 1;
-            return Lines;
+            return (Lines, LangList);
         }
 
         //TODO: Finir le changement de Langue
