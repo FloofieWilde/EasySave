@@ -414,8 +414,8 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <ListBox Grid.Column="0" Margin="4"></ListBox>
-            <DataGrid Grid.Column="1" Margin="4"></DataGrid>
+            <ListBox Name= "LogsGrid" Grid.Column="0" Margin="4"></ListBox>
+            <DataGrid  Grid.Column="1" Margin="4"></DataGrid>
         </Grid>
         
     </Grid>

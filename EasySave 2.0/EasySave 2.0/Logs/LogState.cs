@@ -6,6 +6,7 @@ using Projet.Languages;
 using Projet;
 using System.Xml;
 using Projet.Stockages;
+using System.Windows.Controls;
 
 namespace Projet.Logs
 {
@@ -138,15 +139,11 @@ namespace Projet.Logs
         /// <summary>
         /// Called when save process is finished, saves a last time object's datas then display the sucessfull save message
         /// </summary>
-        public void End()
+        public void End(ProgressBar progressBar)
         {
             Active = false;
             Save();
-            Console.WriteLine("\n");
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine(CurrentLanguage.SaveSuccess);
-            Console.ResetColor();
-            Menu.MenuPrincipal();
+            progressBar.Value = 100;
         }
     }
 }

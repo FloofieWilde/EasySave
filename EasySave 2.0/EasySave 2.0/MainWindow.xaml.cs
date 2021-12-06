@@ -18,6 +18,8 @@ using Projet.SaveSystem;
 using Projet.Stockages;
 using Projet.WorkSoftwares;
 using Projet.Languages;
+using System.IO;
+using Projet.Logs;
 
 namespace EasySave_2._0
 {
@@ -85,6 +87,21 @@ namespace EasySave_2._0
             CopyPannel.Visibility = Visibility.Collapsed;
             OptionsPannel.Visibility = Visibility.Collapsed;
             LogsPannel.Visibility = Visibility.Visible;
+            LogsGrid.Items.Add("test");
+            
+            LogDaily dailyLog = new LogDaily("");
+            string ad = @"./data/Logs/Daily/2021/12/6";
+            DirectoryInfo dirInfo = dailyLog.GetFiles(ad);
+            if (dirInfo == null) return;
+            List<LogDaily> logs = dailyLog.Load(dirInfo.FullName);
+            LogsGrid.Items.Add(logs.Count);
+
+            foreach (LogDaily log in logs)
+            {
+                LogsGrid.Items.Add("Test");
+                LogsGrid.Items.Add(log.Name);
+            }
+
         }
 
         private void LangButton_Click(object sender, RoutedEventArgs e)
@@ -378,11 +395,11 @@ namespace EasySave_2._0
                 string selectedItem = ListExtension.SelectedItem.ToString();
 
                 string id = "";
-                for (int i=0; i<=9; i++)
+                for (int i = 0; i <= 9; i++)
                 {
-                    for (int j=0; j <= 3; j++)
+                    for (int j = 0; j <= 3; j++)
                     {
-                        if(i.ToString() == selectedItem.Substring(j, 1))
+                        if (i.ToString() == selectedItem.Substring(j, 1))
                         {
                             id += i.ToString();
                         }
@@ -464,6 +481,8 @@ namespace EasySave_2._0
 
         private void CopyStartButton_Click(object sender, RoutedEventArgs e)
         {
+            ErrorCopy.Content = "VOMI";
+
             if ((RadioCopyComplet.IsChecked == true || RadioCopyPartial.IsChecked == true) && ListPresetCopy.SelectedIndex != -1)
             {
                 Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
@@ -507,7 +526,6 @@ namespace EasySave_2._0
                     CopyNamePreset.Text = $"Nom sauvegarde: {name}";
                     CopySource.Text = $"Path Source: {source}";
                     CopyDestination.Text = $"Path Destination: {destination}";
-                    save.ProcessCopy(DirInfo.source, DirInfo.target);
 
                     var staticLog = save.CurrentStateLog;
 
@@ -515,13 +533,15 @@ namespace EasySave_2._0
                     CopyNbFile.Text = $"Nombre total des fichiers: {staticLog.TotalFiles}";
                     CopySizeFile.Text = $"Taille total des fichiers: {staticLog.TotalSize}";
 
-                    while (staticLog.Progress < 100)
+
+                    save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy);
+
+                    /*while (staticLog.Progress < 100)
                     {
-                        ProgressBarCopy.Value = staticLog.Progress;
                         CopyFileRemaining.Content = $"Fichier restants: {staticLog.RemainingFiles}";
                         CopySizeRemaining.Content = $"Taille des fichiers restant: {staticLog.RemainingFilesSize}";
 
-                    }
+                    }*/
                     CopyEnd.Text = "Copie terminée!";
                 }
             }
@@ -606,7 +626,7 @@ namespace EasySave_2._0
                 name = name.Remove(length - 5);
 
                 string PathImg = PathDataImg + name + ".png";
-                
+
 
                 Image img = new Image();
                 BitmapImage ImgBmp = new BitmapImage(new Uri(PathImg, UriKind.Relative));

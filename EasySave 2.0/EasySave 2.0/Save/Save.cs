@@ -5,6 +5,7 @@ using System.Diagnostics;
 using Projet.Languages;
 using EasySave_2._0;
 using Projet.WorkSoftwares;
+using System.Windows.Controls;
 
 
 namespace Projet.SaveSystem
@@ -61,7 +62,7 @@ namespace Projet.SaveSystem
         /// </summary>
         /// <param name="source">Source Directory</param>
         /// <param name="target">Target Directory</param>
-        public void ProcessCopy(DirectoryInfo source, DirectoryInfo target)
+        public void ProcessCopy(DirectoryInfo source, DirectoryInfo target, ProgressBar progressBar)
         {
             CurrentStateLog.Display();
             long filesSize;
@@ -81,6 +82,7 @@ namespace Projet.SaveSystem
                 {
                     CheckException(fi, target);
                 }
+                progressBar.Value = CurrentStateLog.Progress;
                 filesSize = fi.Length;
                 ProcessTime.Stop();
                 CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name, CryptTime);
@@ -91,10 +93,11 @@ namespace Projet.SaveSystem
             {
                 DirectoryInfo nextTargetSubDir =
                 target.CreateSubdirectory(diSourceSubDir.Name);
-                ProcessCopy(diSourceSubDir, nextTargetSubDir);
+                ProcessCopy(diSourceSubDir, nextTargetSubDir, progressBar);
                 CurrentStateLog.Save();
                 CurrentStateLog.Display();
             }
+            CurrentStateLog.End(progressBar);
         }
         /// <summary>
         /// Returns directory's size, in bytes

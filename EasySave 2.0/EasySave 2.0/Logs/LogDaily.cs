@@ -115,51 +115,51 @@ namespace Projet.Logs
             }
             XmlCount++;
         }
-        public void Load()
+        public List<LogDaily> Load(string path)
         {
-            string path = LogFile + "Daily" + GetDay();
+
+            var fullLog = new List<LogDaily>();
+            string[] files = Directory.GetFiles(path);
+            foreach (string file in files)
+            {
+                if (path.EndsWith(".json"))
+                {
+                    string json = File.ReadAllText(file);
+                    var logList = JsonConvert.DeserializeObject<List<LogDaily>>(json);
+                    foreach (LogDaily logDaily in logList)
+                    {
+                        fullLog.Add(logDaily);
+                        fullLog.Append<LogDaily>(logDaily);
+                    }
+                }
+                else if(path.EndsWith(".xml"))
+                {
+                    XmlDoc.Load(path);
+                    foreach(XmlNode xnode in XmlDoc.DocumentElement.ChildNodes)
+                    {
+                        string xstring = JsonConvert.SerializeXmlNode(xnode);
+                        LogDaily finalLog = JsonConvert.DeserializeObject<LogDaily>(xstring);
+                        fullLog.Append<LogDaily>(finalLog);
+
+                    }
+                }
+
+            }
+            return fullLog;
+        }
+
+        public DirectoryInfo GetFiles(string path)
+        {
+            //string path = LogFile + "Daily" + GetDay();
+            DirectoryInfo dirInfo = new DirectoryInfo(path);
             if (!Directory.Exists(path))
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine(CurrentLanguage.LogNoDaily);
-                Console.ResetColor();
+                return null;
             }
             else
             {
-                string[] files = Directory.GetFiles(path);
-                int it = 0;
-                foreach (string file in files)
-                {
-                    it++;
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(CurrentLanguage.LogDailyFilen + " : " + it + " / " + files.Length);
-                    Console.ResetColor();
-                    string[] json = File.ReadAllLines(file);
-                    int i = 0;
-                    int j = 0;
-                    foreach (string line in json)
-                    {
-                        if (line.StartsWith("}"))
-                        {
-                            Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.WriteLine(CurrentLanguage.LogNumber + " : " + i);
-                            Console.ResetColor();
-                        }
-                        else
-                        {
-                            Console.WriteLine(line);
-
-                        }
-                        j++;
-                        if (j >= 6)
-                        {
-                            i++;
-                            j = 0;
-                        }
-                    }
-                }
+                return dirInfo;
             }
-            Menu.MenuPrincipal();
         }
     }
 }

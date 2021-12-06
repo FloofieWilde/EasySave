@@ -83,7 +83,7 @@ namespace Projet
                     break;
                 case "3":
                     LogDaily oui = new LogDaily("Full");
-                    oui.Load();
+                    oui.Load("oui");
                     break;
                 case "4":
                     //Console.WriteLine("Quitter");
