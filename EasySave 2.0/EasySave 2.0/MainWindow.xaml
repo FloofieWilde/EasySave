@@ -57,12 +57,12 @@
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" VerticalAlignment="Center">
-                        <Label Content="Choisissez le type de sauvegarde:" HorizontalAlignment="Left" Foreground="white"></Label>
-                        <RadioButton Name="RadioCopyPartial" Content="Partielle" Margin="30 0 0 0"  HorizontalAlignment="Left" Foreground="white"/>
-                        <RadioButton Name="RadioCopyComplet" Content="Complète" Margin="30 0 0 0" HorizontalAlignment="Left" Foreground="white"/>
+                        <Label Content="Choisissez le type de sauvegarde:" HorizontalAlignment="Left" Foreground="white" FontSize="16"></Label>
+                        <RadioButton Name="RadioCopyPartial" Content="" Margin="30 0 0 0"  HorizontalAlignment="Left" Foreground="white" FontSize="14"/>
+                        <RadioButton Name="RadioCopyComplet" Content="" Margin="30 0 0 0" HorizontalAlignment="Left" Foreground="white" FontSize="14"/>
                     </StackPanel>
                     <StackPanel Grid.Row="1">
-                        <Button Name="CopyStartButton" Content="START" Height="auto" MaxWidth="150" Click="CopyStartButton_Click"/>
+                        <Button Name="CopyStartButton" Content="START" Background="#FF450046" Foreground="#ad005d" FontFamily="Alien Encounters" Height="auto" MaxWidth="150" Click="CopyStartButton_Click"/>
                         <Label Name="ErrorCopy" Content="" HorizontalAlignment="Center" Foreground="red"> </Label>
                     </StackPanel>
                 </Grid>
@@ -203,8 +203,6 @@
                             <Button Name="ConfirmAddPreset" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmAddPreset_Click" Grid.Column="0" Margin="4" Padding="5"/>
                             <Button Name="CancelAddPreset" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelAddPreset_Click" Grid.Column="1" Padding="5"/>
                         </Grid>
-
-                        
                     </StackPanel>
                     
                     
@@ -213,19 +211,51 @@
                         <Label Name="LabelEditPreset" Content="" Foreground="white" FontSize="16"/>
                         <Label Name="PresetEditId" Content="" Foreground="white"/>
                         <Label Name="LabelNameEditPreset" Content="" Foreground="white"/>
-                        <TextBox Name="EditNameTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="EditNameTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
+                        </Grid>
                         <Label Name="LabelSourceEditPreset" Content="" HorizontalAlignment="left" Foreground="white"/>
-                        <TextBox Name="EditPathSourceTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="EditPathSourceTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
+                        </Grid>
+
                         <Label Name="LabelDestinationEditPreset" Content="" Foreground="white"/>
-                        <TextBox Name="EditPathDestinationTextbox" Text="" TextWrapping="Wrap" Width="120" HorizontalAlignment="left"/>
-                        <Button Name="ConfirmEditPreset" Content="" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ConfirmEditPreset_Click"/>
-                        <Button Name="CancelEditPreset" Content="" HorizontalAlignment="Left"  VerticalAlignment="Top" Click="CancelEditPreset_Click"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="EditPathDestinationTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
+                        </Grid>
+
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmEditPreset" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmEditPreset_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelEditPreset" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelEditPreset_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
                     </StackPanel>
                     <StackPanel Name="DeletePannel" Grid.Row="1" Visibility="Collapsed">
-                        <Label Name="LabelDeletePreset" Content="" HorizontalAlignment="Left" Foreground="white"/>
-                        <Label Name="PresetDeleteId" Content="" HorizontalAlignment="Left" Foreground="white"/>
-                        <Button Name="ConfirmDeletePreset" Content="" HorizontalAlignment="Left" Click="ConfirmDeletePreset_Click"/>
-                        <Button Name="CancelDeletePreset" Content="" HorizontalAlignment="Left" Click="CancelDeletePreset_Click"/>
+                        <Label Name="LabelDeletePreset" Content="" Foreground="white" FontSize="16"/>
+                        <Label Name="PresetDeleteId" Content="" Foreground="white"/>
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmDeletePreset" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmDeletePreset_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelDeletePreset" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelDeletePreset_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -264,25 +294,55 @@
                         
                     </Grid>
                     <StackPanel Name="AddExtensionPannel" Grid.Row="1" Visibility="Collapsed">
-                        <Label Name="LabelAddExtension" Content="" HorizontalAlignment="Left" Foreground="white"/>
-                        <Label Name="LabelAddNewExtension" Content="" HorizontalAlignment="Left" Foreground="white"/>
-                        <TextBox Name="AddExtensionTextbox" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" Width="120"/>
-                        <Button Name="ConfirmAddExtension" Content="" HorizontalAlignment="Left" Click="ConfirmAddExtension_Click"/>
-                        <Button Name="CancelAddExtension" Content="" HorizontalAlignment="Left" Click="CancelAddExtension_Click"/>
+                        <Label Name="LabelAddExtension" Content="" Foreground="white" FontSize="16"/>
+                        <Label Name="LabelAddNewExtension" Content="" Foreground="white"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="AddExtensionTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
+                        </Grid>
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmAddExtension" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmAddExtension_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelAddExtension" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelAddExtension_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
                     </StackPanel>
                     <StackPanel Name="EditExtensionPannel" Grid.Row="1" Visibility="Collapsed">
-                        <Label Name="LabelEditExtension" Content="" HorizontalAlignment="Left" Foreground="white"/>
-                        <Label Name="ExtensionEditId" Content="" HorizontalAlignment="Left" Foreground="white"/>
-                        <Label Name="LabelEditTheExtension" Content="" HorizontalAlignment="Left" Foreground="white"/>
-                        <TextBox Name="EditExtensionTextbox" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" Width="120"/>
-                        <Button Name="ConfirmEditExtension" Content="" HorizontalAlignment="Left" Click="ConfirmEditExtension_Click"/>
-                        <Button Name="CancelEditExtension" Content="" HorizontalAlignment="Left" Click="CancelEditExtension_Click"/>
+                        <Label Name="LabelEditExtension" Content="" Foreground="white" FontSize="16"/>
+                        <Label Name="ExtensionEditId" Content="" Foreground="white"/>
+                        <Label Name="LabelEditTheExtension" Content="" Foreground="white"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="EditExtensionTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
+                        </Grid>
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmEditExtension" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmEditExtension_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelEditExtension" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelEditExtension_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
                     </StackPanel>
                     <StackPanel Name="DeleteExtensionPannel" Grid.Row="1" Visibility="Collapsed">
-                        <Label Name="LabelDeleteExtension" Content="Êtes vous sûr de supprimer l'extension numéro:" HorizontalAlignment="Left" Foreground="white"/>
-                        <Label Name="ExtensionDeleteId" Content="" HorizontalAlignment="Left" Foreground="white"/>
-                        <Button Name="ConfirmDeleteExtension" Content="Confirmer" HorizontalAlignment="Left" Click="ConfirmDeleteExtension_Click"/>
-                        <Button Name="CancelDeleteExtension" Content="Annuler" HorizontalAlignment="Left" Click="CancelDeleteExtension_Click"/>
+                        <Label Name="LabelDeleteExtension" Content="Êtes vous sûr de supprimer l'extension numéro:" Foreground="white" FontSize="16"/>
+                        <Label Name="ExtensionDeleteId" Content="" Foreground="white"/>
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmDeleteExtension" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmDeleteExtension_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelDeleteExtension" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelDeleteExtension_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -302,25 +362,51 @@
                     </Grid.RowDefinitions>
                     <Button Name="EditApplicationButton" Grid.Row="0" Content="" HorizontalAlignment="Center" Width="200" Click="EditApplicationButton_Click" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal"/>
                     <StackPanel Name="EditApplicationPannel" Grid.Row="1" Visibility="Collapsed">
-                        <Label Name="LabelEditApplication" Content="" HorizontalAlignment="Left" Foreground="white"/>
-                        <Label Name="LabelEditTheApplication" Content="" HorizontalAlignment="Left" Foreground="white"/>
-                        <TextBox Name="EditApplicationTextbox" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" Width="120"/>
-                        <Button Name="ConfirmEditApplication" Content="" HorizontalAlignment="Left" Click="ConfirmEditApplication_Click"/>
-                        <Button Name="CancelEditApplication" Content="" HorizontalAlignment="Left" Click="CancelEditApplication_Click"/>
+                        <Label Name="LabelEditApplication" Content="" Foreground="white" FontSize="16"/>
+                        <Label Name="LabelEditTheApplication" Content="" Foreground="white"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="EditApplicationTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
+                        </Grid>
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmEditApplication" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmEditApplication_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelEditApplication" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelEditApplication_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
                     </StackPanel>
                 </Grid>
             </Grid>
-            <StackPanel Name="StockagePannel" Grid.Row="1" Visibility="Collapsed">
-                <Label Name="LabelCurrentStockage" Content="" HorizontalAlignment="Left" Foreground="green"/>
-                <Button Name="EditStockageButton" Content="" HorizontalAlignment="Left" Width="200" Click="EditStockageButton_Click" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal"/>
-                <StackPanel Name="EditStockagePannel" Visibility="Collapsed">
-                    <Label Name="LabelEditStockage" Content="" HorizontalAlignment="Left" Foreground="white"/>
-                    <RadioButton Name="RadioJson" Content=".json" Margin="30 0 0 0"  HorizontalAlignment="Left" Foreground="white"/>
-                    <RadioButton Name="RadioXml" Content=".xml" Margin="30 0 0 0" HorizontalAlignment="Left" Foreground="white"/>
-                    <Button Name="ConfirmEditStockage" Content="" HorizontalAlignment="Left" Click="ConfirmEditStockage_Click"/>
-                    <Button Name="CancelEditStockage" Content="" HorizontalAlignment="Left" Click="CancelEditStockage_Click"/>
+
+            <Grid Name="StockagePannel" Grid.Row="1" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <Label Name="LabelCurrentStockage" Content="" HorizontalAlignment="Left" Foreground="green" FontSize="16"/>
+                    <Button Name="EditStockageButton" Content="" HorizontalAlignment="Left" Width="200" Click="EditStockageButton_Click" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal"/>
+                    <StackPanel Name="EditStockagePannel" Visibility="Collapsed">
+                        <Label Name="LabelEditStockage" Content="" HorizontalAlignment="Left" Foreground="white" FontSize="16"/>
+                        <RadioButton Name="RadioJson" Content=".json" Margin="30 0 0 0"  HorizontalAlignment="Left" Foreground="white" FontSize="14"/>
+                        <RadioButton Name="RadioXml" Content=".xml" Margin="30 0 0 0" HorizontalAlignment="Left" Foreground="white" FontSize="14"/>
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmEditStockage" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmEditStockage_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelEditStockage" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelEditStockage_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </Grid>
         </Grid>
 
         <Grid Name="LogsPannel" Row="2" Visibility="Collapsed">

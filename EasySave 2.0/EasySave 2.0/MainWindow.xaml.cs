@@ -46,6 +46,8 @@ namespace EasySave_2._0
             InfoCopy.Visibility = Visibility.Collapsed;
             ProgressCopy.Visibility = Visibility.Collapsed;
             ListPresetCopy.Items.Clear();
+            RadioCopyPartial.Content = "Partielle";
+            RadioCopyComplet.Content = "Complète";
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
             int nbPreset = preset.Count;
             for (int i = 1; i <= nbPreset; i++)
