@@ -1,8 +1,8 @@
 {
-    "flag" : "FR_FR.png",
-    
-    "v1": "",
-    
+  "flag": "FR_FR.png",
+
+  "v1": "",
+
   "MenuTitle": "Veuillez sélectrionner un choix.",
   "MenuC1": "1. Copier vos fichiers",
   "menuc2": "2. Configurer l'application",
@@ -47,37 +47,58 @@
   "LogNoDaily": "Il n'y a pas de log journalier.",
   "LogDailyFilen": "File number : ",
   "LogNumber": "Numéro du log : ",
-    
-    
-    
-    
-    "v2" : "",
-    
-    "OptMLang" : "Langue",
-    
-    "OptMPreset" : "Presets",
-    "OptPreAdd" : "Ajouter un preset",
-    "OptPreEdit" : "Modifier le preset n°",
-    "OptPreDel" : "Êtes vous sûr de vouloir supprimer le preset n°",
-    
-    "OptMExt" : "Extension",
-    "OptExtAdd" : "Ajouter une extension à convertir",
-    "OptExtEdit" : "Modifier l'extension n°",
-    "OptExtDel" : "Êtes vous sûr de vouloir supprimer l'extension n°",
-    "Extension" : "Extension (mettez un point devant)",
-    
-    "OptMApp" : "Application",
-    "OptAppAlter" : "Modifier l'application",
-    "OptAppMod" : "Modifier l'application métier",
-    
-    "OptMStoc" : "Stockage",
-    "OptStocNow" : "Stockage actuel :",
-    "OptStocAlter" : "Modifier le stockage",
-    "OptStocNew" : "Sélectionnez le nouveau format de stockage.",
-    
-    "Name" : "Nom",
-    "Sauce" : "Chemin source",
-    "Dest" : "Chemin de destination",
-    "Confirm" : "Confirmer",
-    "Cancel" : "Annuler",
+
+
+
+
+  "v2": "",
+
+  "OptMLang": "Langue",
+
+  "OptMPreset": "Presets",
+  "OptPreAdd": "Ajouter un preset",
+  "OptPreEdit": "Modifier le preset n°",
+  "OptPreDel": "Êtes vous sûr de vouloir supprimer le preset n°",
+
+  "OptMExt": "Extension",
+  "OptExtAdd": "Ajouter une extension à convertir",
+  "OptExtEdit": "Modifier l'extension n°",
+  "OptExtDel": "Êtes vous sûr de vouloir supprimer l'extension n°",
+  "Extension": "Extension (mettez un point devant)",
+
+  "OptMApp": "Application",
+  "OptAppAlter": "Modifier l'application",
+  "OptAppMod": "Modifier l'application métier",
+
+  "OptMStoc": "Stockage",
+  "OptStocNow": "Stockage actuel :",
+  "OptStocAlter": "Modifier le stockage",
+  "OptStocNew": "Sélectionnez le nouveau format de stockage.",
+
+  "Name": "Nom",
+  "Sauce": "Chemin source",
+  "Dest": "Chemin de destination",
+  "Confirm": "Confirmer",
+  "Cancel": "Annuler",
+
+  "ChooseTypeCopy": "Choisissez le type de sauvegarde:",
+  "PartialCopy": "Partielle",
+  "CompletCopy": "Complet",
+
+  "CopyType": "Type de sauvegarde:",
+  "CopyName": "Nom sauvegarde:",
+  "CopyPathSource": "Path Source:",
+  "CopyPathDest": "Path Destination:",
+  "CopyDateStart": "Date de début:",
+  "CopyNbFiles": "Nombre total des fichiers:",
+  "CopyFileSize": "Taille total des fichiers:",
+  "CopyFileRemaining": "Fichier restants:",
+  "CopyFileSizeRemaining": "Taille des fichiers restant:",
+  "CopySuccess": "Copie terminée!",
+
+  "ErrorCloseApplication": "Fermez votre application métier.",
+  "ErrorUnvalidPreset": "Votre preset n'est pas valide.",
+  "ErrorEmptyFolder": "Votre dossier source est vide.",
+  "ErrorOther": "Erreur.",
+  "ErrorChooseTypePreset": "Choisissez un preset et un type."
 }

@@ -163,6 +163,10 @@ namespace Projet.Languages
             public string Confirm { get; set; }
             public string Cancel { get; set; }
 
+            public string ChooseTypeCopy { get; set; }
+            public string PartialCopy { get; set; }
+            public string CompletCopy { get; set; }
+
         }
     }
 }

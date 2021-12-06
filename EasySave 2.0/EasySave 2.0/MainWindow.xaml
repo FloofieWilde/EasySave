@@ -57,7 +57,7 @@
                         <RowDefinition Height="2*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" VerticalAlignment="Center">
-                        <Label Content="Choisissez le type de sauvegarde:" HorizontalAlignment="Left" Foreground="white" FontSize="16"></Label>
+                        <Label Name="ChooseCopyType" Content="" HorizontalAlignment="Left" Foreground="white" FontSize="16"></Label>
                         <RadioButton Name="RadioCopyPartial" Content="" Margin="30 0 0 0"  HorizontalAlignment="Left" Foreground="white" FontSize="14"/>
                         <RadioButton Name="RadioCopyComplet" Content="" Margin="30 0 0 0" HorizontalAlignment="Left" Foreground="white" FontSize="14"/>
                     </StackPanel>

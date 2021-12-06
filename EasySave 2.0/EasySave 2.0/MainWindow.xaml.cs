@@ -46,8 +46,9 @@ namespace EasySave_2._0
             InfoCopy.Visibility = Visibility.Collapsed;
             ProgressCopy.Visibility = Visibility.Collapsed;
             ListPresetCopy.Items.Clear();
-            RadioCopyPartial.Content = "Partielle";
-            RadioCopyComplet.Content = "Complète";
+            RadioCopyPartial.Content = dictLang.PartialCopy;
+            RadioCopyComplet.Content = dictLang.CompletCopy;
+            ChooseCopyType.Content = dictLang.ChooseTypeCopy;
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
             int nbPreset = preset.Count;
             for (int i = 1; i <= nbPreset; i++)
@@ -475,17 +476,16 @@ namespace EasySave_2._0
                 if (RadioCopyComplet.IsChecked == true)
                 {
                     full = true;
-                    copyType = "complet";
+                    copyType = dictLang.CompletCopy;
                 }
                 else if (RadioCopyPartial.IsChecked == true)
                 {
-                    copyType = "partielle";
+                    copyType = dictLang.PartialCopy;
                 }
 
                 Save save = new Save(source, destination, full);
 
                 var DirInfo = save.Copy();
-                ErrorCopy.Content = "test";
 
                 if (DirInfo.error != 0)
                 {

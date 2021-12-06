@@ -1,8 +1,8 @@
 {
-    "flag" : "EN_US.png",
-    
-    "v1": "",
-    
+  "flag": "EN_US.png",
+
+  "v1": "",
+
   "MenuTitle": "Select a choice.",
   "MenuC1": "1. Clone files",
   "MenuC2": "2. Configurate the software",
@@ -47,35 +47,39 @@
   "LogNoDaily": "There's no generated log today.",
   "LogDailyFilen": "File number : ",
   "LogNumber": "Log number : ",
-    
-    
-    "v2" : "",
-    
-    "OptMLang" : "Language",
-    
-    "OptMPreset" : "Presets",
-    "OptPreAdd" : "Add a preset",
-    "OptPreEdit" : "Modify preset number ",
-    "OptPreDel" : "Are you sure to delete preset number ",
-    
-    "OptMExt" : "Extension",
-    "OptExtAdd" : "Add a convertible extension",
-    "OptExtEdit" : "Modify extension number",
-    "OptExtDel" : "Are you sure to delete extension number ",
-    "Extension" : "Extension (don't forget the dot before)",
-    
-    "OptMApp" : "Application",
-    "OptAppAlter" : "Modify application",
-    "OptAppMod" : "Modify blocked application",
-    
-    "OptMStoc" : "Storage",
-    "OptStocNow" : "Actual storage :",
-    "OptStocAlter" : "Modify storage type",
-    "OptStocNew" : "Select new logs' storage format.",
-    
-    "Name" : "Name",
-    "Sauce" : "Source path",
-    "Dest" : "Destination path",
-    "Confirm" : "Confirm",
-    "Cancel" : "Cancel",
+
+
+  "v2": "",
+
+  "OptMLang": "Language",
+
+  "OptMPreset": "Presets",
+  "OptPreAdd": "Add a preset",
+  "OptPreEdit": "Modify preset number ",
+  "OptPreDel": "Are you sure to delete preset number ",
+
+  "OptMExt": "Extension",
+  "OptExtAdd": "Add a convertible extension",
+  "OptExtEdit": "Modify extension number",
+  "OptExtDel": "Are you sure to delete extension number ",
+  "Extension": "Extension (don't forget the dot before)",
+
+  "OptMApp": "Application",
+  "OptAppAlter": "Modify application",
+  "OptAppMod": "Modify blocked application",
+
+  "OptMStoc": "Storage",
+  "OptStocNow": "Actual storage :",
+  "OptStocAlter": "Modify storage type",
+  "OptStocNew": "Select new logs' storage format.",
+
+  "Name": "Name",
+  "Sauce": "Source path",
+  "Dest": "Destination path",
+  "Confirm": "Confirm",
+  "Cancel": "Cancel",
+
+  "ChooseTypeCopy": "Choose the type of copy:",
+  "PartialCopy": "Partial",
+  "CompletCopy": "Complete"
 }
