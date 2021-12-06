@@ -588,7 +588,8 @@ namespace EasySave_2._0
             int countC = 0;
             int countR = 0;
             string PathLang = "./data/lang/";
-            string PathDataImg = "./data/imgs/";
+
+            //string PathDataImg = "./data/imgs/";
 
 
             foreach (string Lang in LangList)
@@ -596,24 +597,33 @@ namespace EasySave_2._0
                 var bc = new BrushConverter();
 
                 Button butt = new Button();
-                //butt.Background = new SolidColorBrush(FF450046);
+                //butt.Background = new Brush.Grey;
                 butt.Margin = new Thickness(4);
 
                 string name = Lang.Substring(PathLang.Length);
                 int length = name.Length;
                 name = name.Remove(length - 5);
 
-                string PathImg = PathDataImg + name + ".png";
+                butt.Tag = name;
+
+                butt.Click += new RoutedEventHandler(ChangeLang_Click);
+
+                string PathImg = "imgs/" + name + ".png";
                 
 
                 Image img = new Image();
                 BitmapImage ImgBmp = new BitmapImage(new Uri(PathImg, UriKind.Relative));
+                img.Stretch = Stretch.Fill;
                 img.Source = ImgBmp;
                 img.Margin = new Thickness(10);
 
-                //img.Source = new Uri(PathImg);
+                StackPanel stackPnl = new StackPanel();
+                stackPnl.Orientation = Orientation.Horizontal;
+                //stackPnl.Margin = new Thickness(10);
+                stackPnl.Children.Add(img);
 
-                butt.Content = img;
+
+                butt.Content = stackPnl;
 
                 LangPannel.Children.Add(butt);
 
@@ -626,6 +636,8 @@ namespace EasySave_2._0
                     countR += 1;
                 }
             }
+
+            //Dans ma fonction : var theValue = button.Attributes["Tag"].ToString()
         }
 
         public (int, string[]) GetLangLines()
@@ -636,6 +648,29 @@ namespace EasySave_2._0
             int ColumnLast = (CountLang % 3);
             if (ColumnLast == 0) Lines -= 1;
             return (Lines, LangList);
+        }
+
+        private void ChangeLang_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("My message here");
+            //var theValue = butt.Attributes["Tag"].ToString();
+
+            //By array
+
+            string Path = "./data/lang/";
+            //string[] files = Directory.GetFiles(Path);
+            Console.WriteLine(dictLang.LangSelect);
+
+            string lChoice = Console.ReadLine();
+
+                //string fileNew = file.Substring(Path.Length);
+                //int length = fileNew.Length;
+                //fileNew = fileNew.Remove(length - 5);
+
+                Langue.Language newDictLang = Langue.GetLang();
+                Console.WriteLine(newDictLang.LangChange);
+                //return newDictLang;
+
         }
 
         //TODO: Finir le changement de Langue

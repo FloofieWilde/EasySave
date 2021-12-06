@@ -17,7 +17,13 @@
     <None Remove="copy-icon.png" />
     <None Remove="crayon.png" />
     <None Remove="delete.png" />
+    <None Remove="EN_OwO.png" />
+    <None Remove="EN_US.png" />
     <None Remove="exit-logo.png" />
+    <None Remove="FR_FR.png" />
+    <None Remove="imgs\EN_OwO.png" />
+    <None Remove="imgs\EN_US.png" />
+    <None Remove="imgs\FR_FR.png" />
     <None Remove="logo.png" />
     <None Remove="plus.png" />
     <None Remove="settings-logo.png" />
@@ -31,7 +37,13 @@
     <Resource Include="copy-icon.png" />
     <Resource Include="crayon.png" />
     <Resource Include="delete.png" />
+    <Resource Include="EN_OwO.png" />
+    <Resource Include="EN_US.png" />
     <Resource Include="exit-logo.png" />
+    <Resource Include="FR_FR.png" />
+    <Resource Include="imgs\EN_OwO.png" />
+    <Resource Include="imgs\EN_US.png" />
+    <Resource Include="imgs\FR_FR.png" />
     <Resource Include="logo.png" />
     <Resource Include="plus.png" />
     <Resource Include="settings-logo.png" />
