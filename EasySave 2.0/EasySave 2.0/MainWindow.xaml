@@ -117,7 +117,7 @@
                 <Button Name="StockageButton" Grid.Column="4" Content="" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Height="auto" Width="auto" Click="StockageButton_Click"/>
             </Grid>
 
-            <Grid Name="LangPannel" Grid.Row="1" Visibility="Collapsed">
+            <Grid Name="LangPannel" Grid.Row="1" >
                 <!--<Button Name="Kckc" Content="" Grid.Column="0"></Button>-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
@@ -131,6 +131,19 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
+
+                <!--<Button Name="FR_FR" Grid.Row="0" Grid.Column="0" Background="#FF450046" Click="ChangeLang_Click" Tag="FR_FR">
+                    <Image Source="FR_FR.png" Margin="10"/>
+                </Button>
+
+                <Button Name="EN_US" Grid.Row="0" Grid.Column="1" Background="#FF450046" Click="ChangeLang_Click" Tag="EN_US">
+                    <Image Source="EN_US.png" Margin="10"/>
+                </Button>
+
+                <Button Name="EN_OwO" Grid.Row="0" Grid.Column="2" Background="#FF450046" Click="ChangeLang_Click" Tag="EN_OwO">
+                    <Image Source="EN_OwO.png" Margin="10"/>
+                </Button>-->
+
             </Grid>
 
             <Grid Name="PresetPannel" Grid.Row="1" Visibility="Collapsed">

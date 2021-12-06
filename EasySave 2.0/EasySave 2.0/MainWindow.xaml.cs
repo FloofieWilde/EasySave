@@ -31,7 +31,7 @@ namespace EasySave_2._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        Langue.Language dictLang = Langue.GetLang();
+        static Langue.Language dictLang = Langue.GetLang();
 
         public MainWindow()
         {
@@ -62,7 +62,7 @@ namespace EasySave_2._0
             }
         }
 
-        private void OptionsBouton_Click(object sender, RoutedEventArgs e)
+        public void OptionsBouton_Click(object sender, RoutedEventArgs e)
         {
             LangButton.Content = dictLang.OptMLang;
             PresetButton.Content = dictLang.OptMPreset;
@@ -621,7 +621,8 @@ namespace EasySave_2._0
             int countC = 0;
             int countR = 0;
             string PathLang = "./data/lang/";
-            string PathDataImg = "./data/imgs/";
+
+            //string PathDataImg = "./data/imgs/";
 
 
             foreach (string Lang in LangList)
@@ -629,24 +630,33 @@ namespace EasySave_2._0
                 var bc = new BrushConverter();
 
                 Button butt = new Button();
-                //butt.Background = new SolidColorBrush(FF450046);
+                //butt.Background = new Brush.Grey;
                 butt.Margin = new Thickness(4);
 
                 string name = Lang.Substring(PathLang.Length);
                 int length = name.Length;
                 name = name.Remove(length - 5);
 
-                string PathImg = PathDataImg + name + ".png";
+                butt.Tag = name;
 
+                butt.Click += new RoutedEventHandler(ChangeLang_Click);
+
+                string PathImg = "imgs/" + name + ".png";
+                
 
                 Image img = new Image();
                 BitmapImage ImgBmp = new BitmapImage(new Uri(PathImg, UriKind.Relative));
+                img.Stretch = Stretch.Fill;
                 img.Source = ImgBmp;
                 img.Margin = new Thickness(10);
 
-                //img.Source = new Uri(PathImg);
+                StackPanel stackPnl = new StackPanel();
+                stackPnl.Orientation = Orientation.Horizontal;
+                //stackPnl.Margin = new Thickness(10);
+                stackPnl.Children.Add(img);
 
-                butt.Content = img;
+
+                butt.Content = stackPnl;
 
                 LangPannel.Children.Add(butt);
 
@@ -659,6 +669,8 @@ namespace EasySave_2._0
                     countR += 1;
                 }
             }
+
+            //Dans ma fonction : var theValue = button.Attributes["Tag"].ToString()
         }
 
         public (int, string[]) GetLangLines()
@@ -669,6 +681,31 @@ namespace EasySave_2._0
             int ColumnLast = (CountLang % 3);
             if (ColumnLast == 0) Lines -= 1;
             return (Lines, LangList);
+        }
+
+        static private void ChangeLang_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button is null) return;
+            string NewLang = (string)button.Tag;
+
+            StreamReader sr = Langue.GetConfig();
+            string jsonString = sr.ReadToEnd();
+            Config conf = JsonConvert.DeserializeObject<Config>(jsonString);
+            sr.Dispose();
+
+            string text = File.ReadAllText("./data/config.json");
+            text = text.Replace(conf.Lang, NewLang);
+
+            File.WriteAllText("./data/config.json", text);
+
+            MessageBox.Show("Langue changée pour " + NewLang);
+
+            dictLang = Langue.GetLang();
+
+
+            //return newDictLang;
+
         }
 
         //TODO: Finir le changement de Langue
