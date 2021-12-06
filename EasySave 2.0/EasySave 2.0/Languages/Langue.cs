@@ -167,6 +167,22 @@ namespace Projet.Languages
             public string PartialCopy { get; set; }
             public string CompletCopy { get; set; }
 
+            public string CopyType { get; set; }
+            public string CopyPreset { get; set; }
+            public string CopyPathSource { get; set; }
+            public string CopyPathDest { get; set; }
+            public string CopyDateStart { get; set; }
+            public string CopyNbFiles { get; set; }
+            public string CopyFileSize { get; set; }
+            public string CopyFileRemaining { get; set; }
+            public string CopyFileSizeRemaining { get; set; }
+            public string CopySuccess { get; set; }
+            public string ErrorCloseApplication { get; set; }
+            public string ErrorUnvalidPreset { get; set; }
+            public string ErrorEmptyFolder { get; set; }
+            public string ErrorOther { get; set; }
+            public string ErrorChooseTypePreset { get; set; }
+
         }
     }
 }

@@ -86,7 +86,7 @@
   "CompletCopy": "Complet",
 
   "CopyType": "Type de sauvegarde:",
-  "CopyName": "Nom sauvegarde:",
+  "CopyPreset": "Nom sauvegarde:",
   "CopyPathSource": "Path Source:",
   "CopyPathDest": "Path Destination:",
   "CopyDateStart": "Date de début:",
