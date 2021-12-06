@@ -19,8 +19,6 @@ namespace Projet.Languages
             sr.Dispose();
             Config configuration = JsonConvert.DeserializeObject<Config>(jsonString);
 
-
-
             sr = new StreamReader("./data/lang/" + configuration.Lang + ".json");
             jsonString = sr.ReadToEnd();
             Language dictLang = JsonConvert.DeserializeObject<Language>(jsonString);

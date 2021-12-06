@@ -18,6 +18,8 @@ using Projet.SaveSystem;
 using Projet.Stockages;
 using Projet.WorkSoftwares;
 using Projet.Languages;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace EasySave_2._0
 {
@@ -26,7 +28,7 @@ namespace EasySave_2._0
     /// </summary>
     public partial class MainWindow : Window
     {
-        Langue.Language dictLang = Langue.GetLang();
+        static Langue.Language dictLang = Langue.GetLang();
 
         public MainWindow()
         {
@@ -54,7 +56,7 @@ namespace EasySave_2._0
             }
         }
 
-        private void OptionsBouton_Click(object sender, RoutedEventArgs e)
+        public void OptionsBouton_Click(object sender, RoutedEventArgs e)
         {
             LangButton.Content = dictLang.OptMLang;
             PresetButton.Content = dictLang.OptMPreset;
@@ -650,26 +652,28 @@ namespace EasySave_2._0
             return (Lines, LangList);
         }
 
-        private void ChangeLang_Click(object sender, RoutedEventArgs e)
+        static private void ChangeLang_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("My message here");
-            //var theValue = butt.Attributes["Tag"].ToString();
+            var button = sender as Button;
+            if (button is null) return;
+            string NewLang = (string)button.Tag;
 
-            //By array
+            StreamReader sr = Langue.GetConfig();
+            string jsonString = sr.ReadToEnd();
+            Config conf = JsonConvert.DeserializeObject<Config>(jsonString);
+            sr.Dispose();
 
-            string Path = "./data/lang/";
-            //string[] files = Directory.GetFiles(Path);
-            Console.WriteLine(dictLang.LangSelect);
+            string text = File.ReadAllText("./data/config.json");
+            text = text.Replace(conf.Lang, NewLang);
 
-            string lChoice = Console.ReadLine();
+            File.WriteAllText("./data/config.json", text);
 
-                //string fileNew = file.Substring(Path.Length);
-                //int length = fileNew.Length;
-                //fileNew = fileNew.Remove(length - 5);
+            MessageBox.Show("Langue changée pour " + NewLang);
 
-                Langue.Language newDictLang = Langue.GetLang();
-                Console.WriteLine(newDictLang.LangChange);
-                //return newDictLang;
+            dictLang = Langue.GetLang();
+
+
+            //return newDictLang;
 
         }
 
