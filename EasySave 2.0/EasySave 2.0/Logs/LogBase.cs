@@ -16,6 +16,7 @@ namespace Projet.Logs
         public string TargetDir { get; set; }
         protected DateTimeOffset DateTimeStamp;
         public string Timestamp;
+        public bool IsJson;
         public LogBase()
         {
             LogFile = "./data/Logs/";
@@ -69,7 +70,14 @@ namespace Projet.Logs
         {
             string currentMin = "/" + DateTimeStamp.Hour.ToString();
             currentMin += "h" + DateTimeStamp.Minute.ToString();
-            currentMin += ".json";
+            if (IsJson)
+            {
+                currentMin += ".json";
+            }
+            else
+            {
+                currentMin += ".xml";
+            }
             return currentMin;
         }
 

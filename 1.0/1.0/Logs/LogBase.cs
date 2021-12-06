@@ -16,6 +16,7 @@ namespace Projet.Logs
         public string TargetDir { get; set; }
         protected DateTimeOffset DateTimeStamp;
         public string Timestamp;
+        public bool IsJson;
         public LogBase()
         {
             LogFile = "./data/Logs/";

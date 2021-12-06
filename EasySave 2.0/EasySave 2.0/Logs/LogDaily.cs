@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Xml;
 using Newtonsoft.Json;
+using System.Xml.Linq;
 using System.IO;
 using System.Text.Json;
 using Projet.Languages;
+using Projet.Stockages;
 
 namespace Projet.Logs
 {
@@ -15,8 +18,10 @@ namespace Projet.Logs
     {
         public long FileSize { get; set; }
         public double TransferTime { get; set; }
-        public long CryptTime { get; set; }
+        public long EncryptTime { get; set; }
         private Langue.Language CurrentLanguage;
+        XmlDocument XmlDoc = new XmlDocument();
+        long XmlCount = 0;
 
         public LogDaily(string name)
         {
@@ -25,6 +30,9 @@ namespace Projet.Logs
             DateTimeStamp = (DateTimeOffset)DateTime.UtcNow;
             Timestamp = DateTimeStamp.ToString("yyyy/MM/dd - HH:mm:ss - fff");
             CurrentLanguage = Langue.GetLang();
+            var extensionType = Stockage.GetJsonStockage();
+            if (extensionType.TypeStockage == ".json") IsJson = true;
+            else IsJson = false;
 
         }
         /// <summary>
@@ -40,7 +48,7 @@ namespace Projet.Logs
             TransferTime = transferTime;
             SourceDir = sourceDir;
             TargetDir = targetDir;
-            CryptTime = cryptTime;
+            EncryptTime = cryptTime;
             Save();
 
         }
@@ -51,17 +59,61 @@ namespace Projet.Logs
         {
 
             string testPath = LogFile + "Daily";
-            string usedPath = testPath + GetDay() + GetMinute();
+            string FilePath = testPath + GetDay() + GetMinute();
 
-            if (!File.Exists(usedPath)) CreatePath(testPath);
+            if (!File.Exists(FilePath))
+            {
+                CreatePath(testPath);
+                if (!IsJson) XmlDoc.LoadXml("<Root></Root>");
+
+            }
 
             JsonSerializerOptions oui = new JsonSerializerOptions();
 
             oui.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
             oui.WriteIndented = true;
             string jsonString = System.Text.Json.JsonSerializer.Serialize<LogDaily>(this, oui);
-            File.AppendAllText(usedPath, jsonString);
 
+            if (!IsJson)
+            {
+
+                XmlNode Root = XmlDoc.DocumentElement;
+
+                XmlNode saveName = XmlDoc.CreateElement($"Save{XmlCount}");
+                Root.InsertAfter(saveName, Root.LastChild);
+
+                XmlNode name = XmlDoc.CreateElement("Name");
+                name.InnerText = Name;
+                saveName.InsertAfter(name, saveName.LastChild);
+
+                XmlNode sourceDir = XmlDoc.CreateElement("SourceDir");
+                sourceDir.InnerText = SourceDir;
+                saveName.InsertAfter(sourceDir, saveName.LastChild);
+
+                XmlNode targetDir = XmlDoc.CreateElement("TargetDir");
+                targetDir.InnerText = TargetDir;
+                saveName.InsertAfter(targetDir, saveName.LastChild);
+
+                XmlNode fileSize = XmlDoc.CreateElement("FileSize");
+                fileSize.InnerText = FileSize.ToString();
+                saveName.InsertAfter(fileSize, saveName.LastChild);
+
+                XmlNode transferTime = XmlDoc.CreateElement("TransferTime");
+                transferTime.InnerText = TransferTime.ToString();
+                saveName.InsertAfter(transferTime, saveName.LastChild);
+
+                XmlNode cryptTime = XmlDoc.CreateElement("CryptTime");
+                cryptTime.InnerText = EncryptTime.ToString();
+                saveName.InsertAfter(cryptTime, saveName.LastChild);
+
+                XmlDoc.Save(FilePath);
+            }
+            else
+            {
+                File.AppendAllText(FilePath, jsonString);
+
+            }
+            XmlCount++;
         }
         public void Load()
         {

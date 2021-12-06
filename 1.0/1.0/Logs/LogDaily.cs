@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Xml;
+using Newtonsoft.Json;
+using System.Xml.Linq;
 using System.IO;
 using System.Text.Json;
 using Projet.Languages;

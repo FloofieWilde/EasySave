@@ -4,6 +4,8 @@ using System.Text.Json.Serialization;
 using System.IO;
 using Projet.Languages;
 using Projet;
+using System.Xml;
+using Projet.Stockages;
 
 namespace Projet.Logs
 {
@@ -20,6 +22,8 @@ namespace Projet.Logs
         public long TotalFiles { get; set; }
         public long TotalSize { get; set; }
         private Langue.Language CurrentLanguage;
+        XmlDocument XmlDoc = new XmlDocument();
+        bool FirstTime = true;
 
         public LogState(string name, string sourceDir, string targetDir, long totalFiles, long totalFilesSize)
         {
@@ -34,6 +38,9 @@ namespace Projet.Logs
             TotalFiles = totalFiles;
             TotalSize = totalFilesSize;
             CurrentLanguage = Langue.GetLang();
+            var extensionType = Stockage.GetJsonStockage();
+            if (extensionType.TypeStockage == ".json") IsJson = true;
+            else IsJson = false;
         }
         /// <summary>
         /// Displays current status on the console
@@ -66,12 +73,67 @@ namespace Projet.Logs
         public void Save()
         {
             string testPath = LogFile + "State";
-            string usedPath = testPath + GetDay() + GetMinute();
+            string FilePath = testPath + GetDay() + GetMinute();
 
-            if (!File.Exists(usedPath)) CreatePath(testPath);
+            if (!File.Exists(FilePath))
+            {
+                CreatePath(testPath);
+                if (!IsJson) XmlDoc.LoadXml("<Root></Root>");
 
-            string jsonString = JsonSerializer.Serialize(this);
-            File.WriteAllText(usedPath, jsonString);
+            }
+            if (!IsJson)
+            {
+
+                XmlNode Root = XmlDoc.DocumentElement;
+
+                XmlNode saveName = XmlDoc.CreateElement($"Save");
+                Root.InsertAfter(saveName, Root.LastChild);
+
+                XmlNode name = XmlDoc.CreateElement("Name");
+                name.InnerText = Name;
+                saveName.InsertAfter(name, saveName.LastChild);
+
+                XmlNode sourceDir = XmlDoc.CreateElement("SourceDir");
+                sourceDir.InnerText = SourceDir;
+                saveName.InsertAfter(sourceDir, saveName.LastChild);
+
+                XmlNode targetDir = XmlDoc.CreateElement("TargetDir");
+                targetDir.InnerText = TargetDir;
+                saveName.InsertAfter(targetDir, saveName.LastChild);
+
+                XmlNode totalSize = XmlDoc.CreateElement("TotalSize");
+                totalSize.InnerText = TotalSize.ToString();
+                saveName.InsertAfter(totalSize, saveName.LastChild);
+
+                XmlNode totalFiles = XmlDoc.CreateElement("TotalFiles");
+                totalFiles.InnerText = TotalFiles.ToString();
+                saveName.InsertAfter(totalFiles, saveName.LastChild);
+
+                XmlNode active = XmlDoc.CreateElement("Active");
+                active.InnerText = Active.ToString();
+                saveName.InsertAfter(active, saveName.LastChild);
+
+                XmlNode progress = XmlDoc.CreateElement("Progress");
+                progress.InnerText = Progress.ToString();
+                saveName.InsertAfter(progress, saveName.LastChild);
+
+                XmlNode remainingFiles = XmlDoc.CreateElement("RemainingFiles");
+                remainingFiles.InnerText = RemainingFiles.ToString();
+                saveName.InsertAfter(remainingFiles, saveName.LastChild);
+
+                XmlNode remainingFilesSize = XmlDoc.CreateElement("RemainingFilesSize");
+                remainingFilesSize.InnerText = Progress.ToString();
+                saveName.InsertAfter(remainingFilesSize, saveName.LastChild);
+
+                XmlDoc.Save(FilePath);
+            }
+            else
+            {
+                string jsonString = JsonSerializer.Serialize(this);
+                File.WriteAllText(FilePath, jsonString);
+
+            }
+
         }
         /// <summary>
         /// Called when save process is finished, saves a last time object's datas then display the sucessfull save message
