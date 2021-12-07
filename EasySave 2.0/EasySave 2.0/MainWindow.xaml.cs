@@ -90,29 +90,28 @@ namespace EasySave_2._0
             CopyPannel.Visibility = Visibility.Collapsed;
             OptionsPannel.Visibility = Visibility.Collapsed;
             LogsPannel.Visibility = Visibility.Visible;
-            //LogsGrid.Items.Add("test");
+            LogsListbox.Items.Clear();
+            LogsGrid.DataContext = null;
+            var dates = LogDaily.GetJsonDates();
+            foreach(string date in dates)
+            {
+                LogsListbox.Items.Add(date);
+            }
+        }
 
-            //LogDaily dailyLog = new LogDaily("");
-            //string ad = @"./data/Logs/Daily/2021/12/6";
-            //DirectoryInfo dirInfo = dailyLog.GetFiles(ad);
-            //if (dirInfo == null) return;
-            //List<LogDaily> logs = dailyLog.Load(dirInfo.FullName);
-            //LogsGrid.Items.Add(logs.Count);
-            ////dgr.ItemsSource = logs.response.ResultSet;
-            //foreach (LogDaily log in logs)
-            //{
-            //    LogsGrid.Items.Add("Test");
-            //    LogsGrid.Items.Add(log.Name);
-            //}
-
+        private void LogsListbox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            string selectedDate = LogsListbox.SelectedItem.ToString();
             var logs = LogDaily.GetJsonLogs();
-            LogsGrid.DataContext = logs;
-            //LogsGrid.DataBind();
-
-
-            //List<LogJson> logs = JsonConvert.DeserializeObject<List<LogJson>>(temp);
-
-
+            List<LogJson> logSelected = new List<LogJson>();
+            foreach (var log in logs)
+            {
+                if (log.Key == selectedDate)
+                {
+                    logSelected = log.Value;
+                }
+            }
+            LogsGrid.DataContext = logSelected;
         }
 
         private void LangButton_Click(object sender, RoutedEventArgs e)
@@ -643,7 +642,6 @@ namespace EasySave_2._0
 
                 string PathImg = "imgs/" + name + ".png";
                 
-
                 Image img = new Image();
                 BitmapImage ImgBmp = new BitmapImage(new Uri(PathImg, UriKind.Relative));
                 img.Stretch = Stretch.Fill;
@@ -654,7 +652,6 @@ namespace EasySave_2._0
                 stackPnl.Orientation = Orientation.Horizontal;
                 //stackPnl.Margin = new Thickness(10);
                 stackPnl.Children.Add(img);
-
 
                 butt.Content = stackPnl;
 
@@ -703,12 +700,7 @@ namespace EasySave_2._0
 
             dictLang = Langue.GetLang();
 
-
             //return newDictLang;
-
         }
-
-        //TODO: Finir le changement de Langue
-
     }
 }

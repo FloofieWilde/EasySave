@@ -421,9 +421,14 @@
                 </StackPanel>
             </Grid>
         </Grid>
-
+        
         <Grid Name="LogsPannel" Row="2" Visibility="Collapsed">
-            <DataGrid Name="LogsGrid" ItemsSource="{Binding}" Margin="4"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox Name="LogsListbox" Grid.Column="0" Height="auto" Width="auto" Margin="4" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" MouseDoubleClick="LogsListbox_MouseDoubleClick"></ListBox>
+            <DataGrid Name="LogsGrid" Grid.Column="1" ItemsSource="{Binding}" Margin="4" Width="auto" Background="#7F450046" Foreground="#ad005d"/>
         </Grid>
     </Grid>
 </Window>

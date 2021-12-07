@@ -163,20 +163,43 @@ namespace Projet.Logs
             }
         }
 
-        public static List<LogJson> GetJsonLogs()
+        public static Dictionary<string, List<LogJson>> GetJsonLogs()
         {
-            string path = "./data/Logs/Daily/2021/12/6";
+            Dictionary<string, List<LogJson>> logTotal = new Dictionary<string, List<LogJson>>();
+            string path = "./data/Logs/Daily/2021/12";
             DirectoryInfo directory = new DirectoryInfo(path);
-            FileInfo[] Files = directory.GetFiles("*.json");
-            string json = "";
-            foreach (FileInfo file in Files)
+
+            DirectoryInfo[] directoryDay = directory.GetDirectories();
+            
+
+            foreach (DirectoryInfo day in directoryDay)
             {
-                json += File.ReadAllText(path + "/" + file.Name);
+                string json = "";
+                DirectoryInfo dayFiles = new DirectoryInfo(path + "/" + day.Name);
+                FileInfo[] Files = dayFiles.GetFiles("*.json");
+                foreach (FileInfo file in Files)
+                {
+                    json += File.ReadAllText(path + "/" + day.Name + "/" + file.Name);
+                }
+                json = "[" + json + "]";
+                List<LogJson> logs = JsonConvert.DeserializeObject<List<LogJson>>(json);
+                logTotal.Add(day.Name, logs);
             }
-            //string json = File.ReadAllText("./data/Logs/Daily/2021/12/6/22h51.json");
-            json = "[" + json + "]";
-            List<LogJson> logs = JsonConvert.DeserializeObject<List<LogJson>>(json);
-            return logs;
+            return logTotal;
+            
+        }
+
+        public static List<string> GetJsonDates()
+        {
+            List<string> dates = new List<string>();
+            string path = "./data/Logs/Daily/2021/12";
+            DirectoryInfo directory = new DirectoryInfo(path);
+            DirectoryInfo[] directoryDay = directory.GetDirectories();
+            foreach(DirectoryInfo day in directoryDay)
+            {
+                dates.Add(day.Name);
+            }
+            return dates;
         }
     }
 }
