@@ -165,7 +165,15 @@ namespace Projet.Logs
 
         public static List<LogJson> GetJsonLogs()
         {
-            string json = File.ReadAllText("./data/Logs/Daily/2021/12/6/22h51.json");
+            string path = "./data/Logs/Daily/2021/12/6";
+            DirectoryInfo directory = new DirectoryInfo(path);
+            FileInfo[] Files = directory.GetFiles("*.json");
+            string json = "";
+            foreach (FileInfo file in Files)
+            {
+                json += File.ReadAllText(path + "/" + file.Name);
+            }
+            //string json = File.ReadAllText("./data/Logs/Daily/2021/12/6/22h51.json");
             json = "[" + json + "]";
             List<LogJson> logs = JsonConvert.DeserializeObject<List<LogJson>>(json);
             return logs;
