@@ -170,7 +170,6 @@ namespace Projet.Logs
             DirectoryInfo directory = new DirectoryInfo(path);
 
             DirectoryInfo[] directoryDay = directory.GetDirectories();
-            
 
             foreach (DirectoryInfo day in directoryDay)
             {
@@ -183,10 +182,9 @@ namespace Projet.Logs
                 }
                 json = "[" + json + "]";
                 List<LogJson> logs = JsonConvert.DeserializeObject<List<LogJson>>(json);
-                logTotal.Add(day.Name, logs);
+                logTotal.Add("2021/12/"+day.Name, logs);
             }
             return logTotal;
-            
         }
 
         public static List<string> GetJsonDates()
@@ -197,7 +195,7 @@ namespace Projet.Logs
             DirectoryInfo[] directoryDay = directory.GetDirectories();
             foreach(DirectoryInfo day in directoryDay)
             {
-                dates.Add(day.Name);
+                dates.Add("2021/12/" + day.Name);
             }
             return dates;
         }
