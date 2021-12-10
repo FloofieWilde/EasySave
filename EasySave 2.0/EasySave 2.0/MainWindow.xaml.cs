@@ -24,6 +24,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Data;
 using System.ComponentModel;
+using Microsoft.Win32;
 
 namespace EasySave_2._0
 {
@@ -208,6 +209,8 @@ namespace EasySave_2._0
             LabelDestinationAddPreset.Content = dictLang.Dest;
             ConfirmAddPreset.Content = dictLang.Confirm;
             CancelAddPreset.Content = dictLang.Cancel;
+            AddSourceFileButton.Content = dictLang.OptiPreBrowse;
+            AddDestinationFileButton.Content = dictLang.OptiPreBrowse;
             AddNameTextbox.Text = "";
             AddPathSourceTextbox.Text = "";
             AddPathDestinationTextbox.Text = "";
@@ -224,6 +227,9 @@ namespace EasySave_2._0
             LabelDestinationEditPreset.Content = dictLang.Dest;
             ConfirmEditPreset.Content = dictLang.Confirm;
             CancelEditPreset.Content = dictLang.Cancel;
+            EditSourceFileButton.Content = dictLang.OptiPreBrowse;
+            EditDestinationFileButton.Content = dictLang.OptiPreBrowse;
+            
             AddPannel.Visibility = Visibility.Collapsed;
             DeletePannel.Visibility = Visibility.Collapsed;
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
@@ -299,6 +305,62 @@ namespace EasySave_2._0
             AddPannel.Visibility = Visibility.Collapsed;
             EditPannel.Visibility = Visibility.Collapsed;
             DeletePannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void AddSourceFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFolder = new OpenFileDialog(); ;
+            openFolder.ValidateNames = false;
+            openFolder.CheckFileExists = false;
+            openFolder.CheckPathExists = true;
+            openFolder.FileName = "Ce dossier";
+            openFolder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFolder.ShowDialog() == true)
+            {
+                AddPathSourceTextbox.Text = System.IO.Path.GetDirectoryName(openFolder.FileName);
+            }  
+        }
+
+        private void AddDestinationFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFolder = new OpenFileDialog();
+            openFolder.ValidateNames = false;
+            openFolder.CheckFileExists = false;
+            openFolder.CheckPathExists = true;
+            openFolder.FileName = "Ce dossier";
+            openFolder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFolder.ShowDialog() == true)
+            {
+                AddPathDestinationTextbox.Text = System.IO.Path.GetDirectoryName(openFolder.FileName);
+            }
+        }
+
+        private void EditSourceFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFolder = new OpenFileDialog();
+            openFolder.ValidateNames = false;
+            openFolder.CheckFileExists = false;
+            openFolder.CheckPathExists = true;
+            openFolder.FileName = "Ce dossier";
+            openFolder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFolder.ShowDialog() == true)
+            {
+                EditPathSourceTextbox.Text = System.IO.Path.GetDirectoryName(openFolder.FileName);
+            }
+        }
+
+        private void EditDestinationFileButton_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFolder = new OpenFileDialog();
+            openFolder.ValidateNames = false;
+            openFolder.CheckFileExists = false;
+            openFolder.CheckPathExists = true;
+            openFolder.FileName = "Ce dossier";
+            openFolder.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            if (openFolder.ShowDialog() == true)
+            {
+                EditPathDestinationTextbox.Text = System.IO.Path.GetDirectoryName(openFolder.FileName);
+            }
         }
 
         private void ConfirmAddPreset_Click(object sender, RoutedEventArgs e)

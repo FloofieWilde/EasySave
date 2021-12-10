@@ -180,6 +180,7 @@ namespace Projet.Languages
             public string ErrorEmptyFolder { get; set; }
             public string ErrorOther { get; set; }
             public string ErrorChooseTypePreset { get; set; }
+            public string OptiPreBrowse { get; set; }
 
         }
     }

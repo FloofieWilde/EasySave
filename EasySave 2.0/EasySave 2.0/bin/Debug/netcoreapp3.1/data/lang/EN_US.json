@@ -57,6 +57,7 @@
   "OptPreAdd": "Add a preset",
   "OptPreEdit": "Modify preset number ",
   "OptPreDel": "Are you sure to delete preset number ",
+  "OptiPreBrowse": "Browse",
 
   "OptMExt": "Extension",
   "OptExtAdd": "Add a convertible extension",
