@@ -511,11 +511,7 @@ namespace EasySave_2._0
                     copyType = dictLang.PartialCopy;
                 }
 
-                BackgroundWorker workerCopy = new BackgroundWorker();
-                workerCopy.DoWork += worker_DoWork;
-                //worker.RunWorkerCompleted += worker_RunWorkerCompleted;
-                workerCopy.RunWorkerAsync();
-
+                
                 Save save = new Save(source, destination, full);
 
                 var DirInfo = save.Copy();
@@ -529,9 +525,8 @@ namespace EasySave_2._0
                         3 => dictLang.ErrorEmptyFolder,
                         _ => dictLang.ErrorOther,
                     };
-
-                    //ErrorCopy.Visibility = Visibility.Visible;
                 }
+
                 else
                 {
                     InfoCopy.Visibility = Visibility.Visible;
@@ -548,7 +543,15 @@ namespace EasySave_2._0
                     CopySizeFile.Text = $"{dictLang.CopyFileSize} {staticLog.TotalSize}";
 
 
-                    save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy);
+                    BackgroundWorker workerCopy = new BackgroundWorker();
+                    workerCopy.DoWork += worker_DoWork;
+                    workerCopy.RunWorkerCompleted += worker_RunWorkerCompleted;
+                    workerCopy.ProgressChanged += worker_ProgressChanged;
+                    workerCopy.WorkerReportsProgress = true;
+                    List<string> param = new List<string>() { presetId, full.ToString(), source, destination };
+                    workerCopy.RunWorkerAsync(param);
+
+                    //save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy);
 
                     /*while (staticLog.Progress < 100)
                     {
@@ -556,7 +559,7 @@ namespace EasySave_2._0
                         CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {staticLog.RemainingFilesSize}";
 
                     }*/
-                    CopyEnd.Text = dictLang.CopySuccess;
+                    //CopyEnd.Text = dictLang.CopySuccess;
                 }
             }
             else
@@ -568,12 +571,39 @@ namespace EasySave_2._0
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            List<string> param = e.Argument as List<string>;
+            string presetId = param[0];
+            string copyType = param[1];
+            string source = param[2];
+            string destination = param[3];
+            bool full = false;
+            if (copyType == "true") { full = true; }
+            else if (copyType == "false") { full = false; }
+            Save save = new Save(source, destination, full);
+            var DirInfo = save.Copy();
+            save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender);
+
+            //CurrentStateLog.Display();
+            //(sender as BackgroundWorker).ReportProgress(CurrentStateLog.Progress);
         }
 
-        //private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        //{
-        //    ReceivedMsg.Text = "Text";
-        //}
+        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            CopyEnd.Text = dictLang.CopySuccess;
+            ProgressBarCopy.Value = 100;
+        }
+
+        void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            //Save save = new Save(source, destination, full);
+            //var staticLog = save.CurrentStateLog;
+            //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {staticLog.RemainingFiles}";
+            //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {staticLog.RemainingFilesSize}";
+            ProgressBarCopy.Value = e.ProgressPercentage;
+            
+        }
+
+
 
         private void EditApplicationButton_Click(object sender, RoutedEventArgs e)
         {

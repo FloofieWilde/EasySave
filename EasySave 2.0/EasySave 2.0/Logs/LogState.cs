@@ -49,9 +49,7 @@ namespace Projet.Logs
         /// <param name="firstTime"></param>
         public (int Progress, long RemainingFiles, long RemainingFilesSize) Display()
         {
-
             return (Progress, RemainingFiles, RemainingFilesSize);
-
         }
 
         /// <summary>
@@ -143,7 +141,7 @@ namespace Projet.Logs
         {
             Active = false;
             Save();
-            progressBar.Value = 100;
+            //progressBar.Value = 100;
         }
     }
 }
