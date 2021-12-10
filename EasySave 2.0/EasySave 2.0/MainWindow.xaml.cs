@@ -23,6 +23,7 @@ using Projet.Logs;
 using Newtonsoft.Json;
 using System.Net;
 using System.Data;
+using System.ComponentModel;
 
 namespace EasySave_2._0
 {
@@ -491,8 +492,6 @@ namespace EasySave_2._0
 
         private void CopyStartButton_Click(object sender, RoutedEventArgs e)
         {
-            ErrorCopy.Content = "VOMI";
-
             if ((RadioCopyComplet.IsChecked == true || RadioCopyPartial.IsChecked == true) && ListPresetCopy.SelectedIndex != -1)
             {
                 Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
@@ -511,6 +510,11 @@ namespace EasySave_2._0
                 {
                     copyType = dictLang.PartialCopy;
                 }
+
+                BackgroundWorker workerCopy = new BackgroundWorker();
+                workerCopy.DoWork += worker_DoWork;
+                //worker.RunWorkerCompleted += worker_RunWorkerCompleted;
+                workerCopy.RunWorkerAsync();
 
                 Save save = new Save(source, destination, full);
 
@@ -561,6 +565,15 @@ namespace EasySave_2._0
                 ErrorCopy.Content = dictLang.ErrorChooseTypePreset;
             }
         }
+
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+        }
+
+        //private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        //{
+        //    ReceivedMsg.Text = "Text";
+        //}
 
         private void EditApplicationButton_Click(object sender, RoutedEventArgs e)
         {
