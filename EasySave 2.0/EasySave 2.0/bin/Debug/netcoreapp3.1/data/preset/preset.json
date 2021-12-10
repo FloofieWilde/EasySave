@@ -33,5 +33,10 @@
     "Name": "Maxime",
     "PathSource": "C:\\Users\\jennm\\source\\repos\\C-hashtag-point-web\\EasySave 2.0\\EasySave 2.0\\DossA",
     "PathDestination": "C:\\Users\\jennm\\source\\repos\\C-hashtag-point-web\\EasySave 2.0\\EasySave 2.0\\DossB"
+  },
+  "Preset8": {
+    "Name": "Loïc bureau",
+    "PathSource": "C:\\Users\\loicm\\Desktop\\DossA",
+    "PathDestination": "C:\\Users\\loicm\\Desktop\\DossB"
   }
 }

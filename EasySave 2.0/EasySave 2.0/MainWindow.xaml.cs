@@ -548,7 +548,7 @@ namespace EasySave_2._0
                     workerCopy.RunWorkerCompleted += worker_RunWorkerCompleted;
                     workerCopy.ProgressChanged += worker_ProgressChanged;
                     workerCopy.WorkerReportsProgress = true;
-                    List<string> param = new List<string>() { presetId, full.ToString(), source, destination };
+                    List<string> param = new List<string>() { full.ToString(), source, destination };
                     workerCopy.RunWorkerAsync(param);
 
                     //save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy);
@@ -572,10 +572,9 @@ namespace EasySave_2._0
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             List<string> param = e.Argument as List<string>;
-            string presetId = param[0];
-            string copyType = param[1];
-            string source = param[2];
-            string destination = param[3];
+            string copyType = param[0];
+            string source = param[1];
+            string destination = param[2];
             bool full = false;
             if (copyType == "true") { full = true; }
             else if (copyType == "false") { full = false; }
@@ -591,14 +590,17 @@ namespace EasySave_2._0
         {
             CopyEnd.Text = dictLang.CopySuccess;
             ProgressBarCopy.Value = 100;
+            CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
+            CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            //Save save = new Save(source, destination, full);
-            //var staticLog = save.CurrentStateLog;
-            //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {staticLog.RemainingFiles}";
-            //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {staticLog.RemainingFilesSize}";
+            List<long> param = e.UserState as List<long>;
+            long remainingFiles = param[0];
+            long RemainingFilesSize = param[1];
+            CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {remainingFiles}";
+            CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {RemainingFilesSize}";
             ProgressBarCopy.Value = e.ProgressPercentage;
             
         }

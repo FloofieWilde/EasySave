@@ -7,6 +7,7 @@ using EasySave_2._0;
 using Projet.WorkSoftwares;
 using System.Windows.Controls;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace Projet.SaveSystem
 {/// <summary>
@@ -85,7 +86,8 @@ namespace Projet.SaveSystem
                 //progressBar.Value = CurrentStateLog.Progress;
                 if ((sender as BackgroundWorker).WorkerReportsProgress == true)
                 {
-                    (sender as BackgroundWorker).ReportProgress(CurrentStateLog.Progress);
+                    List<long> param = new List<long>() { CurrentStateLog.RemainingFiles, CurrentStateLog.RemainingFilesSize };
+                    (sender as BackgroundWorker).ReportProgress(CurrentStateLog.Progress, param);
                 }
                 
                 filesSize = fi.Length;
