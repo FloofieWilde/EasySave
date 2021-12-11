@@ -74,6 +74,8 @@
   "OptStocAlter": "Modify storage type",
   "OptStocNew": "Select new logs' storage format.",
 
+  "OptMPrio": "Priority",
+
   "Name": "Name",
   "Sauce": "Source path",
   "Dest": "Destination path",
