@@ -181,7 +181,8 @@ namespace Projet.Languages
             public string ErrorOther { get; set; }
             public string ErrorChooseTypePreset { get; set; }
             public string OptiPreBrowse { get; set; }
-
+            public string OptMPrio { get; set; }
+            
         }
     }
 }

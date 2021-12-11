@@ -25,6 +25,7 @@ using System.Net;
 using System.Data;
 using System.ComponentModel;
 using Microsoft.Win32;
+using Projet.Priority;
 
 namespace EasySave_2._0
 {
@@ -71,6 +72,7 @@ namespace EasySave_2._0
             ExtensionButton.Content = dictLang.OptMExt;
             ApplicationButton.Content = dictLang.OptMApp;
             StockageButton.Content = dictLang.OptMStoc;
+            PriorityButton.Content = dictLang.OptMPrio;
             CopyPannel.Visibility = Visibility.Collapsed;
             OptionsPannel.Visibility = Visibility.Visible;
             LogsPannel.Visibility = Visibility.Collapsed;
@@ -80,9 +82,13 @@ namespace EasySave_2._0
             AddExtensionPannel.Visibility = Visibility.Collapsed;
             EditExtensionPannel.Visibility = Visibility.Collapsed;
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
+            AddPriorityPannel.Visibility = Visibility.Collapsed;
+            EditPriorityPannel.Visibility = Visibility.Collapsed;
+            DeletePriorityPannel.Visibility = Visibility.Collapsed;
             LangPannel.Visibility = Visibility.Collapsed;
             PresetPannel.Visibility = Visibility.Collapsed;
             ExtensionPannel.Visibility = Visibility.Collapsed;
+            PriorityPannel.Visibility = Visibility.Collapsed;
             ApplicationPannel.Visibility = Visibility.Collapsed;
             StockagePannel.Visibility = Visibility.Collapsed;
         }
@@ -128,6 +134,7 @@ namespace EasySave_2._0
             ExtensionPannel.Visibility = Visibility.Collapsed;
             ApplicationPannel.Visibility = Visibility.Collapsed;
             StockagePannel.Visibility = Visibility.Collapsed;
+            PriorityPannel.Visibility = Visibility.Collapsed;
         }
         private void ExtensionButton_Click(object sender, RoutedEventArgs e)
         {
@@ -140,11 +147,32 @@ namespace EasySave_2._0
             AddExtensionPannel.Visibility = Visibility.Collapsed;
             EditExtensionPannel.Visibility = Visibility.Collapsed;
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
+            PriorityPannel.Visibility = Visibility.Collapsed;
             Dictionary<string, string> extension = Extension.GetJsonExtension();
             int nbExtension = extension.Count;
             for (int i = 1; i <= nbExtension; i++)
             {
                 ListExtension.Items.Add(i.ToString() + $" - {extension["Extension" + i.ToString()]}");
+            }
+        }
+
+        private void PriorityButton_Click(object sender, RoutedEventArgs e)
+        {
+            ListPriority.Items.Clear();
+            LangPannel.Visibility = Visibility.Collapsed;
+            PresetPannel.Visibility = Visibility.Collapsed;
+            ExtensionPannel.Visibility = Visibility.Collapsed;
+            StockagePannel.Visibility = Visibility.Collapsed;
+            ApplicationPannel.Visibility = Visibility.Collapsed;
+            PriorityPannel.Visibility = Visibility.Visible;
+            AddExtensionPannel.Visibility = Visibility.Collapsed;
+            EditExtensionPannel.Visibility = Visibility.Collapsed;
+            DeleteExtensionPannel.Visibility = Visibility.Collapsed;
+            Dictionary<string, string> priorities = Priority.GetJsonPriority();
+            int nbPriority = priorities.Count;
+            for (int i = 1; i <= nbPriority; i++)
+            {
+                ListPriority.Items.Add(i.ToString() + $" - {priorities["Priority" + i.ToString()]}");
             }
         }
 
@@ -163,6 +191,7 @@ namespace EasySave_2._0
             ApplicationPannel.Visibility = Visibility.Visible;
             StockagePannel.Visibility = Visibility.Collapsed;
             EditApplicationPannel.Visibility = Visibility.Collapsed;
+            PriorityPannel.Visibility = Visibility.Collapsed;
             WorkSoft application = WorkSoftware.GetJsonApplication();
             ListApplication.Items.Add(application.Application);
         }
@@ -174,6 +203,7 @@ namespace EasySave_2._0
             ExtensionPannel.Visibility = Visibility.Collapsed;
             ApplicationPannel.Visibility = Visibility.Collapsed;
             StockagePannel.Visibility = Visibility.Visible;
+            PriorityPannel.Visibility = Visibility.Collapsed;
             JsonXml stockage = Stockage.GetJsonStockage();
             LabelCurrentStockage.Content = dictLang.OptStocNow + stockage.TypeStockage;
             EditStockageButton.Content = dictLang.OptStocAlter;
@@ -193,6 +223,7 @@ namespace EasySave_2._0
             AddPannel.Visibility = Visibility.Collapsed;
             EditPannel.Visibility = Visibility.Collapsed;
             DeletePannel.Visibility = Visibility.Collapsed;
+            PriorityPannel.Visibility = Visibility.Collapsed;
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
             int nbPreset = preset.Count;
             for (int i = 1; i <= nbPreset; i++)
@@ -550,6 +581,147 @@ namespace EasySave_2._0
             AddExtensionPannel.Visibility = Visibility.Collapsed;
             EditExtensionPannel.Visibility = Visibility.Collapsed;
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void AddPriorityButton_Click(object sender, RoutedEventArgs e)
+        {
+            LabelAddPriority.Content = dictLang.OptExtAdd;
+            LabelAddNewPriority.Content = dictLang.Extension;
+            ConfirmAddPriority.Content = dictLang.Confirm;
+            CancelAddPriority.Content = dictLang.Cancel;
+
+            AddPriorityTextbox.Text = "";
+            AddPriorityPannel.Visibility = Visibility.Visible;
+            EditPriorityPannel.Visibility = Visibility.Collapsed;
+            DeletePriorityPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void EditPriorityButton_Click(object sender, RoutedEventArgs e)
+        {
+            LabelEditPriority.Content = dictLang.OptExtEdit;
+            LabelEditThePriority.Content = dictLang.Extension;
+            ConfirmEditPriority.Content = dictLang.Confirm;
+            CancelEditPriority.Content = dictLang.Cancel;
+
+            AddPriorityPannel.Visibility = Visibility.Collapsed;
+            DeletePriorityPannel.Visibility = Visibility.Collapsed;
+            Dictionary<string, string> priorities = Priority.GetJsonPriority();
+            if (ListPriority.SelectedIndex != -1)
+            {
+                EditPriorityPannel.Visibility = Visibility.Visible;
+                string selectedItem = ListPriority.SelectedItem.ToString();
+                string id = "";
+                for (int i = 0; i <= 9; i++)
+                {
+                    for (int j = 0; j <= 3; j++)
+                    {
+                        if (i.ToString() == selectedItem.Substring(j, 1))
+                        {
+                            id += i.ToString();
+                        }
+                    }
+                }
+                PriorityEditId.Content = id;
+                EditPriorityTextbox.Text = priorities["Priority" + id];
+            }
+        }
+
+        private void DeletePriorityButton_Click(object sender, RoutedEventArgs e)
+        {
+            LabelDeletePriority.Content = dictLang.OptExtDel;
+            ConfirmDeletePriority.Content = dictLang.Confirm;
+            CancelDeletePriority.Content = dictLang.Cancel;
+
+            AddPriorityPannel.Visibility = Visibility.Collapsed;
+            EditPriorityPannel.Visibility = Visibility.Collapsed;
+            if (ListPriority.SelectedIndex != -1)
+            {
+                DeletePriorityPannel.Visibility = Visibility.Visible;
+                string selectedItem = ListPriority.SelectedItem.ToString();
+
+                string id = "";
+                for (int i = 0; i <= 9; i++)
+                {
+                    for (int j = 0; j <= 3; j++)
+                    {
+                        if (i.ToString() == selectedItem.Substring(j, 1))
+                        {
+                            id += i.ToString();
+                        }
+                    }
+                }
+                PriorityDeleteId.Content = id;
+            }
+        }
+
+        private void ConfirmAddPriority_Click(object sender, RoutedEventArgs e)
+        {
+            string priority = AddPriorityTextbox.Text;
+            Priority.AddPriority(priority);
+            ListPriority.Items.Clear();
+            Dictionary<string, string> priorities = Priority.GetJsonPriority();
+            int nbPriority = priorities.Count;
+            for (int i = 1; i <= nbPriority; i++)
+            {
+                ListPriority.Items.Add(i.ToString() + $" - {priorities["Priority" + i.ToString()]}");
+            }
+            AddPriorityPannel.Visibility = Visibility.Collapsed;
+            EditPriorityPannel.Visibility = Visibility.Collapsed;
+            DeletePriorityPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void CancelAddPriority_Click(object sender, RoutedEventArgs e)
+        {
+            AddPriorityPannel.Visibility = Visibility.Collapsed;
+            EditPriorityPannel.Visibility = Visibility.Collapsed;
+            DeletePriorityPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void ConfirmEditPriority_Click(object sender, RoutedEventArgs e)
+        {
+            int id = Convert.ToInt32(PriorityEditId.Content);
+            string priority = EditPriorityTextbox.Text;
+            Priority.EditPriority(id, priority);
+            ListPriority.Items.Clear();
+            Dictionary<string, string> priorities = Priority.GetJsonPriority();
+            int nbPriority = priorities.Count;
+            for (int i = 1; i <= nbPriority; i++)
+            {
+                ListPriority.Items.Add(i.ToString() + $" - {priorities["Priority" + i.ToString()]}");
+            }
+            AddPriorityPannel.Visibility = Visibility.Collapsed;
+            EditPriorityPannel.Visibility = Visibility.Collapsed;
+            DeletePriorityPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void CancelEditPriority_Click(object sender, RoutedEventArgs e)
+        {
+            AddPriorityPannel.Visibility = Visibility.Collapsed;
+            EditPriorityPannel.Visibility = Visibility.Collapsed;
+            DeletePriorityPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void ConfirmDeletePriority_Click(object sender, RoutedEventArgs e)
+        {
+            int id = Convert.ToInt32(PriorityDeleteId.Content);
+            Priority.DeletePriority(id);
+            ListPriority.Items.Clear();
+            Dictionary<string, string> priorities = Priority.GetJsonPriority();
+            int nbPriority = priorities.Count;
+            for (int i = 1; i <= nbPriority; i++)
+            {
+                ListPriority.Items.Add(i.ToString() + $" - {priorities["Priority" + i.ToString()]}");
+            }
+            AddPriorityPannel.Visibility = Visibility.Collapsed;
+            EditPriorityPannel.Visibility = Visibility.Collapsed;
+            DeletePriorityPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void CancelDeletePriority_Click(object sender, RoutedEventArgs e)
+        {
+            AddPriorityPannel.Visibility = Visibility.Collapsed;
+            EditPriorityPannel.Visibility = Visibility.Collapsed;
+            DeletePriorityPannel.Visibility = Visibility.Collapsed;
         }
 
         private void CopyStartButton_Click(object sender, RoutedEventArgs e)

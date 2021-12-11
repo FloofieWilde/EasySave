@@ -128,12 +128,14 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Button Name="LangButton" Grid.Column="0" Content="" Height="auto" Width="auto" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Click="LangButton_Click"/>
                 <Button Name="PresetButton" Grid.Column="1" Content="" Height="auto" Width="auto" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Click="PresetButton_Click"/>
                 <Button Name="ExtensionButton" Grid.Column="2" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Content="" Height="auto" Width="auto" Click="ExtensionButton_Click"/>
                 <Button Name="ApplicationButton" Grid.Column="3" Content="" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Height="auto" Width="auto" Click="ApplicationButton_Click"/>
                 <Button Name="StockageButton" Grid.Column="4" Content="" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Height="auto" Width="auto" Click="StockageButton_Click"/>
+                <Button Name="PriorityButton" Grid.Column="5" Content="" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Height="auto" Width="auto" Click="PriorityButton_Click"/>
             </Grid>
 
             <Grid Name="LangPannel" Grid.Row="1" >
@@ -444,8 +446,97 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
+            <Grid Name="PriorityPannel" Grid.Row="1" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <ListBox Name="ListPriority" Grid.Column="0" Height="auto" Width="auto" Margin="4" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal">
+                </ListBox>
+
+                <Grid Name="PriorityInterface" Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="1*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Name="AddPriorityButton" Grid.Column="0" Click="AddPriorityButton_Click" Background="#FF450046" Margin="4">
+                            <Image Source="/plus.png" Height="auto" Width="auto" Margin="5"/>
+                        </Button>
+
+                        <Button Name="EditPriorityButton" Grid.Column="1" Click="EditPriorityButton_Click" Background="#FF450046" Margin="4">
+                            <Image Source="/crayon.png" Height="auto" Width="auto" Margin="5"/>
+                        </Button>
+
+                        <Button Name="DeletePriorityButton" Grid.Column="2" Click="DeletePriorityButton_Click" Background="#FF450046" Margin="4">
+                            <Image Source="/delete.png" Height="auto" Width="auto" Margin="5"/>
+                        </Button>
+
+                    </Grid>
+                    <StackPanel Name="AddPriorityPannel" Grid.Row="1" Visibility="Collapsed">
+                        <Label Name="LabelAddPriority" Content="" Foreground="white" FontSize="16"/>
+                        <Label Name="LabelAddNewPriority" Content="" Foreground="white"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="AddPriorityTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
+                        </Grid>
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmAddPriority" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmAddPriority_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelAddPriority" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelAddPriority_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Name="EditPriorityPannel" Grid.Row="1" Visibility="Collapsed">
+                        <Label Name="LabelEditPriority" Content="" Foreground="white" FontSize="16"/>
+                        <Label Name="PriorityEditId" Content="" Foreground="white"/>
+                        <Label Name="LabelEditThePriority" Content="" Foreground="white"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Name="EditPriorityTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
+                        </Grid>
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmEditPriority" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmEditPriority_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelEditPriority" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelEditPriority_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Name="DeletePriorityPannel" Grid.Row="1" Visibility="Collapsed">
+                        <Label Name="LabelDeletePriority" Content="Êtes vous sûr de supprimer l'extension numéro:" Foreground="white" FontSize="16"/>
+                        <Label Name="PriorityDeleteId" Content="" Foreground="white"/>
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmDeletePriority" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmDeletePriority_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelDeletePriority" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelDeletePriority_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </Grid>
         </Grid>
+
         
+
         <Grid Name="LogsPannel" Row="2" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
