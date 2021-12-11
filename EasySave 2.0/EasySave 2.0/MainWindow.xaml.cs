@@ -808,5 +808,20 @@ namespace EasySave_2._0
 
             //return newDictLang;
         }
+
+        private void PlayCopy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PauseCopy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void StopCopy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
