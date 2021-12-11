@@ -604,7 +604,6 @@ namespace EasySave_2._0
                     CopyNbFile.Text = $"{dictLang.CopyNbFiles} {staticLog.TotalFiles}";
                     CopySizeFile.Text = $"{dictLang.CopyFileSize} {staticLog.TotalSize}";
 
-
                     BackgroundWorker workerCopy = new BackgroundWorker();
                     workerCopy.DoWork += worker_DoWork;
                     workerCopy.RunWorkerCompleted += worker_RunWorkerCompleted;
@@ -638,8 +637,8 @@ namespace EasySave_2._0
             string source = param[1];
             string destination = param[2];
             bool full = false;
-            if (copyType == "true") { full = true; }
-            else if (copyType == "false") { full = false; }
+            if (copyType == "True") { full = true; }
+            else if (copyType == "False") { full = false; }
             Save save = new Save(source, destination, full);
             var DirInfo = save.Copy();
             save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender);
