@@ -1045,7 +1045,7 @@ namespace EasySave_2._0
 
         private void PlayCopy_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void PauseCopy_Click(object sender, RoutedEventArgs e)
