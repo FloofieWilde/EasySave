@@ -140,13 +140,16 @@ namespace Projet.Logs
                         string xstring = JsonConvert.SerializeXmlNode(xnode);
                         LogDaily finalLog = JsonConvert.DeserializeObject<LogDaily>(xstring);
                         fullLog.Append<LogDaily>(finalLog);
-
+                        
                     }
                 }
 
             }
             return fullLog;
         }
+
+        
+
 
         public DirectoryInfo GetFiles(string path)
         {
