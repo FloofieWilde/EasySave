@@ -63,7 +63,7 @@ namespace Projet.SaveSystem
         /// </summary>
         /// <param name="source">Source Directory</param>
         /// <param name="target">Target Directory</param>
-        public void ProcessCopy(DirectoryInfo source, DirectoryInfo target, ProgressBar progressBar, object sender)
+        public void ProcessCopy(DirectoryInfo source, DirectoryInfo target, ProgressBar progressBar, object sender, DoWorkEventArgs e)
         {
             CurrentStateLog.Display();
             long filesSize;
@@ -89,7 +89,15 @@ namespace Projet.SaveSystem
                     List<long> param = new List<long>() { CurrentStateLog.RemainingFiles, CurrentStateLog.RemainingFilesSize };
                     (sender as BackgroundWorker).ReportProgress(CurrentStateLog.Progress, param);
                 }
-                
+                for (int i = 0; i <= 100; i++)
+                {
+                    if ((sender as BackgroundWorker).CancellationPending == true)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+                    //System.Threading.Thread.Sleep(250);
+                }
                 filesSize = fi.Length;
                 ProcessTime.Stop();
                 CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name, CryptTime);
@@ -100,7 +108,7 @@ namespace Projet.SaveSystem
             {
                 DirectoryInfo nextTargetSubDir =
                 target.CreateSubdirectory(diSourceSubDir.Name);
-                ProcessCopy(diSourceSubDir, nextTargetSubDir, progressBar, sender);
+                ProcessCopy(diSourceSubDir, nextTargetSubDir, progressBar, sender, e);
                 CurrentStateLog.Save();
                 CurrentStateLog.Display();
             }

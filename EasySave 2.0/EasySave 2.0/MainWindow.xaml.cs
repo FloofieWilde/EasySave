@@ -37,6 +37,7 @@ namespace EasySave_2._0
     public partial class MainWindow : Window
     {
         static Langue.Language dictLang = Langue.GetLang();
+        static List<BackgroundWorker> Workers = new List<BackgroundWorker>();
 
         public MainWindow()
         {
@@ -843,7 +844,10 @@ namespace EasySave_2._0
                     workerCopy.RunWorkerCompleted += worker_RunWorkerCompleted;
                     workerCopy.ProgressChanged += worker_ProgressChanged;
                     workerCopy.WorkerReportsProgress = true;
+                    workerCopy.WorkerSupportsCancellation = true;
+
                     List<string> param = new List<string>() { full.ToString(), source, destination };
+                    Workers.Add(workerCopy);
                     workerCopy.RunWorkerAsync(param);
 
                     //save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy);
@@ -875,7 +879,7 @@ namespace EasySave_2._0
             else if (copyType == "False") { full = false; }
             Save save = new Save(source, destination, full);
             var DirInfo = save.Copy();
-            save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender);
+            save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender, e);
 
             //CurrentStateLog.Display();
             //(sender as BackgroundWorker).ReportProgress(CurrentStateLog.Progress);
@@ -883,10 +887,18 @@ namespace EasySave_2._0
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            CopyEnd.Text = dictLang.CopySuccess;
-            ProgressBarCopy.Value = 100;
-            CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
-            CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
+            if (e.Cancelled)
+            {
+                CopyEnd.Text = "Echec";
+            }
+            else
+            {
+                CopyEnd.Text = dictLang.CopySuccess;
+                ProgressBarCopy.Value = 100;
+                CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
+                CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
+            }
+            
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -1055,7 +1067,7 @@ namespace EasySave_2._0
 
         private void StopCopy_Click(object sender, RoutedEventArgs e)
         {
-
+            Workers[0].CancelAsync();
         }
     }
 }
