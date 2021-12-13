@@ -27,6 +27,7 @@ using System.ComponentModel;
 using Microsoft.Win32;
 using Projet.Priority;
 using Projet.Size;
+using System.Threading;
 
 namespace EasySave_2._0
 {
@@ -36,10 +37,23 @@ namespace EasySave_2._0
     public partial class MainWindow : Window
     {
         static Langue.Language dictLang = Langue.GetLang();
+        static List<BackgroundWorker> Workers = new List<BackgroundWorker>();
 
         public MainWindow()
         {
-            InitializeComponent();
+
+            bool aIsNewInstance = false;
+            Mutex myMutex = new Mutex(true, "MainWindow", out aIsNewInstance);
+            if (!aIsNewInstance)
+            {
+                MessageBox.Show("Already an instance is running...");
+                App.Current.Shutdown();
+            }
+            else
+            {
+                InitializeComponent();
+
+            }
         }
 
         public void ExitApp(object sender, RoutedEventArgs e)
@@ -104,7 +118,7 @@ namespace EasySave_2._0
             LogsListbox.Items.Clear();
             LogsGrid.DataContext = null;
             var dates = LogDaily.GetJsonDates();
-            foreach(string date in dates)
+            foreach (string date in dates)
             {
                 LogsListbox.Items.Add(date);
             }
@@ -287,7 +301,7 @@ namespace EasySave_2._0
             CancelEditPreset.Content = dictLang.Cancel;
             EditSourceFileButton.Content = dictLang.OptiPreBrowse;
             EditDestinationFileButton.Content = dictLang.OptiPreBrowse;
-            
+
             AddPannel.Visibility = Visibility.Collapsed;
             DeletePannel.Visibility = Visibility.Collapsed;
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
@@ -376,7 +390,7 @@ namespace EasySave_2._0
             if (openFolder.ShowDialog() == true)
             {
                 AddPathSourceTextbox.Text = System.IO.Path.GetDirectoryName(openFolder.FileName);
-            }  
+            }
         }
 
         private void AddDestinationFileButton_Click(object sender, RoutedEventArgs e)
@@ -801,7 +815,7 @@ namespace EasySave_2._0
                     copyType = dictLang.PartialCopy;
                 }
 
-                
+
                 Save save = new Save(source, destination, full);
 
                 var DirInfo = save.Copy();
@@ -837,7 +851,10 @@ namespace EasySave_2._0
                     workerCopy.RunWorkerCompleted += worker_RunWorkerCompleted;
                     workerCopy.ProgressChanged += worker_ProgressChanged;
                     workerCopy.WorkerReportsProgress = true;
+                    workerCopy.WorkerSupportsCancellation = true;
+
                     List<string> param = new List<string>() { full.ToString(), source, destination };
+                    Workers.Add(workerCopy);
                     workerCopy.RunWorkerAsync(param);
 
                     //save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy);
@@ -869,7 +886,7 @@ namespace EasySave_2._0
             else if (copyType == "False") { full = false; }
             Save save = new Save(source, destination, full);
             var DirInfo = save.Copy();
-            save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender);
+            save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender, e);
 
             //CurrentStateLog.Display();
             //(sender as BackgroundWorker).ReportProgress(CurrentStateLog.Progress);
@@ -877,10 +894,18 @@ namespace EasySave_2._0
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            CopyEnd.Text = dictLang.CopySuccess;
-            ProgressBarCopy.Value = 100;
-            CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
-            CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
+            if (e.Cancelled)
+            {
+                CopyEnd.Text = "Echec";
+            }
+            else
+            {
+                CopyEnd.Text = dictLang.CopySuccess;
+                ProgressBarCopy.Value = 100;
+                CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
+                CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
+            }
+            
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -891,7 +916,7 @@ namespace EasySave_2._0
             CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {remainingFiles}";
             CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {RemainingFilesSize}";
             ProgressBarCopy.Value = e.ProgressPercentage;
-            
+
         }
 
 
@@ -975,7 +1000,7 @@ namespace EasySave_2._0
                 butt.Click += new RoutedEventHandler(ChangeLang_Click);
 
                 string PathImg = "imgs/" + name + ".png";
-                
+
                 Image img = new Image();
                 BitmapImage ImgBmp = new BitmapImage(new Uri(PathImg, UriKind.Relative));
                 img.Stretch = Stretch.Fill;
@@ -1039,7 +1064,7 @@ namespace EasySave_2._0
 
         private void PlayCopy_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void PauseCopy_Click(object sender, RoutedEventArgs e)
@@ -1049,7 +1074,7 @@ namespace EasySave_2._0
 
         private void StopCopy_Click(object sender, RoutedEventArgs e)
         {
-
+            Workers[0].CancelAsync();
         }
     }
 }
