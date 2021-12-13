@@ -68,6 +68,9 @@
                 </Grid>
             </Grid>
             <TextBlock Name="InfoCopy" Grid.Row="1" Foreground="white" TextWrapping="Wrap" Visibility="Collapsed">
+                <Run Text="ID: "/>
+                <Run Name="CopyIdPreset" Text=""/>
+                <LineBreak/>
                 <Run Name="CopyType" Text=""/>
                 <LineBreak/>
                 <Run Name="CopyNamePreset" Text=""/>

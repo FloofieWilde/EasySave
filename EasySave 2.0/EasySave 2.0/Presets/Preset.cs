@@ -97,5 +97,26 @@ namespace Projet.Presets
             string json = JsonConvert.SerializeObject(preset, Formatting.Indented);
             File.WriteAllText("./data/preset/preset.json", json);
         }
+
+        /// <summary>
+        /// Method to get the ID of the selected preset in the listbox (first few caracters)
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <returns></returns>
+        public static string GetId(string selectedItem)
+        {
+            string id = "";
+            for (int i = 0; i <= 9; i++)
+            {
+                for (int j = 0; j <= 3; j++)
+                {
+                    if (i.ToString() == selectedItem.Substring(j, 1))
+                    {
+                        id += i.ToString();
+                    }
+                }
+            }
+            return id;
+        }
     }
 }

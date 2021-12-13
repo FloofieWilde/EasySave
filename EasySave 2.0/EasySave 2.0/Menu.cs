@@ -10,7 +10,7 @@ namespace Projet
 {
     class Menu
     {
-        static public void MenuPrincipal()
+        /*static public void MenuPrincipal()
         {
             Langue.Language dictLang = Langue.GetLang();
 
@@ -141,7 +141,7 @@ namespace Projet
             }
 
             return choice;
-        }
+        }*/
 
     }
 

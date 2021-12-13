@@ -38,5 +38,10 @@
     "Name": "Loïc bureau",
     "PathSource": "C:\\Users\\loicm\\Desktop\\DossA",
     "PathDestination": "C:\\Users\\loicm\\Desktop\\DossB"
+  },
+  "Preset9": {
+    "Name": "Loic 2",
+    "PathSource": "C:\\Users\\loicm\\Desktop\\Prosits\\A3\\Bloc Programmation Système\\Projet Programmation Système\\DossA",
+    "PathDestination": "C:\\Users\\loicm\\Desktop\\Prosits\\A3\\Bloc Programmation Système\\Projet Programmation Système\\DossB"
   }
 }

@@ -28,6 +28,7 @@ using Microsoft.Win32;
 using Projet.Priority;
 using Projet.Size;
 using System.Threading;
+using Projet.Save;
 
 namespace EasySave_2._0
 {
@@ -37,7 +38,7 @@ namespace EasySave_2._0
     public partial class MainWindow : Window
     {
         static Langue.Language dictLang = Langue.GetLang();
-        static List<BackgroundWorker> Workers = new List<BackgroundWorker>();
+        static List<Worker> Workers = new List<Worker>();
 
         public MainWindow()
         {
@@ -77,6 +78,13 @@ namespace EasySave_2._0
             for (int i = 1; i <= nbPreset; i++)
             {
                 ListPresetCopy.Items.Add(i.ToString() + $" - {preset["Preset" + i.ToString()].Name}");
+                BackgroundWorker workerCopy = new BackgroundWorker();
+                workerCopy.DoWork += worker_DoWork;
+                workerCopy.RunWorkerCompleted += worker_RunWorkerCompleted;
+                workerCopy.ProgressChanged += worker_ProgressChanged;
+                workerCopy.WorkerReportsProgress = true;
+                workerCopy.WorkerSupportsCancellation = true;
+                Workers.Add( new Worker { worker = workerCopy, statut = 0 });
             }
         }
 
@@ -799,10 +807,11 @@ namespace EasySave_2._0
             if ((RadioCopyComplet.IsChecked == true || RadioCopyPartial.IsChecked == true) && ListPresetCopy.SelectedIndex != -1)
             {
                 Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
-                string presetId = ListPresetCopy.SelectedItem.ToString().Substring(0, 1);
-                string name = preset["Preset" + presetId].Name;
-                string source = preset["Preset" + presetId].PathSource;
-                string destination = preset["Preset" + presetId].PathDestination;
+                string selectedItem = ListPresetCopy.SelectedItem.ToString();
+                int id = Convert.ToInt32(Preset.GetId(selectedItem));
+                string name = preset["Preset" + id].Name;
+                string source = preset["Preset" + id].PathSource;
+                string destination = preset["Preset" + id].PathDestination;
                 string copyType = "";
                 bool full = false;
                 if (RadioCopyComplet.IsChecked == true)
@@ -835,6 +844,7 @@ namespace EasySave_2._0
                 {
                     InfoCopy.Visibility = Visibility.Visible;
                     ProgressCopy.Visibility = Visibility.Visible;
+                    CopyIdPreset.Text = id.ToString();
                     CopyType.Text = $"{dictLang.CopyType} {copyType}";
                     CopyNamePreset.Text = $"{dictLang.CopyPreset} {name}";
                     CopySource.Text = $"{dictLang.CopyPathSource} {source}";
@@ -846,16 +856,23 @@ namespace EasySave_2._0
                     CopyNbFile.Text = $"{dictLang.CopyNbFiles} {staticLog.TotalFiles}";
                     CopySizeFile.Text = $"{dictLang.CopyFileSize} {staticLog.TotalSize}";
 
-                    BackgroundWorker workerCopy = new BackgroundWorker();
-                    workerCopy.DoWork += worker_DoWork;
-                    workerCopy.RunWorkerCompleted += worker_RunWorkerCompleted;
-                    workerCopy.ProgressChanged += worker_ProgressChanged;
-                    workerCopy.WorkerReportsProgress = true;
-                    workerCopy.WorkerSupportsCancellation = true;
+                    //BackgroundWorker workerCopy = new BackgroundWorker();
+                    //workerCopy.DoWork += worker_DoWork;
+                    //workerCopy.RunWorkerCompleted += worker_RunWorkerCompleted;
+                    //workerCopy.ProgressChanged += worker_ProgressChanged;
+                    //workerCopy.WorkerReportsProgress = true;
+                    //workerCopy.WorkerSupportsCancellation = true;
 
                     List<string> param = new List<string>() { full.ToString(), source, destination };
-                    Workers.Add(workerCopy);
-                    workerCopy.RunWorkerAsync(param);
+                    //Workers.Add(workerCopy);
+                    if (Workers[id - 1].worker.IsBusy)
+                    {
+                        ErrorCopy.Content = "BUSY!!";
+                    }
+                    else
+                    {
+                        Workers[id - 1].worker.RunWorkerAsync(param);
+                    }
 
                     //save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy);
 
@@ -894,41 +911,74 @@ namespace EasySave_2._0
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            //Statut: 0=Pas de copie ; 1=En cours ; 2=Annulé ; 3=Terminée ; 4=En pause
+            //string selectedItem = ListPresetCopy.SelectedItem.ToString();
+            //int idPreset = Convert.ToInt32(Preset.GetId(selectedItem));
+            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+            int idWorker = 0;
+            BackgroundWorker currentWorker = sender as BackgroundWorker;
+            for (int i=0; i<Workers.Count; i++)
+            {
+                if (currentWorker == Workers[i].worker)
+                {
+                    idWorker = i;
+                }
+            }
             if (e.Cancelled)
             {
-                CopyEnd.Text = "Echec";
+                Workers[idWorker].statut = 2;
+                CopyEnd.Text = "Annulé";
             }
             else
             {
-                CopyEnd.Text = dictLang.CopySuccess;
-                ProgressBarCopy.Value = 100;
-                CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
-                CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
+                Workers[idWorker].statut = 3;
+                if (idPreset-1 == idWorker)
+                {
+                    CopyEnd.Text = dictLang.CopySuccess;
+                    ProgressBarCopy.Value = 100;
+                    CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
+                    CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
+                }
             }
-            
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            List<long> param = e.UserState as List<long>;
-            long remainingFiles = param[0];
-            long RemainingFilesSize = param[1];
-            CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {remainingFiles}";
-            CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {RemainingFilesSize}";
-            ProgressBarCopy.Value = e.ProgressPercentage;
-
+            //string selectedItem = ListPresetCopy.SelectedItem.ToString();
+            //int idPreset = Convert.ToInt32(Preset.GetId(selectedItem));
+            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+            int idWorker = 0;
+            BackgroundWorker currentWorker = sender as BackgroundWorker;
+            for (int i = 0; i < Workers.Count; i++)
+            {
+                if (currentWorker == Workers[i].worker)
+                {
+                    idWorker = i;
+                }
+            }
+            if (Workers[idPreset - 1].worker.IsBusy && idPreset-1 == idWorker)
+            {
+                List<long> param = e.UserState as List<long>;
+                long remainingFiles = param[0];
+                long RemainingFilesSize = param[1];
+                CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {remainingFiles}";
+                CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {RemainingFilesSize}";
+                ProgressBarCopy.Value = e.ProgressPercentage;
+            }
         }
 
         private void ListPresetCopy_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //string selectedPreset = ListPresetCopy.SelectedItem.ToString();
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
-            string presetId = ListPresetCopy.SelectedItem.ToString().Substring(0, 1);
-            string name = preset["Preset" + presetId].Name;
-            string source = preset["Preset" + presetId].PathSource;
-            string destination = preset["Preset" + presetId].PathDestination;
+            string selectedItem = ListPresetCopy.SelectedItem.ToString();
+            int id = Convert.ToInt32(Preset.GetId(selectedItem));
+            string name = preset["Preset" + id].Name;
+            string source = preset["Preset" + id].PathSource;
+            string destination = preset["Preset" + id].PathDestination;
             InfoCopy.Visibility = Visibility.Visible;
-            //ProgressCopy.Visibility = Visibility.Visible;
+            ProgressCopy.Visibility = Visibility.Visible;
+            CopyIdPreset.Text = id.ToString();
             //CopyType.Text = $"{dictLang.CopyType} {copyType}";
             CopyNamePreset.Text = $"{dictLang.CopyPreset} {name}";
             CopySource.Text = $"{dictLang.CopyPathSource} {source}";
@@ -1089,7 +1139,8 @@ namespace EasySave_2._0
 
         private void StopCopy_Click(object sender, RoutedEventArgs e)
         {
-            Workers[0].CancelAsync();
+            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+            Workers[idPreset-1].worker.CancelAsync();
         }
     }
 }
