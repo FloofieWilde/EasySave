@@ -129,6 +129,7 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <Button Name="LangButton" Grid.Column="0" Content="" Height="auto" Width="auto" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Click="LangButton_Click"/>
                 <Button Name="PresetButton" Grid.Column="1" Content="" Height="auto" Width="auto" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Click="PresetButton_Click"/>
@@ -136,6 +137,7 @@
                 <Button Name="ApplicationButton" Grid.Column="3" Content="" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Height="auto" Width="auto" Click="ApplicationButton_Click"/>
                 <Button Name="StockageButton" Grid.Column="4" Content="" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Height="auto" Width="auto" Click="StockageButton_Click"/>
                 <Button Name="PriorityButton" Grid.Column="5" Content="" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Height="auto" Width="auto" Click="PriorityButton_Click"/>
+                <Button Name="SizeButton" Grid.Column="6" Content="" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="22" FontWeight="Normal" Height="auto" Width="auto" Click="SizeButton_Click"/>
             </Grid>
 
             <Grid Name="LangPannel" Grid.Row="1" >
@@ -532,6 +534,28 @@
                         </Grid>
                     </StackPanel>
                 </Grid>
+            </Grid>
+            <Grid Name="SizePannel" Grid.Row="1" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <Label Name="LabelCurrentSize" Content="bb" HorizontalAlignment="Left" Foreground="green" FontSize="16"/>
+                    <Button Name="EditSizeButton" Content="" HorizontalAlignment="Left" Width="200" Click="EditSizeButton_Click" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal"/>
+                    <StackPanel Name="EditSizePannel" Visibility="Collapsed">
+                        <Label Name="LabelEditSize" Content="aa" HorizontalAlignment="Left" Foreground="white" FontSize="16"/>
+                        <Grid Margin="0,15,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Name="ConfirmEditSize" Background="#FF450046" FontSize="14" Foreground="#ad005d" FontFamily="Alien Encounters" FontWeight="Normal" Content="" Click="ConfirmEditSize_Click" Grid.Column="0" Margin="4" Padding="5"/>
+                            <Button Name="CancelEditSize" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelEditSize_Click" Grid.Column="1" Padding="5"/>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
             </Grid>
         </Grid>
 

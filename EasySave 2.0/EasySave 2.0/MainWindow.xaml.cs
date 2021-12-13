@@ -73,6 +73,7 @@ namespace EasySave_2._0
             ApplicationButton.Content = dictLang.OptMApp;
             StockageButton.Content = dictLang.OptMStoc;
             PriorityButton.Content = dictLang.OptMPrio;
+            SizeButton.Content = dictLang.OptMSize;
             CopyPannel.Visibility = Visibility.Collapsed;
             OptionsPannel.Visibility = Visibility.Visible;
             LogsPannel.Visibility = Visibility.Collapsed;
@@ -210,6 +211,22 @@ namespace EasySave_2._0
             LabelEditStockage.Content = dictLang.OptStocNew;
             ConfirmEditStockage.Content = dictLang.Confirm;
             CancelEditStockage.Content = dictLang.Cancel;
+        }
+
+        private void SizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            LangPannel.Visibility = Visibility.Collapsed;
+            PresetPannel.Visibility = Visibility.Collapsed;
+            ExtensionPannel.Visibility = Visibility.Collapsed;
+            ApplicationPannel.Visibility = Visibility.Collapsed;
+            StockagePannel.Visibility = Visibility.Collapsed;
+            PriorityPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Visible;
+            LabelCurrentSize.Content = dictLang.OptCurrentSize;
+            EditSizeButton.Content = dictLang.OptSizeAlter;
+            LabelEditSize.Content = dictLang.OptSizeNew;
+            ConfirmEditSize.Content = dictLang.Confirm;
+            CancelEditSize.Content = dictLang.Cancel;
         }
 
         private void PresetButton_Click(object sender, RoutedEventArgs e)
@@ -722,6 +739,21 @@ namespace EasySave_2._0
             AddPriorityPannel.Visibility = Visibility.Collapsed;
             EditPriorityPannel.Visibility = Visibility.Collapsed;
             DeletePriorityPannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void EditSizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            EditSizePannel.Visibility = Visibility.Visible;
+        }
+
+        private void ConfirmEditSize_Click(object sender, RoutedEventArgs e)
+        {
+            EditSizePannel.Visibility = Visibility.Collapsed;
+        }
+
+        private void CancelEditSize_Click(object sender, RoutedEventArgs e)
+        {
+            EditSizePannel.Visibility = Visibility.Collapsed;
         }
 
         private void CopyStartButton_Click(object sender, RoutedEventArgs e)

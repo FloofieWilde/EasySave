@@ -182,7 +182,12 @@ namespace Projet.Languages
             public string ErrorChooseTypePreset { get; set; }
             public string OptiPreBrowse { get; set; }
             public string OptMPrio { get; set; }
-            
+            public string OptMSize { get; set; }
+            public string OptCurrentSize { get; set; }
+            public string OptSizeAlter { get; set; }
+            public string OptSizeNew { get; set; }
+
+
         }
     }
 }
