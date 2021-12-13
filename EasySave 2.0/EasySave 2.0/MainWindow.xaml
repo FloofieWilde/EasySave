@@ -108,7 +108,7 @@
                         <Button Name="PauseCopy" Grid.Column="2" Width="100" HorizontalAlignment="Center" Content="Pause" Margin="2" Background="#FF450046" Foreground="#ad005d" FontFamily="Alien Encounters" Click="PauseCopy_Click"/>
                         <Button Name="StopCopy" Grid.Column="3" Width="100" HorizontalAlignment="Center" Content="Stop" Margin="2" Background="#FF450046" Foreground="#ad005d" FontFamily="Alien Encounters" Click="StopCopy_Click"/>
                     </Grid>
-                    <ProgressBar Name="ProgressBarCopy"  Grid.Row="1" HorizontalAlignment="Center" Height="10" VerticalAlignment="Center" Width="300" Minimum="0" Maximum="100" Value="30"/>
+                    <ProgressBar Name="ProgressBarCopy"  Grid.Row="1" HorizontalAlignment="Center" Height="10" VerticalAlignment="Center" Width="300" Minimum="0" Maximum="100" Value="0"/>
                 </Grid>
                 
                 <Label Name="CopyFileRemaining" Grid.Column="0" Content="" HorizontalAlignment="Center" Foreground="green"/>
