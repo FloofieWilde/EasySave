@@ -26,6 +26,7 @@ using System.Data;
 using System.ComponentModel;
 using Microsoft.Win32;
 using Projet.Priority;
+using Projet.Size;
 
 namespace EasySave_2._0
 {
@@ -137,6 +138,7 @@ namespace EasySave_2._0
             StockagePannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
         }
+
         private void ExtensionButton_Click(object sender, RoutedEventArgs e)
         {
             ListExtension.Items.Clear();
@@ -222,9 +224,10 @@ namespace EasySave_2._0
             StockagePannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
             SizePannel.Visibility = Visibility.Visible;
-            LabelCurrentSize.Content = dictLang.OptCurrentSize;
+            JsonSize size = Projet.Size.Size.GetJsonSize();
+            LabelCurrentSize.Content = dictLang.OptCurrentSize + size.Size + " Ko";
             EditSizeButton.Content = dictLang.OptSizeAlter;
-            LabelEditSize.Content = dictLang.OptSizeNew;
+            LabelEditSize.Text = dictLang.OptSizeNew;
             ConfirmEditSize.Content = dictLang.Confirm;
             CancelEditSize.Content = dictLang.Cancel;
         }
@@ -744,11 +747,25 @@ namespace EasySave_2._0
         private void EditSizeButton_Click(object sender, RoutedEventArgs e)
         {
             EditSizePannel.Visibility = Visibility.Visible;
+            JsonSize size = Projet.Size.Size.GetJsonSize();
+            EditSizeTextbox.Text = size.Size.ToString();
+            LabelErrorSize.Content = "";
         }
 
         private void ConfirmEditSize_Click(object sender, RoutedEventArgs e)
         {
-            EditSizePannel.Visibility = Visibility.Collapsed;
+            string size = EditSizeTextbox.Text;
+            var isNumeric = int.TryParse(size, out int sizeInt);
+            if (isNumeric == true)
+            {
+                Projet.Size.Size.EditSize(sizeInt);
+                LabelCurrentSize.Content = dictLang.OptCurrentSize + size + " Ko";
+                EditSizePannel.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                LabelErrorSize.Content = dictLang.OptSizeError;
+            }
         }
 
         private void CancelEditSize_Click(object sender, RoutedEventArgs e)

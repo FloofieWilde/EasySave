@@ -79,9 +79,10 @@
   "OptMPrio": "Priorité",
 
   "OptMSize": "Taille",
-  "OptCurrentSize": "Taille actuelle: ",
+  "OptCurrentSize": "Taille maximum actuelle: ",
   "OptSizeAlter": "Modifier la taille",
   "OptSizeNew": "Choisissez la nouvelle taille maximum des fichiers (en Ko).",
+  "OptSizeError": "Attention: entrez uniquement des chiffres.",
 
   "Name": "Nom",
   "Sauce": "Chemin source",

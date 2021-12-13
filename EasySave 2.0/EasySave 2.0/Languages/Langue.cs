@@ -186,6 +186,7 @@ namespace Projet.Languages
             public string OptCurrentSize { get; set; }
             public string OptSizeAlter { get; set; }
             public string OptSizeNew { get; set; }
+            public string OptSizeError { get; set; }
 
 
         }

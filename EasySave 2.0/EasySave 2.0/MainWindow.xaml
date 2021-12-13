@@ -542,10 +542,12 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0">
-                    <Label Name="LabelCurrentSize" Content="bb" HorizontalAlignment="Left" Foreground="green" FontSize="16"/>
+                    <Label Name="LabelCurrentSize" Content="" HorizontalAlignment="Left" Foreground="green" FontSize="16"/>
                     <Button Name="EditSizeButton" Content="" HorizontalAlignment="Left" Width="200" Click="EditSizeButton_Click" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal"/>
                     <StackPanel Name="EditSizePannel" Visibility="Collapsed">
-                        <Label Name="LabelEditSize" Content="aa" HorizontalAlignment="Left" Foreground="white" FontSize="16"/>
+                        <TextBlock Name="LabelEditSize" Text="" TextWrapping="Wrap" HorizontalAlignment="Left" Foreground="white" FontSize="16"/>
+                        <TextBox Name="EditSizeTextbox" Text="" TextWrapping="Wrap"  HorizontalAlignment="Left" Width="100"/>
+                        <Label Name="LabelErrorSize" Content="" HorizontalAlignment="Left" Foreground="red" FontSize="10"/>
                         <Grid Margin="0,15,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
