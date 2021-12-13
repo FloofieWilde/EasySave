@@ -919,6 +919,21 @@ namespace EasySave_2._0
 
         }
 
+        private void ListPresetCopy_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //string selectedPreset = ListPresetCopy.SelectedItem.ToString();
+            Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
+            string presetId = ListPresetCopy.SelectedItem.ToString().Substring(0, 1);
+            string name = preset["Preset" + presetId].Name;
+            string source = preset["Preset" + presetId].PathSource;
+            string destination = preset["Preset" + presetId].PathDestination;
+            InfoCopy.Visibility = Visibility.Visible;
+            //ProgressCopy.Visibility = Visibility.Visible;
+            //CopyType.Text = $"{dictLang.CopyType} {copyType}";
+            CopyNamePreset.Text = $"{dictLang.CopyPreset} {name}";
+            CopySource.Text = $"{dictLang.CopyPathSource} {source}";
+            CopyDestination.Text = $"{dictLang.CopyPathDest} {destination}";
+        }
 
 
         private void EditApplicationButton_Click(object sender, RoutedEventArgs e)
