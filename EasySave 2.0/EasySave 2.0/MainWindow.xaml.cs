@@ -27,6 +27,7 @@ using System.ComponentModel;
 using Microsoft.Win32;
 using Projet.Priority;
 using Projet.Size;
+using System.Threading;
 
 namespace EasySave_2._0
 {
@@ -39,7 +40,19 @@ namespace EasySave_2._0
 
         public MainWindow()
         {
-            InitializeComponent();
+
+            bool aIsNewInstance = false;
+            Mutex myMutex = new Mutex(true, "MainWindow", out aIsNewInstance);
+            if (!aIsNewInstance)
+            {
+                MessageBox.Show("Already an instance is running...");
+                App.Current.Shutdown();
+            }
+            else
+            {
+                InitializeComponent();
+
+            }
         }
 
         public void ExitApp(object sender, RoutedEventArgs e)
@@ -103,7 +116,7 @@ namespace EasySave_2._0
             LogsListbox.Items.Clear();
             LogsGrid.DataContext = null;
             var dates = LogDaily.GetJsonDates();
-            foreach(string date in dates)
+            foreach (string date in dates)
             {
                 LogsListbox.Items.Add(date);
             }
@@ -280,7 +293,7 @@ namespace EasySave_2._0
             CancelEditPreset.Content = dictLang.Cancel;
             EditSourceFileButton.Content = dictLang.OptiPreBrowse;
             EditDestinationFileButton.Content = dictLang.OptiPreBrowse;
-            
+
             AddPannel.Visibility = Visibility.Collapsed;
             DeletePannel.Visibility = Visibility.Collapsed;
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
@@ -369,7 +382,7 @@ namespace EasySave_2._0
             if (openFolder.ShowDialog() == true)
             {
                 AddPathSourceTextbox.Text = System.IO.Path.GetDirectoryName(openFolder.FileName);
-            }  
+            }
         }
 
         private void AddDestinationFileButton_Click(object sender, RoutedEventArgs e)
@@ -794,7 +807,7 @@ namespace EasySave_2._0
                     copyType = dictLang.PartialCopy;
                 }
 
-                
+
                 Save save = new Save(source, destination, full);
 
                 var DirInfo = save.Copy();
@@ -884,7 +897,7 @@ namespace EasySave_2._0
             CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {remainingFiles}";
             CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {RemainingFilesSize}";
             ProgressBarCopy.Value = e.ProgressPercentage;
-            
+
         }
 
 
@@ -968,7 +981,7 @@ namespace EasySave_2._0
                 butt.Click += new RoutedEventHandler(ChangeLang_Click);
 
                 string PathImg = "imgs/" + name + ".png";
-                
+
                 Image img = new Image();
                 BitmapImage ImgBmp = new BitmapImage(new Uri(PathImg, UriKind.Relative));
                 img.Stretch = Stretch.Fill;
