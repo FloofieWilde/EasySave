@@ -78,8 +78,8 @@
 
   "OptMSize": "Size",
   "OptCurrentSize": "Current maximum size: ",
-  "OptSizeAlter": "Modifier la taille",
-  "OptSizeNew": "Choisissez la nouvelle taille maximum des fichiers (in Ko).",
+  "OptSizeAlter": "Edit the size",
+  "OptSizeNew": "Choose the new maximum files size (in Ko).",
   "OptSizeError": "Warning: Only enter a number.",
 
   "Name": "Name",
