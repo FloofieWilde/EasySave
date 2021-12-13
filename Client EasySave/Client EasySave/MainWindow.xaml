@@ -27,11 +27,18 @@
             <ListBox Name="ListPreset" Grid.Column="0" Height="auto" Width="auto" Margin="10" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal">
             </ListBox>
 
-            <StackPanel Name="PanelInfo" Grid.Column="1" Margin="10">
-                <TextBlock Name="TextInfo" Height="auto" TextWrapping="Wrap" Text="" FontSize="18" FontFamily="Alien Encounters" Foreground="White" >
+            <Grid Name="PanelInfo" Grid.Column="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Grid.Row="0" Name="TextInfo" Height="auto" TextWrapping="Wrap" Text="" FontSize="18" FontFamily="Alien Encounters" Foreground="White" >
                     <Run Name="Tets"></Run>
                 </TextBlock>
-            </StackPanel>
+
+                <ProgressBar Grid.Row="1" Foreground="#FF25BBBD" Background="#FF777777"></ProgressBar>
+            </Grid>
 
         </Grid>
 
