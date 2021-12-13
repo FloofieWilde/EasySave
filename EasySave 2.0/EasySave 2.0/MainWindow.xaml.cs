@@ -93,6 +93,7 @@ namespace EasySave_2._0
             PriorityPannel.Visibility = Visibility.Collapsed;
             ApplicationPannel.Visibility = Visibility.Collapsed;
             StockagePannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
         }
 
         private void LogsButton_Click(object sender, RoutedEventArgs e)
@@ -137,6 +138,7 @@ namespace EasySave_2._0
             ApplicationPannel.Visibility = Visibility.Collapsed;
             StockagePannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
         }
 
         private void ExtensionButton_Click(object sender, RoutedEventArgs e)
@@ -151,6 +153,7 @@ namespace EasySave_2._0
             EditExtensionPannel.Visibility = Visibility.Collapsed;
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
             Dictionary<string, string> extension = Extension.GetJsonExtension();
             int nbExtension = extension.Count;
             for (int i = 1; i <= nbExtension; i++)
@@ -171,6 +174,7 @@ namespace EasySave_2._0
             AddExtensionPannel.Visibility = Visibility.Collapsed;
             EditExtensionPannel.Visibility = Visibility.Collapsed;
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
             Dictionary<string, string> priorities = Priority.GetJsonPriority();
             int nbPriority = priorities.Count;
             for (int i = 1; i <= nbPriority; i++)
@@ -186,7 +190,6 @@ namespace EasySave_2._0
             LabelEditTheApplication.Content = dictLang.Name;
             ConfirmEditApplication.Content = dictLang.Confirm;
             CancelEditApplication.Content = dictLang.Cancel;
-
             ListApplication.Items.Clear();
             LangPannel.Visibility = Visibility.Collapsed;
             PresetPannel.Visibility = Visibility.Collapsed;
@@ -195,6 +198,7 @@ namespace EasySave_2._0
             StockagePannel.Visibility = Visibility.Collapsed;
             EditApplicationPannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
             WorkSoft application = WorkSoftware.GetJsonApplication();
             ListApplication.Items.Add(application.Application);
         }
@@ -207,6 +211,7 @@ namespace EasySave_2._0
             ApplicationPannel.Visibility = Visibility.Collapsed;
             StockagePannel.Visibility = Visibility.Visible;
             PriorityPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
             JsonXml stockage = Stockage.GetJsonStockage();
             LabelCurrentStockage.Content = dictLang.OptStocNow + stockage.TypeStockage;
             EditStockageButton.Content = dictLang.OptStocAlter;
@@ -224,6 +229,7 @@ namespace EasySave_2._0
             StockagePannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
             SizePannel.Visibility = Visibility.Visible;
+            EditSizePannel.Visibility = Visibility.Collapsed;
             JsonSize size = Projet.Size.Size.GetJsonSize();
             LabelCurrentSize.Content = dictLang.OptCurrentSize + size.Size + " Ko";
             EditSizeButton.Content = dictLang.OptSizeAlter;
@@ -244,6 +250,7 @@ namespace EasySave_2._0
             EditPannel.Visibility = Visibility.Collapsed;
             DeletePannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
             int nbPreset = preset.Count;
             for (int i = 1; i <= nbPreset; i++)

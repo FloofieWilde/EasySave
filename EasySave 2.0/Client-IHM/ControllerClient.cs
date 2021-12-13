@@ -29,7 +29,7 @@ namespace Client_IHM
             byte[] msg = Encoding.ASCII.GetBytes(message);
             server.Send(msg);
 
-            /*string data;
+            string data;
             byte[] bytes = new byte[1024];
             while (true)
             {
@@ -39,7 +39,7 @@ namespace Client_IHM
                 {
                     break;
                 }
-            }*/
+            }
             //Deconnecter(server);
             //return data;
         }
