@@ -73,6 +73,7 @@ namespace Projet.Logs
             oui.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
             oui.WriteIndented = true;
             string jsonString = System.Text.Json.JsonSerializer.Serialize<LogDaily>(this, oui);
+            jsonString += ",";
 
             if (!IsJson)
             {
@@ -163,6 +164,14 @@ namespace Projet.Logs
             {
                 return dirInfo;
             }
+        }
+
+        public static List<LogJson> GetJsonLogs()
+        {
+            string json = File.ReadAllText("./data/Logs/Daily/2021/12/6/22h51.json");
+            json = "[" + json + "]";
+            List<LogJson> logs = JsonConvert.DeserializeObject<List<LogJson>>(json);
+            return logs;
         }
     }
 }

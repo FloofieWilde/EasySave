@@ -81,5 +81,22 @@
 
   "ChooseTypeCopy": "Choose the type of copy:",
   "PartialCopy": "Partial",
-  "CompletCopy": "Complete"
+  "CompletCopy": "Complete",
+
+  "CopyType": "Type of copy:",
+  "CopyPreset": "Copy name:",
+  "CopyPathSource": "Path Source:",
+  "CopyPathDest": "Path Destination:",
+  "CopyDateStart": "Date of start:",
+  "CopyNbFiles": "Total number of files:",
+  "CopyFileSize": "Total files size:",
+  "CopyFileRemaining": "Remaining files:",
+  "CopyFileSizeRemaining": "Size of remaining files:",
+  "CopySuccess": "Copy successful!",
+
+  "ErrorCloseApplication": "Close your work application.",
+  "ErrorUnvalidPreset": "Your preset is unvalid.",
+  "ErrorEmptyFolder": "Your source folder is empty.",
+  "ErrorOther": "Error.",
+  "ErrorChooseTypePreset": "Choose a preset and a type."
 }

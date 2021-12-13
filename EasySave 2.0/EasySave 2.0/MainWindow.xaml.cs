@@ -20,6 +20,9 @@ using Projet.WorkSoftwares;
 using Projet.Languages;
 using System.IO;
 using Projet.Logs;
+using Newtonsoft.Json;
+using System.Net;
+using System.Data;
 
 namespace EasySave_2._0
 {
@@ -87,20 +90,28 @@ namespace EasySave_2._0
             CopyPannel.Visibility = Visibility.Collapsed;
             OptionsPannel.Visibility = Visibility.Collapsed;
             LogsPannel.Visibility = Visibility.Visible;
-            LogsGrid.Items.Add("test");
-            
-            LogDaily dailyLog = new LogDaily("");
-            string ad = @"./data/Logs/Daily/2021/12/6";
-            DirectoryInfo dirInfo = dailyLog.GetFiles(ad);
-            if (dirInfo == null) return;
-            List<LogDaily> logs = dailyLog.Load(dirInfo.FullName);
-            LogsGrid.Items.Add(logs.Count);
+            //LogsGrid.Items.Add("test");
 
-            foreach (LogDaily log in logs)
-            {
-                LogsGrid.Items.Add("Test");
-                LogsGrid.Items.Add(log.Name);
-            }
+            //LogDaily dailyLog = new LogDaily("");
+            //string ad = @"./data/Logs/Daily/2021/12/6";
+            //DirectoryInfo dirInfo = dailyLog.GetFiles(ad);
+            //if (dirInfo == null) return;
+            //List<LogDaily> logs = dailyLog.Load(dirInfo.FullName);
+            //LogsGrid.Items.Add(logs.Count);
+            ////dgr.ItemsSource = logs.response.ResultSet;
+            //foreach (LogDaily log in logs)
+            //{
+            //    LogsGrid.Items.Add("Test");
+            //    LogsGrid.Items.Add(log.Name);
+            //}
+
+            var logs = LogDaily.GetJsonLogs();
+            LogsGrid.DataContext = logs;
+            //LogsGrid.DataBind();
+
+
+            //List<LogJson> logs = JsonConvert.DeserializeObject<List<LogJson>>(temp);
+
 
         }
 
@@ -510,10 +521,10 @@ namespace EasySave_2._0
                 {
                     ErrorCopy.Content = DirInfo.error switch
                     {
-                        1 => "Fermez votre application métier",
-                        2 => "Votre preset n'est pas valide",
-                        3 => "Votre dossier source est vide",
-                        _ => "Erreur",
+                        1 => dictLang.ErrorCloseApplication,
+                        2 => dictLang.ErrorUnvalidPreset,
+                        3 => dictLang.ErrorEmptyFolder,
+                        _ => dictLang.ErrorOther,
                     };
 
                     //ErrorCopy.Visibility = Visibility.Visible;
@@ -522,33 +533,33 @@ namespace EasySave_2._0
                 {
                     InfoCopy.Visibility = Visibility.Visible;
                     ProgressCopy.Visibility = Visibility.Visible;
-                    CopyType.Text = $"Type de sauvegarde: {copyType}";
-                    CopyNamePreset.Text = $"Nom sauvegarde: {name}";
-                    CopySource.Text = $"Path Source: {source}";
-                    CopyDestination.Text = $"Path Destination: {destination}";
+                    CopyType.Text = $"{dictLang.CopyType} {copyType}";
+                    CopyNamePreset.Text = $"{dictLang.CopyPreset} {name}";
+                    CopySource.Text = $"{dictLang.CopyPathSource} {source}";
+                    CopyDestination.Text = $"{dictLang.CopyPathDest} {destination}";
 
                     var staticLog = save.CurrentStateLog;
 
-                    CopyDate.Text = $"Date de début: {staticLog.Timestamp}";
-                    CopyNbFile.Text = $"Nombre total des fichiers: {staticLog.TotalFiles}";
-                    CopySizeFile.Text = $"Taille total des fichiers: {staticLog.TotalSize}";
+                    CopyDate.Text = $"{dictLang.CopyDateStart} {staticLog.Timestamp}";
+                    CopyNbFile.Text = $"{dictLang.CopyNbFiles} {staticLog.TotalFiles}";
+                    CopySizeFile.Text = $"{dictLang.CopyFileSize} {staticLog.TotalSize}";
 
 
                     save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy);
 
                     /*while (staticLog.Progress < 100)
                     {
-                        CopyFileRemaining.Content = $"Fichier restants: {staticLog.RemainingFiles}";
-                        CopySizeRemaining.Content = $"Taille des fichiers restant: {staticLog.RemainingFilesSize}";
+                        CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {staticLog.RemainingFiles}";
+                        CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {staticLog.RemainingFilesSize}";
 
                     }*/
-                    CopyEnd.Text = "Copie terminée!";
+                    CopyEnd.Text = dictLang.CopySuccess;
                 }
             }
             else
             {
                 //ErrorCopy.Visibility = Visibility.Visible;
-                ErrorCopy.Content = "Merci de choisir un preset et un type";
+                ErrorCopy.Content = dictLang.ErrorChooseTypePreset;
             }
         }
 
