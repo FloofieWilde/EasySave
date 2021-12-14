@@ -42,7 +42,6 @@ namespace Client_IHM
             workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
             workerSend.WorkerSupportsCancellation = true;
             workerSend.RunWorkerAsync(msg);
-
         }
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)

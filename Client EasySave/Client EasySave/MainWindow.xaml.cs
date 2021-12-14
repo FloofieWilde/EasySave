@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Projet.Server;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,9 +24,16 @@ namespace Client_EasySave
     public partial class MainWindow : Window
     {
         static string PPState = "Pause";
-
+        static BackgroundWorker workerListen = new BackgroundWorker();
+        Socket server;
         public MainWindow()
         {
+            workerListen.DoWork += worker_DoWork;
+            workerListen.RunWorkerCompleted += worker_RunWorkerCompleted;
+            workerListen.ProgressChanged += worker_ProgressChangedListen;
+            workerListen.WorkerReportsProgress = true;
+            workerListen.WorkerSupportsCancellation = true;
+            workerListen.RunWorkerAsync();
             InitializeComponent();
             
         }
@@ -74,5 +84,45 @@ namespace Client_EasySave
 
         }
 
+
+
+        private void worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            server = ClientServer.SeConnecter();
+            string msg = e.Argument as string;
+            ClientServer.EcouterReseau(server, sender);
+        }
+
+        private void worker_DoWorkSend(object sender, DoWorkEventArgs e)
+        {
+            string message = e.Argument as string;
+            ClientServer.SendMsg(message, server);
+        }
+
+        private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
+        }
+
+        private void worker_RunWorkerCompletedSend(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //ReceivedMsg.Text = "Text";
+        }
+        void worker_ProgressChangedListen(object sender, ProgressChangedEventArgs e)
+        {
+            string msg = e.UserState as string;
+            TestDistanceText.Text = msg;
+        }
+
+
+        private void TestDistance_Click(object sender, RoutedEventArgs e)
+        {
+            BackgroundWorker workerSend = new BackgroundWorker();
+            string msg = TestDistanceText.Text;
+            workerSend.DoWork += worker_DoWorkSend;
+            workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
+            workerSend.WorkerSupportsCancellation = true;
+            workerSend.RunWorkerAsync(msg);
+        }
     }
 }

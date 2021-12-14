@@ -36,10 +36,10 @@ namespace Client_IHM
             //return data;
         }
 
-        public static void SendMsg(string message, Socket server)
+        public static void SendMsg(string message, Socket client)
         {
             byte[] msg = Encoding.ASCII.GetBytes(message);
-            server.Send(msg);
+            client.Send(msg);
         }
 
         public static void Deconnecter(Socket server)

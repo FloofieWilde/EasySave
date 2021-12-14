@@ -5,9 +5,9 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
-namespace Projet.Client
+namespace Projet.Server
 {
-    public class Server
+    public class ClientServer
     {
         public static Socket SeConnecter()
         {
@@ -15,25 +15,19 @@ namespace Projet.Client
             IPAddress ipAddress = host.AddressList[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 55979);
             Socket server = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            server.Bind(localEndPoint);
-            server.Listen(10);
+
+            server.Connect(localEndPoint);
+
             return server;
         }
 
-        public static Socket AccepterConnection(Socket server)
-        {
-            Socket client = server.Accept();
-            //Console.WriteLine("Connecté avec l'adresse: " + IPAddress.Parse(((IPEndPoint)client.RemoteEndPoint).Address.ToString()) + " et port: " + (((IPEndPoint)client.RemoteEndPoint).Port.ToString()));
-            return client;
-        }
-
-        public static void EcouterReseau(Socket client, object sender)
+        public static void EcouterReseau(Socket server, object sender)
         {
             string data;
             byte[] bytes = new byte[1024];
             while (true)
             {
-                int bytesRec = client.Receive(bytes);
+                int bytesRec = server.Receive(bytes);
                 data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
                 if ((sender as BackgroundWorker).WorkerReportsProgress == true)
                 {
@@ -50,7 +44,7 @@ namespace Projet.Client
             server.Send(msg);
         }
 
-        private static void Deconnecter(Socket server)
+        public static void Deconnecter(Socket server)
         {
             server.Shutdown(SocketShutdown.Both);
             server.Close();
