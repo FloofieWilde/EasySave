@@ -1,10 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\1.0",
-    "\\1.0\\1.0",
-    "\\1.0\\1.0\\Logs"
+    "\\EasySave 2.0",
+    "\\EasySave 2.0\\EasySave 2.0"
   ],
-  "SelectedNode": "\\1.0\\1.0\\1.0.csproj",
+  "SelectedNode": "\\EasySave 2.0\\EasySave 2.0\\Menu.cs",
   "PreviewInSolutionExplorer": false
 }
