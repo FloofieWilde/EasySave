@@ -1201,17 +1201,23 @@ namespace EasySave_2._0
 
         private void PlayCopy_Click(object sender, RoutedEventArgs e)
         {
-            
+            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+            Workers[idPreset - 1].PauseEvent.Set();
         }
 
         private void PauseCopy_Click(object sender, RoutedEventArgs e)
         {
+            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+            Workers[idPreset - 1].PauseEvent.Reset();
 
         }
 
         private void StopCopy_Click(object sender, RoutedEventArgs e)
         {
             int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+
+
+
             if (Workers[idPreset - 1].worker.IsBusy)
             {
                 ProgressBarCopy.Foreground = Brushes.Red;

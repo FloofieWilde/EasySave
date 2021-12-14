@@ -8,6 +8,7 @@ using Projet.WorkSoftwares;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Collections.Generic;
+using Projet.Priority;
 
 namespace Projet.SaveSystem
 {/// <summary>
@@ -22,6 +23,10 @@ namespace Projet.SaveSystem
         private LogDaily CurrentDailyLog;
         private readonly Stopwatch ProcessTime;
         private long CryptTime;
+        private bool FirstProcess = true;
+        private Dictionary<string, string> PriorityExtensions = Priority.Priority.GetJsonPriority();
+        private int CurrentIndexFolder = 0;
+        private int TotalFolders;
 
         public Save(string source, string target, bool full)
         {
@@ -35,6 +40,7 @@ namespace Projet.SaveSystem
         /// </summary>
         public (DirectoryInfo source, DirectoryInfo target, int error) Copy()
         {
+
             var app = WorkSoftware.GetJsonApplication();
             Process[] pname = Process.GetProcessesByName(app.Application);
 
@@ -43,13 +49,15 @@ namespace Projet.SaveSystem
             if (Full) copyType = "Complete";
 
             DirectoryInfo sourceDirInfo = new DirectoryInfo(SourceDir);
-            if (!sourceDirInfo.Exists) return (null, null, 2 );
+            if (!sourceDirInfo.Exists) return (null, null, 2);
             long filesNumber = Directory.GetFiles(SourceDir, "*", SearchOption.AllDirectories).Length;
             long filesSize = DirSize(sourceDirInfo);
             if (filesSize == 0) return (null, null, 3);
             CurrentStateLog = new LogState(copyType, SourceDir, TargetDir, filesNumber, filesSize);
             CurrentDailyLog = new LogDaily(copyType);
             DirectoryInfo targetDirInfo = new DirectoryInfo(TargetDir);
+
+            TotalFolders = Directory.GetDirectories(SourceDir).Length;
 
             if (!targetDirInfo.Exists)
             {
@@ -63,6 +71,8 @@ namespace Projet.SaveSystem
         /// </summary>
         /// <param name="source">Source Directory</param>
         /// <param name="target">Target Directory</param>
+        /// 
+
         public void ProcessCopy(DirectoryInfo source, DirectoryInfo target, ProgressBar progressBar, object sender, DoWorkEventArgs e)
         {
             CurrentStateLog.Display();
@@ -71,23 +81,47 @@ namespace Projet.SaveSystem
 
             foreach (FileInfo fi in source.GetFiles())
             {
-                ProcessTime.Start();
-                if (Full == false)
+                bool ShouldProcess = false;
+
+                foreach (var prio in PriorityExtensions)
                 {
-                    if (File.GetLastWriteTime(target.FullName) != File.GetLastWriteTime(fi.FullName))
+                    if (fi.Extension == prio.Value)
+                    {
+                        if (FirstProcess) ShouldProcess = true;
+                    }
+                    else
+                    {
+                        if (!FirstProcess) ShouldProcess = true;
+                    }
+
+                }
+                if (ShouldProcess == true)
+                {
+                    ProcessTime.Start();
+                    if (Full == false)
+                    {
+                        if (File.GetLastWriteTime(target.FullName) != File.GetLastWriteTime(fi.FullName))
+                        {
+                            CheckException(fi, target);
+                        }
+                    }
+                    else
                     {
                         CheckException(fi, target);
                     }
+                    //progressBar.Value = CurrentStateLog.Progress;
+
+                    filesSize = fi.Length;
+                    ProcessTime.Stop();
+                    CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name, CryptTime);
+                    CurrentStateLog.Update(filesSize);
+                    ProcessTime.Reset();
                 }
-                else
-                {
-                    CheckException(fi, target);
-                }
-                //progressBar.Value = CurrentStateLog.Progress;
                 if ((sender as BackgroundWorker).WorkerReportsProgress == true)
                 {
                     List<long> param = new List<long>() { CurrentStateLog.RemainingFiles, CurrentStateLog.RemainingFilesSize };
                     (sender as BackgroundWorker).ReportProgress(CurrentStateLog.Progress, param);
+
                 }
                 for (int i = 0; i <= 100; i++)
                 {
@@ -98,21 +132,29 @@ namespace Projet.SaveSystem
                     }
                     //System.Threading.Thread.Sleep(250);
                 }
-                filesSize = fi.Length;
-                ProcessTime.Stop();
-                CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name, CryptTime);
-                CurrentStateLog.Update(filesSize);
-                ProcessTime.Reset();
+            }
+
+            if (CurrentIndexFolder == TotalFolders)
+            {
+                if (FirstProcess)
+                {
+                    FirstProcess = false;
+                    DirectoryInfo sourceDirectory = new DirectoryInfo(SourceDir);
+                    DirectoryInfo targetDirectory = new DirectoryInfo(TargetDir);
+                    ProcessCopy(sourceDirectory, targetDirectory, progressBar, sender, e);
+                }
             }
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
             {
+                CurrentIndexFolder++;
                 DirectoryInfo nextTargetSubDir =
-                target.CreateSubdirectory(diSourceSubDir.Name);
-                ProcessCopy(diSourceSubDir, nextTargetSubDir, progressBar, sender, e);
+                                target.CreateSubdirectory(diSourceSubDir.Name);
                 CurrentStateLog.Save();
-                CurrentStateLog.Display();
+                ProcessCopy(diSourceSubDir, nextTargetSubDir, progressBar, sender, e);
+                
             }
             CurrentStateLog.End(progressBar);
+            
         }
         /// <summary>
         /// Returns directory's size, in bytes
