@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Client_EasySave</RootNamespace>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="exit-logo.png" />
+    <None Remove="logo.png" />
+    <None Remove="pause.png" />
+    <None Remove="Play.png" />
+    <None Remove="Relaod.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="exit-logo.png" />
+    <Resource Include="logo.png" />
+    <Resource Include="pause.png" />
+    <Resource Include="Play.png" />
+    <Resource Include="Relaod.png" />
+  </ItemGroup>
+
+</Project>
