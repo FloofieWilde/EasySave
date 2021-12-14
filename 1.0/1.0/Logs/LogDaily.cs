@@ -61,7 +61,7 @@ namespace Projet.Logs
 
             oui.Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
             oui.WriteIndented = true;
-            string jsonString = JsonSerializer.Serialize<LogDaily>(this, oui);
+            string jsonString = System.Text.Json.JsonSerializer.Serialize<LogDaily>(this, oui);
             File.AppendAllText(usedPath, jsonString);
 
         }

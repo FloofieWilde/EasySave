@@ -77,6 +77,10 @@ namespace Projet.SaveSystem
 
             foreach (FileInfo fi in source.GetFiles())
             {
+                string vomi = fi.Extension;
+                if(vomi.EndsWith(".mkv")) Console.WriteLine("|" + vomi.ToUpper()  + "|");
+
+
                 ProcessTime.Start();
                 if (Full == false)
                 {

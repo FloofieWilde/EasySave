@@ -137,7 +137,7 @@ namespace Projet.Logs
         /// <summary>
         /// Called when save process is finished, saves a last time object's datas then display the sucessfull save message
         /// </summary>
-        public void End(ProgressBar progressBar)
+        public void End()
         {
             Active = false;
             Save();

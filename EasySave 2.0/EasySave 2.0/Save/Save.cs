@@ -78,23 +78,22 @@ namespace Projet.SaveSystem
             CurrentStateLog.Display();
             long filesSize;
             Directory.CreateDirectory(target.FullName);
-
+            
             foreach (FileInfo fi in source.GetFiles())
             {
+                
                 bool ShouldProcess = false;
 
                 foreach (var prio in PriorityExtensions)
                 {
-                    if (fi.Extension == prio.Value)
+                    
+                    if (fi.Extension.StartsWith(prio.Value))
                     {
-                        if (FirstProcess) ShouldProcess = true;
-                    }
-                    else
-                    {
-                        if (!FirstProcess) ShouldProcess = true;
+                        ShouldProcess = FirstProcess;
                     }
 
                 }
+
                 if (ShouldProcess == true)
                 {
                     ProcessTime.Start();
@@ -132,8 +131,19 @@ namespace Projet.SaveSystem
                     }
                     //System.Threading.Thread.Sleep(250);
                 }
+                MainWindow.ResetEvent.WaitOne();
             }
 
+            
+            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+            {
+                CurrentIndexFolder++;
+                DirectoryInfo nextTargetSubDir =
+                                target.CreateSubdirectory(diSourceSubDir.Name);
+                CurrentStateLog.Save();
+                ProcessCopy(diSourceSubDir, nextTargetSubDir, progressBar, sender, e);
+
+            }
             if (CurrentIndexFolder == TotalFolders)
             {
                 if (FirstProcess)
@@ -144,17 +154,8 @@ namespace Projet.SaveSystem
                     ProcessCopy(sourceDirectory, targetDirectory, progressBar, sender, e);
                 }
             }
-            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
-            {
-                CurrentIndexFolder++;
-                DirectoryInfo nextTargetSubDir =
-                                target.CreateSubdirectory(diSourceSubDir.Name);
-                CurrentStateLog.Save();
-                ProcessCopy(diSourceSubDir, nextTargetSubDir, progressBar, sender, e);
-                
-            }
-            CurrentStateLog.End(progressBar);
-            
+            CurrentStateLog.End();
+
         }
         /// <summary>
         /// Returns directory's size, in bytes

@@ -42,6 +42,7 @@ namespace EasySave_2._0
         static BackgroundWorker workerListen = new BackgroundWorker();
         static Langue.Language dictLang = Langue.GetLang();
         static List<Worker> Workers = new List<Worker>();
+        public static ManualResetEvent ResetEvent = new ManualResetEvent(false);
         Socket server;
         Socket client;
 
@@ -906,6 +907,7 @@ namespace EasySave_2._0
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
+
             List<string> param = e.Argument as List<string>;
             string copyType = param[0];
             string source = param[1];
@@ -914,6 +916,7 @@ namespace EasySave_2._0
             if (copyType == "True") { full = true; }
             else if (copyType == "False") { full = false; }
             Save save = new Save(source, destination, full);
+            ResetEvent.Set();
             var DirInfo = save.Copy();
             save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender, e);
         }
@@ -1209,15 +1212,12 @@ namespace EasySave_2._0
 
         private void PlayCopy_Click(object sender, RoutedEventArgs e)
         {
-            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
-            Workers[idPreset - 1].PauseEvent.Set();
+            ResetEvent.Set();
         }
 
         private void PauseCopy_Click(object sender, RoutedEventArgs e)
         {
-            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
-            Workers[idPreset - 1].PauseEvent.Reset();
-
+            ResetEvent.Reset();
         }
 
         private void StopCopy_Click(object sender, RoutedEventArgs e)
@@ -1251,7 +1251,6 @@ namespace EasySave_2._0
 
         private void worker_RunWorkerCompletedListen(object sender, RunWorkerCompletedEventArgs e)
         {
-
         }
 
         private void worker_RunWorkerCompletedSend(object sender, RunWorkerCompletedEventArgs e)
