@@ -7,9 +7,9 @@ namespace Projet.Save
 {
     public class Worker
     {
-        public BackgroundWorker worker { get; set; }
         public int Id { get; set; }
-        public int Statut { get; set; }
+        public BackgroundWorker worker { get; set; }
+        public string Statut { get; set; }
         public string Name { get; set; }
         public string Source { get; set; }
         public string Destination { get; set; }
