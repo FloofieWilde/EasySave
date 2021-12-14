@@ -23,25 +23,23 @@ namespace Client_IHM
             return server;
         }
 
-        public static void EcouterReseau(string message)
+        public static void EcouterReseau(Socket server)
         {
-            Socket server = SeConnecter();
-            byte[] msg = Encoding.ASCII.GetBytes(message);
-            server.Send(msg);
-
             string data;
             byte[] bytes = new byte[1024];
             while (true)
             {
                 int bytesRec = server.Receive(bytes);
                 data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                if (data.IndexOf("<EOF>") > -1)
-                {
-                    break;
-                }
             }
             //Deconnecter(server);
             //return data;
+        }
+
+        public static void SendMsg(string message, Socket server)
+        {
+            byte[] msg = Encoding.ASCII.GetBytes(message);
+            server.Send(msg);
         }
 
         public static void Deconnecter(Socket server)

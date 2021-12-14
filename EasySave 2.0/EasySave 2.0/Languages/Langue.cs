@@ -187,6 +187,11 @@ namespace Projet.Languages
             public string OptSizeAlter { get; set; }
             public string OptSizeNew { get; set; }
             public string OptSizeError { get; set; }
+            public string CopyStillRunning { get; set; }
+            public string CopyCancelled { get; set; }
+            public string CopyNo { get; set; }
+            public string CopyPause { get; set; }
+            public string CopyBusy { get; set; }
 
 
         }
