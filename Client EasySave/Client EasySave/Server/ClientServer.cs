@@ -23,15 +23,20 @@ namespace Projet.Server
 
         public static void EcouterReseau(Socket server, object sender)
         {
-            string data;
+            string data = "";
             byte[] bytes = new byte[1024];
             while (true)
             {
                 int bytesRec = server.Receive(bytes);
-                data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                if ((sender as BackgroundWorker).WorkerReportsProgress == true)
+                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                if (data.IndexOf("]") > -1)
                 {
-                    (sender as BackgroundWorker).ReportProgress(0, data);
+                    if ((sender as BackgroundWorker).WorkerReportsProgress == true)
+                    {
+                        (sender as BackgroundWorker).ReportProgress(0, data);
+                        EcouterReseau(server, sender);
+
+                    }
                 }
             }
             //Deconnecter(server);

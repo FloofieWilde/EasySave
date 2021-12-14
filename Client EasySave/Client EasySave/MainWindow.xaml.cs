@@ -1,4 +1,5 @@
-﻿using Projet.Server;
+﻿using Newtonsoft.Json;
+using Projet.Server;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -111,7 +112,9 @@ namespace Client_EasySave
         void worker_ProgressChangedListen(object sender, ProgressChangedEventArgs e)
         {
             string msg = e.UserState as string;
-            TestDistanceText.Text = msg;
+            List<Worker> Workers = JsonConvert.DeserializeObject<List<Worker>>(msg);
+            string text = Workers[8].Progress.ToString();
+            TestDistanceText.Text = text;
         }
 
 
