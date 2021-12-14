@@ -71,6 +71,7 @@ namespace Projet.SaveSystem
 
             foreach (FileInfo fi in source.GetFiles())
             {
+                MainWindow.resetEvent.WaitOne();
                 ProcessTime.Start();
                 if (Full == false)
                 {

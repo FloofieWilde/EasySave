@@ -3,8 +3,6 @@
   "Extension2": ".pdf",
   "Extension3": ".exe",
   "Extension4": ".zip",
-  "Extension5": ".png",
-  "Extension6": ".html",
-  "Extension7": ".docx",
-  "Extension8": ".jpg"
+  "Extension5": ".html",
+  "Extension6": ".docx"
 }

@@ -39,7 +39,7 @@ namespace EasySave_2._0
     {
         static Langue.Language dictLang = Langue.GetLang();
         static List<Worker> Workers = new List<Worker>();
-
+        public static ManualResetEvent resetEvent = new ManualResetEvent(false);
         public MainWindow()
         {
 
@@ -894,6 +894,7 @@ namespace EasySave_2._0
 
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
+            
             List<string> param = e.Argument as List<string>;
             string copyType = param[0];
             string source = param[1];
@@ -903,6 +904,7 @@ namespace EasySave_2._0
             else if (copyType == "False") { full = false; }
             Save save = new Save(source, destination, full);
             var DirInfo = save.Copy();
+            resetEvent.Set();
             save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender, e);
 
             //CurrentStateLog.Display();
@@ -956,6 +958,8 @@ namespace EasySave_2._0
                     idWorker = i;
                 }
             }
+            ManualResetEvent oui  = new ManualResetEvent(false);
+            
             if (Workers[idPreset - 1].worker.IsBusy && idPreset-1 == idWorker)
             {
                 List<long> param = e.UserState as List<long>;
@@ -966,6 +970,7 @@ namespace EasySave_2._0
                 ProgressBarCopy.Value = e.ProgressPercentage;
             }
         }
+
 
         private void ListPresetCopy_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
@@ -1129,18 +1134,20 @@ namespace EasySave_2._0
 
         private void PlayCopy_Click(object sender, RoutedEventArgs e)
         {
-            
+            resetEvent.Set();
         }
 
         private void PauseCopy_Click(object sender, RoutedEventArgs e)
         {
-
+            resetEvent.Reset();
         }
 
         private void StopCopy_Click(object sender, RoutedEventArgs e)
         {
+            
             int idPreset = Convert.ToInt32(CopyIdPreset.Text);
             Workers[idPreset-1].worker.CancelAsync();
+
         }
     }
 }
