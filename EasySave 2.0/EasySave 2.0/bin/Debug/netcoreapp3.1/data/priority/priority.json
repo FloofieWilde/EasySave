@@ -1,6 +1,6 @@
 {
-  "Priority1": ".txt",
-  "Priority2": ".pdf",
-  "Priority3": ".png",
-  "Priority4": ".html"
+  "Priority1": ".pdf",
+  "Priority2": ".png",
+  "Priority3": ".html",
+  "Priority4": ".txt"
 }

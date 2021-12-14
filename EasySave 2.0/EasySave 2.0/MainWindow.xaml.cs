@@ -971,6 +971,14 @@ namespace EasySave_2._0
             Workers[idWorker].RemainingFilesSize = remainingFilesSize;
             LogStates.UpdateJsonLogState(Workers);
 
+            //string msg = JsonConvert.SerializeObject(Workers, Formatting.Indented);
+            //BackgroundWorker workerSend = new BackgroundWorker();
+            ////string msg = TestDistanceText.Text;
+            //workerSend.DoWork += worker_DoWorkSend;
+            //workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
+            //workerSend.WorkerSupportsCancellation = true;
+            //workerSend.RunWorkerAsync(msg);
+
             if (Workers[idPreset - 1].worker.IsBusy && idPreset-1 == idWorker)
             {
                 CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {remainingFiles}";
@@ -1253,8 +1261,9 @@ namespace EasySave_2._0
 
         private void TestDistance_Click(object sender, RoutedEventArgs e)
         {
+            string msg = JsonConvert.SerializeObject(Workers, Formatting.Indented);
             BackgroundWorker workerSend = new BackgroundWorker();
-            string msg = TestDistanceText.Text;
+            //string msg = TestDistanceText.Text;
             workerSend.DoWork += worker_DoWorkSend;
             workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
             workerSend.WorkerSupportsCancellation = true;

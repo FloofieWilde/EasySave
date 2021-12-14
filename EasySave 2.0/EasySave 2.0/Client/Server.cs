@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 
 namespace Projet.Client
 {
@@ -47,6 +48,7 @@ namespace Projet.Client
         public static void SendMsg(string message, Socket server)
         {
             byte[] msg = Encoding.ASCII.GetBytes(message);
+            Thread.Sleep(500);
             server.Send(msg);
         }
 

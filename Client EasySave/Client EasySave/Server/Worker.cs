@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Threading;
 
 namespace Projet.Server
 {
@@ -20,5 +21,16 @@ namespace Projet.Server
         public double Progress { get; set; }
         public long RemainingFiles { get; set; }
         public long RemainingFilesSize { get; set; }
+        public ManualResetEvent PauseEvent { get; set; } = new ManualResetEvent(false);
+
+        public void Pause()
+        {
+            PauseEvent.Reset();
+        }
+
+        public void Resume()
+        {
+            PauseEvent.Set();
+        }
     }
 }

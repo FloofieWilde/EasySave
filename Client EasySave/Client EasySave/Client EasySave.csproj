@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="exit-logo.png" />
     <Resource Include="logo.png" />
     <Resource Include="pause.png" />
