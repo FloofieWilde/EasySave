@@ -82,9 +82,9 @@ namespace Projet.SaveSystem
             foreach (FileInfo fi in source.GetFiles())
             {
                 
-                bool ShouldProcess = false;
+                bool ShouldProcess = true;
 
-                foreach (var prio in PriorityExtensions)
+                /*foreach (var prio in PriorityExtensions)
                 {
                     
                     if (fi.Extension.StartsWith(prio.Value))
@@ -92,7 +92,7 @@ namespace Projet.SaveSystem
                         ShouldProcess = FirstProcess;
                     }
 
-                }
+                }*/
 
                 if (ShouldProcess == true)
                 {
@@ -151,10 +151,10 @@ namespace Projet.SaveSystem
                     FirstProcess = false;
                     DirectoryInfo sourceDirectory = new DirectoryInfo(SourceDir);
                     DirectoryInfo targetDirectory = new DirectoryInfo(TargetDir);
-                    ProcessCopy(sourceDirectory, targetDirectory, progressBar, sender, e);
+                    //ProcessCopy(sourceDirectory, targetDirectory, progressBar, sender, e);
                 }
             }
-            CurrentStateLog.End();
+            //CurrentStateLog.End();
 
         }
         /// <summary>
