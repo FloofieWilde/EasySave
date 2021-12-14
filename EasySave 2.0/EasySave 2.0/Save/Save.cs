@@ -87,7 +87,7 @@ namespace Projet.SaveSystem
                 foreach (var prio in PriorityExtensions)
                 {
                     
-                    if (fi.Extension.StartsWith(prio.Value))
+                    if (fi.Extension == prio.Value)
                     {
                         ShouldProcess = FirstProcess;
                     }
