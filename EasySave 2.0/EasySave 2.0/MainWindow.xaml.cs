@@ -916,6 +916,7 @@ namespace EasySave_2._0
             if (copyType == "True") { full = true; }
             else if (copyType == "False") { full = false; }
             Save save = new Save(source, destination, full);
+            ResetEvent.Set();
             var DirInfo = save.Copy();
             save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender, e);
         }
