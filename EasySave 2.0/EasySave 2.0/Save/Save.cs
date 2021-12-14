@@ -78,12 +78,12 @@ namespace Projet.SaveSystem
             CurrentStateLog.Display();
             long filesSize;
             Directory.CreateDirectory(target.FullName);
-
+            MainWindow.ResetEvent.WaitOne();
             foreach (FileInfo fi in source.GetFiles())
             {
-                bool ShouldProcess = false;
+                bool ShouldProcess = true;
 
-                foreach (var prio in PriorityExtensions)
+                /*foreach (var prio in PriorityExtensions)
                 {
                     if (fi.Extension == prio.Value)
                     {
@@ -94,7 +94,7 @@ namespace Projet.SaveSystem
                         if (!FirstProcess) ShouldProcess = true;
                     }
 
-                }
+                }*/
                 if (ShouldProcess == true)
                 {
                     ProcessTime.Start();
