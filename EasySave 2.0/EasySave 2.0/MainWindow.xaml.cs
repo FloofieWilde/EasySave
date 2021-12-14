@@ -862,10 +862,11 @@ namespace EasySave_2._0
                     CopyDate.Text = $"{dictLang.CopyDateStart} {staticLog.Timestamp}";
                     CopyNbFile.Text = $"{dictLang.CopyNbFiles} {staticLog.TotalFiles}";
                     CopySizeFile.Text = $"{dictLang.CopyFileSize} {staticLog.TotalSize}";
-                    CopyEnd.Text = "Copie en cours.";
+                    CopyStatut.Text = dictLang.CopyStillRunning;
                     RadioCopyPartial.IsChecked = false;
                     RadioCopyComplet.IsChecked = false;
                     ErrorCopy.Content = "";
+                    ProgressBarCopy.Foreground = Brushes.Green;
 
                     //BackgroundWorker workerCopy = new BackgroundWorker();
                     //workerCopy.DoWork += worker_DoWork;
@@ -877,7 +878,7 @@ namespace EasySave_2._0
                     List<string> param = new List<string>() { full.ToString(), source, destination };
                     if (Workers[id - 1].worker.IsBusy)
                     {
-                        ErrorCopy.Content = "BUSY!!";
+                        ErrorCopy.Content = dictLang.CopyBusy;
                     }
                     else
                     {
@@ -943,16 +944,18 @@ namespace EasySave_2._0
             {
                 Workers[idWorker].Statut = 2;
                 Workers[idWorker].Progress = ProgressBarCopy.Value;
+                ProgressBarCopy.Foreground = Brushes.Red;
 
-                CopyEnd.Text = "Copie annulée.";
+                CopyStatut.Text = dictLang.CopyCancelled;
             }
             else
             {
                 Workers[idWorker].Statut = 3;
                 if (idPreset-1 == idWorker)
                 {
-                    CopyEnd.Text = dictLang.CopySuccess;
+                    CopyStatut.Text = dictLang.CopySuccess;
                     ProgressBarCopy.Value = 100;
+                    ProgressBarCopy.Foreground = Brushes.Green;
                     CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
                     CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
                 }
@@ -1002,7 +1005,8 @@ namespace EasySave_2._0
                 CopyDate.Text = "";
                 CopyNbFile.Text = "";
                 CopySizeFile.Text = "";
-                CopyEnd.Text = "Pas de copie.";
+                CopyStatut.Text = dictLang.CopyNo;
+                ProgressBarCopy.Foreground = Brushes.Gray;
             }
             //Si copie en cours
             else if (Workers[id - 1].Statut == 1)
@@ -1012,8 +1016,9 @@ namespace EasySave_2._0
                 CopyDate.Text = $"{dictLang.CopyDateStart} {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"{dictLang.CopyNbFiles} {Workers[id - 1].TotalFiles}";
                 CopySizeFile.Text = $"{dictLang.CopyFileSize} {Workers[id - 1].TotalSize}";
-                CopyEnd.Text = "Copie en cours.";
+                CopyStatut.Text = dictLang.CopyStillRunning;
                 ProgressBarCopy.Value = Workers[id - 1].Progress;
+                ProgressBarCopy.Foreground = Brushes.Green;
                 CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
                 CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
             }
@@ -1025,8 +1030,9 @@ namespace EasySave_2._0
                 CopyDate.Text = $"{dictLang.CopyDateStart} {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"{dictLang.CopyNbFiles} {Workers[id - 1].TotalFiles}";
                 CopySizeFile.Text = $"{dictLang.CopyFileSize} {Workers[id - 1].TotalSize}";
-                CopyEnd.Text = "Copie annulée.";
+                CopyStatut.Text = dictLang.CopyCancelled;
                 ProgressBarCopy.Value = Workers[id - 1].Progress;
+                ProgressBarCopy.Foreground = Brushes.Red;
                 CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
                 CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
             }
@@ -1038,7 +1044,8 @@ namespace EasySave_2._0
                 CopyDate.Text = $"{dictLang.CopyDateStart} {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"{dictLang.CopyNbFiles} {Workers[id - 1].TotalFiles}";
                 CopySizeFile.Text = $"{dictLang.CopyFileSize} {Workers[id - 1].TotalSize}";
-                CopyEnd.Text = dictLang.CopySuccess;
+                CopyStatut.Text = dictLang.CopySuccess;
+                ProgressBarCopy.Foreground = Brushes.Green;
                 ProgressBarCopy.Value = 100;
                 CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
                 CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
@@ -1051,8 +1058,9 @@ namespace EasySave_2._0
                 CopyDate.Text = $"{dictLang.CopyDateStart} {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"{dictLang.CopyNbFiles} {Workers[id - 1].TotalFiles}";
                 CopySizeFile.Text = $"{dictLang.CopyFileSize} {Workers[id - 1].TotalSize}";
-                CopyEnd.Text = "Copie en pause.";
+                CopyStatut.Text = dictLang.CopyPause;
                 ProgressBarCopy.Value = Workers[id - 1].Progress;
+                ProgressBarCopy.Foreground = Brushes.Yellow;
                 CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
                 CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
             }
@@ -1101,7 +1109,7 @@ namespace EasySave_2._0
                 stock = ".xml";
             }
             Stockage.EditStockage(stock);
-            LabelCurrentStockage.Content = $"Stockage actuelle: {stock}";
+            LabelCurrentStockage.Content = $"{dictLang.OptStocNow} {stock}";
             EditStockagePannel.Visibility = Visibility.Collapsed;
         }
 
@@ -1213,7 +1221,11 @@ namespace EasySave_2._0
         private void StopCopy_Click(object sender, RoutedEventArgs e)
         {
             int idPreset = Convert.ToInt32(CopyIdPreset.Text);
-            Workers[idPreset-1].worker.CancelAsync();
+            if (Workers[idPreset - 1].worker.IsBusy)
+            {
+                ProgressBarCopy.Foreground = Brushes.Red;
+                Workers[idPreset - 1].worker.CancelAsync();
+            }
         }
     }
 }
