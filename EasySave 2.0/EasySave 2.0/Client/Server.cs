@@ -1,23 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 
 namespace Projet.Client
 {
-    class Server
+    public class Server
     {
-        static void Main(string[] args)
-        {
-
-            Socket server = SeConnecter();
-            Socket client = AccepterConnection(server);
-            EcouterReseau(client);
-            Deconnecter(server);
-        }
-
-        private static Socket SeConnecter()
+        public static Socket SeConnecter()
         {
             IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddress = host.AddressList[0];
@@ -28,31 +20,34 @@ namespace Projet.Client
             return server;
         }
 
-        private static Socket AccepterConnection(Socket server)
+        public static Socket AccepterConnection(Socket server)
         {
-
             Socket client = server.Accept();
             //Console.WriteLine("Connecté avec l'adresse: " + IPAddress.Parse(((IPEndPoint)client.RemoteEndPoint).Address.ToString()) + " et port: " + (((IPEndPoint)client.RemoteEndPoint).Port.ToString()));
             return client;
         }
 
-        private static void EcouterReseau(Socket client)
+        public static void EcouterReseau(Socket client, object sender)
         {
-            string data = null;
+            string data;
             byte[] bytes = new byte[1024];
             while (true)
             {
                 int bytesRec = client.Receive(bytes);
-                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                if (data.IndexOf("<EOF>") > -1)
+                data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                if ((sender as BackgroundWorker).WorkerReportsProgress == true)
                 {
-                    break;
+                    (sender as BackgroundWorker).ReportProgress(0, data);
                 }
-                Console.WriteLine("Client: " + data);
-                data = "Bonjour client";
-                byte[] msg = Encoding.ASCII.GetBytes(data);
-                client.Send(msg);
             }
+            //Deconnecter(server);
+            //return data;
+        }
+
+        public static void SendMsg(string message, Socket server)
+        {
+            byte[] msg = Encoding.ASCII.GetBytes(message);
+            server.Send(msg);
         }
 
         private static void Deconnecter(Socket server)

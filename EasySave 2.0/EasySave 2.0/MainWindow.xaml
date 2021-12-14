@@ -50,7 +50,7 @@
 
                 <ListBox Name="ListPresetCopy" Grid.Column="0" Margin="4" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" MouseDoubleClick="ListPresetCopy_MouseDoubleClick">
                 </ListBox>
-                
+
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="5*"/>
@@ -63,7 +63,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="1">
                         <Button Name="CopyStartButton" Content="START" Background="#FF450046" Foreground="#ad005d" FontFamily="Alien Encounters" Height="auto" MaxWidth="150" Click="CopyStartButton_Click"/>
-                        <Label Name="ErrorCopy" Content="" HorizontalAlignment="Center" Foreground="red"> </Label>
+                        <Label Name="ErrorCopy" Content="" HorizontalAlignment="Center" Foreground="red"></Label>
                     </StackPanel>
                 </Grid>
             </Grid>
@@ -86,7 +86,7 @@
                 <Run Name="CopySizeFile" Text=""/>
                 <LineBreak/>
                 <LineBreak/>
-                <Run Name="CopyEnd" Text="" Foreground="Green"/>
+                <Run Name="CopyStatut" Text="" Foreground="Green"/>
             </TextBlock>
             <Grid Name="ProgressCopy" Grid.Row="2" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
@@ -113,7 +113,7 @@
                     </Grid>
                     <ProgressBar Name="ProgressBarCopy"  Grid.Row="1" HorizontalAlignment="Center" Height="10" VerticalAlignment="Center" Width="300" Minimum="0" Maximum="100" Value="0"/>
                 </Grid>
-                
+
                 <Label Name="CopyFileRemaining" Grid.Column="0" Content="" HorizontalAlignment="Center" Foreground="green"/>
                 <Label Name="CopySizeRemaining" Grid.Column="2" Content="" HorizontalAlignment="Center" Foreground="green"/>
             </Grid>
@@ -193,7 +193,7 @@
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        
+
                         <Button Name="AddPresetButton" Grid.Column="0" Click="AddPresetButton_Click" Background="#FF450046" Margin="4">
                             <Image Source="/plus.png" Height="auto" Width="auto" Margin="5"/>
                         </Button>
@@ -225,7 +225,7 @@
                             <TextBox Name="AddPathSourceTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
                             <Button Name="AddSourceFileButton" Background="LightYellow" HorizontalAlignment="Left" FontSize="12" Foreground="Black" FontWeight="Normal" Content="" Click="AddSourceFileButton_Click" Grid.Column="1" Margin="4,0,0,0"/>
                         </Grid>
-                            
+
                         <Label Name="LabelDestinationAddPreset" Content="" Foreground="white"/>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -245,9 +245,9 @@
                             <Button Name="CancelAddPreset" Background="#FF450046" Margin="4" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" Content="" Click="CancelAddPreset_Click" Grid.Column="1" Padding="5"/>
                         </Grid>
                     </StackPanel>
-                    
-                    
-                    
+
+
+
                     <StackPanel Name="EditPannel" Grid.Row="1" Visibility="Collapsed">
                         <Label Name="LabelEditPreset" Content="" Foreground="white" FontSize="16"/>
                         <Label Name="PresetEditId" Content="" Foreground="white"/>
@@ -260,7 +260,7 @@
                             <TextBox Name="EditNameTextbox" Text="" TextWrapping="Wrap" Width="auto" Grid.Column="0"/>
                         </Grid>
                         <Label Name="LabelSourceEditPreset" Content="" HorizontalAlignment="left" Foreground="white"/>
-                        
+
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
@@ -317,7 +317,7 @@
                         <RowDefinition Height="1*"/>
                         <RowDefinition Height="5*"/>
                     </Grid.RowDefinitions>
-                    
+
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
@@ -335,7 +335,7 @@
                         <Button Name="DeleteExtensionButton" Grid.Column="2" Click="DeleteExtensionButton_Click" Background="#FF450046" Margin="4">
                             <Image Source="/delete.png" Height="auto" Width="auto" Margin="5"/>
                         </Button>
-                        
+
                     </Grid>
                     <StackPanel Name="AddExtensionPannel" Grid.Row="1" Visibility="Collapsed">
                         <Label Name="LabelAddExtension" Content="" Foreground="white" FontSize="16"/>
@@ -398,7 +398,7 @@
 
                 <ListBox Name="ListApplication" Grid.Column="0" Height="50" VerticalAlignment="Top" Width="auto" Margin="4" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal">
                 </ListBox>
-                
+
                 <Grid Name="ApplicationInterface" Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"/>
@@ -564,7 +564,7 @@
             </Grid>
         </Grid>
 
-        
+
 
         <Grid Name="LogsPannel" Row="2" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
@@ -574,5 +574,7 @@
             <ListBox Name="LogsListbox" Grid.Column="0" Height="auto" Width="auto" Margin="4" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" MouseDoubleClick="LogsListbox_MouseDoubleClick"></ListBox>
             <DataGrid Name="LogsGrid" Grid.Column="1" ItemsSource="{Binding}" Margin="4" Width="auto" Background="#7F450046" Foreground="#ad005d"/>
         </Grid>
+        <Button Name="TestDistance" Content="Envoyer" HorizontalAlignment="Left" Margin="285,161,0,0" Grid.Row="2" VerticalAlignment="Top" Click="TestDistance_Click"/>
+        <TextBox Name="TestDistanceText" HorizontalAlignment="Left" Margin="353,161,0,0" Grid.Row="2" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

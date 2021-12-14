@@ -1,0 +1,62 @@
+﻿<Window x:Class="Client_EasySave.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Client_EasySave"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="800" Background="#FF10100F">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*" MinHeight="100" MaxHeight="150"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="2*" MinHeight="50" MaxHeight="100"/>
+        </Grid.RowDefinitions>
+
+        <Image Grid.Row="0" HorizontalAlignment="Center" Source="/logo.png"></Image>
+        <Button Name="ExitButton" Click="ExitApp" ClickMode="Release" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Margin="5">
+            <Image Source="/exit-logo.png" Height="60" Width="60"/>
+        </Button>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <ListBox Name="ListPreset" Grid.Column="0" Height="auto" Width="auto" Margin="10" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal">
+            </ListBox>
+
+            <Grid Name="PanelInfo" Grid.Column="1" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Name="TextInfo" Height="auto" TextWrapping="Wrap" Text="" FontSize="18" FontFamily="Alien Encounters" Foreground="White" >
+                    <Run Name="Tets"></Run>
+                </TextBlock>
+
+                <ProgressBar Grid.Row="1" Foreground="#FF25BBBD" Background="#FF777777"></ProgressBar>
+                <Button Name="TestDistance" Content="Envoyer" HorizontalAlignment="Left" Margin="100,161,0,0" Grid.Row="0" VerticalAlignment="Top" Click="TestDistance_Click"/>
+                <TextBox Name="TestDistanceText" HorizontalAlignment="Left" Margin="160,161,0,0" Grid.Row="0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Name="Reload" Margin="10" Background="#FF450046">
+                <Image Source="/Relaod.png"/>
+            </Button>
+
+            <Button Grid.Column="1" Name="StartStop" Margin="10" Background="#FF450046" Click="PlayPauseFct">
+                <Image Name="PlayPause" Source="/pause.png" Margin="4"/>
+            </Button>
+        </Grid>
+    </Grid>
+</Window>

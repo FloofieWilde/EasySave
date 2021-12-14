@@ -1,8 +1,7 @@
 {
-  "Extension1": ".txt",
-  "Extension2": ".pdf",
-  "Extension3": ".exe",
-  "Extension4": ".zip",
-  "Extension5": ".html",
-  "Extension6": ".docx"
+  "Extension1": ".pdf",
+  "Extension2": ".exe",
+  "Extension3": ".zip",
+  "Extension4": ".html",
+  "Extension5": ".docx"
 }

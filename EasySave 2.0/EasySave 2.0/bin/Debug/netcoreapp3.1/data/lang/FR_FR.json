@@ -109,5 +109,13 @@
   "ErrorUnvalidPreset": "Votre preset n'est pas valide.",
   "ErrorEmptyFolder": "Votre dossier source est vide.",
   "ErrorOther": "Erreur.",
-  "ErrorChooseTypePreset": "Choisissez un preset et un type."
+  "ErrorChooseTypePreset": "Choisissez un preset et un type.",
+
+  "CopyStillRunning": "Copie en cours.",
+  "CopyCancelled": "Copie annulée.",
+  "CopyNo": "Pas de copie.",
+  "CopyPause": "Copie en pause.",
+  "CopyBusy": "Copie déjà en cours."
+
+
 }
