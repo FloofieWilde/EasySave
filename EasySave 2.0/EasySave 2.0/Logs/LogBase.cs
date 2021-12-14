@@ -70,6 +70,8 @@ namespace Projet.Logs
         {
             string currentMin = "/" + DateTimeStamp.Hour.ToString();
             currentMin += "h" + DateTimeStamp.Minute.ToString();
+            currentMin += "_" + DateTimeStamp.Second.ToString();
+            currentMin += "_" + DateTimeStamp.Millisecond.ToString();
             if (IsJson)
             {
                 currentMin += ".json";

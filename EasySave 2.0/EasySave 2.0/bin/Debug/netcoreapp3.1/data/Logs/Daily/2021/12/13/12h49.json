@@ -1,0 +1,113 @@
+{
+  "FileSize": 4,
+  "TransferTime": 4,
+  "EncryptTime": 2,
+  "Name": "Complete",
+  "SourceDir": "test1 - Copie (2).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 4,
+  "TransferTime": 1,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test1 - Copie (3).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 4,
+  "TransferTime": 0,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test1 - Copie (4).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 4,
+  "TransferTime": 1,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test1 - Copie (5).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 4,
+  "TransferTime": 0,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test1 - Copie (6).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 4,
+  "TransferTime": 0,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test1 - Copie (7).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 4,
+  "TransferTime": 1,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test1 - Copie.txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 4,
+  "TransferTime": 1,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test1.txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 3,
+  "TransferTime": 0,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test2 - Copie (2).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 3,
+  "TransferTime": 0,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test2 - Copie (3).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 3,
+  "TransferTime": 0,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test2 - Copie (4).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 3,
+  "TransferTime": 0,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test2 - Copie (5).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 3,
+  "TransferTime": 0,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test2 - Copie (6).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 3,
+  "TransferTime": 0,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test2 - Copie (7).txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 3,
+  "TransferTime": 0,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test2 - Copie.txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 3,
+  "TransferTime": 0,
+  "EncryptTime": 0,
+  "Name": "Complete",
+  "SourceDir": "test2.txt",
+  "TargetDir": "DossB"
+},

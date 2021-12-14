@@ -27,6 +27,8 @@ using System.ComponentModel;
 using Microsoft.Win32;
 using Projet.Priority;
 using Projet.Size;
+using System.Threading;
+using Projet.Save;
 
 namespace EasySave_2._0
 {
@@ -36,10 +38,23 @@ namespace EasySave_2._0
     public partial class MainWindow : Window
     {
         static Langue.Language dictLang = Langue.GetLang();
+        static List<Worker> Workers = new List<Worker>();
 
         public MainWindow()
         {
-            InitializeComponent();
+
+            bool aIsNewInstance = false;
+            Mutex myMutex = new Mutex(true, "MainWindow", out aIsNewInstance);
+            if (!aIsNewInstance)
+            {
+                MessageBox.Show("Already an instance is running...");
+                App.Current.Shutdown();
+            }
+            else
+            {
+                InitializeComponent();
+
+            }
         }
 
         public void ExitApp(object sender, RoutedEventArgs e)
@@ -63,6 +78,20 @@ namespace EasySave_2._0
             for (int i = 1; i <= nbPreset; i++)
             {
                 ListPresetCopy.Items.Add(i.ToString() + $" - {preset["Preset" + i.ToString()].Name}");
+                BackgroundWorker workerCopy = new BackgroundWorker();
+                workerCopy.DoWork += worker_DoWork;
+                workerCopy.RunWorkerCompleted += worker_RunWorkerCompleted;
+                workerCopy.ProgressChanged += worker_ProgressChanged;
+                workerCopy.WorkerReportsProgress = true;
+                workerCopy.WorkerSupportsCancellation = true;
+                Workers.Add( new Worker { 
+                    worker = workerCopy, 
+                    Id=i, 
+                    Statut = 0, 
+                    Name= preset["Preset" + i.ToString()].Name,
+                    Source = preset["Preset" + i.ToString()].PathSource,
+                    Destination = preset["Preset" + i.ToString()].PathDestination
+                });
             }
         }
 
@@ -93,6 +122,7 @@ namespace EasySave_2._0
             PriorityPannel.Visibility = Visibility.Collapsed;
             ApplicationPannel.Visibility = Visibility.Collapsed;
             StockagePannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
         }
 
         private void LogsButton_Click(object sender, RoutedEventArgs e)
@@ -103,7 +133,7 @@ namespace EasySave_2._0
             LogsListbox.Items.Clear();
             LogsGrid.DataContext = null;
             var dates = LogDaily.GetJsonDates();
-            foreach(string date in dates)
+            foreach (string date in dates)
             {
                 LogsListbox.Items.Add(date);
             }
@@ -137,6 +167,7 @@ namespace EasySave_2._0
             ApplicationPannel.Visibility = Visibility.Collapsed;
             StockagePannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
         }
 
         private void ExtensionButton_Click(object sender, RoutedEventArgs e)
@@ -151,6 +182,7 @@ namespace EasySave_2._0
             EditExtensionPannel.Visibility = Visibility.Collapsed;
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
             Dictionary<string, string> extension = Extension.GetJsonExtension();
             int nbExtension = extension.Count;
             for (int i = 1; i <= nbExtension; i++)
@@ -171,6 +203,7 @@ namespace EasySave_2._0
             AddExtensionPannel.Visibility = Visibility.Collapsed;
             EditExtensionPannel.Visibility = Visibility.Collapsed;
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
             Dictionary<string, string> priorities = Priority.GetJsonPriority();
             int nbPriority = priorities.Count;
             for (int i = 1; i <= nbPriority; i++)
@@ -186,7 +219,6 @@ namespace EasySave_2._0
             LabelEditTheApplication.Content = dictLang.Name;
             ConfirmEditApplication.Content = dictLang.Confirm;
             CancelEditApplication.Content = dictLang.Cancel;
-
             ListApplication.Items.Clear();
             LangPannel.Visibility = Visibility.Collapsed;
             PresetPannel.Visibility = Visibility.Collapsed;
@@ -195,6 +227,7 @@ namespace EasySave_2._0
             StockagePannel.Visibility = Visibility.Collapsed;
             EditApplicationPannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
             WorkSoft application = WorkSoftware.GetJsonApplication();
             ListApplication.Items.Add(application.Application);
         }
@@ -207,6 +240,7 @@ namespace EasySave_2._0
             ApplicationPannel.Visibility = Visibility.Collapsed;
             StockagePannel.Visibility = Visibility.Visible;
             PriorityPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
             JsonXml stockage = Stockage.GetJsonStockage();
             LabelCurrentStockage.Content = dictLang.OptStocNow + stockage.TypeStockage;
             EditStockageButton.Content = dictLang.OptStocAlter;
@@ -224,6 +258,7 @@ namespace EasySave_2._0
             StockagePannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
             SizePannel.Visibility = Visibility.Visible;
+            EditSizePannel.Visibility = Visibility.Collapsed;
             JsonSize size = Projet.Size.Size.GetJsonSize();
             LabelCurrentSize.Content = dictLang.OptCurrentSize + size.Size + " Ko";
             EditSizeButton.Content = dictLang.OptSizeAlter;
@@ -244,6 +279,7 @@ namespace EasySave_2._0
             EditPannel.Visibility = Visibility.Collapsed;
             DeletePannel.Visibility = Visibility.Collapsed;
             PriorityPannel.Visibility = Visibility.Collapsed;
+            SizePannel.Visibility = Visibility.Collapsed;
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
             int nbPreset = preset.Count;
             for (int i = 1; i <= nbPreset; i++)
@@ -280,7 +316,7 @@ namespace EasySave_2._0
             CancelEditPreset.Content = dictLang.Cancel;
             EditSourceFileButton.Content = dictLang.OptiPreBrowse;
             EditDestinationFileButton.Content = dictLang.OptiPreBrowse;
-            
+
             AddPannel.Visibility = Visibility.Collapsed;
             DeletePannel.Visibility = Visibility.Collapsed;
             Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
@@ -369,7 +405,7 @@ namespace EasySave_2._0
             if (openFolder.ShowDialog() == true)
             {
                 AddPathSourceTextbox.Text = System.IO.Path.GetDirectoryName(openFolder.FileName);
-            }  
+            }
         }
 
         private void AddDestinationFileButton_Click(object sender, RoutedEventArgs e)
@@ -778,10 +814,11 @@ namespace EasySave_2._0
             if ((RadioCopyComplet.IsChecked == true || RadioCopyPartial.IsChecked == true) && ListPresetCopy.SelectedIndex != -1)
             {
                 Dictionary<string, NameSourceDest> preset = Preset.GetJsonPreset();
-                string presetId = ListPresetCopy.SelectedItem.ToString().Substring(0, 1);
-                string name = preset["Preset" + presetId].Name;
-                string source = preset["Preset" + presetId].PathSource;
-                string destination = preset["Preset" + presetId].PathDestination;
+                string selectedItem = ListPresetCopy.SelectedItem.ToString();
+                int id = Convert.ToInt32(Preset.GetId(selectedItem));
+                string name = preset["Preset" + id].Name;
+                string source = preset["Preset" + id].PathSource;
+                string destination = preset["Preset" + id].PathDestination;
                 string copyType = "";
                 bool full = false;
                 if (RadioCopyComplet.IsChecked == true)
@@ -794,7 +831,7 @@ namespace EasySave_2._0
                     copyType = dictLang.PartialCopy;
                 }
 
-                
+
                 Save save = new Save(source, destination, full);
 
                 var DirInfo = save.Copy();
@@ -814,6 +851,7 @@ namespace EasySave_2._0
                 {
                     InfoCopy.Visibility = Visibility.Visible;
                     ProgressCopy.Visibility = Visibility.Visible;
+                    CopyIdPreset.Text = id.ToString();
                     CopyType.Text = $"{dictLang.CopyType} {copyType}";
                     CopyNamePreset.Text = $"{dictLang.CopyPreset} {name}";
                     CopySource.Text = $"{dictLang.CopyPathSource} {source}";
@@ -824,14 +862,37 @@ namespace EasySave_2._0
                     CopyDate.Text = $"{dictLang.CopyDateStart} {staticLog.Timestamp}";
                     CopyNbFile.Text = $"{dictLang.CopyNbFiles} {staticLog.TotalFiles}";
                     CopySizeFile.Text = $"{dictLang.CopyFileSize} {staticLog.TotalSize}";
+                    CopyEnd.Text = "Copie en cours.";
+                    RadioCopyPartial.IsChecked = false;
+                    RadioCopyComplet.IsChecked = false;
+                    ErrorCopy.Content = "";
 
-                    BackgroundWorker workerCopy = new BackgroundWorker();
-                    workerCopy.DoWork += worker_DoWork;
-                    workerCopy.RunWorkerCompleted += worker_RunWorkerCompleted;
-                    workerCopy.ProgressChanged += worker_ProgressChanged;
-                    workerCopy.WorkerReportsProgress = true;
+                    //BackgroundWorker workerCopy = new BackgroundWorker();
+                    //workerCopy.DoWork += worker_DoWork;
+                    //workerCopy.RunWorkerCompleted += worker_RunWorkerCompleted;
+                    //workerCopy.ProgressChanged += worker_ProgressChanged;
+                    //workerCopy.WorkerReportsProgress = true;
+                    //workerCopy.WorkerSupportsCancellation = true;
+
                     List<string> param = new List<string>() { full.ToString(), source, destination };
-                    workerCopy.RunWorkerAsync(param);
+                    if (Workers[id - 1].worker.IsBusy)
+                    {
+                        ErrorCopy.Content = "BUSY!!";
+                    }
+                    else
+                    {
+                        Workers[id - 1].Id = id;
+                        Workers[id - 1].Statut = 1;
+                        Workers[id - 1].CopyType = copyType;
+                        Workers[id - 1].Name = name;
+                        Workers[id - 1].Source = source;
+                        Workers[id - 1].Destination = destination;
+                        Workers[id - 1].DateStart = staticLog.Timestamp;
+                        Workers[id - 1].TotalFiles = staticLog.TotalFiles;
+                        Workers[id - 1].TotalSize = staticLog.TotalSize;
+                        Workers[id - 1].Progress = 0;
+                        Workers[id - 1].worker.RunWorkerAsync(param);
+                    }
 
                     //save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy);
 
@@ -862,31 +923,140 @@ namespace EasySave_2._0
             else if (copyType == "False") { full = false; }
             Save save = new Save(source, destination, full);
             var DirInfo = save.Copy();
-            save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender);
-
-            //CurrentStateLog.Display();
-            //(sender as BackgroundWorker).ReportProgress(CurrentStateLog.Progress);
+            save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender, e);
         }
 
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            CopyEnd.Text = dictLang.CopySuccess;
-            ProgressBarCopy.Value = 100;
-            CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
-            CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
+            //Statut: 0=Pas de copie ; 1=En cours ; 2=Annulé ; 3=Terminée ; 4=En pause
+            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+            int idWorker = 0;
+            BackgroundWorker currentWorker = sender as BackgroundWorker;
+            for (int i=0; i<Workers.Count; i++)
+            {
+                if (currentWorker == Workers[i].worker)
+                {
+                    idWorker = i;
+                }
+            }
+            if (e.Cancelled)
+            {
+                Workers[idWorker].Statut = 2;
+                Workers[idWorker].Progress = ProgressBarCopy.Value;
+
+                CopyEnd.Text = "Copie annulée.";
+            }
+            else
+            {
+                Workers[idWorker].Statut = 3;
+                if (idPreset-1 == idWorker)
+                {
+                    CopyEnd.Text = dictLang.CopySuccess;
+                    ProgressBarCopy.Value = 100;
+                    CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
+                    CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
+                }
+            }
         }
 
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+            int idWorker = 0;
+            BackgroundWorker currentWorker = sender as BackgroundWorker;
+            for (int i = 0; i < Workers.Count; i++)
+            {
+                if (currentWorker == Workers[i].worker)
+                {
+                    idWorker = i;
+                }
+            }
             List<long> param = e.UserState as List<long>;
             long remainingFiles = param[0];
-            long RemainingFilesSize = param[1];
-            CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {remainingFiles}";
-            CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {RemainingFilesSize}";
-            ProgressBarCopy.Value = e.ProgressPercentage;
-            
+            long remainingFilesSize = param[1];
+            Workers[idWorker].RemainingFiles = remainingFiles;
+            Workers[idWorker].RemainingFilesSize = remainingFilesSize;
+
+            if (Workers[idPreset - 1].worker.IsBusy && idPreset-1 == idWorker)
+            {
+                CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {remainingFiles}";
+                CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {remainingFilesSize}";
+                ProgressBarCopy.Value = e.ProgressPercentage;
+            }
         }
 
+        private void ListPresetCopy_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            string selectedItem = ListPresetCopy.SelectedItem.ToString();
+            int id = Convert.ToInt32(Preset.GetId(selectedItem));
+            InfoCopy.Visibility = Visibility.Visible;
+            CopyIdPreset.Text = id.ToString();
+            CopyNamePreset.Text = $"{dictLang.CopyPreset} {Workers[id - 1].Name}";
+            CopySource.Text = $"{dictLang.CopyPathSource} {Workers[id - 1].Source}";
+            CopyDestination.Text = $"{dictLang.CopyPathDest} {Workers[id - 1].Destination}";
+            //Si pas de copie
+            if (Workers[id-1].Statut == 0)
+            {
+                ProgressCopy.Visibility = Visibility.Collapsed;
+                CopyType.Text = "";
+                CopyDate.Text = "";
+                CopyNbFile.Text = "";
+                CopySizeFile.Text = "";
+                CopyEnd.Text = "Pas de copie.";
+            }
+            //Si copie en cours
+            else if (Workers[id - 1].Statut == 1)
+            {
+                ProgressCopy.Visibility = Visibility.Visible;
+                CopyType.Text = $"{dictLang.CopyType} {Workers[id - 1].CopyType}";
+                CopyDate.Text = $"{dictLang.CopyDateStart} {Workers[id - 1].DateStart}";
+                CopyNbFile.Text = $"{dictLang.CopyNbFiles} {Workers[id - 1].TotalFiles}";
+                CopySizeFile.Text = $"{dictLang.CopyFileSize} {Workers[id - 1].TotalSize}";
+                CopyEnd.Text = "Copie en cours.";
+                ProgressBarCopy.Value = Workers[id - 1].Progress;
+                CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
+                CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+            }
+            //Si copie annulé
+            else if (Workers[id - 1].Statut == 2)
+            {
+                ProgressCopy.Visibility = Visibility.Visible;
+                CopyType.Text = $"{dictLang.CopyType} {Workers[id - 1].CopyType}";
+                CopyDate.Text = $"{dictLang.CopyDateStart} {Workers[id - 1].DateStart}";
+                CopyNbFile.Text = $"{dictLang.CopyNbFiles} {Workers[id - 1].TotalFiles}";
+                CopySizeFile.Text = $"{dictLang.CopyFileSize} {Workers[id - 1].TotalSize}";
+                CopyEnd.Text = "Copie annulée.";
+                ProgressBarCopy.Value = Workers[id - 1].Progress;
+                CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
+                CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+            }
+            //Si copie terminée avec succès
+            else if (Workers[id - 1].Statut == 3)
+            {
+                ProgressCopy.Visibility = Visibility.Visible;
+                CopyType.Text = $"{dictLang.CopyType} {Workers[id - 1].CopyType}";
+                CopyDate.Text = $"{dictLang.CopyDateStart} {Workers[id - 1].DateStart}";
+                CopyNbFile.Text = $"{dictLang.CopyNbFiles} {Workers[id - 1].TotalFiles}";
+                CopySizeFile.Text = $"{dictLang.CopyFileSize} {Workers[id - 1].TotalSize}";
+                CopyEnd.Text = dictLang.CopySuccess;
+                ProgressBarCopy.Value = 100;
+                CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
+                CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
+            }
+            //Si copie en pause
+            else if (Workers[id - 1].Statut == 4)
+            {
+                ProgressCopy.Visibility = Visibility.Visible;
+                CopyType.Text = $"{dictLang.CopyType} {Workers[id - 1].CopyType}";
+                CopyDate.Text = $"{dictLang.CopyDateStart} {Workers[id - 1].DateStart}";
+                CopyNbFile.Text = $"{dictLang.CopyNbFiles} {Workers[id - 1].TotalFiles}";
+                CopySizeFile.Text = $"{dictLang.CopyFileSize} {Workers[id - 1].TotalSize}";
+                CopyEnd.Text = "Copie en pause.";
+                ProgressBarCopy.Value = Workers[id - 1].Progress;
+                CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
+                CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+            }
+        }
 
 
         private void EditApplicationButton_Click(object sender, RoutedEventArgs e)
@@ -968,7 +1138,7 @@ namespace EasySave_2._0
                 butt.Click += new RoutedEventHandler(ChangeLang_Click);
 
                 string PathImg = "imgs/" + name + ".png";
-                
+
                 Image img = new Image();
                 BitmapImage ImgBmp = new BitmapImage(new Uri(PathImg, UriKind.Relative));
                 img.Stretch = Stretch.Fill;
@@ -1032,7 +1202,7 @@ namespace EasySave_2._0
 
         private void PlayCopy_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void PauseCopy_Click(object sender, RoutedEventArgs e)
@@ -1042,7 +1212,8 @@ namespace EasySave_2._0
 
         private void StopCopy_Click(object sender, RoutedEventArgs e)
         {
-
+            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+            Workers[idPreset-1].worker.CancelAsync();
         }
     }
 }
