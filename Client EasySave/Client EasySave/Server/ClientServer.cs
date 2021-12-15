@@ -38,7 +38,7 @@ namespace Projet.Server
             byte[] bytes = new byte[1024];
             while (true)
             {
-                if (IsSocketConnected(server))
+                try
                 {
                     int bytesRec = server.Receive(bytes);
                     data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
@@ -50,6 +50,14 @@ namespace Projet.Server
                             EcouterReseau(server, sender);
                         }
                     }
+                }
+                catch (SocketException e)
+                {
+                    Console.WriteLine(e);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
                 }
             }
             //Deconnecter(server);

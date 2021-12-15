@@ -16,8 +16,16 @@ namespace Projet.Client
             IPAddress ipAddress = host.AddressList[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 55979);
             Socket server = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            server.Bind(localEndPoint);
-            server.Listen(10);
+            try
+            {
+                server.Bind(localEndPoint);
+                server.Listen(10);
+            }
+            
+            catch (SocketException e)
+            {
+                Console.WriteLine(e.ErrorCode);
+            }
             return server;
         }
 
@@ -34,7 +42,7 @@ namespace Projet.Client
             byte[] bytes = new byte[1024];
             while (true)
             {
-                if (IsSocketConnected(client))
+                try
                 {
                     int bytesRec = client.Receive(bytes);
                     data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
@@ -42,6 +50,10 @@ namespace Projet.Client
                     {
                         (sender as BackgroundWorker).ReportProgress(0, data);
                     }
+                }
+                catch (SocketException e)
+                {
+                    Console.WriteLine(e.ErrorCode);
                 }
             }
             //Deconnecter(server);
@@ -65,8 +77,16 @@ namespace Projet.Client
 
         public static void Deconnecter(Socket server)
         {
-            server.Shutdown(SocketShutdown.Both);
-            server.Close();
+            try
+            {
+                server.Shutdown(SocketShutdown.Both);
+                server.Close();
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine(e.ErrorCode);
+            }
+            
         }
 
         public static bool IsSocketConnected(Socket s)
