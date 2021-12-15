@@ -33,7 +33,7 @@
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Name="TextInfo" Height="auto" TextWrapping="Wrap" Text="" FontSize="14" Foreground="White">
+                <TextBlock Grid.Row="0" Name="TextInfo" Height="auto" TextWrapping="Wrap" Text="" FontSize="12" Foreground="White">
                     <Run Text="ID: "/>
                     <Run Name="CopyIdPreset" Text=""/>
                     <LineBreak/>
