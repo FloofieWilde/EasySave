@@ -575,6 +575,6 @@
             <DataGrid Name="LogsGrid" Grid.Column="1" ItemsSource="{Binding}" Margin="4" Width="auto" Background="#7F450046" Foreground="#ad005d"/>
         </Grid>
         <Button Name="TestDistance" Visibility="Collapsed" Content="Envoyer" HorizontalAlignment="Left" Margin="285,161,0,0" Grid.Row="2" VerticalAlignment="Top" Click="TestDistance_Click"/>
-        <TextBox Name="TestDistanceText" HorizontalAlignment="Left" Margin="353,161,0,0" Grid.Row="2" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox Name="TestDistanceText" Visibility="Collapsed" HorizontalAlignment="Left" Margin="353,161,0,0" Grid.Row="2" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>

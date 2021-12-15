@@ -90,7 +90,6 @@ namespace Client_EasySave
 
         public void Pause()
         {
-
             int id = Convert.ToInt32(CopyIdPreset.Text);
             BackgroundWorker workerSend = new BackgroundWorker();
             string msg = $"[{id},{1}]";
@@ -219,8 +218,6 @@ namespace Client_EasySave
                 CopyStatut.Text = $"{Workers[id - 1].Statut}";
                 Progressbar.Value = Workers[id - 1].Progress;
                 Progressbar.Foreground = Brushes.Green;
-                //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
-                //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
             }
 
             else if (Workers[id - 1].Statut == "CANCELLED")
@@ -234,8 +231,6 @@ namespace Client_EasySave
                 CopyStatut.Text = $"{Workers[id - 1].Statut}";
                 Progressbar.Value = Workers[id - 1].Progress;
                 Progressbar.Foreground = Brushes.Red;
-                //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
-                //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
             }
 
             else if (Workers[id - 1].Statut == "FINISHED")
@@ -249,8 +244,6 @@ namespace Client_EasySave
                 CopyStatut.Text = $"{Workers[id - 1].Statut}";
                 Progressbar.Value = Workers[id - 1].Progress;
                 Progressbar.Foreground = Brushes.Green;
-                //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
-                //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
             }
 
             else if (Workers[id - 1].Statut == "PAUSED")
@@ -264,8 +257,6 @@ namespace Client_EasySave
                 CopyStatut.Text = $"{Workers[id - 1].Statut}";
                 Progressbar.Value = Workers[id - 1].Progress;
                 Progressbar.Foreground = Brushes.Red;
-                //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
-                //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
             }
         }
 
