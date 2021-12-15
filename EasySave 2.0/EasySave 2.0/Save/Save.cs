@@ -28,15 +28,13 @@ namespace Projet.SaveSystem
         private string[] PriorityExtensions;
         private int CurrentIndexFolder = 0;
         private int TotalFolders;
-        public int WorkId;
 
-        public Save(string source, string target, bool full, int workId)
+        public Save(string source, string target, bool full)
         {
             SourceDir = source;
             TargetDir = target;
             Full = full;
             ProcessTime = new Stopwatch();
-            WorkId = workId;
         }
 
 
@@ -78,7 +76,7 @@ namespace Projet.SaveSystem
         /// <param name="target">Target Directory</param>
         /// 
 
-        public void ProcessCopy(DirectoryInfo source, DirectoryInfo target, ProgressBar progressBar, object sender, DoWorkEventArgs e)
+        public void ProcessCopy(DirectoryInfo source, DirectoryInfo target, ProgressBar progressBar, object sender, DoWorkEventArgs e, int workerId)
         {
             CurrentStateLog.Display();
             long filesSize;
@@ -86,6 +84,7 @@ namespace Projet.SaveSystem
             
             foreach (FileInfo fi in source.GetFiles())
             {
+
                 bool ShouldProcess = true;
 
                 /*foreach (string prio in PriorityExtensions)
@@ -135,17 +134,19 @@ namespace Projet.SaveSystem
                     }
                     //System.Threading.Thread.Sleep(250);
                 }
-                MainWindow.ResetEvents[WorkId].WaitOne();
+                MainWindow.Workers[workerId - 1].WorkEvent.WaitOne();
+
             }
 
-            
+
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
             {
+
                 CurrentIndexFolder++;
                 DirectoryInfo nextTargetSubDir =
                                 target.CreateSubdirectory(diSourceSubDir.Name);
                 CurrentStateLog.Save();
-                ProcessCopy(diSourceSubDir, nextTargetSubDir, progressBar, sender, e);
+                ProcessCopy(diSourceSubDir, nextTargetSubDir, progressBar, sender, e, workerId);
 
             }
             if (CurrentIndexFolder == TotalFolders)
