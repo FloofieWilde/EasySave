@@ -32,8 +32,6 @@ namespace Client_IHM
                 int bytesRec = server.Receive(bytes);
                 data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
             }
-            //Deconnecter(server);
-            //return data;
         }
 
         public static void SendMsg(string message, Socket client)
