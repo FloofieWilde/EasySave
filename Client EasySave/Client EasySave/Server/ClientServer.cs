@@ -27,17 +27,21 @@ namespace Projet.Server
             byte[] bytes = new byte[1024];
             while (true)
             {
-                int bytesRec = server.Receive(bytes);
-                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                if (data.IndexOf("]") > -1)
+                if (IsSocketConnected(server))
                 {
-                    if ((sender as BackgroundWorker).WorkerReportsProgress == true)
+                    int bytesRec = server.Receive(bytes);
+                    data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    if (data.IndexOf("]") > -1)
                     {
-                        (sender as BackgroundWorker).ReportProgress(0, data);
-                        EcouterReseau(server, sender);
-
+                        if ((sender as BackgroundWorker).WorkerReportsProgress == true)
+                        {
+                            (sender as BackgroundWorker).ReportProgress(0, data);
+                            EcouterReseau(server, sender);
+                        }
                     }
                 }
+                
+                
             }
             //Deconnecter(server);
             //return data;
@@ -53,6 +57,17 @@ namespace Projet.Server
         {
             server.Shutdown(SocketShutdown.Both);
             server.Close();
+        }
+
+        public static bool IsSocketConnected(Socket s)
+        {
+            /*bool part1 = s.Poll(1000, SelectMode.SelectRead);
+            bool part2 = (s.Available == 0);
+            if ((part1 && part2) || !s.Connected)
+                return false;
+            else
+                return true;*/
+            return !((s.Poll(1000, SelectMode.SelectRead) && (s.Available == 0)) || !s.Connected);
         }
     }
 }

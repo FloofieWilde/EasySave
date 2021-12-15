@@ -24,22 +24,40 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <ListBox Name="ListPreset" Grid.Column="0" Height="auto" Width="auto" Margin="10" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal">
+            <ListBox Name="ListPreset" Grid.Column="0" Height="auto" Width="auto" Margin="10" Background="#7F450046" Foreground="#ad005d" FontFamily="Alien Encounters" FontSize="14" FontWeight="Normal" MouseDoubleClick="ListPreset_MouseDoubleClick">
             </ListBox>
 
-            <Grid Name="PanelInfo" Grid.Column="1" Margin="10">
+            <Grid Name="PanelInfo" Grid.Column="1" Margin="10" Visibility="Collapsed">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="6*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Name="TextInfo" Height="auto" TextWrapping="Wrap" Text="" FontSize="18" FontFamily="Alien Encounters" Foreground="White" >
-                    <Run Name="Tets"></Run>
+                <TextBlock Grid.Row="0" Name="TextInfo" Height="auto" TextWrapping="Wrap" Text="" FontSize="14" Foreground="White">
+                    <Run Text="ID: "/>
+                    <Run Name="CopyIdPreset" Text=""/>
+                    <LineBreak/>
+                    <Run Name="CopyType" Text=""/>
+                    <LineBreak/>
+                    <Run Name="CopyNamePreset" Text=""/>
+                    <LineBreak/>
+                    <Run Name="CopySource" Text="" Foreground="Orange"/>
+                    <LineBreak/>
+                    <Run Name="CopyDestination" Text="" Foreground="Orange"/>
+                    <LineBreak/>
+                    <Run Name="CopyDate" Text=""/>
+                    <LineBreak/>
+                    <Run Name="CopyNbFile" Text=""/>
+                    <LineBreak/>
+                    <Run Name="CopySizeFile" Text=""/>
+                    <LineBreak/>
+                    <LineBreak/>
+                    <Run Name="CopyStatut" Text="" Foreground="Green"/>
                 </TextBlock>
 
-                <ProgressBar Grid.Row="1" Foreground="#FF25BBBD" Background="#FF777777"></ProgressBar>
-                <Button Name="TestDistance" Content="Envoyer" HorizontalAlignment="Left" Margin="100,161,0,0" Grid.Row="0" VerticalAlignment="Top" Click="TestDistance_Click"/>
-                <TextBox Name="TestDistanceText" HorizontalAlignment="Left" Margin="160,161,0,0" Grid.Row="0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <ProgressBar Name="Progressbar" Grid.Row="1" Foreground="#FF25BBBD" Background="#FF777777"></ProgressBar>
+                <Button Name="TestDistance" Visibility="Collapsed" Content="Envoyer" HorizontalAlignment="Left" Margin="100,161,0,0" Grid.Row="0" VerticalAlignment="Top" Click="TestDistance_Click"/>
+                <TextBox Name="TestDistanceText" Visibility="Collapsed" HorizontalAlignment="Left" Margin="160,161,0,0" Grid.Row="0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             </Grid>
 
         </Grid>
@@ -50,7 +68,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Name="Reload" Margin="10" Background="#FF450046">
+            <Button Grid.Column="0" Name="Reload" Margin="10" Background="#FF450046" Click="Reload_Click">
                 <Image Source="/Relaod.png"/>
             </Button>
 
