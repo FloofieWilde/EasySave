@@ -16,7 +16,6 @@ namespace Projet.Client
             IPAddress ipAddress = host.AddressList[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 55979);
             Socket server = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
             try
             {
                 server.Bind(localEndPoint);
@@ -30,15 +29,12 @@ namespace Projet.Client
             {
                 Console.WriteLine(e);
             }
-
-
             return server;
         }
 
         public static Socket AccepterConnection(Socket server)
         {
             Socket client = server.Accept();
-            //Console.WriteLine("Connecté avec l'adresse: " + IPAddress.Parse(((IPEndPoint)client.RemoteEndPoint).Address.ToString()) + " et port: " + (((IPEndPoint)client.RemoteEndPoint).Port.ToString()));
             return client;
         }
 
@@ -68,8 +64,6 @@ namespace Projet.Client
                     break;
                 }
             }
-            //Deconnecter(server);
-            //return data;
         }
 
         public static void SendMsg(string message, Socket server)
@@ -88,7 +82,6 @@ namespace Projet.Client
             {
                 Console.WriteLine(e);
             }
-
         }
 
         public static void Deconnecter(Socket server)
@@ -106,17 +99,6 @@ namespace Projet.Client
             {
                 Console.WriteLine(e);
             }
-
-        }
-
-        public static bool IsSocketConnected(Socket s)
-        {
-            bool part1 = s.Poll(1000, SelectMode.SelectRead);
-            bool part2 = (s.Available == 0);
-            if ((part1 && part2) || !s.Connected)
-                return false;
-            else
-                return true;
         }
     }
 }

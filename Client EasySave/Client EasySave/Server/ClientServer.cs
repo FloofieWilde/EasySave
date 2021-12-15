@@ -60,8 +60,6 @@ namespace Projet.Server
                     Console.WriteLine(e);
                 }
             }
-            //Deconnecter(server);
-            //return data;
         }
 
         public static void SendMsg(string message, Socket server)
@@ -86,17 +84,6 @@ namespace Projet.Server
                 Console.WriteLine(e);
             }
             
-        }
-
-        public static bool IsSocketConnected(Socket s)
-        {
-            /*bool part1 = s.Poll(1000, SelectMode.SelectRead);
-            bool part2 = (s.Available == 0);
-            if ((part1 && part2) || !s.Connected)
-                return false;
-            else
-                return true;*/
-            return !((s.Poll(1000, SelectMode.SelectRead) && (s.Available == 0)) || !s.Connected);
         }
     }
 }

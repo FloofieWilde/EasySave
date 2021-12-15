@@ -23,35 +23,6 @@ namespace Projet.Presets
         }
 
         /// <summary>
-        /// Method to choose which preset we want to edit
-        /// </summary>
-        /// <param name="preset"></param>
-        /// <returns>choice</returns>
-        public static string MakeChoicePreset(Dictionary<string, NameSourceDest> preset)
-        {
-            Langue.Language dictLang = Langue.GetLang();
-            int nbPreset = preset.Count;
-            Console.WriteLine("Nombre de travail de sauvegarde: " + nbPreset);
-            string choice = "0";
-            List<string> listOfChoice = new List<string>();
-            for (int i = 1; i <= nbPreset; i++)
-            {
-                listOfChoice.Add(i.ToString());
-            }
-            while (!listOfChoice.Contains(choice))
-            {
-                Console.WriteLine("\n" + dictLang.PreList);
-                Console.WriteLine(dictLang.PreMod);
-                for (int i = 1; i <= nbPreset; i++)
-                {
-                    Console.WriteLine(i.ToString() + $". {preset["Preset" + i.ToString()].Name}");
-                }
-                choice = Console.ReadLine();
-            }
-            return choice;
-        }
-
-        /// <summary>
         /// Method to edit the choosen preset
         /// </summary>
         public static void EditPreset(int id, string name, string source, string destination)
