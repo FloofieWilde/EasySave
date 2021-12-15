@@ -16,16 +16,22 @@ namespace Projet.Client
             IPAddress ipAddress = host.AddressList[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 55979);
             Socket server = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+
             try
             {
                 server.Bind(localEndPoint);
                 server.Listen(10);
             }
-            
             catch (SocketException e)
             {
-                Console.WriteLine(e.ErrorCode);
+                Console.WriteLine(e);
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+
             return server;
         }
 
@@ -53,7 +59,13 @@ namespace Projet.Client
                 }
                 catch (SocketException e)
                 {
-                    Console.WriteLine(e.ErrorCode);
+                    Console.WriteLine(e);
+                    break;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    break;
                 }
             }
             //Deconnecter(server);
@@ -70,7 +82,11 @@ namespace Projet.Client
             }
             catch (SocketException e)
             {
-                Console.WriteLine(e.ErrorCode);
+                Console.WriteLine(e);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
             }
 
         }
@@ -84,9 +100,13 @@ namespace Projet.Client
             }
             catch (SocketException e)
             {
-                Console.WriteLine(e.ErrorCode);
+                Console.WriteLine(e);
             }
-            
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
         }
 
         public static bool IsSocketConnected(Socket s)

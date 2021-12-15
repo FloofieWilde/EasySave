@@ -42,7 +42,7 @@ namespace Client_EasySave
         }
         public void ExitApp(object sender, RoutedEventArgs e)
         {
-            ClientServer.Deconnecter(server);
+            //ClientServer.Deconnecter(server);
             Environment.Exit(621);
         }
 

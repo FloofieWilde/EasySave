@@ -76,11 +76,7 @@ namespace EasySave_2._0
 
         public void ExitApp(object sender, RoutedEventArgs e)
         {
-            if (client != null)
-            {
-                Server.Deconnecter(server);
-            }
-            
+            Server.Deconnecter(server);
             Environment.Exit(621);
         }
 
