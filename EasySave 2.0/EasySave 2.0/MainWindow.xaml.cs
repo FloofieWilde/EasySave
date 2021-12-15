@@ -1014,7 +1014,7 @@ namespace EasySave_2._0
             List<long> param = e.UserState as List<long>;
             long remainingFiles = param[0];
             long remainingFilesSize = param[1];
-            Workers[idWorker].Statut = "ACTIVE";
+            //Workers[idWorker].Statut = "ACTIVE";
             Workers[idWorker].Progress = e.ProgressPercentage;
             Workers[idWorker].RemainingFiles = remainingFiles;
             Workers[idWorker].RemainingFilesSize = remainingFilesSize;
@@ -1289,11 +1289,11 @@ namespace EasySave_2._0
             if (ProgressBarCopy.Foreground == Brushes.Yellow)
             {
                 int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+                Workers[idPreset - 1].Statut = "ACTIVE";
+                CopyStatut.Text = dictLang.CopyStillRunning;
                 Workers[idPreset - 1].WorkEvent.Set();
                 ProgressBarCopy.Foreground = Brushes.Green;
-                Workers[idPreset - 1].Statut = "ACTIVE";
             }
-
         }
 
         private void PauseCopy_Click(object sender, RoutedEventArgs e)
@@ -1302,8 +1302,16 @@ namespace EasySave_2._0
             if (Workers[idPreset - 1].worker.IsBusy && ProgressBarCopy.Foreground != Brushes.Red)
             {
                 ProgressBarCopy.Foreground = Brushes.Yellow;
-                Workers[idPreset - 1].WorkEvent.Reset();
                 Workers[idPreset - 1].Statut = "PAUSED";
+                CopyStatut.Text = dictLang.CopyPause;
+                Workers[idPreset - 1].WorkEvent.Reset();
+            }
+            if (client != null)
+            {
+                BackgroundWorker workerSendUpdate = new BackgroundWorker();
+                workerSendUpdate.DoWork += worker_DoWorkSend;
+                string message = JsonConvert.SerializeObject(Workers, Formatting.Indented);
+                workerSendUpdate.RunWorkerAsync(message);
             }
         }
 
@@ -1314,8 +1322,8 @@ namespace EasySave_2._0
             {
                 ProgressBarCopy.Foreground = Brushes.Red;
                 Workers[idPreset - 1].Statut = "CANCELLED";
+                CopyStatut.Text = dictLang.CopyCancelled;
                 Workers[idPreset - 1].worker.CancelAsync();
-
             }
         }
 
@@ -1370,8 +1378,9 @@ namespace EasySave_2._0
             {
                 if (Workers[idMessage - 1].worker.IsBusy)
                 {
-                    Workers[idMessage - 1].worker.CancelAsync();
                     Workers[idMessage - 1].Statut = "CANCELLED";
+                    CopyStatut.Text = dictLang.CopyCancelled;
+                    Workers[idMessage - 1].worker.CancelAsync();
                     if (idMessage == idPreset)
                     {
                         ProgressBarCopy.Foreground = Brushes.Red;
@@ -1395,12 +1404,19 @@ namespace EasySave_2._0
                 //}
                 if (Workers[idMessage - 1].Statut == "ACTIVE")
                 {
-                    
-                    Workers[idMessage - 1].WorkEvent.Reset();
                     Workers[idMessage - 1].Statut = "PAUSED";
+                    CopyStatut.Text = dictLang.CopyPause;
+                    Workers[idMessage - 1].WorkEvent.Reset();
                     if (idMessage == idPreset)
                     {
                         ProgressBarCopy.Foreground = Brushes.Yellow;
+                    }
+                    if (client != null)
+                    {
+                        BackgroundWorker workerSendUpdate = new BackgroundWorker();
+                        workerSendUpdate.DoWork += worker_DoWorkSend;
+                        string message = JsonConvert.SerializeObject(Workers, Formatting.Indented);
+                        workerSendUpdate.RunWorkerAsync(message);
                     }
                 }
             }
@@ -1422,6 +1438,7 @@ namespace EasySave_2._0
                 if (Workers[idMessage - 1].Statut == "PAUSED")
                 {
                     Workers[idMessage - 1].WorkEvent.Set();
+                    CopyStatut.Text = dictLang.CopyStillRunning;
                     Workers[idMessage - 1].Statut = "ACTIVE";
                     if(idMessage == idPreset)
                     {
