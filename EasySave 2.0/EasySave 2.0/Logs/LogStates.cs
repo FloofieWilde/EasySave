@@ -19,7 +19,14 @@ namespace Projet.Logs
         public static void UpdateJsonLogState(List<Worker> Workers)
         {
             string json = JsonConvert.SerializeObject(Workers, Formatting.Indented);
-            File.WriteAllText("./data/Logs/logstate.json", json);
+            try
+            {
+                File.WriteAllText("./data/Logs/logstate.json", json);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }
