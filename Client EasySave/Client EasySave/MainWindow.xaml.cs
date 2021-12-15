@@ -46,8 +46,6 @@ namespace Client_EasySave
             Environment.Exit(621);
         }
 
-        
-
         public void PlayPauseFct(object sender, RoutedEventArgs e)
         {
 
@@ -55,14 +53,13 @@ namespace Client_EasySave
             {
                 PlayPause.Source = new BitmapImage(new Uri("Play.png", UriKind.Relative));
                 PPState = "Play";
-                Play();
+                Pause();
                 UpdateInfos();
-
             }
             else if (PPState == "Play"){
                 PlayPause.Source = new BitmapImage(new Uri("Pause.png", UriKind.Relative));
                 PPState = "Pause";
-                Pause();
+                Play();
                 UpdateInfos();
             }
         }
@@ -82,16 +79,40 @@ namespace Client_EasySave
 
         public void Play()
         {
-            
+            int id = Convert.ToInt32(CopyIdPreset.Text);
+            BackgroundWorker workerSend = new BackgroundWorker();
+            string msg = $"[{id},{2}]";
+            workerSend.DoWork += worker_DoWorkSend;
+            workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
+            workerSend.WorkerSupportsCancellation = true;
+            workerSend.RunWorkerAsync(msg);
         }
 
         public void Pause()
         {
 
+            int id = Convert.ToInt32(CopyIdPreset.Text);
+            BackgroundWorker workerSend = new BackgroundWorker();
+            string msg = $"[{id},{1}]";
+            workerSend.DoWork += worker_DoWorkSend;
+            workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
+            workerSend.WorkerSupportsCancellation = true;
+            workerSend.RunWorkerAsync(msg);
+        }
+
+        private void Stop_Click(object sender, RoutedEventArgs e)
+        {
+            int id = Convert.ToInt32(CopyIdPreset.Text);
+            BackgroundWorker workerSend = new BackgroundWorker();
+            string msg = $"[{id},{0}]";
+            workerSend.DoWork += worker_DoWorkSend;
+            workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
+            workerSend.WorkerSupportsCancellation = true;
+            workerSend.RunWorkerAsync(msg);
         }
 
 
-
+        ///BACKGROUNDWORKERS
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             server = ClientServer.SeConnecter();
@@ -128,42 +149,40 @@ namespace Client_EasySave
             {
                 PanelInfo.Visibility = Visibility.Visible;
                 int id = Convert.ToInt32(CopyIdPreset.Text);
-                CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
-               /* Workers[id - 1].RemainingFilesSize = Workers[id - 1].RemainingFilesSize/1024;
-                Workers[id - 1].TotalSize = Workers[id - 1].TotalSize/1024;*/
-                CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id-1].RemainingFilesSize} / {Workers[id - 1].TotalSize} Mo";
+                /* Workers[id - 1].RemainingFilesSize = Workers[id - 1].RemainingFilesSize/1024;
+                 Workers[id - 1].TotalSize = Workers[id - 1].TotalSize/1024;*/
 
                 if (Workers[id - 1].Statut == "ACTIVE")
                 {
                     CopyStatut.Text = $"{Workers[id - 1].Statut}";
                     Progressbar.Value = Workers[id - 1].Progress;
                     Progressbar.Foreground = Brushes.Green;
-                    //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
-                    //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+                    CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
+                    CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id - 1].RemainingFilesSize} / {Workers[id - 1].TotalSize} Mo";
                 }
                 else if (Workers[id - 1].Statut == "CANCELLED")
                 {
                     CopyStatut.Text = $"{Workers[id - 1].Statut}";
                     Progressbar.Value = Workers[id - 1].Progress;
                     Progressbar.Foreground = Brushes.Red;
-                    //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
-                    //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+                    CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
+                    CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id - 1].RemainingFilesSize} / {Workers[id - 1].TotalSize} Mo";
                 }
                 else if (Workers[id - 1].Statut == "FINISHED")
                 {
                     CopyStatut.Text = $"{Workers[id - 1].Statut}";
                     Progressbar.Value = Workers[id - 1].Progress;
                     Progressbar.Foreground = Brushes.Green;
-                    //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
-                    //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+                    CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
+                    CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id - 1].RemainingFilesSize} / {Workers[id - 1].TotalSize} Mo";
                 }
                 else if (Workers[id - 1].Statut == "PAUSED")
                 {
                     CopyStatut.Text = $"{Workers[id - 1].Statut}";
                     Progressbar.Value = Workers[id - 1].Progress;
                     Progressbar.Foreground = Brushes.Yellow;
-                    //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
-                    //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+                    CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
+                    CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id - 1].RemainingFilesSize} / {Workers[id - 1].TotalSize} Mo";
                 }
             }
         }
@@ -181,6 +200,7 @@ namespace Client_EasySave
             if (Workers[id - 1].Statut == "INACTIVE")
             {
                 Progressbar.Visibility = Visibility.Collapsed;
+                BoutonPannel.Visibility = Visibility.Collapsed;
                 CopyType.Text = "";
                 CopyDate.Text = "";
                 CopyNbFile.Text = "";
@@ -191,6 +211,7 @@ namespace Client_EasySave
             else if (Workers[id-1].Statut == "ACTIVE")
             {
                 Progressbar.Visibility = Visibility.Visible;
+                BoutonPannel.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
@@ -205,6 +226,7 @@ namespace Client_EasySave
             else if (Workers[id - 1].Statut == "CANCELLED")
             {
                 Progressbar.Visibility = Visibility.Visible;
+                BoutonPannel.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
@@ -219,6 +241,7 @@ namespace Client_EasySave
             else if (Workers[id - 1].Statut == "FINISHED")
             {
                 Progressbar.Visibility = Visibility.Visible;
+                BoutonPannel.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
@@ -233,6 +256,7 @@ namespace Client_EasySave
             else if (Workers[id - 1].Statut == "PAUSED")
             {
                 Progressbar.Visibility = Visibility.Visible;
+                BoutonPannel.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";

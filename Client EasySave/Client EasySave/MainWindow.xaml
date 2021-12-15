@@ -62,7 +62,7 @@
 
         </Grid>
 
-        <Grid Grid.Row="2">
+        <Grid Name="BoutonPannel" Grid.Row="2" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -75,7 +75,7 @@
                 <Image Source="/Relaod.png"/>
             </Button>
 
-            <Button Grid.Column="2" Name="Stop" Margin="10" Background="#FF450046" Click="PlayPauseFct">
+            <Button Grid.Column="2" Name="Stop" Margin="10" Background="#FF450046" Click="Stop_Click">
                 <Image Name="BtnStop" Source="/Stop.png" Margin="4"/>
             </Button>
 

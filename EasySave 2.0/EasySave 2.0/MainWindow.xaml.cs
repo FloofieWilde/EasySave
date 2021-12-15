@@ -947,10 +947,14 @@ namespace EasySave_2._0
             }
             if (e.Cancelled)
             {
-                Workers[idWorker].Statut = "CANCELLED";
-                ProgressBarCopy.Foreground = Brushes.Red;
+                if(Workers[idPreset-1].Statut == "CANCELLED")
+                {
+                    ProgressBarCopy.Foreground = Brushes.Red;
+                    CopyStatut.Text = dictLang.CopyCancelled;
+                }
+                //Workers[idWorker].Statut = "CANCELLED";
+                
                 LogStates.UpdateJsonLogState(Workers);
-                CopyStatut.Text = dictLang.CopyCancelled;
 
                 if (client != null)
                 {
@@ -1266,6 +1270,7 @@ namespace EasySave_2._0
             if (Workers[idPreset - 1].worker.IsBusy)
             {
                 ProgressBarCopy.Foreground = Brushes.Red;
+                Workers[idPreset - 1].Statut = "CANCELLED";
                 Workers[idPreset - 1].worker.CancelAsync();
             }
         }
@@ -1311,7 +1316,32 @@ namespace EasySave_2._0
         void worker_ProgressChangedListen(object sender, ProgressChangedEventArgs e)
         {
             string msg = e.UserState as string;
-            TestDistanceText.Text = msg;
+            List<int> messageComplet = JsonConvert.DeserializeObject<List<int>>(msg);
+            TestDistanceText.Text = messageComplet[1].ToString();
+            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+            int idMessage = messageComplet[0];
+
+            //Si le client clique sur stop
+            if (messageComplet[1] == 0)
+            {
+                if (Workers[idMessage - 1].worker.IsBusy)
+                {
+                    Workers[idMessage - 1].worker.CancelAsync();
+                    Workers[idMessage - 1].Statut = "CANCELLED";
+                }
+            }
+
+            //Si le client clique sur pause
+            else if(messageComplet[1] == 1)
+            {
+
+            }
+
+            //Si le client clique sur play
+            else if (messageComplet[1] == 2)
+            {
+
+            }
         }
     }
 }
