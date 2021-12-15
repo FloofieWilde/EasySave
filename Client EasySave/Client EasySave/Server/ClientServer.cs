@@ -40,8 +40,6 @@ namespace Projet.Server
                         }
                     }
                 }
-                
-                
             }
             //Deconnecter(server);
             //return data;

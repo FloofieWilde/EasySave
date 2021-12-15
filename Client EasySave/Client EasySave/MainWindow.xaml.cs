@@ -118,21 +118,50 @@ namespace Client_EasySave
         {
             string msg = e.UserState as string;
             Workers = JsonConvert.DeserializeObject<List<Worker>>(msg);
-            //string text = Workers[7].Progress.ToString();
-            //TestDistanceText.Text = text;
-            //string idPreset = CopyIdPreset.Text;
-            //int id = Convert.ToInt32(idPreset);
-            Progressbar.Value = Workers[7].Progress;
+
             ListPreset.Items.Clear();
             for (int i = 1; i <= Workers.Count; i++)
             {
                 ListPreset.Items.Add($"{i} - {Workers[i-1].Name}");
             }
-            //PanelInfo.Visibility = Visibility.Visible;
-            ////CopyIdPreset.Text = id.ToString();
-            //CopyNamePreset.Text = $"Nom: {Workers[7].Name}";
-            //CopySource.Text = $"Source: {Workers[7].Source}";
-            //CopyDestination.Text = $"Destination: {Workers[7].Destination}";
+            if (CopyIdPreset.Text != "")
+            {
+                PanelInfo.Visibility = Visibility.Visible;
+                int id = Convert.ToInt32(CopyIdPreset.Text);
+                Progressbar.Value = Workers[id-1].Progress;
+                if (Workers[id - 1].Statut == "ACTIVE")
+                {
+                    CopyStatut.Text = $"{Workers[id - 1].Statut}";
+                    Progressbar.Value = Workers[id - 1].Progress;
+                    Progressbar.Foreground = Brushes.Green;
+                    //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
+                    //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+                }
+                else if (Workers[id - 1].Statut == "CANCELLED")
+                {
+                    CopyStatut.Text = $"{Workers[id - 1].Statut}";
+                    Progressbar.Value = Workers[id - 1].Progress;
+                    Progressbar.Foreground = Brushes.Red;
+                    //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
+                    //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+                }
+                else if (Workers[id - 1].Statut == "FINISHED")
+                {
+                    CopyStatut.Text = $"{Workers[id - 1].Statut}";
+                    Progressbar.Value = Workers[id - 1].Progress;
+                    Progressbar.Foreground = Brushes.Green;
+                    //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
+                    //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+                }
+                else if (Workers[id - 1].Statut == "PAUSED")
+                {
+                    CopyStatut.Text = $"{Workers[id - 1].Statut}";
+                    Progressbar.Value = Workers[id - 1].Progress;
+                    Progressbar.Foreground = Brushes.Red;
+                    //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
+                    //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+                }
+            }
         }
 
         private void ListPreset_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -141,15 +170,71 @@ namespace Client_EasySave
             int id = Convert.ToInt32(Calcule.GetId(selectedItem));
             PanelInfo.Visibility = Visibility.Visible;
             CopyIdPreset.Text = id.ToString();
-            CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
             CopyNamePreset.Text = $"Nom: {Workers[id-1].Name}";
             CopySource.Text = $"Source: {Workers[id-1].Source}";
             CopyDestination.Text = $"Destination: {Workers[id-1].Destination}";
-            CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
-            CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
-            CopySizeFile.Text = $"Taille total des fichiers: {Workers[id - 1].TotalSize}";
-            CopyStatut.Text = $"{Workers[id - 1].Statut}";
-            Progressbar.Value = Workers[id - 1].Progress;
+
+            if (Workers[id - 1].Statut == "INACTIVE")
+            {
+                Progressbar.Visibility = Visibility.Collapsed;
+                CopyType.Text = "";
+                CopyDate.Text = "";
+                CopyNbFile.Text = "";
+                CopySizeFile.Text = "";
+                CopyStatut.Text = Workers[id - 1].Statut;
+                Progressbar.Foreground = Brushes.Gray;
+            }
+            else if (Workers[id-1].Statut == "ACTIVE")
+            {
+                CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
+                CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
+                CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
+                CopySizeFile.Text = $"Taille total des fichiers: {Workers[id - 1].TotalSize}";
+                CopyStatut.Text = $"{Workers[id - 1].Statut}";
+                Progressbar.Value = Workers[id - 1].Progress;
+                Progressbar.Foreground = Brushes.Green;
+                //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
+                //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+            }
+
+            else if (Workers[id - 1].Statut == "CANCELLED")
+            {
+                CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
+                CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
+                CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
+                CopySizeFile.Text = $"Taille total des fichiers: {Workers[id - 1].TotalSize}";
+                CopyStatut.Text = $"{Workers[id - 1].Statut}";
+                Progressbar.Value = Workers[id - 1].Progress;
+                Progressbar.Foreground = Brushes.Red;
+                //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
+                //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+            }
+
+            else if (Workers[id - 1].Statut == "FINISHED")
+            {
+                CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
+                CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
+                CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
+                CopySizeFile.Text = $"Taille total des fichiers: {Workers[id - 1].TotalSize}";
+                CopyStatut.Text = $"{Workers[id - 1].Statut}";
+                Progressbar.Value = Workers[id - 1].Progress;
+                Progressbar.Foreground = Brushes.Green;
+                //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
+                //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+            }
+
+            else if (Workers[id - 1].Statut == "PAUSED")
+            {
+                CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
+                CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
+                CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
+                CopySizeFile.Text = $"Taille total des fichiers: {Workers[id - 1].TotalSize}";
+                CopyStatut.Text = $"{Workers[id - 1].Statut}";
+                Progressbar.Value = Workers[id - 1].Progress;
+                Progressbar.Foreground = Brushes.Red;
+                //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
+                //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
+            }
         }
 
 
