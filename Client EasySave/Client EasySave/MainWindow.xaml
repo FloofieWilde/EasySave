@@ -66,13 +66,20 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Name="Reload" Margin="10" Background="#FF450046" Click="Reload_Click">
+            <Button Grid.Column="1" Name="Reload" Margin="10" Background="#FF450046" Click="Reload_Click">
                 <Image Source="/Relaod.png"/>
             </Button>
 
-            <Button Grid.Column="1" Name="StartStop" Margin="10" Background="#FF450046" Click="PlayPauseFct">
+            <Button Grid.Column="2" Name="Stop" Margin="10" Background="#FF450046" Click="PlayPauseFct">
+                <Image Name="BtnStop" Source="/Stop.png" Margin="4"/>
+            </Button>
+
+            <Button Grid.Column="3" Name="StartPause" Margin="10" Background="#FF450046" Click="PlayPauseFct">
                 <Image Name="PlayPause" Source="/pause.png" Margin="4"/>
             </Button>
         </Grid>

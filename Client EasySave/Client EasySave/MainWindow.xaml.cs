@@ -128,6 +128,11 @@ namespace Client_EasySave
             {
                 PanelInfo.Visibility = Visibility.Visible;
                 int id = Convert.ToInt32(CopyIdPreset.Text);
+                CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
+               /* Workers[id - 1].RemainingFilesSize = Workers[id - 1].RemainingFilesSize/1024;
+                Workers[id - 1].TotalSize = Workers[id - 1].TotalSize/1024;*/
+                CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id-1].RemainingFilesSize} / {Workers[id - 1].TotalSize} Mo";
+
                 if (Workers[id - 1].Statut == "ACTIVE")
                 {
                     CopyStatut.Text = $"{Workers[id - 1].Statut}";
@@ -156,7 +161,7 @@ namespace Client_EasySave
                 {
                     CopyStatut.Text = $"{Workers[id - 1].Statut}";
                     Progressbar.Value = Workers[id - 1].Progress;
-                    Progressbar.Foreground = Brushes.Red;
+                    Progressbar.Foreground = Brushes.Yellow;
                     //CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {Workers[id - 1].RemainingFiles}";
                     //CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
                 }
@@ -188,8 +193,8 @@ namespace Client_EasySave
                 Progressbar.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
-                CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
-                CopySizeFile.Text = $"Taille total des fichiers: {Workers[id - 1].TotalSize}";
+                CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
+                CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id-1].RemainingFilesSize} / {Workers[id - 1].TotalSize} Mo";
                 CopyStatut.Text = $"{Workers[id - 1].Statut}";
                 Progressbar.Value = Workers[id - 1].Progress;
                 Progressbar.Foreground = Brushes.Green;
@@ -202,8 +207,8 @@ namespace Client_EasySave
                 Progressbar.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
-                CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
-                CopySizeFile.Text = $"Taille total des fichiers: {Workers[id - 1].TotalSize}";
+                CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
+                                CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id-1].RemainingFilesSize} / {Workers[id - 1].TotalSize} Mo";
                 CopyStatut.Text = $"{Workers[id - 1].Statut}";
                 Progressbar.Value = Workers[id - 1].Progress;
                 Progressbar.Foreground = Brushes.Red;
@@ -216,8 +221,8 @@ namespace Client_EasySave
                 Progressbar.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
-                CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
-                CopySizeFile.Text = $"Taille total des fichiers: {Workers[id - 1].TotalSize}";
+                CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
+                                CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id-1].RemainingFilesSize} / {Workers[id - 1].TotalSize} Mo";
                 CopyStatut.Text = $"{Workers[id - 1].Statut}";
                 Progressbar.Value = Workers[id - 1].Progress;
                 Progressbar.Foreground = Brushes.Green;
@@ -230,8 +235,8 @@ namespace Client_EasySave
                 Progressbar.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
-                CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
-                CopySizeFile.Text = $"Taille total des fichiers: {Workers[id - 1].TotalSize}";
+                CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
+                CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id-1].RemainingFilesSize} / {Workers[id - 1].TotalSize} Mo";
                 CopyStatut.Text = $"{Workers[id - 1].Statut}";
                 Progressbar.Value = Workers[id - 1].Progress;
                 Progressbar.Foreground = Brushes.Red;

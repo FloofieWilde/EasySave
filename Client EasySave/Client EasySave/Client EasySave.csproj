@@ -13,6 +13,7 @@
     <None Remove="pause.png" />
     <None Remove="Play.png" />
     <None Remove="Relaod.png" />
+    <None Remove="Stop.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +26,7 @@
     <Resource Include="pause.png" />
     <Resource Include="Play.png" />
     <Resource Include="Relaod.png" />
+    <Resource Include="Stop.png" />
   </ItemGroup>
 
 </Project>
