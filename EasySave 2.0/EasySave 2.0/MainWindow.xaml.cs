@@ -109,8 +109,9 @@ namespace EasySave_2._0
                 workerCopy.WorkerSupportsCancellation = true;
                 ManualResetEvent tempWorkEvent = new ManualResetEvent(false);
                 Workers.Add( new Worker { 
-                    worker = workerCopy, 
-                    Id=i, 
+                    worker = workerCopy,
+                    WorkEvent = tempWorkEvent,
+                    Id =i, 
                     Statut = "INACTIVE", 
                     Name= preset["Preset" + i.ToString()].Name,
                     Source = preset["Preset" + i.ToString()].PathSource,
@@ -1013,6 +1014,7 @@ namespace EasySave_2._0
             List<long> param = e.UserState as List<long>;
             long remainingFiles = param[0];
             long remainingFilesSize = param[1];
+            Workers[idWorker].Statut = "ACTIVE";
             Workers[idWorker].Progress = e.ProgressPercentage;
             Workers[idWorker].RemainingFiles = remainingFiles;
             Workers[idWorker].RemainingFilesSize = remainingFilesSize;
@@ -1370,22 +1372,35 @@ namespace EasySave_2._0
                 {
                     Workers[idMessage - 1].worker.CancelAsync();
                     Workers[idMessage - 1].Statut = "CANCELLED";
+                    if (idMessage == idPreset)
+                    {
+                        ProgressBarCopy.Foreground = Brushes.Red;
+                    }
                 }
             }
 
             //Si le client clique sur pause
             else if(messageComplet[1] == 1)
             {
-                ResetEvent.Reset();
-                if (Workers[idPreset - 1].worker.IsBusy && ProgressBarCopy.Foreground != Brushes.Red)
+                //if (Workers[idPreset - 1].worker.IsBusy && ProgressBarCopy.Foreground != Brushes.Red)
+                //{
+                //    ProgressBarCopy.Foreground = Brushes.Yellow;
+                //}
+                //for (int i = 0; i < Workers.Count; i++)
+                //{
+                //    if (Workers[i].Statut == "ACTIVE")
+                //    {
+                //        Workers[i].Statut = "PAUSED";
+                //    }
+                //}
+                if (Workers[idMessage - 1].Statut == "ACTIVE")
                 {
-                    ProgressBarCopy.Foreground = Brushes.Yellow;
-                }
-                for (int i = 0; i < Workers.Count; i++)
-                {
-                    if (Workers[i].Statut == "ACTIVE")
+                    
+                    Workers[idMessage - 1].WorkEvent.Reset();
+                    Workers[idMessage - 1].Statut = "PAUSED";
+                    if (idMessage == idPreset)
                     {
-                        Workers[i].Statut = "PAUSED";
+                        ProgressBarCopy.Foreground = Brushes.Yellow;
                     }
                 }
             }
@@ -1393,16 +1408,24 @@ namespace EasySave_2._0
             //Si le client clique sur play
             else if (messageComplet[1] == 2)
             {
-                ResetEvent.Set();
-                if (ProgressBarCopy.Foreground == Brushes.Yellow)
+                //if (ProgressBarCopy.Foreground == Brushes.Yellow)
+                //{
+                //    ProgressBarCopy.Foreground = Brushes.Green;
+                //}
+                //for (int i = 0; i < Workers.Count; i++)
+                //{
+                //    if (Workers[i].Statut == "PAUSED")
+                //    {
+                //        Workers[i].Statut = "ACTIVE";
+                //    }
+                //}
+                if (Workers[idMessage - 1].Statut == "PAUSED")
                 {
-                    ProgressBarCopy.Foreground = Brushes.Green;
-                }
-                for (int i = 0; i < Workers.Count; i++)
-                {
-                    if (Workers[i].Statut == "PAUSED")
+                    Workers[idMessage - 1].WorkEvent.Set();
+                    Workers[idMessage - 1].Statut = "ACTIVE";
+                    if(idMessage == idPreset)
                     {
-                        Workers[i].Statut = "ACTIVE";
+                        ProgressBarCopy.Foreground = Brushes.Green;
                     }
                 }
             }
