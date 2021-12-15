@@ -8,6 +8,7 @@ using Projet.WorkSoftwares;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Threading;
 using Projet.Priority;
 
 namespace Projet.SaveSystem
@@ -27,14 +28,15 @@ namespace Projet.SaveSystem
         private string[] PriorityExtensions;
         private int CurrentIndexFolder = 0;
         private int TotalFolders;
+        public int WorkId;
 
-
-        public Save(string source, string target, bool full)
+        public Save(string source, string target, bool full, int workId)
         {
             SourceDir = source;
             TargetDir = target;
             Full = full;
             ProcessTime = new Stopwatch();
+            WorkId = workId;
         }
 
 
@@ -84,10 +86,9 @@ namespace Projet.SaveSystem
             
             foreach (FileInfo fi in source.GetFiles())
             {
-                
-                bool ShouldProcess = false;
+                bool ShouldProcess = true;
 
-                foreach (string prio in PriorityExtensions)
+                /*foreach (string prio in PriorityExtensions)
                 {
                     
                     if (fi.Extension == prio)
@@ -95,7 +96,7 @@ namespace Projet.SaveSystem
                         ShouldProcess = FirstProcess;
                     }
 
-                }
+                }*/
 
                 if (ShouldProcess == true)
                 {
@@ -134,7 +135,7 @@ namespace Projet.SaveSystem
                     }
                     //System.Threading.Thread.Sleep(250);
                 }
-                MainWindow.ResetEvent.WaitOne();
+                MainWindow.ResetEvents[WorkId].WaitOne();
             }
 
             
