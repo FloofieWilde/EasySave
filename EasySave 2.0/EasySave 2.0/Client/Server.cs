@@ -34,11 +34,14 @@ namespace Projet.Client
             byte[] bytes = new byte[1024];
             while (true)
             {
-                int bytesRec = client.Receive(bytes);
-                data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                if ((sender as BackgroundWorker).WorkerReportsProgress == true)
+                if (IsSocketConnected(client))
                 {
-                    (sender as BackgroundWorker).ReportProgress(0, data);
+                    int bytesRec = client.Receive(bytes);
+                    data = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                    if ((sender as BackgroundWorker).WorkerReportsProgress == true)
+                    {
+                        (sender as BackgroundWorker).ReportProgress(0, data);
+                    }
                 }
             }
             //Deconnecter(server);
@@ -49,13 +52,31 @@ namespace Projet.Client
         {
             byte[] msg = Encoding.ASCII.GetBytes(message);
             Thread.Sleep(500);
-            server.Send(msg);
+            try
+            {
+                server.Send(msg);
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine(e.ErrorCode);
+            }
+
         }
 
-        private static void Deconnecter(Socket server)
+        public static void Deconnecter(Socket server)
         {
             server.Shutdown(SocketShutdown.Both);
             server.Close();
+        }
+
+        public static bool IsSocketConnected(Socket s)
+        {
+            bool part1 = s.Poll(1000, SelectMode.SelectRead);
+            bool part2 = (s.Available == 0);
+            if ((part1 && part2) || !s.Connected)
+                return false;
+            else
+                return true;
         }
     }
 }

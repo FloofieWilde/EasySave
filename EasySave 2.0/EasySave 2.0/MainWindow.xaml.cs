@@ -40,6 +40,7 @@ namespace EasySave_2._0
     public partial class MainWindow : Window
     {
         static BackgroundWorker workerListen = new BackgroundWorker();
+        static BackgroundWorker workerSend = new BackgroundWorker();
         static Langue.Language dictLang = Langue.GetLang();
         static List<Worker> Workers = new List<Worker>();
         public static ManualResetEvent ResetEvent = new ManualResetEvent(false);
@@ -64,13 +65,22 @@ namespace EasySave_2._0
                 workerListen.WorkerReportsProgress = true;
                 workerListen.WorkerSupportsCancellation = true;
                 workerListen.RunWorkerAsync();
-                InitializeComponent();
 
+                workerSend.DoWork += worker_DoWorkSend;
+                workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
+                workerSend.WorkerSupportsCancellation = true;
+
+                InitializeComponent();
             }
         }
 
         public void ExitApp(object sender, RoutedEventArgs e)
         {
+            if (client != null)
+            {
+                Server.Deconnecter(server);
+            }
+            
             Environment.Exit(621);
         }
 
@@ -82,6 +92,7 @@ namespace EasySave_2._0
             InfoCopy.Visibility = Visibility.Collapsed;
             ProgressCopy.Visibility = Visibility.Collapsed;
             ListPresetCopy.Items.Clear();
+            Workers.Clear();
             RadioCopyPartial.Content = dictLang.PartialCopy;
             RadioCopyComplet.Content = dictLang.CompletCopy;
             ChooseCopyType.Content = dictLang.ChooseTypeCopy;
@@ -104,6 +115,11 @@ namespace EasySave_2._0
                     Source = preset["Preset" + i.ToString()].PathSource,
                     Destination = preset["Preset" + i.ToString()].PathDestination
                 });
+            }
+            if (!workerSend.IsBusy && client != null)
+            {
+                string msg = JsonConvert.SerializeObject(Workers, Formatting.Indented);
+                workerSend.RunWorkerAsync(msg);
             }
         }
 
@@ -886,7 +902,7 @@ namespace EasySave_2._0
                     else
                     {
                         Workers[id - 1].Id = id;
-                        Workers[id - 1].Statut = "En cours";
+                        Workers[id - 1].Statut = "ACTIVE";
                         Workers[id - 1].CopyType = copyType;
                         Workers[id - 1].Name = name;
                         Workers[id - 1].Source = source;
@@ -935,15 +951,26 @@ namespace EasySave_2._0
             }
             if (e.Cancelled)
             {
-                Workers[idWorker].Statut = "Annulé";
-                Workers[idWorker].Progress = ProgressBarCopy.Value;
+                Workers[idWorker].Statut = "CANCELLED";
                 ProgressBarCopy.Foreground = Brushes.Red;
-
+                LogStates.UpdateJsonLogState(Workers);
                 CopyStatut.Text = dictLang.CopyCancelled;
+
+                if (client != null)
+                {
+                    BackgroundWorker workerSendUpdate = new BackgroundWorker();
+                    workerSendUpdate.DoWork += worker_DoWorkSend;
+                    string msg = JsonConvert.SerializeObject(Workers, Formatting.Indented);
+                    workerSendUpdate.RunWorkerAsync(msg);
+                }
             }
             else
             {
-                Workers[idWorker].Statut = "Terminé";
+                Workers[idWorker].Statut = "FINISHED";
+                Workers[idWorker].Progress = 100;
+                Workers[idWorker].RemainingFiles = 0;
+                Workers[idWorker].RemainingFilesSize = 0;
+                LogStates.UpdateJsonLogState(Workers);
                 if (idPreset-1 == idWorker)
                 {
                     CopyStatut.Text = dictLang.CopySuccess;
@@ -951,6 +978,14 @@ namespace EasySave_2._0
                     ProgressBarCopy.Foreground = Brushes.Green;
                     CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
                     CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
+
+                    if (client != null)
+                    {
+                        BackgroundWorker workerSendUpdate = new BackgroundWorker();
+                        workerSendUpdate.DoWork += worker_DoWorkSend;
+                        string msg = JsonConvert.SerializeObject(Workers, Formatting.Indented);
+                        workerSendUpdate.RunWorkerAsync(msg);
+                    }
                 }
             }
         }
@@ -970,17 +1005,17 @@ namespace EasySave_2._0
             List<long> param = e.UserState as List<long>;
             long remainingFiles = param[0];
             long remainingFilesSize = param[1];
+            Workers[idWorker].Progress = e.ProgressPercentage;
             Workers[idWorker].RemainingFiles = remainingFiles;
             Workers[idWorker].RemainingFilesSize = remainingFilesSize;
             LogStates.UpdateJsonLogState(Workers);
 
-            //string msg = JsonConvert.SerializeObject(Workers, Formatting.Indented);
-            //BackgroundWorker workerSend = new BackgroundWorker();
-            ////string msg = TestDistanceText.Text;
-            //workerSend.DoWork += worker_DoWorkSend;
-            //workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
-            //workerSend.WorkerSupportsCancellation = true;
-            //workerSend.RunWorkerAsync(msg);
+            if (!workerSend.IsBusy && client != null)
+            {
+                string msg = JsonConvert.SerializeObject(Workers, Formatting.Indented);
+                workerSend.RunWorkerAsync(msg);
+            }
+            
 
             if (Workers[idPreset - 1].worker.IsBusy && idPreset-1 == idWorker)
             {
@@ -1000,7 +1035,7 @@ namespace EasySave_2._0
             CopySource.Text = $"{dictLang.CopyPathSource} {Workers[id - 1].Source}";
             CopyDestination.Text = $"{dictLang.CopyPathDest} {Workers[id - 1].Destination}";
             //Si pas de copie
-            if (Workers[id-1].Statut == "Pas commencé")
+            if (Workers[id-1].Statut == "INACTIVE")
             {
                 ProgressCopy.Visibility = Visibility.Collapsed;
                 CopyType.Text = "";
@@ -1011,7 +1046,7 @@ namespace EasySave_2._0
                 ProgressBarCopy.Foreground = Brushes.Gray;
             }
             //Si copie en cours
-            else if (Workers[id - 1].Statut == "En cours")
+            else if (Workers[id - 1].Statut == "ACTIVE")
             {
                 ProgressCopy.Visibility = Visibility.Visible;
                 CopyType.Text = $"{dictLang.CopyType} {Workers[id - 1].CopyType}";
@@ -1025,7 +1060,7 @@ namespace EasySave_2._0
                 CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
             }
             //Si copie annulé
-            else if (Workers[id - 1].Statut == "Annulé")
+            else if (Workers[id - 1].Statut == "CANCELLED")
             {
                 ProgressCopy.Visibility = Visibility.Visible;
                 CopyType.Text = $"{dictLang.CopyType} {Workers[id - 1].CopyType}";
@@ -1039,7 +1074,7 @@ namespace EasySave_2._0
                 CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {Workers[id - 1].RemainingFilesSize}";
             }
             //Si copie terminée avec succès
-            else if (Workers[id - 1].Statut == "Terminé")
+            else if (Workers[id - 1].Statut == "FINISHED")
             {
                 ProgressCopy.Visibility = Visibility.Visible;
                 CopyType.Text = $"{dictLang.CopyType} {Workers[id - 1].CopyType}";
@@ -1053,7 +1088,7 @@ namespace EasySave_2._0
                 CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
             }
             //Si copie en pause
-            else if (Workers[id - 1].Statut == "En pause")
+            else if (Workers[id - 1].Statut == "PAUSED")
             {
                 ProgressCopy.Visibility = Visibility.Visible;
                 CopyType.Text = $"{dictLang.CopyType} {Workers[id - 1].CopyType}";
@@ -1212,26 +1247,35 @@ namespace EasySave_2._0
 
         private void PlayCopy_Click(object sender, RoutedEventArgs e)
         {
-            ResetEvent.Set();
+            if (ProgressBarCopy.Foreground == Brushes.Yellow)
+            {
+                ResetEvent.Set();
+                ProgressBarCopy.Foreground = Brushes.Green;
+            }
+            
         }
 
         private void PauseCopy_Click(object sender, RoutedEventArgs e)
         {
-            ResetEvent.Reset();
+            int idPreset = Convert.ToInt32(CopyIdPreset.Text);
+            if (Workers[idPreset - 1].worker.IsBusy && ProgressBarCopy.Foreground != Brushes.Red)
+            {
+                ProgressBarCopy.Foreground = Brushes.Yellow;
+                ResetEvent.Reset();
+            }
         }
 
         private void StopCopy_Click(object sender, RoutedEventArgs e)
         {
             int idPreset = Convert.ToInt32(CopyIdPreset.Text);
-
-
-
             if (Workers[idPreset - 1].worker.IsBusy)
             {
                 ProgressBarCopy.Foreground = Brushes.Red;
                 Workers[idPreset - 1].worker.CancelAsync();
             }
         }
+
+
 
 
         //BACKGROUNDWORKER ACCES DISTANCE
