@@ -32,7 +32,6 @@ namespace Client_EasySave
         public MainWindow()
         {
             workerListen.DoWork += worker_DoWork;
-            workerListen.RunWorkerCompleted += worker_RunWorkerCompletedListen;
             workerListen.ProgressChanged += worker_ProgressChangedListen;
             workerListen.WorkerReportsProgress = true;
             workerListen.WorkerSupportsCancellation = true;
@@ -54,27 +53,12 @@ namespace Client_EasySave
                 PlayPause.Source = new BitmapImage(new Uri("Play.png", UriKind.Relative));
                 PPState = "Play";
                 Pause();
-                UpdateInfos();
             }
             else if (PPState == "Play"){
                 PlayPause.Source = new BitmapImage(new Uri("Pause.png", UriKind.Relative));
                 PPState = "Pause";
                 Play();
-                UpdateInfos();
             }
-        }
-
-        public void UpdateInfos()
-        {
-            /*Tets.Text = 
-                "Type de sauvegarde : " + "Var\n" +
-                "Statut : " + "Var\n" +
-                "Chemin source : " + "Var\n" +
-                "Chemin de destination : " + "Var\n" +
-                "Date de début : " + "Var\n" +
-                "Fichier : " + "Var/Var " + "(Var restants)\n" +
-                "Taille : " + "Var/Var " + "(Var restants)\n"
-                ;*/
         }
 
         public void Play()
@@ -83,7 +67,6 @@ namespace Client_EasySave
             BackgroundWorker workerSend = new BackgroundWorker();
             string msg = $"[{id},{2}]";
             workerSend.DoWork += worker_DoWorkSend;
-            workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
             workerSend.WorkerSupportsCancellation = true;
             workerSend.RunWorkerAsync(msg);
         }
@@ -94,7 +77,6 @@ namespace Client_EasySave
             BackgroundWorker workerSend = new BackgroundWorker();
             string msg = $"[{id},{1}]";
             workerSend.DoWork += worker_DoWorkSend;
-            workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
             workerSend.WorkerSupportsCancellation = true;
             workerSend.RunWorkerAsync(msg);
         }
@@ -105,7 +87,6 @@ namespace Client_EasySave
             BackgroundWorker workerSend = new BackgroundWorker();
             string msg = $"[{id},{0}]";
             workerSend.DoWork += worker_DoWorkSend;
-            workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
             workerSend.WorkerSupportsCancellation = true;
             workerSend.RunWorkerAsync(msg);
         }
@@ -125,15 +106,6 @@ namespace Client_EasySave
             ClientServer.SendMsg(message, server);
         }
 
-        private void worker_RunWorkerCompletedListen(object sender, RunWorkerCompletedEventArgs e)
-        {
-            
-        }
-
-        private void worker_RunWorkerCompletedSend(object sender, RunWorkerCompletedEventArgs e)
-        {
-            //ReceivedMsg.Text = "Text";
-        }
         void worker_ProgressChangedListen(object sender, ProgressChangedEventArgs e)
         {
             string msg = e.UserState as string;
@@ -266,21 +238,6 @@ namespace Client_EasySave
                 PPState = "Play";
                 PlayPause.Source = new BitmapImage(new Uri("Play.png", UriKind.Relative));
             }
-        }
-
-
-        private void TestDistance_Click(object sender, RoutedEventArgs e)
-        {
-            BackgroundWorker workerSend = new BackgroundWorker();
-            string msg = TestDistanceText.Text;
-            workerSend.DoWork += worker_DoWorkSend;
-            workerSend.RunWorkerCompleted += worker_RunWorkerCompletedSend;
-            workerSend.WorkerSupportsCancellation = true;
-            workerSend.RunWorkerAsync(msg);
-        }
-
-        private void Reload_Click(object sender, RoutedEventArgs e)
-        {
-        }
+        } 
     }
 }
