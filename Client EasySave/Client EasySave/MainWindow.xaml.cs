@@ -158,8 +158,8 @@ namespace Client_EasySave
                     Progressbar.Foreground = Brushes.Green;
                     CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
                     CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id - 1].RemainingFilesSize} / {Workers[id - 1].TotalSize} octets";
-                    //PPState = "Pause";
-                    //PlayPause.Source = new BitmapImage(new Uri("Pause.png", UriKind.Relative));
+                    PPState = "Pause";
+                    PlayPause.Source = new BitmapImage(new Uri("Pause.png", UriKind.Relative));
                 }
                 else if (Workers[id - 1].Statut == "CANCELLED")
                 {
@@ -184,8 +184,8 @@ namespace Client_EasySave
                     Progressbar.Foreground = Brushes.Yellow;
                     CopyNbFile.Text = $"Fichier restants: {Workers[id - 1].RemainingFiles} / {Workers[id - 1].TotalFiles}";
                     CopySizeFile.Text = $"Taille des fichiers restants: {Workers[id - 1].RemainingFilesSize} / {Workers[id - 1].TotalSize} octets";
-                    //PPState = "Play";
-                    //PlayPause.Source = new BitmapImage(new Uri("Play.png", UriKind.Relative));
+                    PPState = "Play";
+                    PlayPause.Source = new BitmapImage(new Uri("Play.png", UriKind.Relative));
                 }
             }
         }
@@ -222,8 +222,8 @@ namespace Client_EasySave
                 CopyStatut.Text = Workers[id - 1].Statut;
                 Progressbar.Value = Workers[id - 1].Progress;
                 Progressbar.Foreground = Brushes.Green;
-                //PPState = "Pause";
-                //PlayPause.Source = new BitmapImage(new Uri("Pause.png", UriKind.Relative));
+                PPState = "Pause";
+                PlayPause.Source = new BitmapImage(new Uri("Pause.png", UriKind.Relative));
             }
 
             else if (Workers[id - 1].Statut == "CANCELLED")
@@ -263,8 +263,8 @@ namespace Client_EasySave
                 CopyStatut.Text = Workers[id - 1].Statut;
                 Progressbar.Value = Workers[id - 1].Progress;
                 Progressbar.Foreground = Brushes.Yellow;
-                //PPState = "Play";
-                //PlayPause.Source = new BitmapImage(new Uri("Play.png", UriKind.Relative));
+                PPState = "Play";
+                PlayPause.Source = new BitmapImage(new Uri("Play.png", UriKind.Relative));
             }
         }
 
