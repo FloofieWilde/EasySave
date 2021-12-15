@@ -8,6 +8,7 @@ using Projet.WorkSoftwares;
 using System.Windows.Controls;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Threading;
 using Projet.Priority;
 
 namespace Projet.SaveSystem
@@ -24,7 +25,7 @@ namespace Projet.SaveSystem
         private readonly Stopwatch ProcessTime;
         private long CryptTime;
         private bool FirstProcess = true;
-        private Dictionary<string, string> PriorityExtensions = Priority.Priority.GetJsonPriority();
+        private string[] PriorityExtensions;
         private int CurrentIndexFolder = 0;
         private int TotalFolders;
 
@@ -35,6 +36,8 @@ namespace Projet.SaveSystem
             Full = full;
             ProcessTime = new Stopwatch();
         }
+
+
         /// <summary>
         /// Fetches basic data like copy type or directory size then call ProcessCopy
         /// </summary>
@@ -73,7 +76,7 @@ namespace Projet.SaveSystem
         /// <param name="target">Target Directory</param>
         /// 
 
-        public void ProcessCopy(DirectoryInfo source, DirectoryInfo target, ProgressBar progressBar, object sender, DoWorkEventArgs e)
+        public void ProcessCopy(DirectoryInfo source, DirectoryInfo target, ProgressBar progressBar, object sender, DoWorkEventArgs e, int workerId)
         {
             CurrentStateLog.Display();
             long filesSize;
@@ -81,13 +84,13 @@ namespace Projet.SaveSystem
             
             foreach (FileInfo fi in source.GetFiles())
             {
-                
+
                 bool ShouldProcess = true;
 
-                /*foreach (var prio in PriorityExtensions)
+                /*foreach (string prio in PriorityExtensions)
                 {
                     
-                    if (fi.Extension.StartsWith(prio.Value))
+                    if (fi.Extension == prio)
                     {
                         ShouldProcess = FirstProcess;
                     }
@@ -131,17 +134,19 @@ namespace Projet.SaveSystem
                     }
                     //System.Threading.Thread.Sleep(250);
                 }
-                MainWindow.ResetEvent.WaitOne();
+                MainWindow.Workers[workerId - 1].WorkEvent.WaitOne();
+
             }
 
-            
+
             foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
             {
+
                 CurrentIndexFolder++;
                 DirectoryInfo nextTargetSubDir =
                                 target.CreateSubdirectory(diSourceSubDir.Name);
                 CurrentStateLog.Save();
-                ProcessCopy(diSourceSubDir, nextTargetSubDir, progressBar, sender, e);
+                ProcessCopy(diSourceSubDir, nextTargetSubDir, progressBar, sender, e, workerId);
 
             }
             if (CurrentIndexFolder == TotalFolders)

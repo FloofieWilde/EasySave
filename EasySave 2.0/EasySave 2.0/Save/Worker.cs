@@ -10,6 +10,7 @@ namespace Projet.Save
     {
         public int Id { get; set; }
         public BackgroundWorker worker { get; set; }
+        public ManualResetEvent WorkEvent { get; set; }
         public string Statut { get; set; }
         public string Name { get; set; }
         public string Source { get; set; }
