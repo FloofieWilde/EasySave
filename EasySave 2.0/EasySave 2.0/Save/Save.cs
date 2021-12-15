@@ -24,9 +24,10 @@ namespace Projet.SaveSystem
         private readonly Stopwatch ProcessTime;
         private long CryptTime;
         private bool FirstProcess = true;
-        private Dictionary<string, string> PriorityExtensions = Priority.Priority.GetJsonPriority();
+        private string[] PriorityExtensions;
         private int CurrentIndexFolder = 0;
         private int TotalFolders;
+
 
         public Save(string source, string target, bool full)
         {
@@ -35,6 +36,8 @@ namespace Projet.SaveSystem
             Full = full;
             ProcessTime = new Stopwatch();
         }
+
+
         /// <summary>
         /// Fetches basic data like copy type or directory size then call ProcessCopy
         /// </summary>
@@ -82,17 +85,17 @@ namespace Projet.SaveSystem
             foreach (FileInfo fi in source.GetFiles())
             {
                 
-                bool ShouldProcess = true;
+                bool ShouldProcess = false;
 
-                /*foreach (var prio in PriorityExtensions)
+                foreach (string prio in PriorityExtensions)
                 {
                     
-                    if (fi.Extension == prio.Value)
+                    if (fi.Extension == prio)
                     {
                         ShouldProcess = FirstProcess;
                     }
 
-                }*/
+                }
 
                 if (ShouldProcess == true)
                 {
