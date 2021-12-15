@@ -11,12 +11,23 @@ namespace Projet.Server
     {
         public static Socket SeConnecter()
         {
+            
             IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
             IPAddress ipAddress = host.AddressList[0];
             IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 55979);
             Socket server = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-
-            server.Connect(localEndPoint);
+            try
+            {
+                server.Connect(localEndPoint);
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine(e);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
 
             return server;
         }
@@ -53,8 +64,20 @@ namespace Projet.Server
 
         public static void Deconnecter(Socket server)
         {
-            server.Shutdown(SocketShutdown.Both);
-            server.Close();
+            try
+            {
+                server.Shutdown(SocketShutdown.Both);
+                server.Close();
+            }
+            catch (SocketException e)
+            {
+                Console.WriteLine(e);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            
         }
 
         public static bool IsSocketConnected(Socket s)

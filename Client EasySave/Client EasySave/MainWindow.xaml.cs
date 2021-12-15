@@ -128,7 +128,6 @@ namespace Client_EasySave
             {
                 PanelInfo.Visibility = Visibility.Visible;
                 int id = Convert.ToInt32(CopyIdPreset.Text);
-                Progressbar.Value = Workers[id-1].Progress;
                 if (Workers[id - 1].Statut == "ACTIVE")
                 {
                     CopyStatut.Text = $"{Workers[id - 1].Statut}";
@@ -182,10 +181,11 @@ namespace Client_EasySave
                 CopyNbFile.Text = "";
                 CopySizeFile.Text = "";
                 CopyStatut.Text = Workers[id - 1].Statut;
-                Progressbar.Foreground = Brushes.Gray;
+                Progressbar.Foreground = Brushes.Green;
             }
             else if (Workers[id-1].Statut == "ACTIVE")
             {
+                Progressbar.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
@@ -199,6 +199,7 @@ namespace Client_EasySave
 
             else if (Workers[id - 1].Statut == "CANCELLED")
             {
+                Progressbar.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
@@ -212,6 +213,7 @@ namespace Client_EasySave
 
             else if (Workers[id - 1].Statut == "FINISHED")
             {
+                Progressbar.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";
@@ -225,6 +227,7 @@ namespace Client_EasySave
 
             else if (Workers[id - 1].Statut == "PAUSED")
             {
+                Progressbar.Visibility = Visibility.Visible;
                 CopyType.Text = $"Type de copie: {Workers[id - 1].CopyType}";
                 CopyDate.Text = $"Date de début: {Workers[id - 1].DateStart}";
                 CopyNbFile.Text = $"Nombre total de fichiers: {Workers[id - 1].TotalFiles}";

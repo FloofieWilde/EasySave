@@ -55,7 +55,7 @@
                     <Run Name="CopyStatut" Text="" Foreground="Green"/>
                 </TextBlock>
 
-                <ProgressBar Name="Progressbar" Grid.Row="1" Foreground="#FF25BBBD" Background="#FF777777"></ProgressBar>
+                <ProgressBar Name="Progressbar" Grid.Row="1" Foreground="#FF25BBBD" Background="#FF777777" Visibility="Collapsed"></ProgressBar>
                 <Button Name="TestDistance" Visibility="Collapsed" Content="Envoyer" HorizontalAlignment="Left" Margin="100,161,0,0" Grid.Row="0" VerticalAlignment="Top" Click="TestDistance_Click"/>
                 <TextBox Name="TestDistanceText" Visibility="Collapsed" HorizontalAlignment="Left" Margin="160,161,0,0" Grid.Row="0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             </Grid>

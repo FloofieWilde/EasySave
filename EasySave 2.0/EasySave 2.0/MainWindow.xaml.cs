@@ -110,7 +110,7 @@ namespace EasySave_2._0
                 Workers.Add( new Worker { 
                     worker = workerCopy, 
                     Id=i, 
-                    Statut = "Pas commencé", 
+                    Statut = "INACTIVE", 
                     Name= preset["Preset" + i.ToString()].Name,
                     Source = preset["Preset" + i.ToString()].PathSource,
                     Destination = preset["Preset" + i.ToString()].PathDestination
@@ -978,14 +978,13 @@ namespace EasySave_2._0
                     ProgressBarCopy.Foreground = Brushes.Green;
                     CopyFileRemaining.Content = $"{dictLang.CopyFileRemaining} {0}";
                     CopySizeRemaining.Content = $"{dictLang.CopyFileSizeRemaining} {0}";
-
-                    if (client != null)
-                    {
-                        BackgroundWorker workerSendUpdate = new BackgroundWorker();
-                        workerSendUpdate.DoWork += worker_DoWorkSend;
-                        string msg = JsonConvert.SerializeObject(Workers, Formatting.Indented);
-                        workerSendUpdate.RunWorkerAsync(msg);
-                    }
+                }
+                if (client != null)
+                {
+                    BackgroundWorker workerSendUpdate = new BackgroundWorker();
+                    workerSendUpdate.DoWork += worker_DoWorkSend;
+                    string msg = JsonConvert.SerializeObject(Workers, Formatting.Indented);
+                    workerSendUpdate.RunWorkerAsync(msg);
                 }
             }
         }
