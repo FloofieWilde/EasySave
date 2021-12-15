@@ -133,7 +133,7 @@ namespace Client_EasySave
 
         private void worker_RunWorkerCompletedSend(object sender, RunWorkerCompletedEventArgs e)
         {
-            //ReceivedMsg.Text = "Text";
+            //ReceivedMsg.Text = "Text";worker_ProgressChangedListen()
         }
         void worker_ProgressChangedListen(object sender, ProgressChangedEventArgs e)
         {
