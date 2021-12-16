@@ -1,20 +1,23 @@
 # Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+EasySave is an easy-to-use backup manager on which you can totally controll and configure your saves.
 
 # Getting Started
 TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
 1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+	- Open the Visual Studio solution
+	- Build the application for you OS
+	- Now you can start the excutable file and starting using the named software
+2.	Latest releases
+	- 1.0 : Only Command line based version
+	- 2.0 : Interface based version
+	- 3.0 : Interface, multi-tasking and client-server version
+3.	NuGet references
+	- Json.NET (NewtonSoft)
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+# How to use ?
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+1. Copy process
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+2. Parameters
+
+3. Logs
