@@ -49,7 +49,7 @@ namespace EasySave_2._0
 
         public MainWindow()
         {
-
+            //Checking if the application is already open, and closing it if it is, else we open it.
             bool aIsNewInstance = false;
             Mutex myMutex = new Mutex(true, "MainWindow", out aIsNewInstance);
             if (!aIsNewInstance)
@@ -74,6 +74,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on the exit button, we close the connexion with the client and close the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void ExitApp(object sender, RoutedEventArgs e)
         {
             if (client != null)
@@ -84,6 +89,11 @@ namespace EasySave_2._0
             Environment.Exit(621);
         }
 
+        /// <summary>
+        /// If we click on "copy", we add all presets into the listbox. We also open a connexion with the client.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CopyButton_Click(object sender, RoutedEventArgs e)
         {
             CopyPannel.Visibility = Visibility.Visible;
@@ -127,6 +137,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "options", the menu options appear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void OptionsBouton_Click(object sender, RoutedEventArgs e)
         {
             LangButton.Content = dictLang.OptMLang;
@@ -157,6 +172,11 @@ namespace EasySave_2._0
             SizePannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on logs, we add all days in the listbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LogsButton_Click(object sender, RoutedEventArgs e)
         {
             CopyPannel.Visibility = Visibility.Collapsed;
@@ -171,6 +191,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we double click on the listbox, the logs daily of the selected day appears.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LogsListbox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             string selectedDate = LogsListbox.SelectedItem.ToString();
@@ -186,6 +211,11 @@ namespace EasySave_2._0
             LogsGrid.DataContext = logSelected;
         }
 
+        /// <summary>
+        /// If we click on the language button, the available language appear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LangButton_Click(object sender, RoutedEventArgs e)
         {
             //Texttext.Content = dictLang.MenuTitle;
@@ -202,6 +232,11 @@ namespace EasySave_2._0
             SizePannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on the button "extensions" the list of extension appear (they are the extensions to crypt a file)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ExtensionButton_Click(object sender, RoutedEventArgs e)
         {
             ListExtension.Items.Clear();
@@ -223,6 +258,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "priority", we add everything in the listbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PriorityButton_Click(object sender, RoutedEventArgs e)
         {
             ListPriority.Items.Clear();
@@ -244,6 +284,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "application", we add the current work application in the listbox (by default "calculator").
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ApplicationButton_Click(object sender, RoutedEventArgs e)
         {
             EditApplicationButton.Content = dictLang.OptAppAlter;
@@ -264,6 +309,11 @@ namespace EasySave_2._0
             ListApplication.Items.Add(application.Application);
         }
 
+        /// <summary>
+        /// If we click on "stockage", we display the current type of stockage (xml or json).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StockageButton_Click(object sender, RoutedEventArgs e)
         {
             LangPannel.Visibility = Visibility.Collapsed;
@@ -281,6 +331,11 @@ namespace EasySave_2._0
             CancelEditStockage.Content = dictLang.Cancel;
         }
 
+        /// <summary>
+        /// If we click on "size", we display the current maximum size of a file we can copy at the same time. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SizeButton_Click(object sender, RoutedEventArgs e)
         {
             LangPannel.Visibility = Visibility.Collapsed;
@@ -299,6 +354,11 @@ namespace EasySave_2._0
             CancelEditSize.Content = dictLang.Cancel;
         }
 
+        /// <summary>
+        /// if we click on "preset", we add them to the listbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PresetButton_Click(object sender, RoutedEventArgs e)
         {
             ListPreset.Items.Clear();
@@ -320,6 +380,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "add preset", the pannel to add a new one appear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddPresetButton_Click(object sender, RoutedEventArgs e)
         {
             LabelAddPreset.Content = dictLang.OptPreAdd;
@@ -338,6 +403,11 @@ namespace EasySave_2._0
             DeletePannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on "edit preset", the pannel appear and the current name/path are showed in the textbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditPresetButton_Click(object sender, RoutedEventArgs e)
         {
             LabelEditPreset.Content = dictLang.OptPreEdit;
@@ -374,6 +444,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "delete preset", the current preset is deleted.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeletePresetButton_Click(object sender, RoutedEventArgs e)
         {
             LabelDeletePreset.Content = dictLang.OptPreDel;
@@ -400,6 +475,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "confirm to edit a preset", the preset is edited and the listbox is updated.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmEditPreset_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(PresetEditId.Content);
@@ -419,6 +499,11 @@ namespace EasySave_2._0
             DeletePannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on "cancel edit preset", the pannel to edit disappear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelEditPreset_Click(object sender, RoutedEventArgs e)
         {
             AddPannel.Visibility = Visibility.Collapsed;
@@ -426,6 +511,11 @@ namespace EasySave_2._0
             DeletePannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on "browse" beside "source path", the explorer open so we can choose a path.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddSourceFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFolder = new OpenFileDialog(); ;
@@ -440,6 +530,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "browse" beside "destination path", the explorer open so we can choose a path.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddDestinationFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFolder = new OpenFileDialog();
@@ -454,6 +549,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "browse" beside "source path", the explorer open so we can choose a path.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditSourceFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFolder = new OpenFileDialog();
@@ -468,6 +568,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "browse" beside "destination path", the explorer open so we can choose a path.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditDestinationFileButton_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog openFolder = new OpenFileDialog();
@@ -482,6 +587,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on confirm add preset, the preset is added and the listbox is updated.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmAddPreset_Click(object sender, RoutedEventArgs e)
         {
             string name = AddNameTextbox.Text;
@@ -500,6 +610,11 @@ namespace EasySave_2._0
             DeletePannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on cancel add preset, the pannel to add disappear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelAddPreset_Click(object sender, RoutedEventArgs e)
         {
             AddPannel.Visibility = Visibility.Collapsed;
@@ -507,6 +622,11 @@ namespace EasySave_2._0
             DeletePannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on confirm delete preset, the preset is deleted and the listbox is updated.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmDeletePreset_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(PresetDeleteId.Content);
@@ -523,6 +643,11 @@ namespace EasySave_2._0
             DeletePannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on cancel delete preset, the pannel to delete disappear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelDeletePreset_Click(object sender, RoutedEventArgs e)
         {
             AddPannel.Visibility = Visibility.Collapsed;
@@ -530,6 +655,11 @@ namespace EasySave_2._0
             DeletePannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on add extension, the pannel appear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddExtensionButton_Click(object sender, RoutedEventArgs e)
         {
             LabelAddExtension.Content = dictLang.OptExtAdd;
@@ -543,6 +673,11 @@ namespace EasySave_2._0
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on edit extension, the pannel to edit appear and the current extension is displayed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditExtensionButton_Click(object sender, RoutedEventArgs e)
         {
             LabelEditExtension.Content = dictLang.OptExtEdit;
@@ -573,6 +708,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "delete extension", the pannel to delete appear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeleteExtensionButton_Click(object sender, RoutedEventArgs e)
         {
             LabelDeleteExtension.Content = dictLang.OptExtDel;
@@ -601,6 +741,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "confirm add extension", the extension is added in the json and the listbox is updated.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmAddExtension_Click(object sender, RoutedEventArgs e)
         {
             string extension = AddExtensionTextbox.Text;
@@ -617,6 +762,11 @@ namespace EasySave_2._0
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we cancel adding an extension, the pannel to add disappear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelAddExtension_Click(object sender, RoutedEventArgs e)
         {
             AddExtensionPannel.Visibility = Visibility.Collapsed;
@@ -624,6 +774,11 @@ namespace EasySave_2._0
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on "confirm edit extension", the extension is edited in the json, and the listbox is updated.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmEditExtension_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(ExtensionEditId.Content);
@@ -640,7 +795,12 @@ namespace EasySave_2._0
             EditExtensionPannel.Visibility = Visibility.Collapsed;
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
         }
-
+        
+        /// <summary>
+        /// If we click on cancel, the pannel disappear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelEditExtension_Click(object sender, RoutedEventArgs e)
         {
             AddExtensionPannel.Visibility = Visibility.Collapsed;
@@ -648,6 +808,11 @@ namespace EasySave_2._0
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on delete, the extension is deleted and the listbox is updated.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmDeleteExtension_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(ExtensionDeleteId.Content);
@@ -664,6 +829,11 @@ namespace EasySave_2._0
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on cancel, the pannel disappear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelDeleteExtension_Click(object sender, RoutedEventArgs e)
         {
             AddExtensionPannel.Visibility = Visibility.Collapsed;
@@ -671,6 +841,11 @@ namespace EasySave_2._0
             DeleteExtensionPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on "addpriority" the pannel to add a priority appear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddPriorityButton_Click(object sender, RoutedEventArgs e)
         {
             LabelAddPriority.Content = dictLang.OptExtAdd;
@@ -684,6 +859,11 @@ namespace EasySave_2._0
             DeletePriorityPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on "edit priority", the pannel appear and the current priority is displayed in the textbox.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditPriorityButton_Click(object sender, RoutedEventArgs e)
         {
             LabelEditPriority.Content = dictLang.OptExtEdit;
@@ -714,6 +894,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on "delete priority", the pannel to delete appear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DeletePriorityButton_Click(object sender, RoutedEventArgs e)
         {
             LabelDeletePriority.Content = dictLang.OptExtDel;
@@ -742,6 +927,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// If we click on confirm add priority, the priority is added and the listbox is updated.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmAddPriority_Click(object sender, RoutedEventArgs e)
         {
             string priority = AddPriorityTextbox.Text;
@@ -758,6 +948,11 @@ namespace EasySave_2._0
             DeletePriorityPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we cancel adding the priority, the pannels disappear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelAddPriority_Click(object sender, RoutedEventArgs e)
         {
             AddPriorityPannel.Visibility = Visibility.Collapsed;
@@ -765,6 +960,11 @@ namespace EasySave_2._0
             DeletePriorityPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we confirm adding the priority, the priority is edited and the listbox is updated.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmEditPriority_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(PriorityEditId.Content);
@@ -782,6 +982,11 @@ namespace EasySave_2._0
             DeletePriorityPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we cancel, the pannel disappear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelEditPriority_Click(object sender, RoutedEventArgs e)
         {
             AddPriorityPannel.Visibility = Visibility.Collapsed;
@@ -789,6 +994,11 @@ namespace EasySave_2._0
             DeletePriorityPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on "confirm delete priority", the priority is deleted and the listbox is updated.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmDeletePriority_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(PriorityDeleteId.Content);
@@ -805,6 +1015,11 @@ namespace EasySave_2._0
             DeletePriorityPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on "cancel delete priority", the pannel disappear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelDeletePriority_Click(object sender, RoutedEventArgs e)
         {
             AddPriorityPannel.Visibility = Visibility.Collapsed;
@@ -812,6 +1027,11 @@ namespace EasySave_2._0
             DeletePriorityPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on edit size button, the pannel appear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditSizeButton_Click(object sender, RoutedEventArgs e)
         {
             EditSizePannel.Visibility = Visibility.Visible;
@@ -820,6 +1040,11 @@ namespace EasySave_2._0
             LabelErrorSize.Content = "";
         }
 
+        /// <summary>
+        /// If we click on confirm edit size, the size is edited (we verify if the input is a number).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmEditSize_Click(object sender, RoutedEventArgs e)
         {
             string size = EditSizeTextbox.Text;
@@ -836,11 +1061,21 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// Close the pannel to edit the size.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelEditSize_Click(object sender, RoutedEventArgs e)
         {
             EditSizePannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Start the copy for the selected preset. Verify is the preset and type are valid.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CopyStartButton_Click(object sender, RoutedEventArgs e)
         {
             if ((RadioCopyComplet.IsChecked == true || RadioCopyPartial.IsChecked == true) && ListPresetCopy.SelectedIndex != -1)
@@ -926,6 +1161,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// Called when we click on "start copy" for each save. This is a new thread (backgroundworker). It process the copy.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
 
@@ -944,6 +1184,11 @@ namespace EasySave_2._0
             save.ProcessCopy(DirInfo.source, DirInfo.target, ProgressBarCopy, sender, e, finalId);
         }
 
+        /// <summary>
+        /// Called if the thread stopped (cancelled or finished). Display the information on the IHM.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             int idPreset = Convert.ToInt32(CopyIdPreset.Text);
@@ -1000,6 +1245,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// Called everytime the progress change (after any file was just copied). Display in real time the progress of the copy.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void worker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             int idPreset = Convert.ToInt32(CopyIdPreset.Text);
@@ -1049,6 +1299,11 @@ namespace EasySave_2._0
             }
         }
 
+        /// <summary>
+        /// Called when we double click on the listbox. Show the selected preset information.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListPresetCopy_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             string selectedItem = ListPresetCopy.SelectedItem.ToString();
@@ -1127,7 +1382,11 @@ namespace EasySave_2._0
             }
         }
 
-
+        /// <summary>
+        /// If we click on application, the pannel appear and the current application is displayed.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditApplicationButton_Click(object sender, RoutedEventArgs e)
         {
             EditApplicationPannel.Visibility = Visibility.Visible;
@@ -1135,6 +1394,11 @@ namespace EasySave_2._0
             EditApplicationTextbox.Text = application.Application;
         }
 
+        /// <summary>
+        /// If we click on confirm edit application, the application is added and the textbox is updated.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmEditApplication_Click(object sender, RoutedEventArgs e)
         {
             string newApplication = EditApplicationTextbox.Text;
@@ -1145,11 +1409,21 @@ namespace EasySave_2._0
             EditApplicationPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Make the pannel to edit an application disappear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelEditApplication_Click(object sender, RoutedEventArgs e)
         {
             EditApplicationPannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// If we click on edit a stockage, the pannel appear.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditStockageButton_Click(object sender, RoutedEventArgs e)
         {
             EditStockagePannel.Visibility = Visibility.Visible;
@@ -1157,6 +1431,11 @@ namespace EasySave_2._0
             RadioXml.IsChecked = false;
         }
 
+        /// <summary>
+        /// If we click on confirm edit stockage, the stockage is edited and the textbox is updated.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ConfirmEditStockage_Click(object sender, RoutedEventArgs e)
         {
             JsonXml stockage = Stockage.GetJsonStockage();
@@ -1174,6 +1453,11 @@ namespace EasySave_2._0
             EditStockagePannel.Visibility = Visibility.Collapsed;
         }
 
+        /// <summary>
+        /// Hide the pannel to edit a stockage.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CancelEditStockage_Click(object sender, RoutedEventArgs e)
         {
             EditStockagePannel.Visibility = Visibility.Collapsed;
@@ -1317,12 +1601,6 @@ namespace EasySave_2._0
                     {
                         work.WorkEvent.Reset();
                         work.Statut = "PAUSED";
-
-                        //if ((sender as BackgroundWorker).WorkerReportsProgress == true)
-                        //{
-                        //    List<long> param = new List<long>() { work.RemainingFiles, work.RemainingFilesSize };
-                        //    (sender as BackgroundWorker).ReportProgress(Convert.ToInt32(work.Progress), param);
-                        //}
                     }
                 }
             }
@@ -1386,6 +1664,12 @@ namespace EasySave_2._0
         }
 
         //BACKGROUNDWORKER ACCES DISTANCE
+
+        /// <summary>
+        /// Called when we click on "copy", this is a separated thread listening continuously the client.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void worker_DoWorkListen(object sender, DoWorkEventArgs e)
         {
             server = Server.SeConnecter();
@@ -1394,20 +1678,36 @@ namespace EasySave_2._0
             Server.EcouterReseau(client, sender);
         }
 
+        /// <summary>
+        /// Called when there is a progress every 0,5 second to send data to the client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void worker_DoWorkSend(object sender, DoWorkEventArgs e)
         {
             string message = e.Argument as string;
             Server.SendMsg(message, client);
         }
 
+        /// <summary>
+        /// Called when the server stop listening. But it never happens anyways.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void worker_RunWorkerCompletedListen(object sender, RunWorkerCompletedEventArgs e)
         {
         }
 
+        /// <summary>
+        /// Called when the message was sent successfully, but not used so far.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void worker_RunWorkerCompletedSend(object sender, RunWorkerCompletedEventArgs e)
         {
             //ReceivedMsg.Text = "Text";
         }
+
 
         private void TestDistance_Click(object sender, RoutedEventArgs e)
         {
@@ -1420,6 +1720,11 @@ namespace EasySave_2._0
             workerSend.RunWorkerAsync(msg);
         }
 
+        /// <summary>
+        /// Called when the server receive a message from the client.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void worker_ProgressChangedListen(object sender, ProgressChangedEventArgs e)
         {
             string msg = e.UserState as string;
@@ -1446,17 +1751,6 @@ namespace EasySave_2._0
             //Si le client clique sur pause
             else if (messageComplet[1] == 1)
             {
-                //if (Workers[idPreset - 1].worker.IsBusy && ProgressBarCopy.Foreground != Brushes.Red)
-                //{
-                //    ProgressBarCopy.Foreground = Brushes.Yellow;
-                //}
-                //for (int i = 0; i < Workers.Count; i++)
-                //{
-                //    if (Workers[i].Statut == "ACTIVE")
-                //    {
-                //        Workers[i].Statut = "PAUSED";
-                //    }
-                //}
                 if (Workers[idMessage - 1].Statut == "ACTIVE")
                 {
                     Workers[idMessage - 1].Statut = "PAUSED";
@@ -1479,17 +1773,6 @@ namespace EasySave_2._0
             //Si le client clique sur play
             else if (messageComplet[1] == 2)
             {
-                //if (ProgressBarCopy.Foreground == Brushes.Yellow)
-                //{
-                //    ProgressBarCopy.Foreground = Brushes.Green;
-                //}
-                //for (int i = 0; i < Workers.Count; i++)
-                //{
-                //    if (Workers[i].Statut == "PAUSED")
-                //    {
-                //        Workers[i].Statut = "ACTIVE";
-                //    }
-                //}
                 if (Workers[idMessage - 1].Statut == "PAUSED")
                 {
                     Workers[idMessage - 1].WorkEvent.Set();
