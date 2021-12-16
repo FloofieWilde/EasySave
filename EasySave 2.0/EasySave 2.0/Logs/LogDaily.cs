@@ -116,6 +116,11 @@ namespace Projet.Logs
             }
             XmlCount++;
         }
+        /// <summary>
+        /// Load all the Daily Logs of the selected day
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public List<LogDaily> Load(string path)
         {
 
@@ -148,7 +153,11 @@ namespace Projet.Logs
             }
             return fullLog;
         }
-
+        /// <summary>
+        /// Returns a directory from a string path
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
         public DirectoryInfo GetFiles(string path)
         {
             //string path = LogFile + "Daily" + GetDay();
@@ -186,7 +195,10 @@ namespace Projet.Logs
             }
             return logTotal;
         }
-
+        /// <summary>
+        /// Returns the wished dates
+        /// </summary>
+        /// <returns></returns>
         public static List<string> GetJsonDates()
         {
             List<string> dates = new List<string>();

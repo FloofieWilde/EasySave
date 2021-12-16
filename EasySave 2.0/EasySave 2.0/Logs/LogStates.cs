@@ -16,6 +16,7 @@ namespace Projet.Logs
             return logstates;
         }
 
+
         public static void UpdateJsonLogState(List<Worker> Workers)
         {
             string json = JsonConvert.SerializeObject(Workers, Formatting.Indented);

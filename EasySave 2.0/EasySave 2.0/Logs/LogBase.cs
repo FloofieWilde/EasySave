@@ -65,7 +65,7 @@ namespace Projet.Logs
         /// <summary>
         /// Return file's architecture depending on hour and minute
         /// </summary>
-        /// <returns>/HOURhMINUTE.json</returns>
+        /// <returns>/HOURhMINUTE_SECOND_MILLISECOND.json</returns>
         protected string GetMinute()
         {
             string currentMin = "/" + DateTimeStamp.Hour.ToString();

@@ -24,7 +24,6 @@ namespace Projet.Logs
         public long TotalSize { get; set; }
         private Langue.Language CurrentLanguage;
         XmlDocument XmlDoc = new XmlDocument();
-        bool FirstTime = true;
 
         public LogState(string name, string sourceDir, string targetDir, long totalFiles, long totalFilesSize)
         {

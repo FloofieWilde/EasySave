@@ -1315,8 +1315,9 @@ namespace EasySave_2._0
                     work.PreviousStatut = work.Statut;
                     if (work.Statut == "ACTIVE")
                     {
-                        work.Statut = "PAUSED";
                         work.WorkEvent.Reset();
+                        work.Statut = "PAUSED";
+
                         //if ((sender as BackgroundWorker).WorkerReportsProgress == true)
                         //{
                         //    List<long> param = new List<long>() { work.RemainingFiles, work.RemainingFilesSize };
@@ -1332,8 +1333,9 @@ namespace EasySave_2._0
             {
                 if (work.Id != id)
                 {
-                    work.Statut = work.PreviousStatut;
+                    //work.Statut = work.PreviousStatut;
                     work.WorkEvent.Set();
+                    work.Statut = "ACTIVE";
                 }
             }
 

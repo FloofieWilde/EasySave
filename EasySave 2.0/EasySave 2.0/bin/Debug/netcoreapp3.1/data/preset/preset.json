@@ -1,13 +1,13 @@
 {
   "Preset1": {
-    "Name": "Fonctionel",
-    "PathSource": "C:\\Users\\franc\\Source\\Repos\\C-hashtag-point-web\\EasySave 2.0\\EasySave 2.0\\DossA",
-    "PathDestination": "C:\\Users\\franc\\Source\\Repos\\C-hashtag-point-web\\EasySave 2.0\\EasySave 2.0\\DossB"
+    "Name": "Franz1",
+    "PathSource": "C:\\Users\\franc\\OneDrive\\Bureau\\Projet folders\\DossA",
+    "PathDestination": "C:\\Users\\franc\\OneDrive\\Bureau\\Projet folders\\DossB"
   },
   "Preset2": {
-    "Name": "Fonctionnel2",
-    "PathSource": "C:\\Users\\franc\\Source\\Repos\\C-hashtag-point-web\\EasySave 2.0\\EasySave 2.0\\DossC",
-    "PathDestination": "C:\\Users\\franc\\Source\\Repos\\C-hashtag-point-web\\EasySave 2.0\\EasySave 2.0\\DossD"
+    "Name": "Franz2",
+    "PathSource": "C:\\Users\\franc\\OneDrive\\Bureau\\Projet folders\\DossC",
+    "PathDestination": "C:\\Users\\franc\\OneDrive\\Bureau\\Projet folders\\DossD"
   },
   "Preset3": {
     "Name": "Haha",
