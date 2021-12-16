@@ -106,6 +106,15 @@ namespace Client_EasySave
             ClientServer.SendMsg(message, server);
         }
 
+        private void worker_RunWorkerCompletedListen(object sender, RunWorkerCompletedEventArgs e)
+        {
+            
+        }
+
+        private void worker_RunWorkerCompletedSend(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //ReceivedMsg.Text = "Text";worker_ProgressChangedListen()
+        }
         void worker_ProgressChangedListen(object sender, ProgressChangedEventArgs e)
         {
             string msg = e.UserState as string;
