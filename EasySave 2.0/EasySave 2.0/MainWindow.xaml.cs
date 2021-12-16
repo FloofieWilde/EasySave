@@ -1020,19 +1020,15 @@ namespace EasySave_2._0
             Workers[idWorker].RemainingFiles = remainingFiles;
             Workers[idWorker].RemainingFilesSize = remainingFilesSize;
             LogStates.UpdateJsonLogState(Workers);
-            if (Workers[idWorker].Statut == "ACTIVE")
+
+            if (Workers[idPreset-1].Statut == "ACTIVE")
             {
                 ProgressBarCopy.Foreground = Brushes.Green;
             }
-            else if (Workers[idWorker].Statut == "PAUSED")
+            else if (Workers[idPreset-1].Statut == "PAUSED")
             {
                 ProgressBarCopy.Foreground = Brushes.Yellow;
             }
-            else
-            {
-                ProgressBarCopy.Foreground = Brushes.Red;
-            }
-
 
             if (!workerSend.IsBusy && client != null)
             {
@@ -1315,8 +1311,12 @@ namespace EasySave_2._0
             {
                 if (work.Id != id)
                 {
-                    work.WorkEvent.Reset();
-                    work.Statut = "PAUSED";
+                    work.PreviousStatut = work.Statut;
+                    if (work.Statut == "ACTIVE")
+                    {
+                        work.Statut = "PAUSED";
+                        work.WorkEvent.Reset();
+                    }
                 }
             }
         }
@@ -1326,16 +1326,17 @@ namespace EasySave_2._0
             {
                 if (work.Id != id)
                 {
+                    work.Statut = work.PreviousStatut;
                     work.WorkEvent.Set();
-                    work.Statut = "ACTIVE";
-
                 }
             }
 
         }
         private void PlayCopy_Click(object sender, RoutedEventArgs e)
         {
-            if (ProgressBarCopy.Foreground == Brushes.Yellow)
+            var app = WorkSoftware.GetJsonApplication();
+            Process[] pname = Process.GetProcessesByName(app.Application);
+            if (ProgressBarCopy.Foreground == Brushes.Yellow && Process.GetProcessesByName(app.Application).Length == 0)
             {
                 int idPreset = Convert.ToInt32(CopyIdPreset.Text);
                 Workers[idPreset - 1].Statut = "ACTIVE";
