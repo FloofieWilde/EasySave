@@ -2,9 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\EasySave 2.0",
+    "\\EasySave 2.0\\Client-IHM",
     "\\EasySave 2.0\\EasySave 2.0",
-    "\\EasySave 2.0\\EasySave 2.0\\Save"
+    "\\EasySave 2.0\\EasySave 2.0\\Client",
+    "\\UML 2.0"
   ],
-  "SelectedNode": "\\EasySave 2.0\\EasySave 2.0\\Save\\Worker.cs",
+  "SelectedNode": "\\EasySave 2.0\\EasySave 2.0\\Client\\Server.cs",
   "PreviewInSolutionExplorer": false
 }

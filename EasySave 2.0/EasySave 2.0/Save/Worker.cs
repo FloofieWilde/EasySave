@@ -12,6 +12,7 @@ namespace Projet.Save
         public BackgroundWorker worker { get; set; }
         public ManualResetEvent WorkEvent { get; set; }
         public string Statut { get; set; }
+        public string PreviousStatut { get; set; }
         public string Name { get; set; }
         public string Source { get; set; }
         public string Destination { get; set; }

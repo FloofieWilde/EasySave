@@ -108,12 +108,13 @@ namespace EasySave_2._0
                 workerCopy.WorkerReportsProgress = true;
                 workerCopy.WorkerSupportsCancellation = true;
                 ManualResetEvent tempWorkEvent = new ManualResetEvent(false);
-                Workers.Add( new Worker { 
+                Workers.Add(new Worker
+                {
                     worker = workerCopy,
                     WorkEvent = tempWorkEvent,
-                    Id =i, 
-                    Statut = "INACTIVE", 
-                    Name= preset["Preset" + i.ToString()].Name,
+                    Id = i,
+                    Statut = "INACTIVE",
+                    Name = preset["Preset" + i.ToString()].Name,
                     Source = preset["Preset" + i.ToString()].PathSource,
                     Destination = preset["Preset" + i.ToString()].PathDestination
                 });
@@ -934,7 +935,7 @@ namespace EasySave_2._0
             string destination = param[2];
             string jsonWorker = param[3];
             int finalId = Convert.ToInt32(jsonWorker);
-            Workers[finalId -1].WorkEvent.Set();
+            Workers[finalId - 1].WorkEvent.Set();
             bool full = false;
             if (copyType == "True") { full = true; }
             else if (copyType == "False") { full = false; }
@@ -957,13 +958,13 @@ namespace EasySave_2._0
             }
             if (e.Cancelled)
             {
-                if(Workers[idPreset-1].Statut == "CANCELLED")
+                if (Workers[idPreset - 1].Statut == "CANCELLED")
                 {
                     ProgressBarCopy.Foreground = Brushes.Red;
                     CopyStatut.Text = dictLang.CopyCancelled;
                 }
                 //Workers[idWorker].Statut = "CANCELLED";
-                
+
                 LogStates.UpdateJsonLogState(Workers);
 
                 if (client != null)
@@ -1019,6 +1020,18 @@ namespace EasySave_2._0
             Workers[idWorker].RemainingFiles = remainingFiles;
             Workers[idWorker].RemainingFilesSize = remainingFilesSize;
             LogStates.UpdateJsonLogState(Workers);
+            if (Workers[idWorker].Statut == "ACTIVE")
+            {
+                ProgressBarCopy.Foreground = Brushes.Green;
+            }
+            else if (Workers[idWorker].Statut == "PAUSED")
+            {
+                ProgressBarCopy.Foreground = Brushes.Yellow;
+            }
+            else
+            {
+                ProgressBarCopy.Foreground = Brushes.Red;
+            }
 
 
             if (!workerSend.IsBusy && client != null)
@@ -1263,26 +1276,62 @@ namespace EasySave_2._0
 
             if (pname.Length > 0)
             {
-                foreach (var even in Workers)
+                foreach (var work in Workers)
                 {
-                    even.WorkEvent.Reset();
+                    work.PreviousStatut = work.Statut;
+                    if (work.Statut == "ACTIVE")
+                    {
+                        work.WorkEvent.Reset();
+                        work.Statut = "PAUSED";
+                    }
+
+                }
+                bool isLocked = true;
+                while (isLocked)
+                {
+                    int tempSoft = Process.GetProcessesByName(app.Application).Length;
+                    if (tempSoft == 0)
+                    {
+                        isLocked = false;
+                    }
                 }
                 foreach (var work in Workers)
                 {
+                    if (work.PreviousStatut == "ACTIVE")
+                    {
+                        work.WorkEvent.Set();
+                        work.Statut = "ACTIVE";
+                    }
+
+                }
+
+            }
+
+        }
+
+        public static void PauseAllExceptOne(int id)
+        {
+            foreach (var work in Workers)
+            {
+                if (work.Id != id)
+                {
+                    work.WorkEvent.Reset();
                     work.Statut = "PAUSED";
                 }
             }
-            else
+        }
+        public static void PlayAllExceptOne(int id)
+        {
+            foreach (var work in Workers)
             {
-                foreach (var even in Workers)
+                if (work.Id != id)
                 {
-                    even.WorkEvent.Set();
-                }
-                foreach (var work in Workers)
-                {
+                    work.WorkEvent.Set();
                     work.Statut = "ACTIVE";
+
                 }
             }
+
         }
         private void PlayCopy_Click(object sender, RoutedEventArgs e)
         {
@@ -1386,7 +1435,7 @@ namespace EasySave_2._0
             }
 
             //Si le client clique sur pause
-            else if(messageComplet[1] == 1)
+            else if (messageComplet[1] == 1)
             {
                 //if (Workers[idPreset - 1].worker.IsBusy && ProgressBarCopy.Foreground != Brushes.Red)
                 //{
@@ -1437,7 +1486,7 @@ namespace EasySave_2._0
                     Workers[idMessage - 1].WorkEvent.Set();
                     CopyStatut.Text = dictLang.CopyStillRunning;
                     Workers[idMessage - 1].Statut = "ACTIVE";
-                    if(idMessage == idPreset)
+                    if (idMessage == idPreset)
                     {
                         ProgressBarCopy.Foreground = Brushes.Green;
                     }

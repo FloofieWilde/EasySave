@@ -10,6 +10,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Threading;
 using Projet.Priority;
+using Projet.Size;
 
 namespace Projet.SaveSystem
 {/// <summary>
@@ -26,7 +27,7 @@ namespace Projet.SaveSystem
         private long CryptTime;
         private bool FirstProcess = true;
         private string[] PriorityExtensions;
-        private int CurrentIndexFolder = 0;
+        private int CurrentIndexFolder = -5;
         private int TotalFolders;
 
         public Save(string source, string target, bool full)
@@ -46,6 +47,10 @@ namespace Projet.SaveSystem
 
             var app = WorkSoftware.GetJsonApplication();
             Process[] pname = Process.GetProcessesByName(app.Application);
+
+            var tempPrio = Priority.Priority.GetJsonPriority();
+            PriorityExtensions = new string[tempPrio.Count];
+            tempPrio.Values.CopyTo(PriorityExtensions, 0);
 
             if (pname.Length > 0) return (null, null, 1);
             string copyType = "Partial";
@@ -84,10 +89,15 @@ namespace Projet.SaveSystem
             
             foreach (FileInfo fi in source.GetFiles())
             {
+                MainWindow.CheckProcesses();
+                var autorizedSize = Size.Size.GetJsonSize().Size;
+                if(fi.Length > autorizedSize)
+                {
+                    MainWindow.PauseAllExceptOne(workerId);
+                }
+                bool ShouldProcess = false;
 
-                bool ShouldProcess = true;
-
-                /*foreach (string prio in PriorityExtensions)
+                foreach (string prio in PriorityExtensions)
                 {
                     
                     if (fi.Extension == prio)
@@ -95,7 +105,7 @@ namespace Projet.SaveSystem
                         ShouldProcess = FirstProcess;
                     }
 
-                }*/
+                }
 
                 if (ShouldProcess == true)
                 {
@@ -118,6 +128,12 @@ namespace Projet.SaveSystem
                     CurrentDailyLog.Update(filesSize, ProcessTime.ElapsedMilliseconds, fi.Name, target.Name, CryptTime);
                     CurrentStateLog.Update(filesSize);
                     ProcessTime.Reset();
+
+                    if (fi.Length > autorizedSize)
+                    {
+                    MainWindow.PlayAllExceptOne(workerId);
+                    }
+                    MainWindow.Workers[workerId - 1].WorkEvent.WaitOne();
                 }
                 if ((sender as BackgroundWorker).WorkerReportsProgress == true)
                 {
@@ -134,7 +150,7 @@ namespace Projet.SaveSystem
                     }
                     //System.Threading.Thread.Sleep(250);
                 }
-                MainWindow.Workers[workerId - 1].WorkEvent.WaitOne();
+                //MainWindow.Workers[workerId - 1].WorkEvent.WaitOne();
 
             }
 
@@ -156,7 +172,7 @@ namespace Projet.SaveSystem
                     FirstProcess = false;
                     DirectoryInfo sourceDirectory = new DirectoryInfo(SourceDir);
                     DirectoryInfo targetDirectory = new DirectoryInfo(TargetDir);
-                    //ProcessCopy(sourceDirectory, targetDirectory, progressBar, sender, e);
+                    ProcessCopy(sourceDirectory, targetDirectory, progressBar, sender, e, workerId);
                 }
             }
             //CurrentStateLog.End();
