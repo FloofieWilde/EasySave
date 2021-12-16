@@ -22,6 +22,7 @@ namespace Projet.Extensions
         /// <summary>
         /// Method to add a new extension.
         /// </summary>
+        /// <param name="extension"></param>
         public static void AddExtension(string extension)
         {
             Dictionary<string, string> extensions = GetJsonExtension();
@@ -45,8 +46,9 @@ namespace Projet.Extensions
         }
 
         /// <summary>
-        /// Method to delete an extension from the json file. 
+        /// Methode to delete the choosen extension
         /// </summary>
+        /// <param name="choice"></param>
         public static void DeleteExtension(int choice)
         {
             Dictionary<string, string> extensions = GetJsonExtension();

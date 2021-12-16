@@ -9,6 +9,10 @@ namespace Projet.Server
 {
     public class ClientServer
     {
+        /// <summary>
+        /// Connect the client to the server.
+        /// </summary>
+        /// <returns></returns>
         public static Socket SeConnecter()
         {
             
@@ -32,6 +36,11 @@ namespace Projet.Server
             return server;
         }
 
+        /// <summary>
+        /// Listen the server and check if there is a new message. If yes, return the progress to use the data for the view.
+        /// </summary>
+        /// <param name="server"></param>
+        /// <param name="sender"></param>
         public static void EcouterReseau(Socket server, object sender)
         {
             string data = "";
@@ -62,12 +71,21 @@ namespace Projet.Server
             }
         }
 
+        /// <summary>
+        /// Send a message to the server.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="server"></param>
         public static void SendMsg(string message, Socket server)
         {
             byte[] msg = Encoding.ASCII.GetBytes(message);
             server.Send(msg);
         }
 
+        /// <summary>
+        /// Close the connexion between the client and the server.
+        /// </summary>
+        /// <param name="server"></param>
         public static void Deconnecter(Socket server)
         {
             try

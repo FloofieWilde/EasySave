@@ -6,6 +6,9 @@ using System.Threading;
 
 namespace Projet.Server
 {
+    /// <summary>
+    /// Class to declare the element that are sent by the server.
+    /// </summary>
     public class Worker
     {
         public int Id { get; set; }

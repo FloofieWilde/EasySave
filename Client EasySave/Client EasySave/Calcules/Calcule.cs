@@ -6,6 +6,11 @@ namespace Projet.Calcules
 {
     public class Calcule
     {
+        /// <summary>
+        /// Return the ID of the selected preset.
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        /// <returns></returns>
         public static string GetId(string selectedItem)
         {
             string id = "";

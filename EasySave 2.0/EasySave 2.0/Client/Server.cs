@@ -10,6 +10,10 @@ namespace Projet.Client
 {
     public class Server
     {
+        /// <summary>
+        /// Create a stocket to make a server.
+        /// </summary>
+        /// <returns></returns>
         public static Socket SeConnecter()
         {
             IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
@@ -32,12 +36,22 @@ namespace Projet.Client
             return server;
         }
 
+        /// <summary>
+        /// Accept the connection from the client.
+        /// </summary>
+        /// <param name="server"></param>
+        /// <returns></returns>
         public static Socket AccepterConnection(Socket server)
         {
             Socket client = server.Accept();
             return client;
         }
 
+        /// <summary>
+        /// Listen the client and check if there is a new message to receive. If there is one, we return the progress.
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="sender"></param>
         public static void EcouterReseau(Socket client, object sender)
         {
             string data;
@@ -66,6 +80,11 @@ namespace Projet.Client
             }
         }
 
+        /// <summary>
+        /// Send a message to the client. Only once every 0,5second.
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="server"></param>
         public static void SendMsg(string message, Socket server)
         {
             byte[] msg = Encoding.ASCII.GetBytes(message);
@@ -84,6 +103,10 @@ namespace Projet.Client
             }
         }
 
+        /// <summary>
+        /// Stop the connection between the server and the client.
+        /// </summary>
+        /// <param name="server"></param>
         public static void Deconnecter(Socket server)
         {
             try
