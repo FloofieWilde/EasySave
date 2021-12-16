@@ -1327,9 +1327,6 @@ namespace EasySave_2._0
             }
         }
 
-
-
-
         //BACKGROUNDWORKER ACCES DISTANCE
         private void worker_DoWorkListen(object sender, DoWorkEventArgs e)
         {

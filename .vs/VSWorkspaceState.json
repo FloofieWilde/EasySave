@@ -1,12 +1,13 @@
 {
   "ExpandedNodes": [
     "",
-    "\\1.0",
     "\\1.0\\1.0",
     "\\1.0\\1.0\\Logs",
     "\\EasySave 2.0",
-    "\\EasySave 2.0\\EasySave 2.0"
+    "\\EasySave 2.0\\Client-IHM",
+    "\\EasySave 2.0\\Client-IHM\\Properties",
+    "\\EasySave 2.0\\EasySave 2.0",
+    "\\UML 2.0"
   ],
-  "SelectedNode": "\\1.0\\1.0\\Logs\\LogDaily.cs",
   "PreviewInSolutionExplorer": false
 }
