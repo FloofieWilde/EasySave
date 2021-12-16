@@ -1553,6 +1553,9 @@ namespace EasySave_2._0
             //return newDictLang;
         }
 
+        /// <summary>
+        /// Check if the work software is running and pauses all processes if it's running
+        /// </summary>
         public static void CheckProcesses()
         {
             var app = WorkSoftware.GetJsonApplication();
@@ -1589,7 +1592,10 @@ namespace EasySave_2._0
                 }
             }
         }
-
+        /// <summary>
+        /// Pauses all processes except the one that calls that method
+        /// </summary>
+        /// <param name="id"></param>
         public static void PauseAllExceptOne(int id, object sender)
         {
             foreach (var work in Workers)
@@ -1605,6 +1611,10 @@ namespace EasySave_2._0
                 }
             }
         }
+        /// <summary>
+        /// Play all processes except the one that calls that method
+        /// </summary>
+        /// <param name="id"></param>
         public static void PlayAllExceptOne(int id)
         {
             foreach (var work in Workers)
@@ -1618,6 +1628,11 @@ namespace EasySave_2._0
             }
 
         }
+        /// <summary>
+        /// Plays the wished process when the Stop button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PlayCopy_Click(object sender, RoutedEventArgs e)
         {
             var app = WorkSoftware.GetJsonApplication();
@@ -1631,7 +1646,11 @@ namespace EasySave_2._0
                 ProgressBarCopy.Foreground = Brushes.Green;
             }
         }
-
+        /// <summary>
+        /// Pauses the wished process when the Stop button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PauseCopy_Click(object sender, RoutedEventArgs e)
         {
             int idPreset = Convert.ToInt32(CopyIdPreset.Text);
@@ -1650,7 +1669,11 @@ namespace EasySave_2._0
                 workerSendUpdate.RunWorkerAsync(message);
             }
         }
-
+        /// <summary>
+        /// Stops the wished process when the Stop button is clicked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StopCopy_Click(object sender, RoutedEventArgs e)
         {
             int idPreset = Convert.ToInt32(CopyIdPreset.Text);
