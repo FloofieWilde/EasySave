@@ -20,8 +20,9 @@ namespace Projet.Priority
         }
 
         /// <summary>
-        /// Method to add a new priority.
+        /// Add a new priority
         /// </summary>
+        /// <param name="priority"></param>
         public static void AddPriority(string priority)
         {
             Dictionary<string, string> priorities = GetJsonPriority();
@@ -45,8 +46,9 @@ namespace Projet.Priority
         }
 
         /// <summary>
-        /// Method to delete a priority from the json file. 
+        /// Delete the choosen priority
         /// </summary>
+        /// <param name="choice"></param>
         public static void DeletePriority(int choice)
         {
             Dictionary<string, string> priorities = GetJsonPriority();

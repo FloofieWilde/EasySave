@@ -6,6 +6,9 @@ using System.Threading;
 
 namespace Projet.Save
 {
+    /// <summary>
+    /// Class to declare the element of the 'Workers' list (it is also what is added in the logstate.json, and also what is sent to the client).
+    /// </summary>
     public class Worker
     {
         public int Id { get; set; }

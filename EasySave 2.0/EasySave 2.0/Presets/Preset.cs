@@ -25,6 +25,10 @@ namespace Projet.Presets
         /// <summary>
         /// Method to edit the choosen preset
         /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="source"></param>
+        /// <param name="destination"></param>
         public static void EditPreset(int id, string name, string source, string destination)
         {
             Dictionary<string, NameSourceDest> preset = GetJsonPreset();
@@ -39,6 +43,9 @@ namespace Projet.Presets
         /// <summary>
         /// Method to add a new preset
         /// </summary>
+        /// <param name="name"></param>
+        /// <param name="source"></param>
+        /// <param name="destination"></param>
         public static void AddPreset(string name, string source, string destination)
         {
             Dictionary<string, NameSourceDest> preset = GetJsonPreset();
@@ -55,8 +62,9 @@ namespace Projet.Presets
         }
 
         /// <summary>
-        /// Method to delete a preset from the json file. 
+        /// Method to delete the choosen preset
         /// </summary>
+        /// <param name="choice"></param>
         public static void DeletePreset(int choice)
         {
             Dictionary<string, NameSourceDest> preset = GetJsonPreset();

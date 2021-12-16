@@ -39,12 +39,23 @@ namespace Client_EasySave
             InitializeComponent();
             
         }
+
+        /// <summary>
+        /// Exit the client application.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void ExitApp(object sender, RoutedEventArgs e)
         {
             //ClientServer.Deconnecter(server);
             Environment.Exit(621);
         }
 
+        /// <summary>
+        /// Determine if the button is for pause or for play.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void PlayPauseFct(object sender, RoutedEventArgs e)
         {
 
@@ -61,6 +72,9 @@ namespace Client_EasySave
             }
         }
 
+        /// <summary>
+        /// If we clicked on play, we send the information to the server, so the server will play again the paused choosen copy.
+        /// </summary>
         public void Play()
         {
             int id = Convert.ToInt32(CopyIdPreset.Text);
@@ -71,6 +85,9 @@ namespace Client_EasySave
             workerSend.RunWorkerAsync(msg);
         }
 
+        /// <summary>
+        /// If we clicked on pause, we send the information to the server, so the server will pause the active choosen copy.
+        /// </summary>
         public void Pause()
         {
             int id = Convert.ToInt32(CopyIdPreset.Text);
@@ -81,6 +98,11 @@ namespace Client_EasySave
             workerSend.RunWorkerAsync(msg);
         }
 
+        /// <summary>
+        /// If we click on stop, we send the information to the server, so the server will stop the choosen copy.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Stop_Click(object sender, RoutedEventArgs e)
         {
             int id = Convert.ToInt32(CopyIdPreset.Text);
@@ -92,7 +114,13 @@ namespace Client_EasySave
         }
 
 
-        ///BACKGROUNDWORKERS
+        //Backgroundworker
+        
+        /// <summary>
+        /// Called when we start the client application. Listen continuously the server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void worker_DoWork(object sender, DoWorkEventArgs e)
         {
             server = ClientServer.SeConnecter();
@@ -100,6 +128,11 @@ namespace Client_EasySave
             ClientServer.EcouterReseau(server, sender);
         }
 
+        /// <summary>
+        /// Called when there is an information to send to the server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void worker_DoWorkSend(object sender, DoWorkEventArgs e)
         {
             string message = e.Argument as string;
@@ -115,6 +148,12 @@ namespace Client_EasySave
         {
             //ReceivedMsg.Text = "Text";worker_ProgressChangedListen()
         }
+
+        /// <summary>
+        /// Update the informations in real time (every 0,5 second).
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void worker_ProgressChangedListen(object sender, ProgressChangedEventArgs e)
         {
             string msg = e.UserState as string;
@@ -171,6 +210,11 @@ namespace Client_EasySave
             }
         }
 
+        /// <summary>
+        /// If we double click on the listbox, show the informations of the choosen preset.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ListPreset_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             string selectedItem = ListPreset.SelectedItem.ToString();
