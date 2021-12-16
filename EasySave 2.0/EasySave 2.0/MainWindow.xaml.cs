@@ -1024,10 +1024,14 @@ namespace EasySave_2._0
             if (Workers[idPreset-1].Statut == "ACTIVE")
             {
                 ProgressBarCopy.Foreground = Brushes.Green;
+                Workers[idPreset - 1].Statut = "ACTIVE";
+                CopyStatut.Text = dictLang.CopyStillRunning;
             }
             else if (Workers[idPreset-1].Statut == "PAUSED")
             {
                 ProgressBarCopy.Foreground = Brushes.Yellow;
+                Workers[idPreset - 1].Statut = "PAUSED";
+                CopyStatut.Text = dictLang.CopyPause;
             }
 
             if (!workerSend.IsBusy && client != null)
@@ -1298,14 +1302,11 @@ namespace EasySave_2._0
                         work.WorkEvent.Set();
                         work.Statut = "ACTIVE";
                     }
-
                 }
-
             }
-
         }
 
-        public static void PauseAllExceptOne(int id)
+        public static void PauseAllExceptOne(int id, object sender)
         {
             foreach (var work in Workers)
             {
@@ -1316,6 +1317,11 @@ namespace EasySave_2._0
                     {
                         work.Statut = "PAUSED";
                         work.WorkEvent.Reset();
+                        //if ((sender as BackgroundWorker).WorkerReportsProgress == true)
+                        //{
+                        //    List<long> param = new List<long>() { work.RemainingFiles, work.RemainingFilesSize };
+                        //    (sender as BackgroundWorker).ReportProgress(Convert.ToInt32(work.Progress), param);
+                        //}
                     }
                 }
             }

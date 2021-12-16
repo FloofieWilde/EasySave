@@ -93,7 +93,7 @@ namespace Projet.SaveSystem
                 var autorizedSize = Size.Size.GetJsonSize().Size;
                 if(fi.Length > autorizedSize)
                 {
-                    MainWindow.PauseAllExceptOne(workerId);
+                    MainWindow.PauseAllExceptOne(workerId, sender);
                 }
                 bool ShouldProcess = false;
 
@@ -139,7 +139,6 @@ namespace Projet.SaveSystem
                 {
                     List<long> param = new List<long>() { CurrentStateLog.RemainingFiles, CurrentStateLog.RemainingFilesSize };
                     (sender as BackgroundWorker).ReportProgress(CurrentStateLog.Progress, param);
-
                 }
                 for (int i = 0; i <= 100; i++)
                 {
