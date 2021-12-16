@@ -17,7 +17,16 @@ TODO: Guide users through getting your code up and running on their own system. 
 # How to use ?
 
 1. Copy process
+	- Double-click on the preset
+	- Choose your copy mode
+	- Start the copy
 
-2. Parameters
+	Notes :
+		- You can launch different works simultaneously
+		- You can cancel jobs
+		- You can pause and resume jobs
+		- Other parameters are available, but will be explained in 2.
+
+2. Available parameters
 
 3. Logs
