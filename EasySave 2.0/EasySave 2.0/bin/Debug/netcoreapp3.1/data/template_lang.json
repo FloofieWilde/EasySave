@@ -1,0 +1,66 @@
+{
+    "flag" : "",
+    
+    "v1": "",
+    
+    "MenuTitle": "",
+    "MenuC1": "",
+    "MenuC2": "",
+    "MenuC3": "",
+    "MenuC4": "",
+    "MenuBc": "",
+    
+    "OptTitle": "",
+    "OptC1": "",
+    "OptC2": "",
+    "OptExit": "",
+
+    "LangSelect" : "",
+    "LangChange": "",
+    "LangNo" : "",
+    "LangChoice" : "",
+    
+    "PreList" : "",
+    "PreMod" : "",
+    "PreChoice" : "",
+    "PreName" : "",
+    "PrepathSource" : "",
+    "PrepathDest" : "",
+    "PreSave1" : "",
+    "PreSave2" : "",
+    "PreSave3" : "",
+    "PreFbg" : "",
+    
+    
+    
+    
+    "v2" : "",
+    
+    "OptMLang" : "",
+    
+    "OptMPreset" : "",
+    "OptPreAdd" : "",
+    "OptPreEdit" : "",
+    "OptPreDel" : "",
+    
+    "OptMExt" : "",
+    "OptExtAdd" : "",
+    "OptExtEdit" : "",
+    "OptExtDel" : "",
+    "Extension" : "",
+    
+    "OptMApp" : "",
+    "OptAppAlter" : "",
+    "OptAppMod" : "",
+    
+    "OptMStoc" : "",
+    "OptStocNow" : "",
+    "OptStocAlter" : "",
+    
+    "Name" : "",
+    "Sauce" : "",
+    "Dest" : "",
+    "Confirm" : "",
+    "Cancel" : "",
+    
+}

@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>Menu</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="data\lang\logs\**" />
+    <EmbeddedResource Remove="data\lang\logs\**" />
+    <None Remove="data\lang\logs\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="VisualStudio.gitignore" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Logs\LogsData\Daily\" />
+    <Folder Include="Logs\LogsData\State\" />
+  </ItemGroup>
+
+</Project>

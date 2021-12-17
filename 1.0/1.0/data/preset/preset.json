@@ -1,0 +1,27 @@
+{
+  "Preset1": {
+    "Name": "Working",
+    "PathSource": "C:/Users/jennm/source/repos/C-hashtag-point-web/1.0/1.0/DossA",
+    "PathDestination": "C:/Users/jennm/source/repos/C-hashtag-point-web/1.0/1.0/DossB"
+  },
+  "Preset2": {
+    "Name": "Test2",
+    "PathSource": "C:/Test25",
+    "PathDestination": "C:/Test99"
+  },
+  "Preset3": {
+    "Name": "Haha",
+    "PathSource": "C:/P",
+    "PathDestination": "C:/M"
+  },
+  "Preset4": {
+    "Name": "Voila",
+    "PathSource": "",
+    "PathDestination": ""
+  },
+  "Preset5": {
+    "Name": "Test",
+    "PathSource": "C:/source",
+    "PathDestination": "C:/destination"
+  }
+}

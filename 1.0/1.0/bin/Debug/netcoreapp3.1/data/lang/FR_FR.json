@@ -1,0 +1,46 @@
+{
+  "MenuTitle": "Veuillez sélectrionner un choix.",
+  "MenuC1": "1. Copier vos fichiers",
+  "menuc2": "2. Configurer l'application",
+  "MenuC3": "3. Voir les logs",
+  "MenuC4": "4. Quitter l'application",
+  "MenuBc": "N'est pas un choix valide.",
+
+  "OptTitle": "Que voulez vous configurer ?",
+  "OptC1": "1. Langue",
+  "OptC2": "2. Présets",
+  "OptExit": "3. Retour",
+
+  "LangSelect": "Langues disponibles :",
+  "LangChange": "Langue modifiée",
+  "LangNo": "Langue inexistante",
+  "LangChoice": "Faites votre choix",
+
+  "PreList": "Voici la liste des presets:",
+  "PreMod": "Quel preset voulez vous modifier?",
+  "PreChoice": "Vous avez choisit de modifier le Preset",
+  "PreName": "Choisissez un nouveau nom: ",
+  "PrepathSource": "Choisissez un nouveau path source: ",
+  "PrepathDest": "Choisissez un nouveau path destination: ",
+  "PreSave1": "Enregistrement du nouveau preset n°",
+  "PreSave2": " avec succès!",
+  "PreSave3": "Voici les nouvelles valeurs: ",
+  "PreFbg": "Retour au menu Options...",
+  "SaveSauceNotExists": "Le répertoire source n'existe pas.",
+  "SaveWip": "Travail en cours.",
+  "SaveType": "Type : ",
+  "SaveSauce": "Répertoire source : ",
+  "SaveTarget": "Répertoire de destination : ",
+  "SaveStartTime": "Date de début : ",
+  "SaveTotalFile": "Nombre total de fichiers : ",
+  "SaveTotalSize": "Taille totale des fichiers : ",
+
+  "SaveProgress1": "Progression : ",
+  "SaveProgress2": "% | Fichiers restants : ",
+  "SaveProgress3": "Taille des fichiers restants : ",
+  "SaveSuccess": "Sauvegarde effectuée avec succès.",
+
+  "LogNoDaily": "Il n'y a pas de log journalier.",
+  "LogDailyFilen": "File number : ",
+  "LogNumber": "Numéro du log : "
+}

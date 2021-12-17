@@ -1,0 +1,15 @@
+{
+  "FileSize": 4,
+  "TransferTime": 33,
+  "EncryptTime": -1,
+  "Name": "Partial",
+  "SourceDir": "test1.txt",
+  "TargetDir": "DossB"
+},{
+  "FileSize": 3,
+  "TransferTime": 22,
+  "EncryptTime": -1,
+  "Name": "Partial",
+  "SourceDir": "test2.txt",
+  "TargetDir": "DossB"
+},

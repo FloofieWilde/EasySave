@@ -1,0 +1,47 @@
+{
+  "Preset1": {
+    "Name": "Franz1",
+    "PathSource": "C:\\Users\\franc\\OneDrive\\Bureau\\Projet folders\\DossA",
+    "PathDestination": "C:\\Users\\franc\\OneDrive\\Bureau\\Projet folders\\DossB"
+  },
+  "Preset2": {
+    "Name": "Franz2",
+    "PathSource": "C:\\Users\\franc\\OneDrive\\Bureau\\Projet folders\\DossC",
+    "PathDestination": "C:\\Users\\franc\\OneDrive\\Bureau\\Projet folders\\DossD"
+  },
+  "Preset3": {
+    "Name": "Haha",
+    "PathSource": "C:/P",
+    "PathDestination": "C:/M"
+  },
+  "Preset4": {
+    "Name": "Voila",
+    "PathSource": "C:/sharp",
+    "PathDestination": "C:/plusplus"
+  },
+  "Preset5": {
+    "Name": "Test",
+    "PathSource": "C:/source",
+    "PathDestination": "C:/destination"
+  },
+  "Preset6": {
+    "Name": "Oof",
+    "PathSource": "D:/Lefichier",
+    "PathDestination": "D:/Ledossier"
+  },
+  "Preset7": {
+    "Name": "Maxime",
+    "PathSource": "C:\\Users\\jennm\\source\\repos\\C-hashtag-point-web\\EasySave 2.0\\Doss A",
+    "PathDestination": "C:\\Users\\jennm\\source\\repos\\C-hashtag-point-web\\EasySave 2.0\\Doss B"
+  },
+  "Preset8": {
+    "Name": "Loic bureau",
+    "PathSource": "C:\\Users\\loicm\\Desktop\\DossA",
+    "PathDestination": "C:\\Users\\loicm\\Desktop\\DossB"
+  },
+  "Preset9": {
+    "Name": "Loic 2",
+    "PathSource": "C:\\Users\\loicm\\Desktop\\Prosits\\A3\\Bloc Programmation Système\\Projet Programmation Système\\DossA",
+    "PathDestination": "C:\\Users\\loicm\\Desktop\\Prosits\\A3\\Bloc Programmation Système\\Projet Programmation Système\\DossB"
+  }
+}
