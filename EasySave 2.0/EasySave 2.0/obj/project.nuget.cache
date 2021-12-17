@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "cr33eMYzmm9dcrTnsbTDByRlc7Nbgazk5t5ph0Jb4xgtOC4B6vR6YSytOAbw6KBo9EBu8nxm7ELt+QrkklcFvw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\jennm\\Source\\Repos\\C-hashtag-point-web\\EasySave 2.0\\EasySave 2.0\\EasySave 2.0.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\jennm\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
