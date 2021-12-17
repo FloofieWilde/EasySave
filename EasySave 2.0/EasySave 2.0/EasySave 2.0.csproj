@@ -27,6 +27,7 @@
     <None Remove="logo.png" />
     <None Remove="plus.png" />
     <None Remove="settings-logo.png" />
+    <None Remove="text.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +48,7 @@
     <Resource Include="logo.png" />
     <Resource Include="plus.png" />
     <Resource Include="settings-logo.png" />
+    <Resource Include="text.png" />
   </ItemGroup>
 
   <ItemGroup>
