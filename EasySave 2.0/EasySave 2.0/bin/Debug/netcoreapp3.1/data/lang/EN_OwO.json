@@ -33,33 +33,69 @@
     
     
     
-    "v2" : "",
-    
-    "OptMLang" : "Language",
-    
-    "OptMPreset" : "Presets",
-    "OptPreAdd" : "Add a preset",
-    "OptPreEdit" : "Modify preset number ",
-    "OptPreDel" : "Are you sure to delete preset number ",
-    
-    "OptMExt" : "Extension",
-    "OptExtAdd" : "Add a convertible extension",
-    "OptExtEdit" : "Modify extension number",
-    "OptExtDel" : "Are you sure to delete extension number ",
-    "Extension" : "Extension (don't forget the dot before)",
-    
-    "OptMApp" : "Application",
-    "OptAppAlter" : "Modify application",
-    "OptAppMod" : "Modify blocked application",
-    
-    "OptMStoc" : "Storage",
-    "OptStocNow" : "Actual storage :",
-    "OptStocAlter" : "Modify storage type",
-    "OptStocNew" : "Select new logs' storage format.",
-    
-    "Name" : "Name",
-    "Sauce" : "Source path",
-    "Dest" : "Destination path",
-    "Confirm" : "Confirm",
-    "Cancel" : "Cancel",
+   "v2": "",
+
+  "OptMLang": "Lawanguawage",
+
+  "OptMPreset": "Presets",
+  "OptPreAdd": "Add awa preset",
+  "OptPreEdit": "MOwOdify preset number ",
+  "OptPreDel": "Are yOwOu sure tOwO delete preset number ",
+  "OptiPreBrowse": "BrOwOwse",
+
+  "OptMExt": "ExtensiOwOn",
+  "OptExtAdd": "Add awa cOwOnvertible extensiOwOn",
+  "OptExtEdit": "MOwOdify extensiOwOn number",
+  "OptExtDel": "Are yOwOu sure tOwO delete extensiOwOn number ",
+  "Extension": "ExtensiOwOn (dOwOn't fOwOrget the dOwOt befOwOre)",
+
+  "OptMApp": "ApplicawatiOwOn",
+  "OptAppAlter": "MOwOdify awapplicawatiOwOn",
+  "OptAppMod": "MOwOdify blOwOcked awapplicawatiOwOn",
+
+  "OptMStoc": "StOwOrawage",
+  "OptStocNow": "Actuawal stOwOrawage :",
+  "OptStocAlter": "MOwOdify stOwOrawage type",
+  "OptStocNew": "Select new lOwOgs' stOwOrawage fOwOrmawat.",
+
+  "OptMPrio": "PriOwOrity",
+
+  "OptMSize": "Size",
+  "OptCurrentSize": "Current mawaximum size: ",
+  "OptSizeAlter": "Edit the size",
+  "OptSizeNew": "ChOwOse the new mawaximum files size (in KOwO).",
+  "OptSizeError": "Wawarning: OwOnly enter awa number.",
+
+  "Name": "Nawame",
+  "Sauce": "SOwOurce pawath",
+  "Dest": "DestinawatiOwOn pawath",
+  "Confirm": "COwOnfirm",
+  "Cancel": "Cawancel",
+
+  "ChooseTypeCopy": "ChOwOse the type OwOf cOwOpy:",
+  "PartialCopy": "Pawartiawal",
+  "CompletCopy": "COwOmplete",
+
+  "CopyType": "Type OwOf cOwOpy:",
+  "CopyPreset": "COwOpy nawame:",
+  "CopyPathSource": "Pawath SOwOurce:",
+  "CopyPathDest": "Pawath DestinawatiOwOn:",
+  "CopyDateStart": "Dawate OwOf stawart:",
+  "CopyNbFiles": "TOwOtawal number OwOf files:",
+  "CopyFileSize": "TOwOtawal files size:",
+  "CopyFileRemaining": "Remawaining files:",
+  "CopyFileSizeRemaining": "Size OwOf remawaining files:",
+  "CopySuccess": "COwOpy successful!",
+
+  "ErrorCloseApplication": "ClOwOse yOwOur wOwOrk awapplicawatiOwOn.",
+  "ErrorUnvalidPreset": "YOwOur preset is unvawalid.",
+  "ErrorEmptyFolder": "YOwOur sOwOurce fOwOlder is empty.",
+  "ErrorOther": "ErrOwOr.",
+  "ErrorChooseTypePreset": "ChOwOse awa preset awand awa type.",
+
+  "CopyStillRunning": "COwOpy in prOwOgress.",
+  "CopyCancelled": "COwOpy cawancelled.",
+  "CopyNo": "NOwO cOwOpy.",
+  "CopyPause": "COwOpy pawaused.",
+  "CopyBusy": "COwOpy awalreawady running."
 }

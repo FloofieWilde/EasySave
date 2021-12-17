@@ -53,4 +53,4 @@ L'application logue les actions du logiciel :
 		"Name"
 		"SourceDir"
 		"TargetDir"
-	- "State" Logs : Enregistre les préréglages et leur état pendant le lancement du programme. Celui-ci est utile pour le fonctionnement du logiciel.
+	- Logs d'état : Enregistre les préréglages et leur état pendant le lancement du programme. Celui-ci est utile pour le fonctionnement du logiciel.
