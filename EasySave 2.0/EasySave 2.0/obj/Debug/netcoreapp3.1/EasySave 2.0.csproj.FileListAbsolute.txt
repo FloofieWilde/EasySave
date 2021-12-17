@@ -19,3 +19,24 @@ C:\Users\jennm\Source\Repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\bin\De
 C:\Users\jennm\Source\Repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.csproj.CopyComplete
 C:\Users\jennm\Source\Repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.dll
 C:\Users\jennm\Source\Repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.genruntimeconfig.cache
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\bin\Debug\netcoreapp3.1\EasySave 2.0.exe
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\bin\Debug\netcoreapp3.1\EasySave 2.0.deps.json
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\bin\Debug\netcoreapp3.1\EasySave 2.0.runtimeconfig.json
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\bin\Debug\netcoreapp3.1\EasySave 2.0.runtimeconfig.dev.json
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\bin\Debug\netcoreapp3.1\EasySave 2.0.dll
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\bin\Debug\netcoreapp3.1\EasySave 2.0.pdb
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.csprojAssemblyReference.cache
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\MainWindow.g.cs
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\App.g.cs
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0_MarkupCompile.cache
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0_MarkupCompile.lref
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\MainWindow.baml
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.g.resources
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.AssemblyInfoInputs.cache
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.AssemblyInfo.cs
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.csproj.CoreCompileInputs.cache
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.csproj.CopyComplete
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.dll
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.pdb
+C:\Users\loicm\source\repos\C-hashtag-point-web\EasySave 2.0\EasySave 2.0\obj\Debug\netcoreapp3.1\EasySave 2.0.genruntimeconfig.cache
