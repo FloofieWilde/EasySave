@@ -29,7 +29,7 @@
             </Button>
 
             <Button Name="LogsButton" Grid.Column="2" Height="auto" Width="auto" Background="#FF450046" Margin="4" Click="LogsButton_Click">
-                <Image Source="/copy-icon.png" Height="auto" Width="auto" Margin="10,10"/>
+                <Image Source="/text.png" Height="auto" Width="auto" Margin="10,10"/>
             </Button>
         </Grid>
         <Button Name="ExitButton" Click="ExitApp" ClickMode="Release" HorizontalAlignment="Right" VerticalAlignment="Top" Background="#00DDDDDD" BorderBrush="#00DDDDDD" Margin="5">
